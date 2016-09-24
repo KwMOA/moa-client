@@ -8,7 +8,7 @@ typedef uint32_t command_t;
 
 ////////////Packet Command//////////////
 
-static const int32_t PACKET_VERSION = 7;
+static const int32_t PACKET_VERSION = 1;
 
 
 ///////////////////////////////////

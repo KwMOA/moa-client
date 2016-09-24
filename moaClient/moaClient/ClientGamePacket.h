@@ -13,7 +13,9 @@ public:
 
 	enum EnumCommand // start number is at least 3.
 	{
-		CREATE_BUILDING_REQ = 10,
+        EMPTY_RES = 10,
+        
+		CREATE_BUILDING_REQ,
 		CREATE_BUILDING_RES,
         
         CANCEL_BUILDING_REQ,
@@ -30,8 +32,15 @@ public:
 
 	///////////////////////////////////
 
+    struct EmptyPacket : public Packet
+    {
+        EmptyPacket() { cmd = EMPTY_RES; }
+        
+        int32_t packetNo;
+        int8_t isEnemy;
+    };
 
-    struct CreateBuildingReqPacket : public Packet
+    struct CreateBuildingReqPacket : public EmptyPacket
 	{
         CreateBuildingReqPacket() { cmd = CREATE_BUILDING_REQ; }
         
@@ -40,7 +49,7 @@ public:
         int16_t position;
 	};
     
-    struct CreateBuildingResPacket : public Packet
+    struct CreateBuildingResPacket : public EmptyPacket
     {
         CreateBuildingResPacket() { cmd = CREATE_BUILDING_RES; }
         
@@ -49,32 +58,32 @@ public:
         int16_t position;
     };
 
-    struct CancelBuildingReqPacket : public Packet
+    struct CancelBuildingReqPacket : public EmptyPacket
 	{
         CancelBuildingReqPacket() { cmd = CANCEL_BUILDING_REQ; }
 
         int32_t objectNo;
 	};
     
-    struct CancelBuildingResPacket : public Packet
+    struct CancelBuildingResPacket : public EmptyPacket
     {
         CancelBuildingResPacket() { cmd = CANCEL_BUILDING_RES; }
         
         int32_t objectNo;
     };
     
-    struct WorkBuildingReqPakcet : public Packet
+    struct WorkBuildingReqPakcet : public EmptyPacket
     {
-        WorkBuildingReqPacket() { cmd = WORK_BUILDING_REQ; }
+        WorkBuildingReqPakcet() { cmd = WORK_BUILDING_REQ; }
         
         int32_t objectNo;
         int8_t buttonNo;
         int16_t lineNo;
     };
     
-    struct WorkBuildingResPakcet : public Packet
+    struct WorkBuildingResPacket : public EmptyPacket
     {
-        WorkBuildingResPakcet() { cmd = WORK_BUILDING_RES; }
+        WorkBuildingResPacket() { cmd = WORK_BUILDING_RES; }
         
         int32_t objectNo;
         int8_t buttonNo;
