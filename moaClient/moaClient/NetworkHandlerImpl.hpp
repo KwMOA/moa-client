@@ -19,7 +19,10 @@ class NetworkHandlerImpl : public NetworkHandler
 private:
     std::list<Packet*> receivePacketList;
     
+    int tempAutoPacketNo;
+    
 public:
+    NetworkHandlerImpl();
     void sendInput(Packet* packet);
     void update(long dt);
 };

@@ -10,6 +10,10 @@
 #include "ClientGamePacket.h"
 #include "GameManager.hpp"
 
+NetworkHandlerImpl::NetworkHandlerImpl()
+{
+    tempAutoPacketNo = 1;
+}
 void NetworkHandlerImpl::sendInput(Packet* packet)
 {
     receivePacketList.push_back(packet);
@@ -21,7 +25,14 @@ void NetworkHandlerImpl::update(long dt)
     // not exist received packet
     if(receivePacketList.empty()) {
         
-        GameManager::GetInstance()->getTaskManager()->receiveFromNetwork(new ClientGamePacket::EmptyPacket());
+        ClientGamePacket::EmptyPacket* p = new ClientGamePacket::EmptyPacket();
+        
+        p->packetNo = tempAutoPacketNo;
+        tempAutoPacketNo++;
+        
+        p->isEnemy = 0;
+        
+        GameManager::GetInstance()->getTaskManager()->receiveFromNetwork(p);
         
     } else { // exist received packet
         
