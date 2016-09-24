@@ -9,7 +9,12 @@
 #include "GameManager.hpp"
 
 #include <iostream>
+
+#if OS_PLATFORM == PLATFORM_LINUX
 #include <sys/time.h>
+#else
+#include <windows.h>
+#endif
 
 GameManager* GameManager::instance = nullptr;
 
@@ -22,10 +27,27 @@ GameManager::GameManager()
 
 void GameManager::run()
 {
+    
+    long startTime = 0;
+    
+#if OS_PLATFORM == PLATFORM_LINUX
+    
     struct timeval tp;
     gettimeofday(&tp, NULL);
     
-    long startTime = tp.tv_sec * 1000 + tp.tv_usec / 1000;
+    
+    startTime = tp.tv_sec * 1000 + tp.tv_usec / 1000;
+
+#else
+    
+    SYSTEMTIME time;
+    GetSystemTime(&time);
+    startTime = (time.wSecond * 1000) + time.wMilliseconds;
+
+#endif
+
+    
+
     
     long currentTime = startTime;
     
@@ -49,9 +71,17 @@ void GameManager::run()
             taskCount++;
         }
         
-        
+#if OS_PLATFORM == PLATFORM_LINUX
         
         gettimeofday(&tp, NULL);
         currentTime = tp.tv_sec * 1000 + tp.tv_usec / 1000;
+
+#else
+        
+        GetSystemTime(&time);
+        currentTime = (time.wSecond * 1000) + time.wMilliseconds;
+        
+#endif
+        
     }
 }

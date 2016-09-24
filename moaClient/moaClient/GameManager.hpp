@@ -10,6 +10,8 @@
 #define GameManager_hpp
 
 #include <stddef.h>
+#include "BasicDefines.h"
+
 #include "NetworkHandlerImpl.hpp"
 #include "TaskManager.h"
 
