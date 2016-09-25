@@ -23,13 +23,11 @@ private:
     
     static GameManager* instance;
     
-    
     ////////////////
     
     NetworkHandler* networkHandler;
     TaskManager* taskManager;
 
-    
     ////////////////
     
 public:
