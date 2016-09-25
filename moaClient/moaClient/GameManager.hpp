@@ -14,6 +14,7 @@
 
 #include "NetworkHandlerImpl.hpp"
 #include "TaskManager.h"
+#include "GameLogic.hpp"
 #include "GamePlayer.hpp"
 #include "GameDefines.h"
 
@@ -33,6 +34,7 @@ private:
     
     NetworkHandler* networkHandler;
     TaskManager* taskManager;
+    GameLogic* gameLogic;
     
     GamePlayer* gamePlayers[2];
     

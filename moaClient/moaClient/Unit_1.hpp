@@ -1,22 +1,22 @@
 //
-//  Building_1.hpp
+//  Unit_1.hpp
 //  moaClient
 //
 //  Created by kimyongchan on 2016. 9. 25..
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#ifndef Building_1_hpp
-#define Building_1_hpp
+#ifndef Unit_1_hpp
+#define Unit_1_hpp
 
 #include <stdio.h>
-#include "Building.h"
+#include "Unit.h"
 
-class Building_1 : public Building {
+class Unit_1 : public Unit {
 public:
-    Building_1();
+    Unit_1();
     void click();
     void update(long dt);
 };
 
-#endif /* Building_1_hpp */
+#endif /* Unit_1_hpp */

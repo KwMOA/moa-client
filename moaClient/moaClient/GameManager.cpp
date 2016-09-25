@@ -29,7 +29,7 @@ GameManager::GameManager()
     //DOTO. set new Instance in NetworkHandler and TaskManager
     networkHandler = new NetworkHandlerImpl();
     taskManager = new TestTaskManager();
-    
+    gameLogic = new GameLogic();
     
     gamePlayers[0] = new GamePlayer();
     gamePlayers[1] = new GamePlayer();
@@ -51,12 +51,12 @@ bool GameManager::init()
     
     // init - send request to create first building both player
     
-    ClientGamePacket::CreateBuildingReqPacket* packet1 = new ClientGamePacket::CreateBuildingReqPacket();
+    ClientGamePacket::CreateBuildingResPacket* packet1 = new ClientGamePacket::CreateBuildingResPacket();
     packet1->isEnemy = 0;
     packet1->objectType = OBJECT_TYPE_BUILDING_1;
     packet1->position = 1;
     
-    ClientGamePacket::CreateBuildingReqPacket* packet2 = new ClientGamePacket::CreateBuildingReqPacket();
+    ClientGamePacket::CreateBuildingResPacket* packet2 = new ClientGamePacket::CreateBuildingResPacket();
     packet2->isEnemy = 1;
     packet2->objectType = OBJECT_TYPE_BUILDING_1;
     packet2->position = 1;
