@@ -21,4 +21,17 @@ struct ObjectInfo
     int CREATE_TIME;
 };
 
+enum INFLUENCE_TYPE
+{
+    INFLUENCE_TYPE_ATTACK,
+    INFLUENCE_TYPE_HEAL,
+};
+
+struct Influence
+{
+    int objectNo;
+    int influenceType;
+    int damage;
+};
+
 #endif /* GameDefines_h */

@@ -14,6 +14,9 @@ enum ObjectState
     CREATEING,
     WORK,
     DESTROY,
+    RUN,
+    ATTACK,
+    DEAD,
 };
 
 #endif /* ObjectState_h */
