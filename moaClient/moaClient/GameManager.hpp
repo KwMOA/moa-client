@@ -14,6 +14,8 @@
 
 #include "NetworkHandlerImpl.hpp"
 #include "TaskManager.h"
+#include "GamePlayer.hpp"
+#include "GameDefines.h"
 
 class GameManager
 {
@@ -23,11 +25,19 @@ private:
     
     static GameManager* instance;
     
+    
+    
     ////////////////
+    
+    ObjectInfo objectInfos[1];
     
     NetworkHandler* networkHandler;
     TaskManager* taskManager;
-
+    
+    GamePlayer* gamePlayers[2];
+    
+    int tempObjectNoCreator;
+    
     ////////////////
     
 public:
@@ -37,6 +47,7 @@ public:
         return instance;
     }
     
+    bool init();
     void run();
     
     
@@ -46,6 +57,8 @@ public:
     
     NetworkHandler* getNetworkHandler() { return networkHandler; }
     TaskManager* getTaskManager() { return taskManager; }
+    
+    ObjectInfo getObjectInfoByObjectType(int objectType) const { return objectInfos[objectType]; }
     
     //////////////////
 };

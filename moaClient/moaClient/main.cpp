@@ -10,6 +10,10 @@
 
 int main(int argc, const char * argv[]) {
     
+    GameManager::GetInstance();
+    
+    GameManager::GetInstance()->init();
+    
     GameManager::GetInstance()->run();
     
     return 0;

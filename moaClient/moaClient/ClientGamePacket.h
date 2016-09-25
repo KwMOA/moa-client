@@ -44,8 +44,7 @@ public:
 	{
         CreateBuildingReqPacket() { cmd = CREATE_BUILDING_REQ; }
         
-        int32_t objectNo;
-        int8_t buttonNo;
+        int8_t objectType;
         int16_t position;
 	};
     
@@ -53,8 +52,7 @@ public:
     {
         CreateBuildingResPacket() { cmd = CREATE_BUILDING_RES; }
         
-        int32_t objectNo;
-        int8_t buttonNo;
+        int8_t objectType;
         int16_t position;
     };
 

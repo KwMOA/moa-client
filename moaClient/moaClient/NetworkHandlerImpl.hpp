@@ -18,6 +18,7 @@ class NetworkHandlerImpl : public NetworkHandler
 {
 private:
     std::list<Packet*> receivePacketList;
+    std::list<Packet*>::iterator itr;
     
     int tempAutoPacketNo;
     
