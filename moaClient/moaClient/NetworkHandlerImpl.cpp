@@ -10,13 +10,14 @@
 #include "ClientGamePacket.h"
 #include "GameManager.hpp"
 
+
 NetworkHandlerImpl::NetworkHandlerImpl()
 {
     tempAutoPacketNo = 1;
 }
 void NetworkHandlerImpl::sendInput(Packet* packet)
 {
-    ((ClientGamePacket::EmptyPacket*)packet)->isEnemy = 0;
+//    ((ClientGamePacket::EmptyPacket*)packet)->isEnemy = 0;
     receivePacketList.push_back(packet);
 }
 
