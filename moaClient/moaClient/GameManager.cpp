@@ -16,13 +16,55 @@
 #include <windows.h>
 #endif
 
+#include "GameDefines.h"
+#include "ClientGamePacket.h"
+#include "Building_1.hpp"
+
+#include "TestTaskManager.hpp"
+
 GameManager* GameManager::instance = nullptr;
 
 GameManager::GameManager()
 {
     //DOTO. set new Instance in NetworkHandler and TaskManager
     networkHandler = new NetworkHandlerImpl();
+    taskManager = new TestTaskManager();
+    
+    
+    gamePlayers[0] = new GamePlayer();
+    gamePlayers[1] = new GamePlayer();
+    
+    tempObjectNoCreator = 1;
+    
+    
+    
+    //object info init (TODO. receive from json data)
+    objectInfos[0].PRICE = 100;
+    objectInfos[0].CANCEL_PRICE = 80;
+    objectInfos[0].CREATE_TIME = 80;
+    
+    //////////////////////////
+}
 
+bool GameManager::init()
+{
+    
+    // init - send request to create first building both player
+    
+    ClientGamePacket::CreateBuildingReqPacket* packet1 = new ClientGamePacket::CreateBuildingReqPacket();
+    packet1->isEnemy = 0;
+    packet1->objectType = OBJECT_TYPE_BUILDING_1;
+    packet1->position = 1;
+    
+    ClientGamePacket::CreateBuildingReqPacket* packet2 = new ClientGamePacket::CreateBuildingReqPacket();
+    packet2->isEnemy = 1;
+    packet2->objectType = OBJECT_TYPE_BUILDING_1;
+    packet2->position = 1;
+    
+    networkHandler->sendInput(packet1);
+    networkHandler->sendInput(packet2);
+    
+    return true;
 }
 
 void GameManager::run()
