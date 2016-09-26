@@ -9,5 +9,12 @@
 #ifndef GameWorld_h
 #define GameWorld_h
 
+class GameWorld {
+public:
+    virtual void checkState() = 0;
+    virtual void actState() = 0;
+    virtual void applyInfluence() = 0;
+};
+
 
 #endif /* GameWorld_h */

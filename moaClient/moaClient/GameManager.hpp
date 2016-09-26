@@ -11,12 +11,12 @@
 
 #include <stddef.h>
 #include "BasicDefines.h"
-
-#include "NetworkHandlerImpl.hpp"
-#include "TaskManager.h"
-#include "GameLogic.hpp"
-#include "GamePlayer.hpp"
 #include "GameDefines.h"
+
+#include "NetworkHandler.h"
+#include "TaskManager.h"
+#include "GameLogic.h"
+#include "GameWorld.h"
 
 class GameManager
 {
@@ -35,8 +35,8 @@ private:
     NetworkHandler* networkHandler;
     TaskManager* taskManager;
     GameLogic* gameLogic;
+    GameWorld* gameWorld;
     
-    GamePlayer* gamePlayers[2];
     
     int tempObjectNoCreator;
     
@@ -59,6 +59,8 @@ public:
     
     NetworkHandler* getNetworkHandler() { return networkHandler; }
     TaskManager* getTaskManager() { return taskManager; }
+    GameLogic* getGameLogic() { return gameLogic; }
+    GameWorld* getGameWorld() { return gameWorld; }
     
     ObjectInfo getObjectInfoByObjectType(int objectType) const { return objectInfos[objectType]; }
     

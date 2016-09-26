@@ -11,4 +11,24 @@
 
 #include <stdio.h>
 
+#include "GameWorld.h"
+
+#include "GamePlayer.hpp"
+
+class GameWorldImpl : public GameWorld
+{
+private:
+    GamePlayer* gamePlayers[2];
+    
+public:
+    GameWorldImpl();
+    
+    void checkState();
+    void actState();
+    void applyInfluence();
+    
+    GamePlayer* getGamePlayer(int index) { return gamePlayers[index]; }
+};
+
+
 #endif /* GameWorldImpl_hpp */

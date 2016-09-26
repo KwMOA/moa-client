@@ -9,6 +9,8 @@
 #ifndef GameDefines_h
 #define GameDefines_h
 
+const int INTERUPT_NETWORK_FRAME = 2;
+
 enum OBJECT_TYPE
 {
     OBJECT_TYPE_BUILDING_1,

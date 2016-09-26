@@ -7,3 +7,24 @@
 //
 
 #include "GameWorldImpl.hpp"
+
+GameWorldImpl::GameWorldImpl()
+{
+    gamePlayers[0] = new GamePlayer();
+    gamePlayers[1] = new GamePlayer();
+}
+
+void GameWorldImpl::checkState()
+{
+    
+}
+
+void GameWorldImpl::actState()
+{
+    
+}
+
+void GameWorldImpl::applyInfluence()
+{
+    
+}

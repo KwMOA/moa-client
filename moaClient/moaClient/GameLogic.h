@@ -9,5 +9,9 @@
 #ifndef GameLogic_h
 #define GameLogic_h
 
+class GameLogic {
+public:
+    virtual void update(long dt) = 0;
+};
 
 #endif /* GameLogic_h */

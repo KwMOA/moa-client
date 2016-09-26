@@ -20,6 +20,11 @@
 #include "ClientGamePacket.h"
 #include "Building_1.hpp"
 
+
+#include "NetworkHandlerImpl.hpp"
+#include "GameLogicImpl.hpp"
+#include "GamePlayer.hpp"
+#include "GameWorldImpl.hpp"
 #include "TestTaskManager.hpp"
 
 GameManager* GameManager::instance = nullptr;
@@ -29,10 +34,8 @@ GameManager::GameManager()
     //DOTO. set new Instance in NetworkHandler and TaskManager
     networkHandler = new NetworkHandlerImpl();
     taskManager = new TestTaskManager();
-    gameLogic = new GameLogic();
-    
-    gamePlayers[0] = new GamePlayer();
-    gamePlayers[1] = new GamePlayer();
+    gameLogic = new GameLogicImpl();
+    gameWorld = new GameWorldImpl();
     
     tempObjectNoCreator = 1;
     
@@ -96,19 +99,24 @@ void GameManager::run()
     int netWorkCount = 0;
     int taskCount = 0;
     
+    int networkFrame = 1;
     
     while(true) {
         
-        //true if over 250 / 1000 second
-        if((currentTime - startTime) - (netWorkCount * 250) >= 250) {
-            networkHandler->update((currentTime - startTime) - (netWorkCount * 250));
-            
-            netWorkCount++;
-        }
-        
-        //true if over 500 / 1000 second
+        //true if over 125 / 1000 second
         if((currentTime - startTime) - (taskCount * 125) >= 125) {
-            std::cout<<"task"<<std::endl;
+            
+            //true if over 250 / 1000 second
+            if(networkFrame == INTERUPT_NETWORK_FRAME) {
+                networkHandler->update((currentTime - startTime) - (netWorkCount * 250));
+                
+                networkFrame = 1;
+                netWorkCount++;
+            } else {
+                networkFrame++;
+            }
+            
+            taskManager->update((currentTime - startTime) - (taskCount * 125));
             
             taskCount++;
         }
