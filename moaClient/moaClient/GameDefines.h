@@ -9,6 +9,8 @@
 #ifndef GameDefines_h
 #define GameDefines_h
 
+#include <iostream>
+
 const int INTERUPT_NETWORK_FRAME = 2;
 
 enum OBJECT_TYPE

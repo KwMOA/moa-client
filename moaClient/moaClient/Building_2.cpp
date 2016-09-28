@@ -8,7 +8,7 @@
 
 #include "Building_2.hpp"
 
-Building_2::Building_2()
+Building_2::Building_2(GamePlayer* _gamePlayer) : Building(_gamePlayer)
 {
     quantity = 1;
     quality = 1;

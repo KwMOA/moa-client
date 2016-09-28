@@ -18,7 +18,7 @@ private:
     int quality;
     
 public:
-    Building_2();
+    Building_2(GamePlayer* _gamePlayer);
     void click();
     void update(long dt);
 };

@@ -10,12 +10,12 @@
 #define Building_hpp
 
 #include <stdio.h>
-#include "BaseObject.h"
+#include "BaseObject.hpp"
 
 class Building : public BaseObject {
 protected:
 public:
-    Building();
+    Building(GamePlayer* gamePlayer);
 };
 
 #endif /* Building_hpp */

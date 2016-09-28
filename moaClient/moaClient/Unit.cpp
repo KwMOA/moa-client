@@ -8,7 +8,7 @@
 
 #include "Unit.hpp"
 
-Unit::Unit()
+Unit::Unit(GamePlayer* _gamePlayer) :BaseObject(_gamePlayer)
 {
     state = OBJECT_STATE_RUN;
 }

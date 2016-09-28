@@ -8,6 +8,7 @@
 
 #include "GameLogicImpl.hpp"
 #include "GameManager.hpp"
+#include "GamePlayer.hpp"
 
 
 GameLogicImpl::GameLogicImpl()
@@ -18,6 +19,12 @@ GameLogicImpl::GameLogicImpl()
 
 void GameLogicImpl::update(long dt)
 {
+    //building update
+    
+    GameManager::GetInstance()->getGameWorld()->getGamePlayer(0)->update(dt);
+    GameManager::GetInstance()->getGameWorld()->getGamePlayer(1)->update(dt);
+    
+    
     //check all object if exist to change state
     
     GameManager::GetInstance()->getGameWorld()->checkState();
