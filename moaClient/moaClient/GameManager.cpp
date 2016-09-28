@@ -19,13 +19,13 @@
 #include "GameDefines.h"
 #include "ClientGamePacket.h"
 #include "Building_1.hpp"
+#include "TaskManagerImpl.h"
 
 
 #include "NetworkHandlerImpl.hpp"
 #include "GameLogicImpl.hpp"
 #include "GamePlayer.hpp"
 #include "GameWorldImpl.hpp"
-#include "TestTaskManager.hpp"
 
 GameManager* GameManager::instance = nullptr;
 
@@ -33,7 +33,8 @@ GameManager::GameManager()
 {
     //DOTO. set new Instance in NetworkHandler and TaskManager
     networkHandler = new NetworkHandlerImpl();
-    taskManager = new TestTaskManager();
+
+    taskManager = new TaskManagerImpl();
     gameLogic = new GameLogicImpl();
     gameWorld = new GameWorldImpl();
     
@@ -105,7 +106,7 @@ void GameManager::run()
         
         //true if over 125 / 1000 second
         if((currentTime - startTime) - (taskCount * 125) >= 125) {
-            
+     
             //true if over 250 / 1000 second
             if(networkFrame == INTERUPT_NETWORK_FRAME) {
                 networkHandler->update((currentTime - startTime) - (netWorkCount * 250));

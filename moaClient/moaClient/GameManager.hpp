@@ -59,6 +59,7 @@ public:
     
     NetworkHandler* getNetworkHandler() { return networkHandler; }
     TaskManager* getTaskManager() { return taskManager; }
+
     GameLogic* getGameLogic() { return gameLogic; }
     GameWorld* getGameWorld() { return gameWorld; }
     
