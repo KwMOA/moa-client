@@ -1,13 +1,15 @@
 //
-//  BaseObject.h
+//  BaseObject.hpp
 //  moaClient
 //
-//  Created by kimyongchan on 2016. 9. 25..
+//  Created by kimyongchan on 2016. 9. 28..
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#ifndef BaseObject_h
-#define BaseObject_h
+#ifndef BaseObject_hpp
+#define BaseObject_hpp
+
+class GamePlayer;
 
 class BaseObject {
 protected:
@@ -16,7 +18,11 @@ protected:
     int x, y, w, h;
     int state;
     
+    GamePlayer* gamePlayer;
+    
 public:
+    BaseObject(GamePlayer* _gamePlayer);
+    
     virtual void click() = 0;
     virtual void update(long dt) = 0;
     
@@ -30,6 +36,8 @@ public:
     int getState() { return state; }
     void setState(int state) { this->state = state; }
     
+    GamePlayer* getGamePlayer() { return gamePlayer; }
+    
 };
 
-#endif /* BaseObject_h */
+#endif /* BaseObject_hpp */

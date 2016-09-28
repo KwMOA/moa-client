@@ -9,7 +9,7 @@
 #include "Building.hpp"
 #include "GameDefines.h"
 
-Building::Building()
+Building::Building(GamePlayer* _gamePlayer) :BaseObject(_gamePlayer)
 {
     state = OBJECT_STATE_CREATEING;
 }

@@ -9,7 +9,7 @@
 #include "Unit_1.hpp"
 #include "GameDefines.h"
 
-Unit_1::Unit_1()
+Unit_1::Unit_1(GamePlayer* _gamePlayer) :Unit(_gamePlayer)
 {
     w = 50;
     h = 70;

@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <list>
 
-#include "BaseObject.h"
+class BaseObject;
 
 class GamePlayer
 {
@@ -36,5 +36,9 @@ public:
     
     int setBuilding(BaseObject* building);
     int setUnit(BaseObject* unit);
+    
+    void addGold(int plus) { gold += plus; }
+    
+    
 };
 #endif /* GamePlayer_hpp */

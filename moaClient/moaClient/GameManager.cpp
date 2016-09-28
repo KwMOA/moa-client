@@ -24,7 +24,7 @@
 
 #include "NetworkHandlerImpl.hpp"
 #include "GameLogicImpl.hpp"
-#include "GamePlayer.hpp"
+//#include "GamePlayerImpl.hpp"
 #include "GameWorldImpl.hpp"
 
 GameManager* GameManager::instance = nullptr;

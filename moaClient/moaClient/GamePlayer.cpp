@@ -7,6 +7,7 @@
 //
 
 #include "GamePlayer.hpp"
+#include "BaseObject.hpp"
 
 GamePlayer::GamePlayer()
 {

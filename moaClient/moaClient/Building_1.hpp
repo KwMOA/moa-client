@@ -15,9 +15,11 @@
 class Building_1 : public Building {
 private:
     int quantity;
+    int createPersent;
+    int goldAquiredTime;
     
 public:
-    Building_1();
+    Building_1(GamePlayer* _gamePlayer);
     void click();
     void update(long dt);
 };

@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include <list>
-#include "BaseObject.h"
+#include "BaseObject.hpp"
 #include "GameDefines.h"
 
 class Unit : public BaseObject {
@@ -26,6 +26,6 @@ protected:
     
     std::list<Influence*> lists;
 public:
-    Unit();
+    Unit(GamePlayer* _gamePlayer);
 };
 #endif /* Unit_hpp */
