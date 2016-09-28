@@ -24,23 +24,28 @@ void TaskManagerImpl::receiveFromNetwork(Packet* packet)
 
 void TaskManagerImpl::update(long dt)
 {
+	int who;
+	ClientGamePacket::EmptyPacket* packet;
 	ClientGamePacket::CancelBuildingResPacket* canclePacket;
-		ClientGamePacket::CreateBuildingResPacket* buildPacket;
+	ClientGamePacket::CreateBuildingResPacket* buildPacket;
 		if (count == INTERUPT_NETWORK_FRAME) {
-		switch (autoTaskQueue.Dequeue()->cmd) {
+			packet = (ClientGamePacket::EmptyPacket*)autoTaskQueue.Dequeue();
+			who = packet->isEnemy;
+		switch (packet->cmd) {
+			
 		case ClientGamePacket::CREATE_BUILDING_RES:
 			buildPacket = (ClientGamePacket::CreateBuildingResPacket*)autoTaskQueue.Dequeue();
 			switch (buildPacket->objectType) {
 			case 1:
 				Building_1* building = new Building_1();
-				GameManager::GetInstance()->getGameWorld()->getGamePlayer(0)->setBuilding(building);
+				GameManager::GetInstance()->getGameWorld()->getGamePlayer(who)->setBuilding(building);
 
 				break;
 			}
 			break;
 		case ClientGamePacket::CANCEL_BUILDING_RES:
 			 canclePacket = (ClientGamePacket::CancelBuildingResPacket*)autoTaskQueue.Dequeue();			
-			GameManager::GetInstance()->getGameWorld()->getGamePlayer(0)->getBuildingByObjectNo(canclePacket->objectNo);
+			GameManager::GetInstance()->getGameWorld()->getGamePlayer(who)->getBuildingByObjectNo(canclePacket->objectNo);
 			break;
 		default:
 			break;
