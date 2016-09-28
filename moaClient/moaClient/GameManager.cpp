@@ -42,9 +42,9 @@ GameManager::GameManager()
     
     
     //object info init (TODO. receive from json data)
-    objectInfos[0].PRICE = 100;
-    objectInfos[0].CANCEL_PRICE = 80;
-    objectInfos[0].CREATE_TIME = 80;
+    objectInfos[0].price = 100;
+    objectInfos[0].cancel_price = 80;
+    objectInfos[0].create_time = 80;
     
     //////////////////////////
 }

@@ -9,8 +9,8 @@
 #include "Building_1.hpp"
 
 Building_1::Building_1()
-{
-    state = CREATEING;
+{    
+    quantity = 1;
 }
 
 void Building_1::click()

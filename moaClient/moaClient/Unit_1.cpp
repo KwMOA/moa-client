@@ -7,10 +7,19 @@
 //
 
 #include "Unit_1.hpp"
+#include "GameDefines.h"
 
 Unit_1::Unit_1()
 {
-    state = RUN;
+    w = 50;
+    h = 70;
+    hp = 100;
+    atk = 30;
+    atkSpeed = 1;
+    atkRange = 0;
+    speed = 80;
+    def = 10;
+    isVisible = 1;
 }
 
 void Unit_1::click()

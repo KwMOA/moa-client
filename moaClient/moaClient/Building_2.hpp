@@ -10,9 +10,13 @@
 #define Building_2_hpp
 
 #include <stdio.h>
-#include "Building.h"
+#include "Building.hpp"
 
 class Building_2 : public Building {
+private:
+    int quantity;
+    int quality;
+    
 public:
     Building_2();
     void click();

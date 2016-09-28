@@ -10,7 +10,7 @@
 
 Unit_2::Unit_2()
 {
-    state = RUN;
+    state = OBJECT_STATE_RUN;
 }
 
 

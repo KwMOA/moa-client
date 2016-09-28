@@ -1,13 +1,13 @@
 //
-//  Unit.h
+//  Unit.hpp
 //  moaClient
 //
 //  Created by kimyongchan on 2016. 9. 26..
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#ifndef Unit_h
-#define Unit_h
+#ifndef Unit_hpp
+#define Unit_hpp
 
 #include <stdio.h>
 #include <list>
@@ -20,14 +20,12 @@ protected:
     int atk;
     int atkSpeed;
     int atkRange;
-    int speend;
+    int speed;
     int def;
     int isVisible;
     
     std::list<Influence*> lists;
 public:
-    
+    Unit();
 };
-
-
-#endif /* Unit_h */
+#endif /* Unit_hpp */

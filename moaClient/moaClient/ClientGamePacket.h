@@ -23,6 +23,9 @@ public:
         
         WORK_BUILDING_REQ,
         WORK_BUILDING_RES,
+        
+        CREATE_UNIT_REQ,
+        CREATE_UNIT_RES,
 	};
 
 
@@ -75,8 +78,7 @@ public:
         WorkBuildingReqPakcet() { cmd = WORK_BUILDING_REQ; }
         
         int32_t objectNo;
-        int8_t buttonNo;
-        int16_t lineNo;
+        int8_t upgradeType;
     };
     
     struct WorkBuildingResPacket : public EmptyPacket
@@ -84,11 +86,26 @@ public:
         WorkBuildingResPacket() { cmd = WORK_BUILDING_RES; }
         
         int32_t objectNo;
+        int8_t upgradeType;
+    };
+    
+    struct CreateUnitReqPacket : public EmptyPacket
+    {
+        CreateUnitReqPacket() { cmd = CREATE_UNIT_REQ; }
+        
+        int32_t objectNo;
         int8_t buttonNo;
         int16_t lineNo;
     };
     
-    
+    struct CreateUnitResPacket : public EmptyPacket
+    {
+        CreateUnitResPacket() { cmd = CREATE_UNIT_RES; }
+        
+        int32_t objectNo;
+        int8_t buttonNo;
+        int16_t lineNo;
+    };
 };
 
 #pragma pack(pop)

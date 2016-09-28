@@ -9,8 +9,6 @@
 #ifndef BaseObject_h
 #define BaseObject_h
 
-#include "ObjectState.h"
-
 class BaseObject {
 protected:
     int objectNo;

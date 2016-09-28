@@ -10,13 +10,17 @@
 
 Building_2::Building_2()
 {
-    state = CREATEING;
+    quantity = 1;
+    quality = 1;
 }
+
 
 void Building_2::click()
 {
     
 }
+
+
 void Building_2::update(long dt)
 {
     

@@ -16,17 +16,27 @@ enum OBJECT_TYPE
     OBJECT_TYPE_BUILDING_1,
 };
 
-struct ObjectInfo
+enum OBJECT_STATE
 {
-    int PRICE;
-    int CANCEL_PRICE;
-    int CREATE_TIME;
+    OBJECT_STATE_CREATEING,
+    OBJECT_STATE_WORK,
+    OBJECT_STATE_DESTROY,
+    OBJECT_STATE_RUN,
+    OBJECT_STATE_ATTACK,
+    OBJECT_STATE_DEAD,
 };
 
 enum INFLUENCE_TYPE
 {
     INFLUENCE_TYPE_ATTACK,
     INFLUENCE_TYPE_HEAL,
+};
+
+struct ObjectInfo
+{
+    int price;
+    int cancel_price;
+    int create_time;
 };
 
 struct Influence
