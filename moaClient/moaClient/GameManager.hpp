@@ -59,6 +59,7 @@ public:
     
     NetworkHandler* getNetworkHandler() { return networkHandler; }
     TaskManager* getTaskManager() { return taskManager; }
+	GameLogic* getGameLogic() { return gameLogic; }
     
     ObjectInfo getObjectInfoByObjectType(int objectType) const { return objectInfos[objectType]; }
     

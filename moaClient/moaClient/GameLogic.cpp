@@ -6,8 +6,10 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
+
 #include "GameLogic.hpp"
 
+#include <iostream>
 
 GameLogic::GameLogic()
 {
@@ -17,5 +19,5 @@ GameLogic::GameLogic()
 
 void GameLogic::update(long dt)
 {
-    
+	std::cout << "GameLogic\n";
 }

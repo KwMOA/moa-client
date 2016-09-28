@@ -19,6 +19,7 @@
 #include "GameDefines.h"
 #include "ClientGamePacket.h"
 #include "Building_1.hpp"
+#include "TaskManagerImpl.h"
 
 #include "TestTaskManager.hpp"
 
@@ -28,7 +29,7 @@ GameManager::GameManager()
 {
     //DOTO. set new Instance in NetworkHandler and TaskManager
     networkHandler = new NetworkHandlerImpl();
-    taskManager = new TestTaskManager();
+    taskManager = new TaskManagerImpl();
     gameLogic = new GameLogic();
     
     gamePlayers[0] = new GamePlayer();
@@ -108,8 +109,8 @@ void GameManager::run()
         
         //true if over 500 / 1000 second
         if((currentTime - startTime) - (taskCount * 125) >= 125) {
-            std::cout<<"task"<<std::endl;
-            
+			taskManager->update((currentTime - startTime) - (netWorkCount * 250));
+
             taskCount++;
         }
         
