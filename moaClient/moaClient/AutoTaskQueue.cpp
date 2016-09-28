@@ -25,7 +25,7 @@ void AutoTaskQueue::Enqueue(Packet* packet) {
 }
 
 bool AutoTaskQueue::QIsEmpty() {
-	if (front->packet == NULL) {
+	if (front == NULL) {
 		return true;
 	}else
 	return false;
