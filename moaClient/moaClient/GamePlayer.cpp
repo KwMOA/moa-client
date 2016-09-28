@@ -8,6 +8,7 @@
 
 #include "GamePlayer.hpp"
 #include "BaseObject.hpp"
+#include "GameDefines.h"
 
 GamePlayer::GamePlayer()
 {
@@ -16,9 +17,9 @@ GamePlayer::GamePlayer()
 
 BaseObject* GamePlayer::getBuildingByObjectNo(int objectNo)
 {
-    for(buildingitr = buildingList.begin(); buildingitr != buildingList.end() ; buildingitr++)
+    for(buildingItr = buildingList.begin(); buildingItr != buildingList.end() ; buildingItr++)
     {
-        BaseObject* baseObject = (BaseObject*)*buildingitr;
+        BaseObject* baseObject = (BaseObject*)*buildingItr;
         
         if(baseObject->getObjectNo() == objectNo) {
             return baseObject;
@@ -43,6 +44,42 @@ int GamePlayer::setBuilding(BaseObject* building)
     return objectNoCreator++;
 }
 
+int GamePlayer::destoryBuilding(int objectNo)
+{
+    for(buildingItr = buildingList.begin(); buildingItr != buildingList.end() ; buildingItr++)
+    {
+        BaseObject* baseObject = (BaseObject*)*buildingItr;
+        
+        if(baseObject->getObjectNo() == objectNo) {
+            baseObject->setState(OBJECT_STATE_DESTROY);
+            
+            buildingList.remove(*buildingItr);
+            destroyBuildingList.push_back(baseObject);
+            
+            std::cout<< "destroy building start - " << baseObject->getObjectNo() <<std::endl;
+        }
+    }
+    
+    return -1;
+}
+
+int GamePlayer::removeBuilding(int objectNo)
+{
+    for(destroyBuildingItr = destroyBuildingList.begin(); destroyBuildingItr != destroyBuildingList.end() ; destroyBuildingItr++)
+    {
+        BaseObject* baseObject = (BaseObject*)*destroyBuildingItr;
+        
+        if(baseObject->getObjectNo() == objectNo) {
+            destroyBuildingList.remove(*buildingItr);
+            
+            delete baseObject;
+        }
+    }
+    
+    return -1;
+}
+
+
 
 int GamePlayer::setUnit(BaseObject* unit)
 {
@@ -51,9 +88,16 @@ int GamePlayer::setUnit(BaseObject* unit)
 
 void GamePlayer::update(long dt)
 {
-    for(buildingitr = buildingList.begin(); buildingitr != buildingList.end() ; buildingitr++)
+    for(buildingItr = buildingList.begin(); buildingItr != buildingList.end() ; buildingItr++)
     {
-        BaseObject* baseObject = (BaseObject*)*buildingitr;
+        BaseObject* baseObject = (BaseObject*)*buildingItr;
+        
+        baseObject->update(dt);
+    }
+
+    for(destroyBuildingItr = destroyBuildingList.begin(); destroyBuildingItr != destroyBuildingList.end() ; destroyBuildingItr++)
+    {
+        BaseObject* baseObject = (BaseObject*)*destroyBuildingItr;
         
         baseObject->update(dt);
     }

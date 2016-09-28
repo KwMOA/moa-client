@@ -16,6 +16,7 @@
 class Unit_2 : public Unit {
 public:
     Unit_2();
+    ~Unit_2() {};
     void click();
     void update(long dt);
 };

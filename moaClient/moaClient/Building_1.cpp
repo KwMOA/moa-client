@@ -15,6 +15,8 @@ Building_1::Building_1()
     quantity = 1;
     createPersent = 0;
     goldAquiredTime = 0;
+    destroyTime = 0;
+    
 }
 
 void Building_1::click()
@@ -44,7 +46,18 @@ void Building_1::update(long dt)
             gamePlayer->addGold(100);
             
             goldAquiredTime = 0;
+            
+            
         }
         
+    } else if(state == OBJECT_STATE_DESTROY) {
+        
+        destroyTime += 1;
+        
+        if(destroyTime == 8) {
+            std::cout << "destroy - " << objectNo <<std::endl;
+            
+            //TODO. think that how to remove in building list
+        }
     }
 }

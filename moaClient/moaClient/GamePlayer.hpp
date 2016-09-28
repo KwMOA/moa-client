@@ -18,15 +18,23 @@ class GamePlayer
 {
 private:
     std::list<BaseObject*> buildingList;
-    std::list<BaseObject*>::iterator buildingitr;
+    std::list<BaseObject*>::iterator buildingItr;
+    
+    std::list<BaseObject*> destroyBuildingList;
+    std::list<BaseObject*>::iterator destroyBuildingItr;
     
     std::list<BaseObject*> unitList;
-    std::list<BaseObject*>::iterator unititr;
+    std::list<BaseObject*>::iterator unitItr;
+    
+    std::list<BaseObject*> destroyUnitList;
+    std::list<BaseObject*>::iterator destoryUnitItr;
     
     int gold;
     int unitPopulation;
     
     int objectNoCreator;
+    
+    int removeBuilding(int objectNo);
     
 public:
     GamePlayer();
@@ -36,8 +44,11 @@ public:
     
     int setBuilding(BaseObject* building);
     int setUnit(BaseObject* unit);
+    int destoryBuilding(int objectNo);
     
     void addGold(int plus) { gold += plus; }
+    
+    int getGold() { return gold; }
     
     void update(long dt);
     
