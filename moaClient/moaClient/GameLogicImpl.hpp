@@ -9,12 +9,12 @@
 #ifndef GameLogic_hpp
 #define GameLogic_hpp
 
-#include <stdio.h>
+#include "GameLogic.h"
 
-class GameLogic
+class GameLogicImpl : public GameLogic
 {
 public:
-    GameLogic();
+    GameLogicImpl();
     void update(long dt);
 };
 
