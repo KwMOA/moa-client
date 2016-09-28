@@ -31,14 +31,15 @@ void TaskManagerImpl::update(long dt)
 		if (count == INTERUPT_NETWORK_FRAME) {
 			packet = (ClientGamePacket::EmptyPacket*)autoTaskQueue.Dequeue();
 			who = packet->isEnemy;
+
 		switch (packet->cmd) {
 			
 		case ClientGamePacket::CREATE_BUILDING_RES:
 			buildPacket = (ClientGamePacket::CreateBuildingResPacket*)autoTaskQueue.Dequeue();
 			switch (buildPacket->objectType) {
-			case 1:
+			case OBJECT_TYPE_BUILDING_1:
 				Building_1* building = new Building_1();
-				GameManager::GetInstance()->getGameWorld()->getGamePlayer(who)->setBuilding(building);
+				GameManager::GetInstance()->getGameWorld()->getGamePlayer(0)->setBuilding(building);
 
 				break;
 			}
