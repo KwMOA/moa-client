@@ -19,6 +19,7 @@ private:
     
 public:
     Building_2();
+    ~Building_2() {};
     void click();
     void update(long dt);
 };

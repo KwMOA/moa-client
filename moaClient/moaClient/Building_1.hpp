@@ -17,9 +17,12 @@ private:
     int quantity;
     int createPersent;
     int goldAquiredTime;
+    int destroyTime;
     
 public:
     Building_1();
+    ~Building_1() {};
+    
     void click();
     void update(long dt);
 };

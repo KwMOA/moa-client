@@ -25,6 +25,7 @@ public:
     
     virtual void click() = 0;
     virtual void update(long dt) = 0;
+    virtual ~BaseObject() {};
     
     
     int getObjectNo() { return objectNo; }

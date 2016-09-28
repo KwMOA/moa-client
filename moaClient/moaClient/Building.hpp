@@ -16,6 +16,7 @@ class Building : public BaseObject {
 protected:
 public:
     Building();
+    ~Building() {}
 };
 
 #endif /* Building_hpp */

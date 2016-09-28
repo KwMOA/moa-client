@@ -27,5 +27,6 @@ protected:
     std::list<Influence*> lists;
 public:
     Unit();
+    ~Unit() {}
 };
 #endif /* Unit_hpp */
