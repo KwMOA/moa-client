@@ -47,3 +47,13 @@ int GamePlayer::setUnit(BaseObject* unit)
 {
     return 0;
 }
+
+void GamePlayer::update(long dt)
+{
+    for(buildingitr = buildingList.begin(); buildingitr != buildingList.end() ; buildingitr++)
+    {
+        BaseObject* baseObject = (BaseObject*)*buildingitr;
+        
+        baseObject->update(dt);
+    }
+}

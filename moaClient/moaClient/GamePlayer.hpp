@@ -39,6 +39,8 @@ public:
     
     void addGold(int plus) { gold += plus; }
     
+    void update(long dt);
+    
     
 };
 #endif /* GamePlayer_hpp */
