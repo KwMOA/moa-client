@@ -27,7 +27,7 @@ void Building_1::update(long dt)
         
         createPersent += 10;
         
-        if(createPersent > 800) {
+        if(createPersent == 800) {
             std::cout << "create building_1 - " << objectNo <<std::endl;
             
             state = OBJECT_STATE_WORK;
@@ -38,10 +38,12 @@ void Building_1::update(long dt)
         
         goldAquiredTime += 1;
         
-        if(goldAquiredTime > 40) {
+        if(goldAquiredTime == 40) {
             std::cout << "aquired gold - " << objectNo <<std::endl;
             
             gamePlayer->addGold(100);
+            
+            goldAquiredTime = 0;
         }
         
     }
