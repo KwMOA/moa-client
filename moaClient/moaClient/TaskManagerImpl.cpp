@@ -53,7 +53,13 @@ void TaskManagerImpl::update(long dt)
 					break;
 				case ClientGamePacket::CANCEL_BUILDING_RES:
 					canclePacket = (ClientGamePacket::CancelBuildingResPacket*)packet;
-					GameManager::GetInstance()->getGameWorld()->getGamePlayer(who)->getBuildingByObjectNo(canclePacket->objectNo);
+					if(GameManager::GetInstance()->getGameWorld()->getGamePlayer(who)->getBuildingByObjectNo(canclePacket->objectNo)->getState() == OBJECT_STATE_CREATEING){
+						GameManager::GetInstance()->getGameWorld()->getGamePlayer(who)->destoryBuilding(canclePacket->objectNo);
+					}
+					else {
+						std::cout << "It`s InValide Packet\n";
+						continue;
+					}
 					break;
 				default:
 					break;
