@@ -22,11 +22,9 @@ void GameLogicImpl::update(long dt)
     
     GameManager::GetInstance()->getGameWorld()->checkState();
     
-    
     //act all object
     
     GameManager::GetInstance()->getGameWorld()->actState();
-    
     
     //apply influence each object
     

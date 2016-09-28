@@ -15,21 +15,12 @@ class AutoTaskQueue{
 
 private:
 
-	AutoTaskQueue();
-	static AutoTaskQueue* instance;
-
 
 	Node * front;
 	Node * rear;
 public:
 
-	static AutoTaskQueue* GetInstance()
-	{
-		if (instance == NULL) instance = new AutoTaskQueue();
-		return instance;
-	}
-
-	
+	AutoTaskQueue();
 	bool QIsEmpty();
 
 	void Enqueue(Packet* packet);

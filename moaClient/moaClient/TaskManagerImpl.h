@@ -5,6 +5,7 @@
 
 #include "BasicDefines.h"
 #include "TaskManager.h"
+#include "AutoTaskQueue.h"
 
 class TaskManagerImpl : public TaskManager
 {
@@ -12,6 +13,7 @@ private:
 
 	int32_t count;
 	bool isFirst;
+	AutoTaskQueue autoTaskQueue;
 
 public:
 	TaskManagerImpl();

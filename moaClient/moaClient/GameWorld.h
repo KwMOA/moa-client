@@ -9,12 +9,16 @@
 #ifndef GameWorld_h
 #define GameWorld_h
 
+#include "GamePlayer.hpp"
+
 class GameWorld {
 public:
     virtual void checkState() = 0;
     virtual void actState() = 0;
     virtual void applyInfluence() = 0;
+	virtual GamePlayer* getGamePlayer(int index) = 0;
 };
+
 
 
 #endif /* GameWorld_h */

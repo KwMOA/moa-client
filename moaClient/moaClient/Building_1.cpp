@@ -7,6 +7,7 @@
 //
 
 #include "Building_1.hpp"
+#include "GameWorldImpl.hpp"
 
 Building_1::Building_1()
 {    
@@ -19,5 +20,5 @@ void Building_1::click()
 }
 void Building_1::update(long dt)
 {
-    
+	
 }
