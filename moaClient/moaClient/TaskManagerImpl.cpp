@@ -25,14 +25,15 @@ void TaskManagerImpl::receiveFromNetwork(Packet* packet)
 void TaskManagerImpl::update(long dt)
 {
 	int who;
-	ClientGamePacket::EmptyPacket* packet = (ClientGamePacket::EmptyPacket*)autoTaskQueue.QPeek();
-	if (packet != NULL) {
-		int thisNo = packet->packetNo;
-		int nextNo = packet->packetNo;
+	ClientGamePacket::EmptyPacket* packet;
 		ClientGamePacket::CancelBuildingResPacket* canclePacket;
 		ClientGamePacket::CreateBuildingResPacket* buildPacket;
 
 		if (count == INTERUPT_NETWORK_FRAME) {
+			packet = (ClientGamePacket::EmptyPacket*)autoTaskQueue.QPeek();
+
+			int thisNo = packet->packetNo;
+			int nextNo = packet->packetNo;
 			while (!autoTaskQueue.QIsEmpty() || nextNo != thisNo) {
 				packet = (ClientGamePacket::EmptyPacket*)autoTaskQueue.Dequeue();
 				who = packet->isEnemy;
@@ -69,6 +70,6 @@ void TaskManagerImpl::update(long dt)
 		GameManager::GetInstance()->getGameLogic()->update(dt);
 
 		count++;
-	}
+	
 }
 
