@@ -10,7 +10,7 @@
 #include "GameDefines.h"
 #include "GamePlayer.hpp"
 
-Building_1::Building_1(GamePlayer* _gamePlayer) : Building(_gamePlayer)
+Building_1::Building_1()
 {    
     quantity = 1;
     createPersent = 0;

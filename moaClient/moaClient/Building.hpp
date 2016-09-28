@@ -15,7 +15,7 @@
 class Building : public BaseObject {
 protected:
 public:
-    Building(GamePlayer* gamePlayer);
+    Building();
 };
 
 #endif /* Building_hpp */

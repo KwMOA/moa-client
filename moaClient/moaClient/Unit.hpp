@@ -26,6 +26,6 @@ protected:
     
     std::list<Influence*> lists;
 public:
-    Unit(GamePlayer* _gamePlayer);
+    Unit();
 };
 #endif /* Unit_hpp */

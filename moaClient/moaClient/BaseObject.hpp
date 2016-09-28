@@ -21,7 +21,7 @@ protected:
     GamePlayer* gamePlayer;
     
 public:
-    BaseObject(GamePlayer* _gamePlayer);
+    BaseObject();
     
     virtual void click() = 0;
     virtual void update(long dt) = 0;
@@ -37,6 +37,7 @@ public:
     void setState(int state) { this->state = state; }
     
     GamePlayer* getGamePlayer() { return gamePlayer; }
+    void setGamePlayer(GamePlayer* _gamePlayer) { gamePlayer = _gamePlayer; }
     
 };
 
