@@ -6,8 +6,6 @@
 #include "BasicDefines.h"
 #include "TaskManager.h"
 
-#define CHECK_COUNT 2
-
 class TaskManagerImpl : public TaskManager
 {
 private:
