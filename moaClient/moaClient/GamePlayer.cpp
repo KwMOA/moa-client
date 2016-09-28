@@ -36,6 +36,7 @@ BaseObject* GamePlayer::getUnitByObjectNo(int objectNo)
 int GamePlayer::setBuilding(BaseObject* building)
 {
     building->setObjectNo(objectNoCreator);
+    building->setGamePlayer(this);
     
     buildingList.push_back(building);
     

@@ -19,7 +19,7 @@ private:
     int goldAquiredTime;
     
 public:
-    Building_1(GamePlayer* _gamePlayer);
+    Building_1();
     void click();
     void update(long dt);
 };
