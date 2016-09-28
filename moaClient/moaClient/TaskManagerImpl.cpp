@@ -36,7 +36,7 @@ void TaskManagerImpl::update(long dt)
 		case ClientGamePacket::CREATE_BUILDING_RES:
 			buildPacket = (ClientGamePacket::CreateBuildingResPacket*)autoTaskQueue.Dequeue();
 			switch (buildPacket->objectType) {
-			case 1:
+			case OBJECT_TYPE_BUILDING_1:
 				Building_1* building = new Building_1();
 				GameManager::GetInstance()->getGameWorld()->getGamePlayer(who)->setBuilding(building);
 
