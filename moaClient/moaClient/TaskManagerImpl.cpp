@@ -45,7 +45,7 @@ void TaskManagerImpl::update(long dt)
                 case ClientGamePacket::CREATE_BUILDING_RES:
                 {
                     ClientGamePacket::CreateBuildingResPacket* createBuildingPacket = (ClientGamePacket::CreateBuildingResPacket*)packet;
-                    GameManager::GetInstance()->getGameWorld()->createBuilding(who, (int)createBuildingPacket->objectType);
+                    GameManager::GetInstance()->getGameWorld()->createBuilding(who, createBuildingPacket->objectType);
                     
                     break;
                 }
