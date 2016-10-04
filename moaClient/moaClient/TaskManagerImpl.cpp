@@ -4,6 +4,8 @@
 #include "GameManager.hpp"
 #include "GamePlayer.hpp"
 #include "Building_1.hpp"
+#include "Process.h"
+#include "IProcessBuilding_1.hpp"
 
 #include <iostream>
 
@@ -12,6 +14,8 @@ TaskManagerImpl::TaskManagerImpl()
 	isFirst = false;
 	count = 1;
 	autoTaskQueue = AutoTaskQueue();
+	resPacketHandler = ResPacketHandler();
+	map[1] = new IProcessBuilding_1();
 }
 
 void TaskManagerImpl::receiveFromNetwork(Packet* packet)
@@ -24,50 +28,29 @@ void TaskManagerImpl::receiveFromNetwork(Packet* packet)
 
 void TaskManagerImpl::update(long dt)
 {
-	int who;
-	ClientGamePacket::EmptyPacket* packet;
-		ClientGamePacket::CancelBuildingResPacket* canclePacket;
-		ClientGamePacket::CreateBuildingResPacket* buildPacket;
-
+		int who;
+		
 		if (count == INTERUPT_NETWORK_FRAME) {
-			packet = (ClientGamePacket::EmptyPacket*)autoTaskQueue.QPeek();
+			resPacketHandler.setEmpty((ClientGamePacket::EmptyPacket*)autoTaskQueue.QPeek());
+			
+			int thisNo = resPacketHandler.getPacketNo();
+			int nextNo = resPacketHandler.getPacketNo();
 
-			int thisNo = packet->packetNo;
-			int nextNo = packet->packetNo;
 			while (!autoTaskQueue.QIsEmpty() || nextNo != thisNo) {
-				packet = (ClientGamePacket::EmptyPacket*)autoTaskQueue.Dequeue();
-				who = packet->isEnemy;
-				nextNo = packet->packetNo;
+				resPacketHandler.setEmpty((ClientGamePacket::EmptyPacket*)autoTaskQueue.Dequeue());
+				nextNo = resPacketHandler.getPacketNo();
 
-				switch (packet->cmd) {
+				switch (resPacketHandler.getEmpty()->cmd) {
 
 				case ClientGamePacket::CREATE_BUILDING_RES:
-					buildPacket = (ClientGamePacket::CreateBuildingResPacket*)packet;
-					switch (buildPacket->objectType) {
-					case OBJECT_TYPE_BUILDING_1:
-						Building_1* building = new Building_1();
-						GameManager::GetInstance()->getGameWorld()->getGamePlayer(who)->setBuilding(building);
-
-						break;
-					}
+					resPacketHandler.resCreateBuilding();
 					break;
 				case ClientGamePacket::CANCEL_BUILDING_RES:
-					canclePacket = (ClientGamePacket::CancelBuildingResPacket*)packet;
-					if(GameManager::GetInstance()->getGameWorld()->getGamePlayer(who)->getBuildingByObjectNo(canclePacket->objectNo)->getState() == OBJECT_STATE_CREATEING){
-						GameManager::GetInstance()->getGameWorld()->getGamePlayer(who)->destoryBuilding(canclePacket->objectNo);
-					}
-					else {
-						std::cout << "It`s InValide Packet\n";
-						continue;
-					}
+					resPacketHandler.resCancelBuilding();
 					break;
 				default:
 					break;
 				}
-
-
-
-
 				count = 0;
 			}
 		}

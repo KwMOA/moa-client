@@ -6,16 +6,20 @@
 #include "BasicDefines.h"
 #include "TaskManager.h"
 #include "AutoTaskQueue.h"
-
+#include "ResPacketHandler.hpp"
+#include <map>
+#include "Process.h"
 class TaskManagerImpl : public TaskManager
 {
 private:
-
 	int32_t count;
 	bool isFirst;
 	AutoTaskQueue autoTaskQueue;
+	ResPacketHandler resPacketHandler;
 
 public:
+
+	std::map<int, Process*> map;
 	TaskManagerImpl();
 	void update(long dt);
 	void receiveFromNetwork(Packet* packet);
