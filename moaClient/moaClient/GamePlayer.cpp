@@ -12,11 +12,15 @@
 #include "Building.hpp"
 #include "Unit.hpp"
 #include "StaticObject.h"
+#include "GameWorld.h"
 
-GamePlayer::GamePlayer()
+GamePlayer::GamePlayer(GameWorld* _gameWorld, int _playerIndex)
 {
     objectNoCreator = 1;
     
+    gameWorld = _gameWorld;
+    
+    playerIndex = _playerIndex;
     
     // set static unit
     
@@ -220,5 +224,13 @@ void GamePlayer::update(long dt)
         }
     }
     
-    
+    for(int i = 0; i < 3; i++)
+    {
+        for(unitItr[i] = unitList[i].begin(); unitItr[i] != unitList[i].end(); i++)
+        {
+            
+        }
+    }
 }
+
+

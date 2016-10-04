@@ -16,6 +16,7 @@
 class BaseObject;
 class Unit;
 class StaticUnit;
+class GameWorld;
 
 class GamePlayer
 {
@@ -32,17 +33,19 @@ private:
     std::list<Unit*> destroyUnitList;
     std::list<Unit*>::iterator destoryUnitItr;
     
+    std::list<StaticUnit*> staticUnitList;
+    std::list<StaticUnit*>::iterator staticUnitItr;
+
     int gold;
     int unitPopulation;
     
     int objectNoCreator;
     
-    std::list<StaticUnit*> staticUnitList;
-    std::list<StaticUnit*>::iterator staticUnitItr;
-
+    int playerIndex;
+    GameWorld* gameWorld;
     
 public:
-    GamePlayer();
+    GamePlayer(GameWorld* _gameWorld, int _playerIndex);
     
     BaseObject* getBuildingByObjectNo(int objectNo);
     BaseObject* getUnitByObjectNo(int objectNo);

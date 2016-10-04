@@ -10,8 +10,8 @@
 
 GameWorldImpl::GameWorldImpl()
 {
-    gamePlayers[0] = new GamePlayer();
-    gamePlayers[1] = new GamePlayer();
+    gamePlayers[0] = new GamePlayer(this, 0);
+    gamePlayers[1] = new GamePlayer(this, 1);
 }
 
 void GameWorldImpl::checkState()
