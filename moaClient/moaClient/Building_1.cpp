@@ -8,56 +8,24 @@
 
 #include "Building_1.hpp"
 #include "GameDefines.h"
-#include "GamePlayer.hpp"
+#include "Upgrade_1.hpp"
 
-Building_1::Building_1()
-{    
-    quantity = 1;
-    createPersent = 0;
-    goldAquiredTime = 0;
-    destroyTime = 0;
-    
+
+Building_1::Building_1(GamePlayer* _gamePlayer) : Building(_gamePlayer, OBJECT_TYPE_BUILDING_1)
+{
+    upgradeList->push_back(new Upgrade_1(this));
 }
 
 void Building_1::click()
 {
     
 }
+
 void Building_1::update(long dt)
 {
-    if(state == OBJECT_STATE_CREATEING) { // if building is creating
+    Building::update(dt);
+    
+    if(state == OBJECT_STATE_IDLE) { // if building is idle
         
-        createPersent += 10;
-        
-        if(createPersent == 800) {
-            std::cout << "create building_1 - " << objectNo <<std::endl;
-            
-            state = OBJECT_STATE_WORK;
-        }
-        
-        
-    } else if(state == OBJECT_STATE_WORK) { // if building is working
-        
-        goldAquiredTime += 1;
-        
-        if(goldAquiredTime == 40) {
-            std::cout << "aquired gold - " << objectNo <<std::endl;
-            
-            gamePlayer->addGold(100);
-            
-            goldAquiredTime = 0;
-            
-            
-        }
-        
-    } else if(state == OBJECT_STATE_DESTROY) {
-        
-        destroyTime += 1;
-        
-        if(destroyTime == 8) {
-            std::cout << "destroy - " << objectNo <<std::endl;
-            
-            //TODO. think that how to remove in building list
-        }
     }
 }

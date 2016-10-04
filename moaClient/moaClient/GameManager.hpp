@@ -17,6 +17,7 @@
 #include "TaskManager.h"
 #include "GameLogic.h"
 #include "GameWorld.h"
+#include "GameData.h"
 
 class GameManager
 {
@@ -30,15 +31,16 @@ private:
     
     ////////////////
     
-    ObjectInfo objectInfos[1];
     
     NetworkHandler* networkHandler;
     TaskManager* taskManager;
     GameLogic* gameLogic;
     GameWorld* gameWorld;
+    GameData* gameData;
     
     
     int tempObjectNoCreator;
+    int myIndex;
     
     ////////////////
     
@@ -63,9 +65,10 @@ public:
     GameLogic* getGameLogic() { return gameLogic; }
     GameWorld* getGameWorld() { return gameWorld; }
     
-    ObjectInfo getObjectInfoByObjectType(int objectType) const { return objectInfos[objectType]; }
-    
     //////////////////
+    
+
+    
 };
 
 #endif /* GameManager_hpp */

@@ -18,6 +18,14 @@ public:
     virtual void applyInfluence() = 0;
     
     virtual GamePlayer* getGamePlayer(int index) = 0;
+    
+    
+    virtual void createBuilding(int userIndex, int objectType) = 0;
+    virtual void cancelCreateBuilding(int userIndex, int objectNo) = 0;
+    virtual void upgradeBuilding(int userIndex, int objectNo, int upgradeType) = 0;
+    virtual void cancelUpgradeBuilding(int userIndex, int objectNo, int upgradeType) = 0;
+    virtual void createUnit(int userIndex, int objectNo, int objectType, int objectCount, int lineNo) = 0;
+    
 };
 
 

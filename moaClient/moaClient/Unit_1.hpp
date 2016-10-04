@@ -14,7 +14,7 @@
 
 class Unit_1 : public Unit {
 public:
-    Unit_1();
+    Unit_1(GamePlayer* _gamePlayer);
     ~Unit_1() {};
     void click();
     void update(long dt);

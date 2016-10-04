@@ -18,11 +18,14 @@ public:
 		CREATE_BUILDING_REQ,
 		CREATE_BUILDING_RES,
         
-        CANCEL_BUILDING_REQ,
-        CANCEL_BUILDING_RES,
+        CANCEL_CREATE_BUILDING_REQ,
+        CANCEL_CREATE_BUILDING_RES,
         
-        WORK_BUILDING_REQ,
-        WORK_BUILDING_RES,
+        UPGRADE_BUILDING_REQ,
+        UPGRADE_BUILDING_RES,
+        
+        CANCEL_UPGRADE_BUILDING_REQ,
+        CANCEL_UPGRADE_BUILDING_RES,
         
         CREATE_UNIT_REQ,
         CREATE_UNIT_RES,
@@ -48,7 +51,6 @@ public:
         CreateBuildingReqPacket() { cmd = CREATE_BUILDING_REQ; }
         
         int8_t objectType;
-        int16_t position;
 	};
     
     struct CreateBuildingResPacket : public EmptyPacket
@@ -56,34 +58,49 @@ public:
         CreateBuildingResPacket() { cmd = CREATE_BUILDING_RES; }
         
         int8_t objectType;
-        int16_t position;
     };
 
-    struct CancelBuildingReqPacket : public EmptyPacket
+    struct CancelCreateBuildingReqPacket : public EmptyPacket
 	{
-        CancelBuildingReqPacket() { cmd = CANCEL_BUILDING_REQ; }
+        CancelCreateBuildingReqPacket() { cmd = CANCEL_CREATE_BUILDING_REQ; }
 
         int32_t objectNo;
 	};
     
-    struct CancelBuildingResPacket : public EmptyPacket
+    struct CancelCreateBuildingResPacket : public EmptyPacket
     {
-        CancelBuildingResPacket() { cmd = CANCEL_BUILDING_RES; }
+        CancelCreateBuildingResPacket() { cmd = CANCEL_CREATE_BUILDING_RES; }
         
         int32_t objectNo;
     };
     
-    struct WorkBuildingReqPakcet : public EmptyPacket
+    struct UpgradeBuildingReqPacket : public EmptyPacket
     {
-        WorkBuildingReqPakcet() { cmd = WORK_BUILDING_REQ; }
+        UpgradeBuildingReqPacket() { cmd = UPGRADE_BUILDING_REQ; }
         
         int32_t objectNo;
         int8_t upgradeType;
     };
     
-    struct WorkBuildingResPacket : public EmptyPacket
+    struct UpgradeBuildingResPacket : public EmptyPacket
     {
-        WorkBuildingResPacket() { cmd = WORK_BUILDING_RES; }
+        UpgradeBuildingResPacket() { cmd = UPGRADE_BUILDING_RES; }
+        
+        int32_t objectNo;
+        int8_t upgradeType;
+    };
+    
+    struct CancelUpgradeBuildingReqPacket : public EmptyPacket
+    {
+        CancelUpgradeBuildingReqPacket() { cmd = CANCEL_UPGRADE_BUILDING_REQ; }
+        
+        int32_t objectNo;
+        int8_t upgradeType;
+    };
+    
+    struct CancelUpgradeBuildingResPacket : public EmptyPacket
+    {
+        CancelUpgradeBuildingResPacket() { cmd = CANCEL_UPGRADE_BUILDING_RES; }
         
         int32_t objectNo;
         int8_t upgradeType;
@@ -93,8 +110,9 @@ public:
     {
         CreateUnitReqPacket() { cmd = CREATE_UNIT_REQ; }
         
-        int32_t objectNo;
-        int8_t buttonNo;
+        int32_t objectNo; // building number
+        int8_t objectType; // unit type
+        int8_t objectCount;
         int16_t lineNo;
     };
     
@@ -103,7 +121,8 @@ public:
         CreateUnitResPacket() { cmd = CREATE_UNIT_RES; }
         
         int32_t objectNo;
-        int8_t buttonNo;
+        int8_t objectType;
+        int8_t objectCount;
         int16_t lineNo;
     };
 };

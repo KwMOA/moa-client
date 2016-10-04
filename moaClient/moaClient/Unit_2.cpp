@@ -7,21 +7,21 @@
 //
 
 #include "Unit_2.hpp"
+#include "GameDefines.h"
 
-Unit_2::Unit_2()
+Unit_2::Unit_2(GamePlayer* _gamePlayer) : Unit(_gamePlayer, OBJECT_TYPE_UNIT_2)
 {
-    state = OBJECT_STATE_RUN;
+    w = 50;
+    h = 70;
+    hp = staticUnit->getMaxHp();
 }
-
 
 void Unit_2::click()
 {
     
 }
 
-
 void Unit_2::update(long dt)
 {
     
 }
-

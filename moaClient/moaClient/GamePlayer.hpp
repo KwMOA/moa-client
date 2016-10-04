@@ -11,8 +11,12 @@
 
 #include <stdio.h>
 #include <list>
+#include <map>
 
 class BaseObject;
+class Unit;
+class StaticUnit;
+class GameWorld;
 
 class GamePlayer
 {
@@ -23,32 +27,44 @@ private:
     std::list<BaseObject*> destroyBuildingList;
     std::list<BaseObject*>::iterator destroyBuildingItr;
     
-    std::list<BaseObject*> unitList;
-    std::list<BaseObject*>::iterator unitItr;
+    std::list<Unit*> unitList[3];
+    std::list<Unit*>::iterator unitItr[3];
     
-    std::list<BaseObject*> destroyUnitList;
-    std::list<BaseObject*>::iterator destoryUnitItr;
+    std::list<Unit*> destroyUnitList;
+    std::list<Unit*>::iterator destoryUnitItr;
     
+    std::list<StaticUnit*> staticUnitList;
+    std::list<StaticUnit*>::iterator staticUnitItr;
+
     int gold;
     int unitPopulation;
     
     int objectNoCreator;
     
-    int removeBuilding(int objectNo);
+    int playerIndex;
+    GameWorld* gameWorld;
     
 public:
-    GamePlayer();
+    GamePlayer(GameWorld* _gameWorld, int _playerIndex);
     
     BaseObject* getBuildingByObjectNo(int objectNo);
     BaseObject* getUnitByObjectNo(int objectNo);
     
-    int setBuilding(BaseObject* building);
-    int setUnit(BaseObject* unit);
-    int destoryBuilding(int objectNo);
+    int createBuilding(int objectType);
+    int cancelCreateBuilding(int objectNo);
+    int upgradeBuilding(int objectNo, int upgradeType);
+    int cancelUpgradeBuilding(int objectNo, int upgradeType);
+    
+    
+    int createUnit(int objectNo, int objectType, int objectCount, int lineNo);
     
     void addGold(int plus) { gold += plus; }
     
     int getGold() { return gold; }
+    
+    std::list<Unit*> getUnitListByUnitType(int unitType);
+    
+    StaticUnit* getStaticUnitByUnitType(int unitType);
     
     void update(long dt);
     

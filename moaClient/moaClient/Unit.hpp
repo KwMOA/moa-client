@@ -13,20 +13,24 @@
 #include <list>
 #include "BaseObject.hpp"
 #include "GameDefines.h"
+#include "StaticObject.h"
 
 class Unit : public BaseObject {
 protected:
+    StaticUnit* staticUnit;
+    
     int hp;
-    int atk;
-    int atkSpeed;
-    int atkRange;
-    int speed;
-    int def;
-    int isVisible;
     
     std::list<Influence*> lists;
 public:
-    Unit();
+    Unit(GamePlayer* _gamePlayer, int _objectType);
     ~Unit() {}
+    
+    
+    void setHp(int _hp) { hp = _hp; }
+    int getHp() { return hp; }
+    
+    static Unit* createUnit(GamePlayer* _gamePlayer, int _objectType);
+    
 };
 #endif /* Unit_hpp */

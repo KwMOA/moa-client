@@ -21,7 +21,7 @@ protected:
     GamePlayer* gamePlayer;
     
 public:
-    BaseObject();
+    BaseObject(GamePlayer* _gamePlayer, int _objectType);
     
     virtual void click() = 0;
     virtual void update(long dt) = 0;
@@ -29,13 +29,13 @@ public:
     
     
     int getObjectNo() { return objectNo; }
-    void setObjectNo(int objectNo) { this->objectNo = objectNo; }
+    void setObjectNo(int _objectNo) { objectNo = _objectNo; }
     
     int getObjectType() { return objectType; }
-    void setObjectType(int objectType) { this->objectType = objectType; }
+    void setObjectType(int _objectType) { objectType = _objectType; }
     
     int getState() { return state; }
-    void setState(int state) { this->state = state; }
+    void setState(int _state) { state = _state; }
     
     GamePlayer* getGamePlayer() { return gamePlayer; }
     void setGamePlayer(GamePlayer* _gamePlayer) { gamePlayer = _gamePlayer; }
