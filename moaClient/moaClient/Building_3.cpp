@@ -10,6 +10,13 @@
 #include "GameDefines.h"
 #include "GamePlayer.hpp"
 
+//test
+#include "GameManager.hpp"
+#include "ClientGamePacket.h"
+#include "NetworkHandler.h"
+//
+
+
 Building_3::Building_3(GamePlayer* _gamePlayer) : Building(_gamePlayer, OBJECT_TYPE_BUILDING_3)
 {
     unitTypeList->push_back(OBJECT_TYPE_UNIT_1);
@@ -28,6 +35,6 @@ void Building_3::update(long dt)
     
     if(state == OBJECT_STATE_IDLE) { // if building is idle
         
-        
     }
+
 }

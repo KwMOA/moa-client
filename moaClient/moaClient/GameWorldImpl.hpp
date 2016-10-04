@@ -32,9 +32,9 @@ public:
     
     
     void createBuilding(int userIndex, int objectType);
-    void cancelCreateBuilding(int userIndex, int objectType);
-    void upgradeBuilding(int userIndex, int objectType, int upgradeType);
-    void cancelUpgradeBuilding(int userIndex, int objectType, int upgradeType);
+    void cancelCreateBuilding(int userIndex, int objectNo);
+    void upgradeBuilding(int userIndex, int objectNo, int upgradeType);
+    void cancelUpgradeBuilding(int userIndex, int objectNo, int upgradeType);
     void createUnit(int userIndex, int objectNo, int objectType, int objectCount, int lineNo);
 };
 

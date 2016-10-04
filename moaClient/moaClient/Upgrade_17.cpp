@@ -20,33 +20,13 @@ Upgrade_17::Upgrade_17(Building* building) : Upgrade(building)
 }
 
 
-int Upgrade_17::isPossibleUpgrade()
+void Upgrade_17::upgradeComplete()
 {
-    
-    return 0;
+    ((StaticUnit_6*)owner->getGamePlayer()->getStaticUnitByUnitType(OBJECT_TYPE_UNIT_6))->setGraveCount(((StaticUnit_6*)owner->getGamePlayer()->getStaticUnitByUnitType(OBJECT_TYPE_UNIT_6))->getGraveCount() + 1);
 }
 
 
 void Upgrade_17::update(long dt)
 {
-    upgradePercent += 1;
-
-    if(upgradePercent == 400) {
-        std::cout << "upgrade complete" <<std::endl;
-
-        upgradePercent = 0;
-        upgradeCount++;
-        upgradeType = 0;
-        
-        
-        //upgrade something
-        
-        ((StaticUnit_6*)owner->getGamePlayer()->getStaticUnitByUnitType(OBJECT_TYPE_UNIT_6))->setGraveCount(((StaticUnit_6*)owner->getGamePlayer()->getStaticUnitByUnitType(OBJECT_TYPE_UNIT_6))->getGraveCount() + 1);
-        
-        
-        ////////////////////////
-        
-        
-        owner->setState(OBJECT_STATE_IDLE);
-    }
+    upgrading(40);
 }

@@ -20,30 +20,13 @@ Upgrade_14::Upgrade_14(Building* building) : Upgrade(building)
 }
 
 
-int Upgrade_14::isPossibleUpgrade()
+void Upgrade_14::upgradeComplete()
 {
-    
-    return 0;
+    // maybe... skill range up
 }
 
 
 void Upgrade_14::update(long dt)
 {
-    upgradePercent += 1;
-
-    if(upgradePercent == 400) {
-        std::cout << "upgrade complete" <<std::endl;
-
-        upgradePercent = 0;
-        upgradeCount++;
-        upgradeType = 0;
-        
-        //upgrade something
-        
-        // maybe is skill range up
-        
-        ////////////////////////
-        
-        owner->setState(OBJECT_STATE_IDLE);
-    }
+    upgrading(40);
 }

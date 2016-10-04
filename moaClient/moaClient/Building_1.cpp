@@ -10,6 +10,7 @@
 #include "GameDefines.h"
 #include "Upgrade_1.hpp"
 
+
 Building_1::Building_1(GamePlayer* _gamePlayer) : Building(_gamePlayer, OBJECT_TYPE_BUILDING_1)
 {
     upgradeList->push_back(new Upgrade_1(this));
@@ -27,22 +28,4 @@ void Building_1::update(long dt)
     if(state == OBJECT_STATE_IDLE) { // if building is idle
         
     }
-//    
-//    if(state == OBJECT_STATE_UPDATEING) {
-//        
-//        currentUpgrade->update(dt);
-//
-//        
-//        //        upgradePercent += 1;
-////        
-////        if(upgradePercent == 40) {
-////            std::cout << "upgrade complete - " << objectNo <<std::endl;
-////            
-////            upgradePercent = 0;
-////            upgradeCount++;
-////            upgradeType = 0;
-////            state = OBJECT_STATE_IDLE;
-////        }
-//    
-//    }
 }

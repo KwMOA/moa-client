@@ -16,7 +16,7 @@ class Upgrade_23 : public Upgrade
 {
 public:
     Upgrade_23(Building* building);
-    int isPossibleUpgrade();
+    void upgradeComplete();
     void update(long dt);
 };
 

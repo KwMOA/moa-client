@@ -18,29 +18,13 @@ Upgrade_2::Upgrade_2(Building* building) : Upgrade(building)
 }
 
 
-int Upgrade_2::isPossibleUpgrade()
+void Upgrade_2::upgradeComplete()
 {
     
-    return 0;
 }
 
 
 void Upgrade_2::update(long dt)
 {
-    upgradePercent += 1;
-
-    if(upgradePercent == 400) {
-        std::cout << "upgrade complete" <<std::endl;
-
-        upgradePercent = 0;
-        upgradeCount++;
-        upgradeType = 0;
-        
-        //ToDo. upgrade something
-        
-        //not exist to do something
-        
-        /////////////////////////
-        owner->setState(OBJECT_STATE_IDLE);
-    }
+    upgrading(40);
 }

@@ -20,34 +20,13 @@ Upgrade_5::Upgrade_5(Building* building) : Upgrade(building)
 }
 
 
-int Upgrade_5::isPossibleUpgrade()
+void Upgrade_5::upgradeComplete()
 {
-    
-    return 0;
+    owner->getGamePlayer()->getStaticUnitByUnitType(OBJECT_TYPE_UNIT_2)->setAtkSpeed(owner->getGamePlayer()->getStaticUnitByUnitType(OBJECT_TYPE_UNIT_2)->getAtkSpeed() - 4);
 }
 
 
 void Upgrade_5::update(long dt)
 {
-    upgradePercent += 1;
-
-    if(upgradePercent == 400) {
-        std::cout << "upgrade complete" <<std::endl;
-
-        upgradePercent = 0;
-        upgradeCount++;
-        upgradeType = 0;
-        
-        //upgrade something
-        
-        
-        owner->getGamePlayer()->getStaticUnitByUnitType(OBJECT_TYPE_UNIT_2)->setAtkSpeed(owner->getGamePlayer()->getStaticUnitByUnitType(OBJECT_TYPE_UNIT_2)->getAtkSpeed() - 4);
-        
-        
-        
-        ////////////////////////
-        
-        
-        owner->setState(OBJECT_STATE_IDLE);
-    }
+    upgrading(40);
 }

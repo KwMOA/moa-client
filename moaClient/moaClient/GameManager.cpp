@@ -51,27 +51,108 @@ bool GameManager::init()
 {
     // init - set first building both player
     
-    Building_1* building1 = new Building_1(gameWorld->getGamePlayer(0));
-    building1->setState(OBJECT_STATE_IDLE);
-    Building_2* building2 = new Building_2(gameWorld->getGamePlayer(0));
-    building2->setState(OBJECT_STATE_IDLE);
+//    Building_1* building1 = new Building_1(gameWorld->getGamePlayer(0));
+//    building1->setState(OBJECT_STATE_IDLE);
+//    Building_2* building2 = new Building_2(gameWorld->getGamePlayer(0));
+//    building2->setState(OBJECT_STATE_IDLE);
+//    
+//    gameWorld->getGamePlayer(0)->setBuilding(building1);
+//    gameWorld->getGamePlayer(0)->setBuilding(building2);
+//    
+//    
+//    Building_1* building3 = new Building_1(gameWorld->getGamePlayer(1));
+//    building3->setState(OBJECT_STATE_IDLE);
+//    
+//    Building_2* building4 = new Building_2(gameWorld->getGamePlayer(1));
+//    building4->setState(OBJECT_STATE_IDLE);
+//    
+//    
+//    gameWorld->getGamePlayer(1)->setBuilding(building3);
+//    gameWorld->getGamePlayer(1)->setBuilding(building4);
     
-    gameWorld->getGamePlayer(0)->setBuilding(building1);
-    gameWorld->getGamePlayer(0)->setBuilding(building2);
+    
+    //test code - create
+    
+    ClientGamePacket::CreateBuildingResPacket* p1 = new ClientGamePacket::CreateBuildingResPacket();
+    p1->objectType = OBJECT_TYPE_BUILDING_1;
+    p1->isEnemy = 0;
+    networkHandler->sendInput(p1);
     
     
-    Building_1* building3 = new Building_1(gameWorld->getGamePlayer(1));
-    building3->setState(OBJECT_STATE_IDLE);
+    ClientGamePacket::CreateBuildingResPacket* p2 = new ClientGamePacket::CreateBuildingResPacket();
+    p2->objectType = OBJECT_TYPE_BUILDING_2;
+    p2->isEnemy = 0;
     
-    Building_2* building4 = new Building_2(gameWorld->getGamePlayer(1));
-    building4->setState(OBJECT_STATE_IDLE);
+    networkHandler->sendInput(p2);
+    
+    ClientGamePacket::CreateBuildingResPacket* p3 = new ClientGamePacket::CreateBuildingResPacket();
+    p3->objectType = OBJECT_TYPE_BUILDING_3;
+    p3->isEnemy = 0;
+    
+    networkHandler->sendInput(p3);
+    
+    ClientGamePacket::CreateBuildingResPacket* p4 = new ClientGamePacket::CreateBuildingResPacket();
+    p4->objectType = OBJECT_TYPE_BUILDING_4;
+    p4->isEnemy = 0;
+    
+    networkHandler->sendInput(p4);
+    
+    ClientGamePacket::CreateBuildingResPacket* p5 = new ClientGamePacket::CreateBuildingResPacket();
+    p5->objectType = OBJECT_TYPE_BUILDING_5;
+    p5->isEnemy = 0;
+    
+    networkHandler->sendInput(p5);
+    
+    ClientGamePacket::CreateBuildingResPacket* p6 = new ClientGamePacket::CreateBuildingResPacket();
+    p6->objectType = OBJECT_TYPE_BUILDING_6;
+    p6->isEnemy = 0;
+    
+    networkHandler->sendInput(p6);
+    
+    ClientGamePacket::CreateBuildingResPacket* p7 = new ClientGamePacket::CreateBuildingResPacket();
+    p7->objectType = OBJECT_TYPE_BUILDING_7;
+    p7->isEnemy = 0;
+    
+    networkHandler->sendInput(p7);
+    
+    ClientGamePacket::CreateBuildingResPacket* p8 = new ClientGamePacket::CreateBuildingResPacket();
+    p8->objectType = OBJECT_TYPE_BUILDING_8;
+    p8->isEnemy = 0;
+    
+    networkHandler->sendInput(p8);
+    
+    ClientGamePacket::CreateBuildingResPacket* p9 = new ClientGamePacket::CreateBuildingResPacket();
+    p9->objectType = OBJECT_TYPE_BUILDING_9;
+    p9->isEnemy = 0;
+    
+    networkHandler->sendInput(p9);
+    
+    ClientGamePacket::CreateBuildingResPacket* p10 = new ClientGamePacket::CreateBuildingResPacket();
+    p10->objectType = OBJECT_TYPE_BUILDING_10;
+    p10->isEnemy = 0;
+    
+    networkHandler->sendInput(p10);
     
     
-    gameWorld->getGamePlayer(1)->setBuilding(building3);
-    gameWorld->getGamePlayer(1)->setBuilding(building4);
+    ClientGamePacket::CreateBuildingResPacket* p11 = new ClientGamePacket::CreateBuildingResPacket();
+    p11->objectType = OBJECT_TYPE_BUILDING_11;
+    p11->isEnemy = 0;
     
+    networkHandler->sendInput(p11);
     
+    ClientGamePacket::CreateBuildingResPacket* p12 = new ClientGamePacket::CreateBuildingResPacket();
+    p12->objectType = OBJECT_TYPE_BUILDING_12;
+    p12->isEnemy = 0;
     
+    networkHandler->sendInput(p12);
+    
+//    ClientGamePacket::CancelCreateBuildingResPacket* p = new ClientGamePacket::CancelCreateBuildingResPacket();
+//    p->objectNo = 1;
+//    p->isEnemy = 0;
+//    
+//    GameManager::GetInstance()->getNetworkHandler()->sendInput(p);
+    
+    //////////////////////////////
     
     return true;
 }

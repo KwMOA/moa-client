@@ -2,6 +2,7 @@
 #include "ClientGamePacket.h"
 #include "AutoTaskPacket.h"
 #include "GameManager.hpp"
+#include "GameWorld.h"
 #include "GamePlayer.hpp"
 #include "Building_1.hpp"
 
@@ -25,57 +26,73 @@ void TaskManagerImpl::receiveFromNetwork(Packet* packet)
 void TaskManagerImpl::update(long dt)
 {
 	int who;
+    
 	ClientGamePacket::EmptyPacket* packet;
-		ClientGamePacket::CancelBuildingResPacket* canclePacket;
-		ClientGamePacket::CreateBuildingResPacket* buildPacket;
 
-		if (count == INTERUPT_NETWORK_FRAME) {
-			packet = (ClientGamePacket::EmptyPacket*)autoTaskQueue.QPeek();
+    if (count == INTERUPT_NETWORK_FRAME) {
+        packet = (ClientGamePacket::EmptyPacket*)autoTaskQueue.QPeek();
 
-			int thisNo = packet->packetNo;
-			int nextNo = packet->packetNo;
-			while (!autoTaskQueue.QIsEmpty() || nextNo != thisNo) {
-				packet = (ClientGamePacket::EmptyPacket*)autoTaskQueue.Dequeue();
-				who = packet->isEnemy;
-				nextNo = packet->packetNo;
+        int thisNo = packet->packetNo;
+        int nextNo = packet->packetNo;
+        
+        while (!autoTaskQueue.QIsEmpty() || nextNo != thisNo) {
+            packet = (ClientGamePacket::EmptyPacket*)autoTaskQueue.Dequeue();
+            
+            who = packet->isEnemy;
+            nextNo = packet->packetNo;
 
-				switch (packet->cmd) {
+            switch (packet->cmd) {
+                case ClientGamePacket::CREATE_BUILDING_RES:
+                {
+                    ClientGamePacket::CreateBuildingResPacket* createBuildingPacket = (ClientGamePacket::CreateBuildingResPacket*)packet;
+                    GameManager::GetInstance()->getGameWorld()->createBuilding(who, (int)createBuildingPacket->objectType);
+                    
+                    break;
+                }
+                case ClientGamePacket::CANCEL_CREATE_BUILDING_RES:
+                {
+                    ClientGamePacket::CancelCreateBuildingResPacket* cancelCreateBuildingPacket = (ClientGamePacket::CancelCreateBuildingResPacket*)packet;
+                    GameManager::GetInstance()->getGameWorld()->cancelCreateBuilding(who, cancelCreateBuildingPacket->objectNo);
+                    
+                    break;
+                }
+                case ClientGamePacket::UPGRADE_BUILDING_RES:
+                {
+                    ClientGamePacket::UpgradeBuildingResPacket* upgradeBuildingPacket = (ClientGamePacket::UpgradeBuildingResPacket*)packet;
+                    GameManager::GetInstance()->getGameWorld()->upgradeBuilding(who, upgradeBuildingPacket->objectNo, upgradeBuildingPacket->upgradeType);
+                    
+                    break;
+                }
+                case ClientGamePacket::CANCEL_UPGRADE_BUILDING_RES:
+                {
+                    ClientGamePacket::CancelUpgradeBuildingResPacket* cancelUpgradeBuildingPacket = (ClientGamePacket::CancelUpgradeBuildingResPacket*)packet;
+                    GameManager::GetInstance()->getGameWorld()->cancelUpgradeBuilding(who, cancelUpgradeBuildingPacket->objectNo, cancelUpgradeBuildingPacket->upgradeType);
+                    
+                    break;
+                }
+                case ClientGamePacket::CREATE_UNIT_RES:
+                {
+                    ClientGamePacket::CreateUnitResPacket* createUnitPacket = (ClientGamePacket::CreateUnitResPacket*)packet;
+                    GameManager::GetInstance()->getGameWorld()->createUnit(who, createUnitPacket->objectNo, createUnitPacket->objectType, createUnitPacket->objectCount, createUnitPacket->lineNo);
+                    
+                    break;
+                }
+                default:
+                {                    
+                    break;
+                }
+            }
+            
+            count = 0;
+        }
+    }
+    else { // not process network
+    
+    }
 
-				case ClientGamePacket::CREATE_BUILDING_RES:
-					buildPacket = (ClientGamePacket::CreateBuildingResPacket*)packet;
-					switch (buildPacket->objectType) {
-					case OBJECT_TYPE_BUILDING_1:
-						Building_1* building = new Building_1();
-						GameManager::GetInstance()->getGameWorld()->getGamePlayer(who)->setBuilding(building);
+    GameManager::GetInstance()->getGameLogic()->update(dt);
 
-						break;
-					}
-					break;
-				case ClientGamePacket::CANCEL_BUILDING_RES:
-					canclePacket = (ClientGamePacket::CancelBuildingResPacket*)packet;
-					if(GameManager::GetInstance()->getGameWorld()->getGamePlayer(who)->getBuildingByObjectNo(canclePacket->objectNo)->getState() == OBJECT_STATE_CREATEING){
-						GameManager::GetInstance()->getGameWorld()->getGamePlayer(who)->destoryBuilding(canclePacket->objectNo);
-					}
-					else {
-						std::cout << "It`s InValide Packet\n";
-						continue;
-					}
-					break;
-				default:
-					break;
-				}
+    count++;
 
-
-
-
-				count = 0;
-			}
-		}
-		else {}
-
-		GameManager::GetInstance()->getGameLogic()->update(dt);
-
-		count++;
-	
 }
 

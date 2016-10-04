@@ -34,15 +34,20 @@ protected:
     CreatingUnit* creatingUnit;
     
     Upgrade* getUpgradeByUpgradeType(int upgradeType);
-    int setUpgrade(int upgradeType);
-    
     Unit* createUnitByUnitType(int unitType);
     
 public:
     Building(GamePlayer* _gamePlayer, int _objectType);
-    ~Building() {}
-    void update(long dt);
+    virtual ~Building() {}
     
+    void startUpgrade(int upgradeType);
+    void cancelUpgrade(int upgradeType);
+    
+    void update(long dt);
+
+    
+    
+    static Building* createBuilding(GamePlayer* _gamePlayer, int objectType);
 };
 
 #endif /* Building_hpp */

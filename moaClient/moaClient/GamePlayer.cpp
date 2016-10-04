@@ -17,6 +17,7 @@ GamePlayer::GamePlayer()
 {
     objectNoCreator = 1;
     
+    
     // set static unit
     
     staticUnitList.push_back(new StaticUnit_1());
@@ -51,29 +52,56 @@ BaseObject* GamePlayer::getUnitByObjectNo(int objectNo)
     return nullptr;
 }
 
-int GamePlayer::setBuilding(BaseObject* building)
+int GamePlayer::createBuilding(int objectType)
 {
-    building->setObjectNo(objectNoCreator);
-    building->setGamePlayer(this);
+    Building* building = Building::createBuilding(this, objectType);
     
-    buildingList.push_back(building);
+    if(building == nullptr) {
+        std::cout<< "invalid building type - " << objectType <<std::endl;
+        
+        return -1;
+    }
+    
+    building->setObjectNo(objectNoCreator);
+    
+     buildingList.push_back(building);
     
     return objectNoCreator++;
 }
 
-int GamePlayer::destoryBuilding(int objectNo)
+int GamePlayer::cancelCreateBuilding(int objectNo)
 {
     for(buildingItr = buildingList.begin(); buildingItr != buildingList.end() ; buildingItr++)
     {
         BaseObject* baseObject = (BaseObject*)*buildingItr;
         
-        if(baseObject->getObjectNo() == objectNo) {
+        if(baseObject->getObjectNo() == objectNo && baseObject->getState() == OBJECT_STATE_CREATING) {
             baseObject->setState(OBJECT_STATE_DESTROYING);
             
             buildingList.remove(*buildingItr);
             destroyBuildingList.push_back(baseObject);
             
             std::cout<< "destroy building start - " << baseObject->getObjectNo() <<std::endl;
+            
+            return 1;
+        }
+    }
+    
+    return -1;
+}
+
+int GamePlayer::upgradeBuilding(int objectNo, int upgradeType)
+{
+    for(buildingItr = buildingList.begin(); buildingItr != buildingList.end() ; buildingItr++)
+    {
+        BaseObject* baseObject = (BaseObject*)*buildingItr;
+        
+        if(baseObject->getObjectNo() == objectNo && baseObject->getState() == OBJECT_STATE_IDLE) {
+            ((Building*)baseObject)->startUpgrade(upgradeType);
+            
+            std::cout<< "upgrade building start - " << baseObject->getObjectNo() <<std::endl;
+            
+            return 1;
         }
     }
     
@@ -81,44 +109,66 @@ int GamePlayer::destoryBuilding(int objectNo)
 }
 
 
-int GamePlayer::setUnit(BaseObject* unit)
+int GamePlayer::cancelUpgradeBuilding(int objectNo, int upgradeType)
 {
-    return 0;
+    for(buildingItr = buildingList.begin(); buildingItr != buildingList.end() ; buildingItr++)
+    {
+        BaseObject* baseObject = (BaseObject*)*buildingItr;
+        
+        if(baseObject->getObjectNo() == objectNo && baseObject->getState() == OBJECT_STATE_UPGRADING) {
+            ((Building*)baseObject)->cancelUpgrade(upgradeType);
+            
+            std::cout<< "cancel upgrade building - " << baseObject->getObjectNo() <<std::endl;
+            
+            return 1;
+        }
+    }
+    
+    return -1;
+}
+
+
+
+int GamePlayer::createUnit(int objectNo, int objectType, int objectCount, int lineNo)
+{
+    for(int i = 0; i < objectCount; i++) {
+        
+        Unit* unit = Unit::createUnit(this, objectType);
+        
+        if(unit == nullptr) {
+            std::cout<< "invalid unit type - " << objectType <<std::endl;
+            
+            return -1;
+        }
+        
+        unit->setObjectNo(objectNoCreator++);
+        
+        unitList[lineNo - 1].push_back(unit);
+        
+        std::cout<< "create unit - objectNo : " << unit->getObjectNo() << ", objectType : " << objectType <<std::endl;
+    
+    }
+    
+    return objectNoCreator;
 }
 
 
 std::list<Unit*> GamePlayer::getUnitListByUnitType(int unitType)
 {
-    std::list<Unit*> unitList;
+    std::list<Unit*> sendUnitList;
     
-    for(unitItr1 = unitList1.begin(); unitItr1 != unitList1.end(); unitItr1++)
-    {
-        if((*unitItr1)->getObjectType() == unitType)
+    for(int i = 0; i < 3; i++) {
+        for(unitItr[i] = unitList[i].begin(); unitItr[i] != unitList[i].end(); unitItr[i]++)
         {
-            unitList.push_back(*unitItr1);
+            if((*unitItr[i])->getObjectType() == unitType)
+            {
+                sendUnitList.push_back(*unitItr[i]);
+            }
+            
         }
-        
     }
     
-    for(unitItr2 = unitList2.begin(); unitItr2 != unitList2.end(); unitItr2++)
-    {
-        if((*unitItr2)->getObjectType() == unitType)
-        {
-            unitList.push_back(*unitItr2);
-        }
-        
-    }
-    
-    for(unitItr3 = unitList3.begin(); unitItr3 != unitList3.end(); unitItr3++)
-    {
-        if((*unitItr3)->getObjectType() == unitType)
-        {
-            unitList.push_back(*unitItr3);
-        }
-        
-    }
-    
-    return unitList;
+    return sendUnitList;
 }
 
 
@@ -154,16 +204,19 @@ void GamePlayer::update(long dt)
     
     
     // update destorying building
-    for(destroyBuildingItr = destroyBuildingList.begin(); destroyBuildingItr != destroyBuildingList.end() ; destroyBuildingItr++)
+    for(destroyBuildingItr = destroyBuildingList.begin(); destroyBuildingItr != destroyBuildingList.end() ; )
     {
         Building* building = (Building*)*destroyBuildingItr;
         
         building->update(dt);
         
         if(building->getState() == OBJECT_STATE_DESTROY) {
-            destroyBuildingList.remove(*buildingItr);
+            destroyBuildingItr = destroyBuildingList.erase(destroyBuildingItr);
             
             delete building;
+            
+        } else {
+            destroyBuildingItr++;
         }
     }
     

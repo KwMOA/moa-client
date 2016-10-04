@@ -20,32 +20,13 @@ Upgrade_18::Upgrade_18(Building* building) : Upgrade(building)
 }
 
 
-int Upgrade_18::isPossibleUpgrade()
+void Upgrade_18::upgradeComplete()
 {
-    
-    return 0;
+    ((StaticUnit_7*)owner->getGamePlayer()->getStaticUnitByUnitType(OBJECT_TYPE_UNIT_7))->setIsIgnoreDef(true);
 }
 
 
 void Upgrade_18::update(long dt)
 {
-    upgradePercent += 1;
-
-    if(upgradePercent == 400) {
-        std::cout << "upgrade complete" <<std::endl;
-
-        upgradePercent = 0;
-        upgradeCount++;
-        upgradeType = 0;
-        
-        //upgrade something
-        
-        ((StaticUnit_7*)owner->getGamePlayer()->getStaticUnitByUnitType(OBJECT_TYPE_UNIT_7))->setIsIgnoreDef(true);
-        
-        
-        ////////////////////////
-        
-        
-        owner->setState(OBJECT_STATE_IDLE);
-    }
+    upgrading(40);
 }

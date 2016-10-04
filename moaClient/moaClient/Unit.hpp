@@ -30,5 +30,7 @@ public:
     void setHp(int _hp) { hp = _hp; }
     int getHp() { return hp; }
     
+    static Unit* createUnit(GamePlayer* _gamePlayer, int _objectType);
+    
 };
 #endif /* Unit_hpp */

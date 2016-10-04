@@ -74,33 +74,33 @@ public:
         int32_t objectNo;
     };
     
-    struct UpgradeBuildingReqPakcet : public EmptyPacket
+    struct UpgradeBuildingReqPacket : public EmptyPacket
     {
-        UpgradeBuildingReqPakcet() { cmd = UPGRADE_BUILDING_REQ; }
+        UpgradeBuildingReqPacket() { cmd = UPGRADE_BUILDING_REQ; }
         
         int32_t objectNo;
         int8_t upgradeType;
     };
     
-    struct UpgradeBuildingResPakcet : public EmptyPacket
+    struct UpgradeBuildingResPacket : public EmptyPacket
     {
-        UpgradeBuildingResPakcet() { cmd = UPGRADE_BUILDING_RES; }
+        UpgradeBuildingResPacket() { cmd = UPGRADE_BUILDING_RES; }
         
         int32_t objectNo;
         int8_t upgradeType;
     };
     
-    struct CancelUpgradeBuildingReqPakcet : public EmptyPacket
+    struct CancelUpgradeBuildingReqPacket : public EmptyPacket
     {
-        CancelUpgradeBuildingReqPakcet() { cmd = CANCEL_UPGRADE_BUILDING_REQ; }
+        CancelUpgradeBuildingReqPacket() { cmd = CANCEL_UPGRADE_BUILDING_REQ; }
         
         int32_t objectNo;
         int8_t upgradeType;
     };
     
-    struct CancelUpgradeBuildingResPakcet : public EmptyPacket
+    struct CancelUpgradeBuildingResPacket : public EmptyPacket
     {
-        CancelUpgradeBuildingResPakcet() { cmd = CANCEL_UPGRADE_BUILDING_RES; }
+        CancelUpgradeBuildingResPacket() { cmd = CANCEL_UPGRADE_BUILDING_RES; }
         
         int32_t objectNo;
         int8_t upgradeType;

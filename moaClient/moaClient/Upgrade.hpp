@@ -24,8 +24,10 @@ protected:
     
 public:
     Upgrade(Building* building);
-    virtual int isPossibleUpgrade() = 0;
+    virtual void upgradeComplete() = 0;
     virtual void update(long dt) = 0;
+    
+    void upgrading(int upgradeTime);
 
     int getUpgradePercent() { return upgradePercent; }
     int getUpgradeCount() { return upgradeCount; }

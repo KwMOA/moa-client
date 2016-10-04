@@ -26,15 +26,8 @@ private:
     std::list<BaseObject*> destroyBuildingList;
     std::list<BaseObject*>::iterator destroyBuildingItr;
     
-    std::list<Unit*> unitList1;
-    std::list<Unit*>::iterator unitItr1;
-    
-    std::list<Unit*> unitList2;
-    std::list<Unit*>::iterator unitItr2;
-    
-    std::list<Unit*> unitList3;
-    std::list<Unit*>::iterator unitItr3;
-    
+    std::list<Unit*> unitList[3];
+    std::list<Unit*>::iterator unitItr[3];
     
     std::list<Unit*> destroyUnitList;
     std::list<Unit*>::iterator destoryUnitItr;
@@ -54,9 +47,13 @@ public:
     BaseObject* getBuildingByObjectNo(int objectNo);
     BaseObject* getUnitByObjectNo(int objectNo);
     
-    int setBuilding(BaseObject* building);
-    int setUnit(BaseObject* unit);
-    int destoryBuilding(int objectNo);
+    int createBuilding(int objectType);
+    int cancelCreateBuilding(int objectNo);
+    int upgradeBuilding(int objectNo, int upgradeType);
+    int cancelUpgradeBuilding(int objectNo, int upgradeType);
+    
+    
+    int createUnit(int objectNo, int objectType, int objectCount, int lineNo);
     
     void addGold(int plus) { gold += plus; }
     

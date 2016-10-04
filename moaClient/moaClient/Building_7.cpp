@@ -28,4 +28,5 @@ void Building_7::click()
 void Building_7::update(long dt)
 {
     Building::update(dt);
+    
 }

@@ -28,14 +28,15 @@ void Building_2::update(long dt)
 {
     Building::update(dt);
     
-    if(state != OBJECT_STATE_CREATEING || state != OBJECT_STATE_DESTROYING) { // if building can create gold
+    if(state != OBJECT_STATE_CREATING && state != OBJECT_STATE_DESTROYING) { // if building can create gold
         
         goldAquiredTime += 1;
         
         if(goldAquiredTime == 40) {
-            std::cout << "aquired gold - " << objectNo <<std::endl;
             
             gamePlayer->addGold(100 + (100 * getUpgradeByUpgradeType(UPGRADE_TYPE_2)->getUpgradeCount()));
+            
+            std::cout << "acquired gold - " << gamePlayer->getGold() <<std::endl;
             
             goldAquiredTime = 0;
             
