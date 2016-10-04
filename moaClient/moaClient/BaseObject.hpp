@@ -21,7 +21,7 @@ protected:
     GamePlayer* gamePlayer;
     
 public:
-    BaseObject();
+    BaseObject(GamePlayer* _gamePlayer, int _objectType);
     
     virtual void click() = 0;
     virtual void update(long dt) = 0;

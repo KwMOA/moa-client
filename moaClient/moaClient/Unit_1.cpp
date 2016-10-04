@@ -9,23 +9,18 @@
 #include "Unit_1.hpp"
 #include "GameDefines.h"
 
-Unit_1::Unit_1()
+Unit_1::Unit_1(GamePlayer* _gamePlayer) : Unit(_gamePlayer, OBJECT_TYPE_UNIT_1)
 {
     w = 50;
     h = 70;
-    hp = 100;
-    atk = 30;
-    atkSpeed = 1;
-    atkRange = 0;
-    speed = 80;
-    def = 10;
-    isVisible = 1;
+    hp = staticUnit->getMaxHp();
 }
 
 void Unit_1::click()
 {
     
 }
+
 void Unit_1::update(long dt)
 {
     

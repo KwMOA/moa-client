@@ -7,8 +7,10 @@
 //
 
 #include "Unit.hpp"
+#include "GamePlayer.hpp"
 
-Unit::Unit()
+Unit::Unit(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gamePlayer, _objectType)
 {
     state = OBJECT_STATE_RUN;
+    staticUnit = gamePlayer->getStaticUnitByUnitType(_objectType);
 }

@@ -28,6 +28,14 @@ public:
     void applyInfluence();
     
     GamePlayer* getGamePlayer(int index) { return gamePlayers[index]; }
+    
+    
+    
+    void createBuilding(int userIndex, int objectType);
+    void cancelCreateBuilding(int userIndex, int objectType);
+    void upgradeBuilding(int userIndex, int objectType, int upgradeType);
+    void cancelUpgradeBuilding(int userIndex, int objectType, int upgradeType);
+    void createUnit(int userIndex, int objectNo, int objectType, int objectCount, int lineNo);
 };
 
 

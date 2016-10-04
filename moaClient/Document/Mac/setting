@@ -1,0 +1,7 @@
+<jsoncpp setting>
+
+sudo brew jsoncpp install
+
+xcode -> Build setting -> linker 
+-> set header link '~~jsoncpp/include'
+-> set lib link '~~jsoncpp/lib'

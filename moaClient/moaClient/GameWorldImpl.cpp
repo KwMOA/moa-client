@@ -28,3 +28,32 @@ void GameWorldImpl::applyInfluence()
 {
     
 }
+
+void GameWorldImpl::createBuilding(int userIndex, int objectType)
+{
+    
+}
+
+
+void GameWorldImpl::cancelCreateBuilding(int userIndex, int objectType)
+{
+    
+}
+
+
+void GameWorldImpl::upgradeBuilding(int userIndex, int objectType, int upgradeType)
+{
+    
+}
+
+
+void GameWorldImpl::cancelUpgradeBuilding(int userIndex, int objectType, int upgradeType)
+{
+    
+}
+
+
+void GameWorldImpl::createUnit(int userIndex, int objectNo, int objectType, int objectCount, int lineNo)
+{
+    
+}

@@ -11,8 +11,11 @@
 
 #include <stdio.h>
 #include <list>
+#include <map>
 
 class BaseObject;
+class Unit;
+class StaticUnit;
 
 class GamePlayer
 {
@@ -23,18 +26,27 @@ private:
     std::list<BaseObject*> destroyBuildingList;
     std::list<BaseObject*>::iterator destroyBuildingItr;
     
-    std::list<BaseObject*> unitList;
-    std::list<BaseObject*>::iterator unitItr;
+    std::list<Unit*> unitList1;
+    std::list<Unit*>::iterator unitItr1;
     
-    std::list<BaseObject*> destroyUnitList;
-    std::list<BaseObject*>::iterator destoryUnitItr;
+    std::list<Unit*> unitList2;
+    std::list<Unit*>::iterator unitItr2;
+    
+    std::list<Unit*> unitList3;
+    std::list<Unit*>::iterator unitItr3;
+    
+    
+    std::list<Unit*> destroyUnitList;
+    std::list<Unit*>::iterator destoryUnitItr;
     
     int gold;
     int unitPopulation;
     
     int objectNoCreator;
     
-    int removeBuilding(int objectNo);
+    std::list<StaticUnit*> staticUnitList;
+    std::list<StaticUnit*>::iterator staticUnitItr;
+
     
 public:
     GamePlayer();
@@ -49,6 +61,10 @@ public:
     void addGold(int plus) { gold += plus; }
     
     int getGold() { return gold; }
+    
+    std::list<Unit*> getUnitListByUnitType(int unitType);
+    
+    StaticUnit* getStaticUnitByUnitType(int unitType);
     
     void update(long dt);
     

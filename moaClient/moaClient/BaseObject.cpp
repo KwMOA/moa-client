@@ -7,8 +7,10 @@
 //
 
 #include "BaseObject.hpp"
+#include "GamePlayer.hpp"
 
-BaseObject::BaseObject()
+BaseObject::BaseObject(GamePlayer* _gamePlayer, int _objectType)
 {
-
+    gamePlayer = _gamePlayer;
+    objectType = _objectType;
 }

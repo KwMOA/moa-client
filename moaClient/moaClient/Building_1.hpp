@@ -12,15 +12,12 @@
 #include <stdio.h>
 #include "Building.hpp"
 
+
 class Building_1 : public Building {
 private:
-    int quantity;
-    int createPersent;
-    int goldAquiredTime;
-    int destroyTime;
     
 public:
-    Building_1();
+    Building_1(GamePlayer* _gamePlayer);
     ~Building_1() {};
     
     void click();

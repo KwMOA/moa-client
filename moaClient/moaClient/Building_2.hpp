@@ -14,11 +14,10 @@
 
 class Building_2 : public Building {
 private:
-    int quantity;
-    int quality;
-    
+    int goldAquiredTime;
+
 public:
-    Building_2();
+    Building_2(GamePlayer* _gamePlayer);
     ~Building_2() {};
     void click();
     void update(long dt);

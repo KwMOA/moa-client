@@ -19,12 +19,12 @@
 #include "GameDefines.h"
 #include "ClientGamePacket.h"
 #include "Building_1.hpp"
+#include "Building_2.hpp"
 #include "TaskManagerImpl.h"
 
 
 #include "NetworkHandlerImpl.hpp"
 #include "GameLogicImpl.hpp"
-//#include "GamePlayerImpl.hpp"
 #include "GameWorldImpl.hpp"
 
 GameManager* GameManager::instance = nullptr;
@@ -40,33 +40,38 @@ GameManager::GameManager()
     
     tempObjectNoCreator = 1;
     
+    //TODO. if multi play, receive and set myIdex from Server
     
-    
-    //object info init (TODO. receive from json data)
-    objectInfos[0].price = 100;
-    objectInfos[0].cancel_price = 80;
-    objectInfos[0].create_time = 80;
+    myIndex = 0;
     
     //////////////////////////
 }
 
 bool GameManager::init()
 {
+    // init - set first building both player
     
-    // init - send request to create first building both player
+    Building_1* building1 = new Building_1(gameWorld->getGamePlayer(0));
+    building1->setState(OBJECT_STATE_IDLE);
+    Building_2* building2 = new Building_2(gameWorld->getGamePlayer(0));
+    building2->setState(OBJECT_STATE_IDLE);
     
-    ClientGamePacket::CreateBuildingResPacket* packet1 = new ClientGamePacket::CreateBuildingResPacket();
-    packet1->isEnemy = 0;
-    packet1->objectType = OBJECT_TYPE_BUILDING_1;
-    packet1->position = 1;
+    gameWorld->getGamePlayer(0)->setBuilding(building1);
+    gameWorld->getGamePlayer(0)->setBuilding(building2);
     
-    ClientGamePacket::CreateBuildingResPacket* packet2 = new ClientGamePacket::CreateBuildingResPacket();
-    packet2->isEnemy = 1;
-    packet2->objectType = OBJECT_TYPE_BUILDING_1;
-    packet2->position = 1;
     
-    networkHandler->sendInput(packet1);
-    networkHandler->sendInput(packet2);
+    Building_1* building3 = new Building_1(gameWorld->getGamePlayer(1));
+    building3->setState(OBJECT_STATE_IDLE);
+    
+    Building_2* building4 = new Building_2(gameWorld->getGamePlayer(1));
+    building4->setState(OBJECT_STATE_IDLE);
+    
+    
+    gameWorld->getGamePlayer(1)->setBuilding(building3);
+    gameWorld->getGamePlayer(1)->setBuilding(building4);
+    
+    
+    
     
     return true;
 }
@@ -136,3 +141,10 @@ void GameManager::run()
         
     }
 }
+
+
+
+
+
+
+
