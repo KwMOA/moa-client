@@ -8,6 +8,7 @@
 #include "AutoTaskQueue.h"
 #include <map>
 #include "Process.h"
+
 class TaskManagerImpl : public TaskManager
 {
 private:

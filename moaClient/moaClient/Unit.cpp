@@ -26,6 +26,12 @@ Unit::Unit(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gamePlayer, _
     state = OBJECT_STATE_RUN;
     staticUnit = gamePlayer->getStaticUnitByUnitType(_objectType);
     attackPercent = 0;
+    
+    if(getGamePlayer()->getPlayerIndex() == 0)
+        x = UNIT_START_X[getGamePlayer()->getPlayerIndex()] - getWidth() / 2;
+    else
+        x = UNIT_START_X[getGamePlayer()->getPlayerIndex()] + getWidth() / 2;
+    
 }
 
 Unit* Unit::createUnit(GamePlayer* _gamePlayer, int _objectType)
