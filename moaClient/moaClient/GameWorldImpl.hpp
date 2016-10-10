@@ -25,9 +25,7 @@ private:
 public:
     GameWorldImpl();
     
-    void checkState();
-    void actState();
-    void applyInfluence();
+    void update(long dt);
     
     GamePlayer* getGamePlayer(int index) { return gamePlayers[index]; }
     

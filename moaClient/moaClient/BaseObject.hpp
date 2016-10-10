@@ -40,6 +40,19 @@ public:
     GamePlayer* getGamePlayer() { return gamePlayer; }
     void setGamePlayer(GamePlayer* _gamePlayer) { gamePlayer = _gamePlayer; }
     
+    int getX() { return x; }
+    void setX(int _x) { x = _x; }
+    
+    int getY() { return y; }
+    void setY(int _y) { y = _y; }
+    
+    int getW() { return w; }
+    void setW(int _w) { w = _w; }
+    
+    int getH() { return h; }
+    void setH(int _h) { h = _h; }
+    
+    
 };
 
 #endif /* BaseObject_hpp */

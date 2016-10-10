@@ -69,7 +69,14 @@ public:
     StaticUnit* getStaticUnitByUnitType(int unitType);
     
     void update(long dt);
+    void checkUnitState();
+    void actUnit();
+    void applyInfluenceUnit();
     
+    
+    
+    Unit* checkEnemyInRange(int lineNo, int x, int width, int range);
+    Unit* getBestCloseUnit(int lineNo, int x, int width, int range);
     
 };
 #endif /* GamePlayer_hpp */

@@ -12,8 +12,7 @@
 #include "GameDefines.h"
 #include "Building_8.hpp"
 #include "GamePlayer.hpp"
-#include "StaticObject.h"
-
+#include "StaticObject.hpp"
 Upgrade_9::Upgrade_9(Building* building) : Upgrade(building)
 {
     upgradeType = UPGRADE_TYPE_9;

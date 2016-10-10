@@ -11,8 +11,8 @@
 #include "GameDefines.h"
 #include "Building.hpp"
 #include "Unit.hpp"
-#include "StaticObject.h"
-#include "GameWorld.h"
+#include "StaticObject.hpp"
+#include "GameWorldImpl.hpp"
 
 GamePlayer::GamePlayer(GameWorld* _gameWorld, int _playerIndex)
 {
@@ -37,6 +37,8 @@ GamePlayer::GamePlayer(GameWorld* _gameWorld, int _playerIndex)
 	gold = 0;
     
     ////////////////////
+    
+    gold = 0;
 }
 
 BaseObject* GamePlayer::getBuildingByObjectNo(int objectNo)
@@ -164,6 +166,7 @@ int GamePlayer::createUnit(int objectNo, int objectType, int objectCount, int li
         }
         
         unit->setObjectNo(objectNoCreator++);
+        unit->setLineNo(lineNo);
         
         unitList[lineNo - 1].push_back(unit);
         
@@ -242,13 +245,71 @@ void GamePlayer::update(long dt)
         }
     }
     
+    
+    
     for(int i = 0; i < 3; i++)
     {
         for(unitItr[i] = unitList[i].begin(); unitItr[i] != unitList[i].end(); i++)
         {
+            Unit* unit = *unitItr[i];
             
+            unit->update(dt);
         }
     }
+}
+
+
+
+Unit* GamePlayer::checkEnemyInRange(int lineNo, int x, int width, int range)
+{
+    Unit* unit;
+    if(playerIndex == 0) {
+        unit = gameWorld->getGamePlayer(1)->getBestCloseUnit(lineNo, x, width, range);
+    } else {
+        unit = gameWorld->getGamePlayer(0)->getBestCloseUnit(lineNo, x, width, range);
+    }
+    
+    return unit;
+}
+
+Unit* GamePlayer::getBestCloseUnit(int lineNo, int x, int width, int range)
+{
+    Unit* closeUnit = nullptr;
+    int i = lineNo - 1;
+    
+    if(playerIndex == 0) {
+     
+        int closeX = x + width + range + 1;
+        
+        for(unitItr[i] = unitList[i].begin(); unitItr[i] != unitList[i].end(); i++)
+        {
+            Unit* unit = *unitItr[i];
+            
+            if(unit->getX() - unit->getWidth() < closeX && unit->getIsVisible()) { // if find close unit
+                closeX = unit->getX() - unit->getWidth();
+                
+                closeUnit = unit;
+            }
+        }
+        
+    } else {
+    
+        int closeX = x - (width + range + 1);
+        
+        for(unitItr[i] = unitList[i].begin(); unitItr[i] != unitList[i].end(); i++)
+        {
+            Unit* unit = *unitItr[i];
+            
+            if(unit->getX() + unit->getWidth() > closeX && unit->getIsVisible()) { // if find close unit
+                closeX = unit->getX() + unit->getWidth();
+                
+                closeUnit = unit;
+            }
+        }
+        
+    }
+    
+    return closeUnit;
 }
 
 

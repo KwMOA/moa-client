@@ -24,16 +24,8 @@ void GameLogicImpl::update(long dt)
     GameManager::GetInstance()->getGameWorld()->getGamePlayer(0)->update(dt);
     GameManager::GetInstance()->getGameWorld()->getGamePlayer(1)->update(dt);
     
+    //unit update
     
-    //check all object if exist to change state
+    GameManager::GetInstance()->getGameWorld()->getGamePlayer(0)->update(dt);
     
-    GameManager::GetInstance()->getGameWorld()->checkState();
-    
-    //act all object
-    
-    GameManager::GetInstance()->getGameWorld()->actState();
-    
-    //apply influence each object
-    
-    GameManager::GetInstance()->getGameWorld()->applyInfluence();
 }
