@@ -52,7 +52,7 @@ void Building::update(long dt)
         createPersent += 10;
         
         if(createPersent == 800) {
-            std::cout << "create building - " << objectNo << objectType<<std::endl;
+            std::cout << "create building - " << objectNo <<std::endl;
             
             state = OBJECT_STATE_IDLE;
         }
