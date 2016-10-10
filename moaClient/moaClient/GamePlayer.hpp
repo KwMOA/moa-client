@@ -78,5 +78,6 @@ public:
     Unit* checkEnemyInRange(int lineNo, int x, int width, int range);
     Unit* getBestCloseUnit(int lineNo, int x, int width, int range);
     
+    int getPlayerIndex() { return playerIndex; }
 };
 #endif /* GamePlayer_hpp */

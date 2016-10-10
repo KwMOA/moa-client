@@ -14,7 +14,6 @@
 const int INTERUPT_NETWORK_FRAME = 2;
 const int UNIT_START_X[2] = {300, 1000};
 
-
 enum OBJECT_TYPE
 {
     OBJECT_TYPE_BUILDING_1 = 1,
