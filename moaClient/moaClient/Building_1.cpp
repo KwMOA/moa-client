@@ -11,6 +11,7 @@
 #include "Upgrade_1.hpp"
 
 
+
 Building_1::Building_1(GamePlayer* _gamePlayer) : Building(_gamePlayer, OBJECT_TYPE_BUILDING_1)
 {
     upgradeList->push_back(new Upgrade_1(this));

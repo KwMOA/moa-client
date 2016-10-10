@@ -49,6 +49,8 @@ public:
     
     BaseObject* getBuildingByObjectNo(int objectNo);
     BaseObject* getUnitByObjectNo(int objectNo);
+
+	BaseObject* getBuildingByObjectType(int objectType);
     
     int createBuilding(int objectType);
     int cancelCreateBuilding(int objectNo);

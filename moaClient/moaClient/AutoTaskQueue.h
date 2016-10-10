@@ -24,8 +24,11 @@ public:
 	bool QIsEmpty();
 
 	void Enqueue(Packet* packet);
+	void DelayQueue(Packet* packet);
+
 	Packet* Dequeue();
 	Packet* QPeek();
+	
 
 };
 

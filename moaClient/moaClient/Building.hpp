@@ -33,13 +33,15 @@ protected:
     std::list<int>* unitTypeList;
     CreatingUnit* creatingUnit;
     
-    Upgrade* getUpgradeByUpgradeType(int upgradeType);
+   
     Unit* createUnitByUnitType(int unitType);
     
 public:
     Building(GamePlayer* _gamePlayer, int _objectType);
     virtual ~Building() {}
-    
+   
+	Upgrade* getUpgradeByUpgradeType(int upgradeType);
+
     void startUpgrade(int upgradeType);
     void cancelUpgrade(int upgradeType);
     

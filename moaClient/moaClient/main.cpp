@@ -14,11 +14,11 @@
 
 int main(int argc, const char * argv[]) {
     
-//    GameManager::GetInstance();
+    GameManager::GetInstance();
     
-//    GameManager::GetInstance()->init();
+    GameManager::GetInstance()->init();
     
-//    GameManager::GetInstance()->run();
+    GameManager::GetInstance()->run();
 	/*const int BufferLength = 1024;
 	std::string config_doc;
 	int fileSize;
@@ -35,24 +35,24 @@ int main(int argc, const char * argv[]) {
 	}
 
 	fclose(r);*/
-	JsonReader jr = JsonReader();
-	Json::Value root;
-	Json::Reader reader;
-	bool parsingSuccessful = reader.parse(jr.config_doc, root);
-	if (!parsingSuccessful)
-	{
-		std::cout << "Failed to parse configuration\n"
-			<< reader.getFormatedErrorMessages();
-		return 0;
-	}
-	
-	const Json::Value tribe = root["tribe"]["1"]["object"]["building_1"];
-	
-		std::cout << tribe["name"].asString() << std::endl;
+	//JsonReader jr = JsonReader();
+	//Json::Value root;
+	//Json::Reader reader;
+	//bool parsingSuccessful = reader.parse(jr.config_doc, root);
+	//if (!parsingSuccessful)
+	//{
+	//	std::cout << "Failed to parse configuration\n"
+	//		<< reader.getFormatedErrorMessages();
+	//	return 0;
+	//}
+	//
+	//const Json::Value tribe = root["tribe"]["1"]["object"]["building_1"];
+	//
+	//	std::cout << tribe["name"].asString() << std::endl;
 
-		TaskManagerImpl task = TaskManagerImpl();
-		
-		std::map<int, Process*>::iterator it = task.map.find(1);
-		std::cout << it->first;
+	//	TaskManagerImpl task = TaskManagerImpl();
+	//	
+	//	std::map<int, Process*>::iterator it = task.map.find(1);
+	//	std::cout << it->first;
 		return 0;
 }

@@ -33,6 +33,8 @@ GamePlayer::GamePlayer(GameWorld* _gameWorld, int _playerIndex)
     staticUnitList.push_back(new StaticUnit_7());
     staticUnitList.push_back(new StaticUnit_8());
     staticUnitList.push_back(new StaticUnit_9());
+
+	gold = 0;
     
     ////////////////////
 }
@@ -51,9 +53,25 @@ BaseObject* GamePlayer::getBuildingByObjectNo(int objectNo)
     return nullptr;
 }
 
+
+
 BaseObject* GamePlayer::getUnitByObjectNo(int objectNo)
 {
     return nullptr;
+}
+
+BaseObject* GamePlayer::getBuildingByObjectType(int objectType)
+{
+	for (buildingItr = buildingList.begin(); buildingItr != buildingList.end(); buildingItr++)
+	{
+		BaseObject* baseObject = (BaseObject*)*buildingItr;
+
+		if (baseObject->getObjectType() == objectType) {
+			return baseObject;
+		}
+	}
+
+	return nullptr;
 }
 
 int GamePlayer::createBuilding(int objectType)

@@ -15,11 +15,13 @@
 
 #include "GamePlayer.hpp"
 
+#include "CheckAvavilable.hpp"
+
 class GameWorldImpl : public GameWorld
 {
 private:
     GamePlayer* gamePlayers[2];
-    
+	CheckAvailable checker;
 public:
     GameWorldImpl();
     

@@ -24,6 +24,10 @@ void AutoTaskQueue::Enqueue(Packet* packet) {
 	}
 }
 
+void AutoTaskQueue::DelayQueue(Packet * packet)
+{
+}
+
 bool AutoTaskQueue::QIsEmpty() {
 	if (front == NULL) {
 		return true;
