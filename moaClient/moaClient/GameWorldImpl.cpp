@@ -14,20 +14,11 @@ GameWorldImpl::GameWorldImpl()
     gamePlayers[1] = new GamePlayer(this, 1);
 }
 
-void GameWorldImpl::checkState()
+void GameWorldImpl::update(long dt)
 {
     
 }
 
-void GameWorldImpl::actState()
-{
-    
-}
-
-void GameWorldImpl::applyInfluence()
-{
-    
-}
 
 void GameWorldImpl::createBuilding(int userIndex, int objectType)
 {

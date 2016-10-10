@@ -12,6 +12,8 @@
 #include <iostream>
 
 const int INTERUPT_NETWORK_FRAME = 2;
+const int UNIT_START_X[2] = {300, 1000};
+
 
 enum OBJECT_TYPE
 {
@@ -94,18 +96,31 @@ enum UPGRADE_TYPE
     
 };
 
-enum INFLUENCE_TYPE
+enum ACT_TYPE
 {
-    INFLUENCE_TYPE_ATTACK = 1,
-    INFLUENCE_TYPE_HEAL,
+    ACT_TYPE_RUN = 1,
+    ACT_TYPE_ATTACK,
+    ACT_TYPE_LOAD,
+    ACT_TYPE_HEAL,
 };
 
 
 struct Influence
 {
     int objectNo;
-    int influenceType;
+    int actType;
+};
+
+struct RunInfluence : public Influence
+{
+    int distance;
+};
+
+struct AttackInfluence : public Influence
+{
     int damage;
 };
+
+
 
 #endif /* GameDefines_h */

@@ -13,9 +13,7 @@ class GamePlayer;
 
 class GameWorld {
 public:
-    virtual void checkState() = 0;
-    virtual void actState() = 0;
-    virtual void applyInfluence() = 0;
+    virtual void update(long dt) = 0;
     
     virtual GamePlayer* getGamePlayer(int index) = 0;
     

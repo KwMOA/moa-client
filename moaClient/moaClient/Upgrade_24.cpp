@@ -12,8 +12,7 @@
 #include "GameDefines.h"
 #include "Building_7.hpp"
 #include "GamePlayer.hpp"
-#include "StaticObject.h"
-
+#include "StaticObject.hpp"
 Upgrade_24::Upgrade_24(Building* building) : Upgrade(building)
 {
     upgradeType = UPGRADE_TYPE_24;

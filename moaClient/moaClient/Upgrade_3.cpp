@@ -12,8 +12,7 @@
 #include "GameDefines.h"
 #include "GamePlayer.hpp"
 #include "Building_7.hpp"
-#include "StaticObject.h"
-
+#include "StaticObject.hpp"
 
 Upgrade_3::Upgrade_3(Building* building) : Upgrade(building)
 {

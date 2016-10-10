@@ -1,15 +1,17 @@
 //
-//  StaticObject.h
+//  StaticObject.hpp
 //  moaClient
 //
-//  Created by kimyongchan on 2016. 10. 4..
+//  Created by kimyongchan on 2016. 10. 5..
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#ifndef StaticObject_h
-#define StaticObject_h
+#ifndef StaticObject_hpp
+#define StaticObject_hpp
 
+#include <stdio.h>
 #include <string>
+#include "GameDefines.h"
 
 class StaticUnit
 {
@@ -21,6 +23,7 @@ protected:
     int maxHp;
     int atk;
     int atkSpeed;
+    int atkLoadSpeed;
     int atkRange;
     int speed;
     int def;
@@ -51,6 +54,9 @@ public:
     void setAtkSpeed(int _atkSpeed) { atkSpeed = _atkSpeed; }
     int getAtkSpeed() { return atkSpeed; }
     
+    void setAtkLoadSpeed(int _atkLoadSpeed) { atkLoadSpeed = _atkLoadSpeed; }
+    int getAtkLoadSpeed() { return atkLoadSpeed; }
+    
     void setAtkRange(int _atkRange) { atkRange = _atkRange; }
     int getAtkRange() { return atkRange; }
     
@@ -72,13 +78,13 @@ public:
 class StaticUnit_1 : public StaticUnit
 {
 public:
-    StaticUnit_1() { unitType = OBJECT_TYPE_UNIT_1; }
+    StaticUnit_1();
 };
 
 class StaticUnit_2 : public StaticUnit
 {
 public:
-    StaticUnit_2() { unitType = OBJECT_TYPE_UNIT_2; }
+    StaticUnit_2();
 };
 
 class StaticUnit_3 : public StaticUnit
@@ -88,7 +94,7 @@ protected:
     bool isDetecting;
     
 public:
-    StaticUnit_3() { unitType = OBJECT_TYPE_UNIT_3; }
+    StaticUnit_3();
     
     void setHeal(int _heal) { heal = _heal; }
     int getHeal() { return heal; }
@@ -103,7 +109,7 @@ protected:
     int knockBack;
     
 public:
-    StaticUnit_4() { unitType = OBJECT_TYPE_UNIT_4; }
+    StaticUnit_4();
     
     void setKnockBack(int _knockBack) { knockBack = _knockBack; }
     int getKnockBack() { return knockBack; }
@@ -116,7 +122,7 @@ protected:
     int skillRange;
     
 public:
-    StaticUnit_5() { unitType = OBJECT_TYPE_UNIT_5; }
+    StaticUnit_5();
     
     void setSkillCount(int _skillCount) { skillCount = _skillCount; }
     int getSkillCount() { return skillCount; }
@@ -132,7 +138,7 @@ protected:
     int graveCount;
     
 public:
-    StaticUnit_6() { unitType = OBJECT_TYPE_UNIT_6; }
+    StaticUnit_6();
     
     void setGraveCount(int _graveCount) { graveCount = _graveCount; }
     int getGraveCount() { return graveCount; }
@@ -145,7 +151,7 @@ protected:
     bool isIgnoreDef;
     
 public:
-    StaticUnit_7() { unitType = OBJECT_TYPE_UNIT_7; }
+    StaticUnit_7();
     
     void setIsIgnoreDef(bool _isIgnoreDef) { isIgnoreDef = _isIgnoreDef; }
     bool getIsIgnoreDef() { return isIgnoreDef; }
@@ -158,7 +164,7 @@ protected:
     int autoAroundHeal;
     
 public:
-    StaticUnit_8() { unitType = OBJECT_TYPE_UNIT_8; }
+    StaticUnit_8();
     
     void setShield(int _shield) { shield = _shield; }
     int getShield() { return shield; }
@@ -174,7 +180,7 @@ protected:
     int aroundAtkRange;
     
 public:
-    StaticUnit_9() { unitType = OBJECT_TYPE_UNIT_9; }
+    StaticUnit_9();
     
     void setAroundAtk(int _aroundAtk) { aroundAtk = _aroundAtk; }
     int getAroundAtk() { return aroundAtk; }
@@ -183,4 +189,4 @@ public:
     int getAroundAtkRange() { return aroundAtkRange; }
 };
 
-#endif /* StaticObject_h */
+#endif /* StaticObject_hpp */
