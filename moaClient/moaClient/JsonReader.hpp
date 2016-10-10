@@ -1,8 +1,16 @@
 #ifndef __JSON_READER_HPP__
 #define __JSON_READER_HPP__
 
+#include "BasicDefines.h"
+
+#if OS_PLATFORM == PLATFORM_LINUX
+#include <jsoncpp/json/json.h>
+#else
 #include <json/json.h>
+#endif
+
 #include <string.h>
+
 class JsonReader {
 private:
 	const int BufferLength = 1024;

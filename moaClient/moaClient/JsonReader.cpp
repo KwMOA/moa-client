@@ -1,4 +1,5 @@
 #include "JsonReader.hpp"
+#include <iostream>
 
 JsonReader::JsonReader() {
 	readBuffer = new char[BufferLength];
