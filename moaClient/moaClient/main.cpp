@@ -9,7 +9,6 @@
 #include "GameManager.hpp"
 #include "JsonReader.hpp"
 #include "TaskManagerImpl.h"
-#include "IProcessBuilding_1.hpp"
 #include <map>
 
 int main(int argc, const char * argv[]) {

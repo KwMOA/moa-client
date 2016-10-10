@@ -6,7 +6,6 @@
 #include "GamePlayer.hpp"
 #include "Building_1.hpp"
 #include "Process.h"
-#include "IProcessBuilding_1.hpp"
 
 #include <iostream>
 
@@ -15,7 +14,6 @@ TaskManagerImpl::TaskManagerImpl()
 	isFirst = false;
 	count = 1;
 	autoTaskQueue = AutoTaskQueue();
-	map[1] = new IProcessBuilding_1();
 }
 
 void TaskManagerImpl::receiveFromNetwork(Packet* packet)
