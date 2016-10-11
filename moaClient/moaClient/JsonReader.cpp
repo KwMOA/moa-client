@@ -7,7 +7,7 @@ JsonReader::JsonReader() {
 	if (NULL == file) std::cout << "FILE NULL\n";
 	while (!feof(file)) {
 		i = 0;
-		fileSize = fread(readBuffer, 1, BufferLength, file);
+		fileSize = (int)fread(readBuffer, 1, BufferLength, file);
 		for (i = 0; i < fileSize; i++) { config_doc += readBuffer[i]; }
 	}
 
