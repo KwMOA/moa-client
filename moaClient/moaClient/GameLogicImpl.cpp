@@ -19,13 +19,18 @@ GameLogicImpl::GameLogicImpl()
 
 void GameLogicImpl::update(long dt)
 {
-    //building update
-    
+    //buildings and units updates
     GameManager::GetInstance()->getGameWorld()->getGamePlayer(0)->update(dt);
     GameManager::GetInstance()->getGameWorld()->getGamePlayer(1)->update(dt);
     
-    //unit update
     
-    GameManager::GetInstance()->getGameWorld()->getGamePlayer(0)->update(dt);
+    // check collusion
+    GameManager::GetInstance()->getGameWorld()->checkCollusion();
+    
+    // apply influence
+    GameManager::GetInstance()->getGameWorld()->getGamePlayer(0)->applyInfluenceUnit();
+    GameManager::GetInstance()->getGameWorld()->getGamePlayer(1)->applyInfluenceUnit();
+    
+    // check is finish game
     
 }

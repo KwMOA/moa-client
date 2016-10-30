@@ -36,6 +36,7 @@ public:
     void upgradeBuilding(int userIndex, int objectNo, int upgradeType);
     void cancelUpgradeBuilding(int userIndex, int objectNo, int upgradeType);
     void createUnit(int userIndex, int objectNo, int objectType, int objectCount, int lineNo);
+    void checkCollusion();
 };
 
 

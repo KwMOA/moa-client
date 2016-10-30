@@ -15,7 +15,7 @@ class BaseObject {
 protected:
     int objectNo;
     int objectType;
-    int x, y, w, h;
+    int x, y, px, py, w, h;
     int state;
     
     GamePlayer* gamePlayer;
@@ -42,6 +42,9 @@ public:
     
     int getX() { return x; }
     void setX(int _x) { x = _x; }
+    
+    int getPX() { return px; }
+    void setPX(int _px) { px = _px; }
     
     int getY() { return y; }
     void setY(int _y) { y = _y; }

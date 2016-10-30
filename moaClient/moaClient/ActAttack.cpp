@@ -10,6 +10,7 @@
 #include "Unit.hpp"
 #include "GamePlayer.hpp"
 #include "ActRun.hpp"
+#include "AttackInfluence.hpp"
 
 ActAttack::ActAttack(Unit* _unit) : Act(_unit, ACT_TYPE_ATTACK)
 {
@@ -71,9 +72,9 @@ void ActAttack::update(long dt)
         if(actPercent == atkSpeed) { // attack
             
             AttackInfluence* influence = new AttackInfluence();
-            influence->objectNo = unit->getObjectNo();
-            influence->actType = ACT_TYPE_ATTACK;
-            influence->damage = atk;
+            influence->setObjectNo(unit->getObjectNo());
+            influence->setActType(ACT_TYPE_ATTACK);
+            influence->setDamage(atk);
             
             otherUnit->setInfluenceList(influence);
             
@@ -81,7 +82,7 @@ void ActAttack::update(long dt)
             otherUnit->removeTargetList(unit);
         }
         
-    } else if( actPercent == atkSpeed + atkLoadSpeed) { // attack finish
+    } else if(actPercent == atkSpeed + atkLoadSpeed) { // attack finish
         
         flag = 1;
         

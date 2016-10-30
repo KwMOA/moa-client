@@ -19,7 +19,7 @@
 #include "Unit_9.hpp"
 
 #include "Act.hpp"
-
+#include "Influence.hpp"
 
 Unit::Unit(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gamePlayer, _objectType)
 {
@@ -32,6 +32,7 @@ Unit::Unit(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gamePlayer, _
     else
         x = UNIT_START_X[getGamePlayer()->getPlayerIndex()] + getWidth() / 2;
     
+    px = x;
 }
 
 Unit* Unit::createUnit(GamePlayer* _gamePlayer, int _objectType)
@@ -100,4 +101,16 @@ void Unit::removeTargetList(Unit* _unit)
     std::cout<<"not exist unit"<<std::endl;
 }
 
+void Unit::applyInfluence()
+{
+    std::list<Influence*>::iterator influenceListItr;
+    
+    //TODO. change other class for sorting influence
+    
+    for(influenceListItr = influenceList.begin(); influenceListItr != influenceList.end(); influenceListItr++) {
+        
+        influenceList.front()->applyInfluence(this);
+        influenceList.pop_front();
+    }
+}
 

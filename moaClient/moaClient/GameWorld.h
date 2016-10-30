@@ -23,7 +23,7 @@ public:
     virtual void upgradeBuilding(int userIndex, int objectNo, int upgradeType) = 0;
     virtual void cancelUpgradeBuilding(int userIndex, int objectNo, int upgradeType) = 0;
     virtual void createUnit(int userIndex, int objectNo, int objectType, int objectCount, int lineNo) = 0;
-    
+    virtual void checkCollusion() = 0;
 };
 
 

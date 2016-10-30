@@ -258,6 +258,19 @@ void GamePlayer::update(long dt)
     }
 }
 
+void GamePlayer::applyInfluenceUnit()
+{
+    for(int i = 0; i < 3; i++)
+    {
+        for(unitItr[i] = unitList[i].begin(); unitItr[i] != unitList[i].end(); i++)
+        {
+            Unit* unit = *unitItr[i];
+            
+            unit->applyInfluence();
+        }
+    }
+}
+
 
 
 Unit* GamePlayer::checkEnemyInRange(int lineNo, int x, int width, int range)

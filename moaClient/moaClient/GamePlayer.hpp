@@ -69,8 +69,6 @@ public:
     StaticUnit* getStaticUnitByUnitType(int unitType);
     
     void update(long dt);
-    void checkUnitState();
-    void actUnit();
     void applyInfluenceUnit();
     
     

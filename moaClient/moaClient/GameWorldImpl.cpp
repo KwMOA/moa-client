@@ -32,26 +32,34 @@ void GameWorldImpl::createBuilding(int userIndex, int objectType)
 void GameWorldImpl::cancelCreateBuilding(int userIndex, int objectNo)
 {
 	if(checker.checkCancelBuilding(userIndex, objectNo))
-    gamePlayers[userIndex]->cancelCreateBuilding(objectNo);
+        gamePlayers[userIndex]->cancelCreateBuilding(objectNo);
 }
 
 
 void GameWorldImpl::upgradeBuilding(int userIndex, int objectNo, int upgradeType)
 {
 	if (checker.ckeckUpgradeBuilding(userIndex, objectNo))
-    gamePlayers[userIndex]->upgradeBuilding(objectNo, upgradeType);
+        gamePlayers[userIndex]->upgradeBuilding(objectNo, upgradeType);
 }
 
 
 void GameWorldImpl::cancelUpgradeBuilding(int userIndex, int objectNo, int upgradeType)
 {
 	if (checker.checkCancleUpgradeBuilding(userIndex, objectNo))
-    gamePlayers[userIndex]->cancelUpgradeBuilding(objectNo, upgradeType);
+        gamePlayers[userIndex]->cancelUpgradeBuilding(objectNo, upgradeType);
 }
 
 
 void GameWorldImpl::createUnit(int userIndex, int objectNo, int objectType, int objectCount, int lineNo)
 {
 	if(checker.checkCreateUnit(userIndex, objectNo))
-    gamePlayers[userIndex]->createUnit(objectNo, objectType, objectCount, lineNo);
+        gamePlayers[userIndex]->createUnit(objectNo, objectType, objectCount, lineNo);
+}
+
+void GameWorldImpl::checkCollusion()
+{
+    
+    
+    
+    
 }

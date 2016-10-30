@@ -104,22 +104,4 @@ enum ACT_TYPE
 };
 
 
-struct Influence
-{
-    int objectNo;
-    int actType;
-};
-
-struct RunInfluence : public Influence
-{
-    int distance;
-};
-
-struct AttackInfluence : public Influence
-{
-    int damage;
-};
-
-
-
 #endif /* GameDefines_h */

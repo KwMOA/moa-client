@@ -16,6 +16,7 @@
 #include "StaticObject.hpp"
 
 class Act;
+class Influence;
 
 class Unit : public BaseObject {
 protected:
@@ -88,7 +89,7 @@ public:
     void removeTargetList(Unit* _unit);
     
     void setInfluenceList(Influence* influence) { influenceList.push_back(influence); }
-    
+    void applyInfluence();
     
     void setActList(Act* act) { actList.push_front(act); }
     

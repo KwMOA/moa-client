@@ -24,9 +24,10 @@ void ActRun::update(long dt)
     
     if(otherUnit == nullptr) {
 
-        //move unit
-        
+        //move unit        
+        unit->setPX(unit->getX());
         unit->setX(unit->getX() + unit->getSpeed());
+        
         
     } else {
         
