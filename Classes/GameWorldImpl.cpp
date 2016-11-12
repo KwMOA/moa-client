@@ -19,6 +19,15 @@ GameWorldImpl::GameWorldImpl(GameManager* _gameManager)
 {
     gameManager = _gameManager;
 
+    
+    gameMap = Layer::create();
+
+    gameMap->setAnchorPoint(Vec2(0,0));
+    gameMap->setPosition(Vec2(0,0));
+    
+    gameManager->getGameScene()->addChild(gameMap, 1);
+
+    
     if(gameManager->isAiMode()) {
         gamePlayers[0] = new GamePlayer(this, 0);
         gamePlayers[1] = new AIPlayer(this, 1, 1);
@@ -26,13 +35,7 @@ GameWorldImpl::GameWorldImpl(GameManager* _gameManager)
         gamePlayers[0] = new GamePlayer(this, 0);
         gamePlayers[1] = new GamePlayer(this, 1);
     }
-        
-    gameMap = Layer::create();
     
-    gameMap->setAnchorPoint(Vec2(0,0));
-    gameMap->setPosition(Vec2(0,0));
-    
-    gameManager->getGameScene()->addChild(gameMap, 1);
 }
 
 void GameWorldImpl::update(long dt)

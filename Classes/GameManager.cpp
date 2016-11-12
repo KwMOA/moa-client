@@ -80,25 +80,11 @@ bool GameManager::init()
     
     //test code - create
     
-    CreateBuildingCI* p1 = new CreateBuildingCI();
-    p1->objectType = OBJECT_TYPE_BUILDING_1;
-    taskManager->pushBackMessage(p1);
-    
-    CreateBuildingCI* p2 = new CreateBuildingCI();
-    p2->objectType = OBJECT_TYPE_BUILDING_2;
-    taskManager->pushBackMessage(p2);
     
     CreateBuildingCI* p3 = new CreateBuildingCI();
     p3->objectType = OBJECT_TYPE_BUILDING_3;
     taskManager->pushBackMessage(p3);
     
-    CreateBuildingCI* p4 = new CreateBuildingCI();
-    p4->objectType = OBJECT_TYPE_BUILDING_1;
-    taskManager->pushBackAITask(p4);
-    
-    CreateBuildingCI* p5 = new CreateBuildingCI();
-    p5->objectType = OBJECT_TYPE_BUILDING_2;
-    taskManager->pushBackAITask(p5);
     
     CreateBuildingCI* p6 = new CreateBuildingCI();
     p6->objectType = OBJECT_TYPE_BUILDING_3;
