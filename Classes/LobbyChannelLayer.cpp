@@ -122,8 +122,13 @@ void LobbyChannelLayer::clickChattingSendBtn(cocos2d::Ref *pSender)
     
     const char* text = editbox->getText();
     
+#ifndef NOT_CONNECT_WITH_SERVER
+
     NetMgr->chattingSendSendChattingReq(text, strlen(text));
-    
+
+#else
+
+#endif
     editbox->setText("");
 }
 

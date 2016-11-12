@@ -86,8 +86,13 @@ void CreateAccountLayer::clickOkBtn(cocos2d::Ref* pSender)
         exit(0);
     }
         
+#ifndef NOT_CONNECT_WITH_SERVER
 
     NetMgr->frontSendCreateAccountReq(loginToken.c_str(), loginToken.length(), text, strlen(text));
+
+#else
+
+#endif
 }
 
 

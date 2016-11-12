@@ -1,8 +1,8 @@
 #ifndef __LOBBY_SCENE_H__
 #define __LOBBY_SCENE_H__
 
+
 #include "BaseLayer.h"
-#include "extensions/cocos-ext.h"
 using namespace cocos2d;
 //using namespace cocos2d::extension;
 using namespace std;

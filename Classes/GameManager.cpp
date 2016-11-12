@@ -10,11 +10,6 @@
 
 #include <iostream>
 
-#if OS_PLATFORM == PLATFORM_LINUX
-#include <sys/time.h>
-#else
-#include <windows.h>
-#endif
 
 #include "GameDefines.h"
 #include "ClientGamePacket.h"

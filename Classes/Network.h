@@ -2,6 +2,9 @@
 #ifndef __NETWORK_H__
 #define __NETWORK_H__
 
+#include "DefineHeader.h"
+
+#ifndef NOT_CONNECT_WITH_SERVER
 #include <stdint.h>
 
 #define MAX_FD_COUNT 10
@@ -80,6 +83,8 @@ private:
 public:
     int testNum = 0;
 };
+#else
 
+#endif
 
 #endif // __NETWORK_H__

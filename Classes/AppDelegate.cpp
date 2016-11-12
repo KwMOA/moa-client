@@ -7,6 +7,7 @@
 #include "LoginScene.h"
 #include "LobbyScene.h"
 #include "BasicDefines.h"
+#include "DefineHeader.h"
 
 
 USING_NS_CC;
@@ -47,7 +48,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto glview = director->getOpenGLView();
     if(!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-        glview = GLViewImpl::createWithRect("moaClient", cocos2d::Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
+        glview = GLViewImpl::createWithRect("moaClient", cocos2d::Rect(0, 0, designResolutionSize.width * 3, designResolutionSize.height * 3));
 #else
         glview = GLViewImpl::create("moaClient");
 #endif
@@ -82,26 +83,26 @@ bool AppDelegate::applicationDidFinishLaunching() {
     glview->setDesignResolutionSize(DISPLAY_WIDTH, DISPLAY_HEIGHT, ResolutionPolicy::SHOW_ALL);
     ///////////////////////////로그인 서버로 접속
     
-    if(NOT_CONNECT_WITH_SERVER) {
-        auto scene = LobbyScene::createScene();
+#ifndef NOT_CONNECT_WITH_SERVER
+	GameClient::GetInstance().Initialize();
+
+	//NetworkManager::initInstance(IP_ADDRESS, PORT);
+
+	GameClient::GetInstance().currentScene = NO_SCENE_NOW;
+
+	Scene* scene = LoginScene::createScene();
+
+	Director::getInstance()->runWithScene(scene);
+
+	NetMgr->frontSendFirstConnectReq();
+#else
+	auto scene = LobbyScene::createScene();
         
         Director::getInstance()->runWithScene(scene);
 
         // run
         director->runWithScene(scene);
-    } else {
-        GameClient::GetInstance().Initialize();
-        
-        NetworkManager::initInstance(IP_ADDRESS, PORT);
-        
-        GameClient::GetInstance().currentScene = NO_SCENE_NOW;
-        
-        Scene* scene = LoginScene::createScene();
-        
-        Director::getInstance()->runWithScene(scene);
-        
-        NetMgr->frontSendFirstConnectReq();
-    }
+#endif
     
     register_all_packages();
 

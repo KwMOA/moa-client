@@ -63,7 +63,11 @@ void LoginLayer::clickLoginBtn(Ref* pSender)
     }
 
     CCLOG("not have id - %s %ld\n", loginToken.c_str(), loginToken.length());
-
+#ifndef NOT_CONNECT_WITH_SERVER
+	
     NetMgr->frontSendLoginReq(loginToken.c_str(), loginToken.length());
+#else
+
+#endif
 }
 

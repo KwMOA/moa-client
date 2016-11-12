@@ -18,8 +18,8 @@ void LogManager::Log(std::string str, ...){
     
     char szOutStr[ 1024 ];
     va_list argptr;
-    va_start( argptr, str.c_str() );
+    /*va_start( argptr, str.c_str() );
     vsprintf( szOutStr , str.c_str(), argptr );
     va_end( argptr );
-    printf("%s\n",szOutStr);
+    printf("%s\n",szOutStr);*/
 }

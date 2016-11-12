@@ -1,6 +1,10 @@
 #ifndef __NETWORK_MANAGER_H__
 #define __NETWORK_MANAGER_H__
 
+#include "DefineHeader.h"
+
+#ifndef NOT_CONNECT_WITH_SERVER
+
 #include "Network.h"
 
 #define NetMgr NetworkManager::getInstance()
@@ -147,4 +151,7 @@ public:
     char sendBuffer[5000];
 };
 
+#else
+
+#endif
 #endif //__NETWORK_MANAGER_H__

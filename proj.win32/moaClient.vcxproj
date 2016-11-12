@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -96,7 +96,8 @@
       </Command>
     </PostBuildEvent>
     <PreLinkEvent>
-      <Command></Command>
+      <Command>
+      </Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup>
@@ -108,7 +109,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
       <Inputs>$(TargetFileName)</Inputs>
     </CustomBuildStep>
   </ItemDefinitionGroup>
-
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
@@ -139,17 +139,219 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
       </Command>
     </PostBuildEvent>
     <PreLinkEvent>
-      <Command></Command>
+      <Command>
+      </Command>
     </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Classes\Act.cpp" />
+    <ClCompile Include="..\Classes\ActAttack.cpp" />
+    <ClCompile Include="..\Classes\ActRun.cpp" />
+    <ClCompile Include="..\Classes\AiPlayer.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\AttackInfluence.cpp" />
+    <ClCompile Include="..\Classes\AutoTaskQueue.cpp" />
+    <ClCompile Include="..\Classes\BaseLayer.cpp" />
+    <ClCompile Include="..\Classes\BaseObject.cpp" />
+    <ClCompile Include="..\Classes\Building.cpp" />
+    <ClCompile Include="..\Classes\Building_1.cpp" />
+    <ClCompile Include="..\Classes\Building_10.cpp" />
+    <ClCompile Include="..\Classes\Building_11.cpp" />
+    <ClCompile Include="..\Classes\Building_12.cpp" />
+    <ClCompile Include="..\Classes\Building_2.cpp" />
+    <ClCompile Include="..\Classes\Building_3.cpp" />
+    <ClCompile Include="..\Classes\Building_4.cpp" />
+    <ClCompile Include="..\Classes\Building_5.cpp" />
+    <ClCompile Include="..\Classes\Building_6.cpp" />
+    <ClCompile Include="..\Classes\Building_7.cpp" />
+    <ClCompile Include="..\Classes\Building_8.cpp" />
+    <ClCompile Include="..\Classes\Building_9.cpp" />
+    <ClCompile Include="..\Classes\CheckAvailable.cpp" />
+    <ClCompile Include="..\Classes\CheckCreateAvailable.cpp" />
+    <ClCompile Include="..\Classes\Controller.cpp" />
+    <ClCompile Include="..\Classes\CreateAccountLayer.cpp" />
+    <ClCompile Include="..\Classes\CustomPopUp.cpp" />
+    <ClCompile Include="..\Classes\GameClient.cpp" />
+    <ClCompile Include="..\Classes\GameLogicImpl.cpp" />
+    <ClCompile Include="..\Classes\GameManager.cpp" />
+    <ClCompile Include="..\Classes\GamePlayer.cpp" />
+    <ClCompile Include="..\Classes\GameScene.cpp" />
+    <ClCompile Include="..\Classes\GameWorldImpl.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\Influence.cpp" />
+    <ClCompile Include="..\Classes\IProcessBuilding_1.cpp" />
+    <ClCompile Include="..\Classes\JsonReader.cpp" />
+    <ClCompile Include="..\Classes\LobbyAIGameLayer.cpp" />
+    <ClCompile Include="..\Classes\LobbyBoardLayer.cpp" />
+    <ClCompile Include="..\Classes\LobbyChannelLayer.cpp" />
+    <ClCompile Include="..\Classes\LobbyClanLayer.cpp" />
+    <ClCompile Include="..\Classes\LobbyFriendLayer.cpp" />
+    <ClCompile Include="..\Classes\LobbyGameLayer.cpp" />
+    <ClCompile Include="..\Classes\LobbyMainLayer.cpp" />
+    <ClCompile Include="..\Classes\LobbyRankGameLayer.cpp" />
+    <ClCompile Include="..\Classes\LobbyRankingLayer.cpp" />
+    <ClCompile Include="..\Classes\LobbyScene.cpp" />
+    <ClCompile Include="..\Classes\LoginLayer.cpp" />
+    <ClCompile Include="..\Classes\LoginScene.cpp" />
+    <ClCompile Include="..\Classes\LogManager.cpp" />
+    <ClCompile Include="..\Classes\MenuButtonLayer.cpp" />
+    <ClCompile Include="..\Classes\MiniMapLayer.cpp" />
+    <ClCompile Include="..\Classes\MyInfoLayer.cpp" />
+    <ClCompile Include="..\Classes\Network.cpp" />
+    <ClCompile Include="..\Classes\NetworkManager.cpp" />
+    <ClCompile Include="..\Classes\ResultScene.cpp" />
+    <ClCompile Include="..\Classes\StaticObject.cpp" />
+    <ClCompile Include="..\Classes\TaskManager.cpp" />
+    <ClCompile Include="..\Classes\Unit.cpp" />
+    <ClCompile Include="..\Classes\Unit_1.cpp" />
+    <ClCompile Include="..\Classes\Unit_2.cpp" />
+    <ClCompile Include="..\Classes\Unit_3.cpp" />
+    <ClCompile Include="..\Classes\Unit_4.cpp" />
+    <ClCompile Include="..\Classes\Unit_5.cpp" />
+    <ClCompile Include="..\Classes\Unit_6.cpp" />
+    <ClCompile Include="..\Classes\Unit_7.cpp" />
+    <ClCompile Include="..\Classes\Unit_8.cpp" />
+    <ClCompile Include="..\Classes\Unit_9.cpp" />
+    <ClCompile Include="..\Classes\Upgrade.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_1.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_10.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_11.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_12.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_13.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_14.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_15.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_16.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_17.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_18.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_19.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_2.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_20.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_21.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_22.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_23.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_24.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_3.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_4.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_5.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_6.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_7.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_8.cpp" />
+    <ClCompile Include="..\Classes\Upgrade_9.cpp" />
+    <ClCompile Include="..\Classes\UserInfoLayer.cpp" />
+    <ClCompile Include="..\Classes\UserListLayer.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Classes\Act.hpp" />
+    <ClInclude Include="..\Classes\ActAttack.hpp" />
+    <ClInclude Include="..\Classes\ActRun.hpp" />
+    <ClInclude Include="..\Classes\AiPlayer.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\AttackInfluence.hpp" />
+    <ClInclude Include="..\Classes\AutoTaskPacket.h" />
+    <ClInclude Include="..\Classes\AutoTaskQueue.h" />
+    <ClInclude Include="..\Classes\BaseLayer.h" />
+    <ClInclude Include="..\Classes\BaseObject.hpp" />
+    <ClInclude Include="..\Classes\BasicDefines.h" />
+    <ClInclude Include="..\Classes\BasicPacket.h" />
+    <ClInclude Include="..\Classes\Building.hpp" />
+    <ClInclude Include="..\Classes\Building_1.hpp" />
+    <ClInclude Include="..\Classes\Building_10.hpp" />
+    <ClInclude Include="..\Classes\Building_11.hpp" />
+    <ClInclude Include="..\Classes\Building_12.hpp" />
+    <ClInclude Include="..\Classes\Building_2.hpp" />
+    <ClInclude Include="..\Classes\Building_3.hpp" />
+    <ClInclude Include="..\Classes\Building_4.hpp" />
+    <ClInclude Include="..\Classes\Building_5.hpp" />
+    <ClInclude Include="..\Classes\Building_6.hpp" />
+    <ClInclude Include="..\Classes\Building_7.hpp" />
+    <ClInclude Include="..\Classes\Building_8.hpp" />
+    <ClInclude Include="..\Classes\Building_9.hpp" />
+    <ClInclude Include="..\Classes\CheckAvailable.hpp" />
+    <ClInclude Include="..\Classes\CheckCreateAvailable.hpp" />
+    <ClInclude Include="..\Classes\ClientChattingPacket.h" />
+    <ClInclude Include="..\Classes\ClientFrontPacket.h" />
+    <ClInclude Include="..\Classes\ClientGamePacket.h" />
+    <ClInclude Include="..\Classes\ClientInput.h" />
+    <ClInclude Include="..\Classes\ClientLobbyPacket.h" />
+    <ClInclude Include="..\Classes\Controller.h" />
+    <ClInclude Include="..\Classes\CreateAccountLayer.h" />
+    <ClInclude Include="..\Classes\CustomPopUp.h" />
+    <ClInclude Include="..\Classes\DefineHeader.h" />
+    <ClInclude Include="..\Classes\GameClient.h" />
+    <ClInclude Include="..\Classes\GameData.h" />
+    <ClInclude Include="..\Classes\GameDefines.h" />
+    <ClInclude Include="..\Classes\GameLogic.h" />
+    <ClInclude Include="..\Classes\GameLogicImpl.hpp" />
+    <ClInclude Include="..\Classes\GameManager.hpp" />
+    <ClInclude Include="..\Classes\GamePlayer.hpp" />
+    <ClInclude Include="..\Classes\GameScene.h" />
+    <ClInclude Include="..\Classes\GameWorld.h" />
+    <ClInclude Include="..\Classes\GameWorldImpl.hpp" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\Influence.hpp" />
+    <ClInclude Include="..\Classes\IProcessBuilding_1.hpp" />
+    <ClInclude Include="..\Classes\JsonReader.hpp" />
+    <ClInclude Include="..\Classes\LobbyAIGameLayer.h" />
+    <ClInclude Include="..\Classes\LobbyBoardLayer.h" />
+    <ClInclude Include="..\Classes\LobbyChannelLayer.h" />
+    <ClInclude Include="..\Classes\LobbyClanLayer.h" />
+    <ClInclude Include="..\Classes\LobbyFriendLayer.h" />
+    <ClInclude Include="..\Classes\LobbyGameLayer.h" />
+    <ClInclude Include="..\Classes\LobbyMainLayer.h" />
+    <ClInclude Include="..\Classes\LobbyRankGameLayer.h" />
+    <ClInclude Include="..\Classes\LobbyRankingLayer.h" />
+    <ClInclude Include="..\Classes\LobbyScene.h" />
+    <ClInclude Include="..\Classes\LoginLayer.h" />
+    <ClInclude Include="..\Classes\LoginScene.h" />
+    <ClInclude Include="..\Classes\LogManager.h" />
+    <ClInclude Include="..\Classes\MenuButtonLayer.h" />
+    <ClInclude Include="..\Classes\MiniMapLayer.h" />
+    <ClInclude Include="..\Classes\MyInfoLayer.h" />
+    <ClInclude Include="..\Classes\Network.h" />
+    <ClInclude Include="..\Classes\NetworkManager.h" />
+    <ClInclude Include="..\Classes\ObjectInfo.h" />
+    <ClInclude Include="..\Classes\Process.h" />
+    <ClInclude Include="..\Classes\ResultScene.h" />
+    <ClInclude Include="..\Classes\StaticObject.hpp" />
+    <ClInclude Include="..\Classes\TaskManager.h" />
+    <ClInclude Include="..\Classes\Unit.hpp" />
+    <ClInclude Include="..\Classes\Unit_1.hpp" />
+    <ClInclude Include="..\Classes\Unit_2.hpp" />
+    <ClInclude Include="..\Classes\Unit_3.hpp" />
+    <ClInclude Include="..\Classes\Unit_4.hpp" />
+    <ClInclude Include="..\Classes\Unit_5.hpp" />
+    <ClInclude Include="..\Classes\Unit_6.hpp" />
+    <ClInclude Include="..\Classes\Unit_7.hpp" />
+    <ClInclude Include="..\Classes\Unit_8.hpp" />
+    <ClInclude Include="..\Classes\Unit_9.hpp" />
+    <ClInclude Include="..\Classes\Upgrade.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_1.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_10.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_11.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_12.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_13.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_14.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_15.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_16.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_17.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_18.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_19.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_2.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_20.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_21.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_22.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_23.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_24.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_3.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_4.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_5.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_6.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_7.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_8.hpp" />
+    <ClInclude Include="..\Classes\Upgrade_9.hpp" />
+    <ClInclude Include="..\Classes\UserInfoLayer.h" />
+    <ClInclude Include="..\Classes\UserListLayer.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +368,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Classes\object_Info.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

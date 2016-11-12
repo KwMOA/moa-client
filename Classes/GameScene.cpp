@@ -35,6 +35,11 @@ bool GameScene::init()
     if(gameManager->init() == false) {
         return false;
     }
+
+
+
+
+
     
     auto background = Sprite::create("game_back_ground_01.png");
     background->setAnchorPoint(Vec2(0, 0));

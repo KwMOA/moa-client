@@ -64,6 +64,10 @@ void ResultScene::menuCloseCallback(Ref* pSender)
 
 void ResultScene::clickLoginBtn(Ref* pSender)
 {
-    NetMgr->lobbySendFirstConnectReq();
+#ifndef NOT_CONNECT_WITH_SERVER
 
+    NetMgr->lobbySendFirstConnectReq();
+#else
+
+#endif
 }

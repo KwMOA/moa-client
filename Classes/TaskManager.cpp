@@ -135,7 +135,12 @@ void TaskManager::dispatchToServer(){
         if(PLAY_ALONE) {
 //            fetchFromServer(nextBuffer, buffer);
         } else {
+#ifndef NOT_CONNECT_WITH_SERVER
+
             NetMgr->gameSendClientNotify(nextBuffer,buffer);
+#else
+
+#endif
         }
     
     } else {
@@ -147,7 +152,12 @@ void TaskManager::dispatchToServer(){
         if(PLAY_ALONE) {
 //            fetchFromServer(0, buffer);
         } else {
+#ifndef NOT_CONNECT_WITH_SERVER
+		
             NetMgr->gameSendClientNotify(0, buffer);
+#else
+
+#endif
         }
     }
     

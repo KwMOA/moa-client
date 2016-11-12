@@ -1,5 +1,7 @@
+
 #include "NetworkManager.h"
 
+#ifndef NOT_CONNECT_WITH_SERVER
 
 #include "GameDefines.h"
 #include "LoginScene.h"
@@ -1574,8 +1576,9 @@ void NetworkManager::chattingSendSendChattingReq(const char* chatting, uint8_t c
 
 ////////////////////////////////////////////
 
+#else
 
-
+#endif
 
 
 

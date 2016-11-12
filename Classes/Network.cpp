@@ -1,6 +1,8 @@
 
 #include "Network.h"
 
+#ifndef NOT_CONNECT_WITH_SERVER
+
 #include <string.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -366,6 +368,8 @@ ConnectInfo* Network::getConnectInfo(int fd)
     return NULL;
 }
 
+#else
 
+#endif
 
 

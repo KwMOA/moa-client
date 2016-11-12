@@ -21,15 +21,18 @@ bool BaseLayer::init()
         return false;
     }
     
-    if(!NOT_CONNECT_WITH_SERVER) {
+#ifndef NOT_CONNECT_WITH_SERVER
         scheduleUpdate();
-    }
+#else
+
+#endif
     
     return true;
 }
 
 void BaseLayer::update(float dt)
 {
+#ifndef NOT_CONNECT_WITH_SERVER
     int recvBytes = 0;
     while (1)
     {
@@ -58,6 +61,10 @@ void BaseLayer::update(float dt)
         if(recvBytes <= 0)
             break;
     }
+
+#else
+
+#endif
 }
 
 void BaseLayer::popLayer()
@@ -81,17 +88,21 @@ void BaseLayer::popLayer()
 
 void BaseLayer::pushLayer(Layer* layer)
 {
-    Layer* oldLayer = layerStack.front();
-    
-    Director::getInstance()->getEventDispatcher()->pauseEventListenersForTarget(oldLayer);
+	if (layerStack.size() != 0) {
+		Layer* oldLayer = layerStack.front();
 
-    layerStack.push_front(layer);
-    
-    
-    if(layerStack.size() != 1) {
-        removeChild(oldLayer);
-    }
-    
+		Director::getInstance()->getEventDispatcher()->pauseEventListenersForTarget(oldLayer);
+	
+		layerStack.push_front(layer);
+
+
+		if (layerStack.size() != 1) {
+			removeChild(oldLayer);
+		}
+	}
+
+	layerStack.push_front(layer);
+
     layer = layerStack.front();
     Director::getInstance()->getEventDispatcher()->resumeEventListenersForTarget(layer);
     
