@@ -34,8 +34,6 @@ Building_2::Building_2(GamePlayer* _gamePlayer) : Building(_gamePlayer, OBJECT_T
         images[0][i] = Sprite::create(buf);
         images[0][i]->retain();
         
-        images[0][i]->setAnchorPoint(Vec2(0.5, 0));
-        images[0][i]->setPosition(Vec2(60, 300));
         images[0][i]->setScale(128 / (double)1701, 128 / (double)1701);
     }
     
@@ -49,8 +47,6 @@ Building_2::Building_2(GamePlayer* _gamePlayer) : Building(_gamePlayer, OBJECT_T
         
         
         
-        images[1][i]->setAnchorPoint(Vec2(0.5, 0));
-        images[1][i]->setPosition(Vec2(60, 300));
         images[1][i]->setScale(128 / (double)1701, 128 / (double)1701);
     }
     
@@ -63,8 +59,6 @@ Building_2::Building_2(GamePlayer* _gamePlayer) : Building(_gamePlayer, OBJECT_T
         images[2][i] = Sprite::create(buf);
         images[2][i]->retain();
         
-        images[2][i]->setAnchorPoint(Vec2(0.5, 0));
-        images[2][i]->setPosition(Vec2(60, 300));
         images[2][i]->setScale(128 / (double)1701, 128 / (double)1701);
     }
     
@@ -76,11 +70,11 @@ Building_2::Building_2(GamePlayer* _gamePlayer) : Building(_gamePlayer, OBJECT_T
         images[3][i] = Sprite::create(buf);
         images[3][i]->retain();
         
-        images[3][i]->setAnchorPoint(Vec2(0.5, 0));
-        images[3][i]->setPosition(Vec2(60, 300));
         images[3][i]->setScale(128 / (double)1701, 128 / (double)1701);
     }
     
+    objectLayer->setAnchorPoint(Vec2(0.5, 0));
+    objectLayer->setPosition(Vec2(60, DISPLAY_HEIGHT - 240));
     objectLayer->addChild(images[0][0], 0, TAG_IMAGE_OBJECT);
 }
 
