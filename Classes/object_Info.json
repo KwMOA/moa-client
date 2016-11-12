@@ -1,0 +1,336 @@
+{
+  "encoding" : "UTF-8",
+  "file_version": 1,
+  "tribe": {
+    "1": {
+      "population": 100,
+      "object": {
+        "building_1":{
+          "name": "building_1",
+          "create_time": 320,
+          "price": 1000,
+          "upgrade_quality_time_1": 160,
+          "upgrade_quality_time_2": 240,
+          "upgrade_quality_price_1": 500,
+          "upgrade_quality_price_2": 700
+        },
+        "building_2": {
+          "name": "building_2",
+          "create_time": 80,
+          "price": 300,
+          "upgrade_quantity_time": 80,
+          "upgrade_quantity_price": 300,
+          "gold_time": 8,
+          "gold_count": 30
+        },
+        "building_3": {
+          "name": "building_3",
+          "create_time": 120,
+          "price": 500
+        },
+        "building_4": {
+          "name": "building_4",
+          "create_time": 160,
+          "price": 700
+        },
+        "building_5": {
+          "name": "building_5",
+          "create_time": 160,
+          "price": 700
+        },
+        "building_6": {
+          "name": "building_6",
+          "create_time": 240,
+          "price": 900
+        },
+        "building_7": {
+          "name": "building_7",
+          "create_time": 240,
+          "price": 500,
+
+          "upgrade_unit_2_time": 320,
+          "upgrade_unit_2_price": 300,
+          "upgrade_unit_2_nv": 50,
+
+          "upgrade_atk_price_1": 300,
+          "upgrade_atk_price_2": 300,
+          "upgrade_atk_price_3": 300,
+          "upgrade_def_price_1": 300,
+          "upgrade_def_price_2": 300,
+          "upgrade_def_price_3": 300,
+
+          "upgrade_atk_nvp_1": 10,
+          "upgrade_atk_nvp_2": 10,
+          "upgrade_atk_nvp_3": 10,
+          "upgrade_def_nvp_1": 10,
+          "upgrade_def_nvp_2": 10,
+          "upgrade_def_nvp_3": 10,
+
+          "upgrade_atk_time_1": 480,
+          "upgrade_atk_time_2": 480,
+          "upgrade_atk_time_3": 480,
+          "upgrade_def_time_1": 480,
+          "upgrade_def_time_2": 480,
+          "upgrade_def_time_3": 480
+        },
+        "building_8": {
+          "name": "building_8",
+          "create_time": 120,
+          "price": 500,
+          "upgrade_unit_1_time": 480,
+          "upgrade_unit_3_time_1": 480,
+          "upgrade_unit_3_time_2": 320,
+          "upgrade_unit_1_price": 300,
+          "upgrade_unit_3_price_1": 300,
+          "upgrade_unit_3_price_2": 300,
+          "upgrade_unit_1_nvp": 100,
+          "upgrade_unit_3_nv_2": 25
+
+        },
+        "building_9": {
+          "name": "building_9",
+          "create_time": 240,
+          "price": 1000,
+          "upgrade_unit_4_time_1": 480,
+          "upgrade_unit_4_time_2": 480,
+          "upgrade_unit_5_time_1": 320,
+          "upgrade_unit_5_time_2": 320,
+          "upgrade_unit_4_price_1": 300,
+          "upgrade_unit_4_price_2": 300,
+          "upgrade_unit_5_price_1": 300,
+          "upgrade_unit_5_price_2": 300,
+
+          "upgrade_unit_4_nv_1": 50,
+          "upgrade_unit_4_nv_2": 50,
+          "upgrade_unit_5_nv_1": 50,
+          "upgrade_unit_5_nv_2": 70,
+
+          "upgrade_atk_price_1": 300,
+          "upgrade_atk_price_2": 300,
+          "upgrade_atk_price_3": 300,
+          "upgrade_def_price_1": 300,
+          "upgrade_def_price_2": 300,
+          "upgrade_def_price_3": 300,
+
+          "upgrade_atk_nvp_1": 10,
+          "upgrade_atk_nvp_2": 10,
+          "upgrade_atk_nvp_3": 10,
+          "upgrade_def_nvp_1": 10,
+          "upgrade_def_nvp_2": 10,
+          "upgrade_def_nvp_3": 10,
+
+          "upgrade_atk_time_1": 480,
+          "upgrade_atk_time_2": 480,
+          "upgrade_atk_time_3": 480,
+          "upgrade_def_time_1": 480,
+          "upgrade_def_time_2": 480,
+          "upgrade_def_time_3": 480
+        },
+        "building_10": {
+          "name": "building_10",
+          "create_time": 240,
+          "price": 1000,
+          "upgrade_unit_6_time": 480,
+          "upgrade_unit_7_time": 320,
+          "upgrade_unit_6_price": 300,
+          "upgrade_unit_7_price": 300,
+          "upgrade_unit_6_nv": 2,
+
+          "upgrade_atk_price_1": 300,
+          "upgrade_atk_price_2": 300,
+          "upgrade_atk_price_3": 300,
+          "upgrade_def_price_1": 300,
+          "upgrade_def_price_2": 300,
+          "upgrade_def_price_3": 300,
+
+          "upgrade_atk_nvp_1": 10,
+          "upgrade_atk_nvp_2": 10,
+          "upgrade_atk_nvp_3": 10,
+          "upgrade_def_nvp_1": 10,
+          "upgrade_def_nvp_2": 10,
+          "upgrade_def_nvp_3": 10,
+
+          "upgrade_atk_time_1": 480,
+          "upgrade_atk_time_2": 480,
+          "upgrade_atk_time_3": 480,
+          "upgrade_def_time_1": 480,
+          "upgrade_def_time_2": 480,
+          "upgrade_def_time_3": 480
+
+        },
+        "building_11": {
+          "name": "building_11",
+          "create_time": 240,
+          "price": 1000,
+          "upgrade_unit_8_time_1": 480,
+          "upgrade_unit_8_time_2": 320,
+          "upgrade_unit_8_price_1": 300,
+          "upgrade_unit_8_price_2": 300,
+          "upgrade_unit_8_1_nv": 100,
+          "upgrade_unit_8_2_nv": 1,
+
+          "upgrade_def_price_1": 300,
+          "upgrade_def_price_2": 300,
+          "upgrade_def_price_3": 300,
+
+          "upgrade_def_nvp_1": 10,
+          "upgrade_def_nvp_2": 10,
+          "upgrade_def_nvp_3": 10,
+
+          "upgrade_def_time_1": 480,
+          "upgrade_def_time_2": 480,
+          "upgrade_def_time_3": 480
+
+        },
+        "building_12": {
+          "name": "building_12",
+          "create_time": 240,
+          "price": 1000,
+          "upgrade_unit_9_time_1": 480,
+          "upgrade_unit_9_time_2": 320,
+          "upgrade_unit_9_price_1": 300,
+          "upgrade_unit_9_price_2": 300,
+          "upgrade_unit_9_1_nv": 25,
+          "upgrade_unit_9_2_nv": 10,
+
+          "upgrade_atk_price_1": 300,
+          "upgrade_atk_price_2": 300,
+          "upgrade_atk_price_3": 300,
+
+          "upgrade_atk_nvp_1": 10,
+          "upgrade_atk_nvp_2": 10,
+          "upgrade_atk_nvp_3": 10,
+
+          "upgrade_atk_time_1": 480,
+          "upgrade_atk_time_2": 480,
+          "upgrade_atk_time_3": 480
+
+        },
+        "unit_1": {
+          "name": "unit_1",
+          "price": 30,
+          "width": 50,
+          "hp": 100,
+          "atk": 30,
+          "atkspeed": 8,
+          "atkrange": 0,
+          "speed": 10,
+          "def": 20,
+          "isvisible": 1,
+          "population": 1
+        },
+        "unit_2": {
+          "name": "unit_2",
+          "price": 50,
+          "width": 50,
+          "hp": 70,
+          "atk": 40,
+          "atkspeed": 16,
+          "atkrange": 150,
+          "speed": 8,
+          "def": 10,
+          "isvisible": 1,
+          "population": 1
+        },
+        "unit_3": {
+          "name": "unit_3",
+          "price": 70,
+          "width": 50,
+          "hp": 70,
+          "atk": 10,
+          "atkspeed": 16,
+          "atkrange": 100,
+          "speed": 12,
+          "def": 0,
+          "isvisible": 1,
+          "heal": 50,
+          "population": 1
+        },
+        "unit_4": {
+          "name": "unit_4",
+          "price": 150,
+          "width": 50,
+          "hp": 50,
+          "atk": 15,
+          "atkspeed": 24,
+          "atkrange": 120,
+          "speed": 8,
+          "def": 5,
+          "isvisible": 1,
+          "knockback": 50,
+          "population": 2
+        },
+        "unit_5": {
+          "name": "unit_5",
+          "price": 250,
+          "width": 50,
+          "hp": 100,
+          "atk": 30,
+          "atkspeed": 24,
+          "atkrange": 130,
+          "speed": 8,
+          "def": 20,
+          "isvisible": 1,
+          "skill_count": 3,
+          "skill_range": 130,
+          "population": 3
+        },
+        "unit_6": {
+          "name": "unit_6",
+          "price": 100,
+          "width": 50,
+          "hp": 75,
+          "atk": 20,
+          "atkspeed": 16,
+          "atkrange": 120,
+          "speed": 12,
+          "def": 16,
+          "isvisible": 1,
+          "grave_count": 3,
+          "population": 2
+        },
+        "unit_7": {
+          "name": "unit_7",
+          "price": 120,
+          "width": 50,
+          "hp": 60,
+          "atk": 60,
+          "atkspeed": 16,
+          "atkrange": 0,
+          "speed": 10,
+          "def": 0,
+          "isvisible": 0,
+          "population": 2
+        },
+        "unit_8": {
+          "name": "unit_8",
+          "price": 300,
+          "width": 100,
+          "hp": 300,
+          "atk": 20,
+          "atkspeed": 16,
+          "atkrange": 0,
+          "speed": 12,
+          "def": 30,
+          "isvisible": 1,
+          "population": 3
+        },
+        "unit_9": {
+          "name": "unit_8",
+          "price": 350,
+          "width": 70,
+          "hp": 150,
+          "atk": 50,
+          "atkspeed": 16,
+          "atkrange": 150,
+          "speed": 9,
+          "def": 10,
+          "isvisible": 1,
+          "around_atk": 25,
+          "atk_range": 100,
+          "population": 4
+        }
+      }
+    }
+  }
+}
