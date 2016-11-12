@@ -16,7 +16,7 @@ class ControlLayer : public cocos2d::Layer
 {
 private:
 	 
-	GameScene* gameWorld;
+	GameScene* gameScene;
 	LinkedList<CustomButton*> list;
 	LinkedList<CustomButton*>::iterator itr;
 	
