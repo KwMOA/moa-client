@@ -168,8 +168,10 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Building_9.cpp" />
     <ClCompile Include="..\Classes\CheckAvailable.cpp" />
     <ClCompile Include="..\Classes\CheckCreateAvailable.cpp" />
+    <ClCompile Include="..\Classes\ControlLayer.cpp" />
     <ClCompile Include="..\Classes\Controller.cpp" />
     <ClCompile Include="..\Classes\CreateAccountLayer.cpp" />
+    <ClCompile Include="..\Classes\CustomButton.cpp" />
     <ClCompile Include="..\Classes\CustomPopUp.cpp" />
     <ClCompile Include="..\Classes\GameClient.cpp" />
     <ClCompile Include="..\Classes\GameLogicImpl.cpp" />
@@ -181,6 +183,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Influence.cpp" />
     <ClCompile Include="..\Classes\IProcessBuilding_1.cpp" />
     <ClCompile Include="..\Classes\JsonReader.cpp" />
+    <ClCompile Include="..\Classes\LinkedList.cpp" />
     <ClCompile Include="..\Classes\LobbyAIGameLayer.cpp" />
     <ClCompile Include="..\Classes\LobbyBoardLayer.cpp" />
     <ClCompile Include="..\Classes\LobbyChannelLayer.cpp" />
@@ -199,6 +202,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\MyInfoLayer.cpp" />
     <ClCompile Include="..\Classes\Network.cpp" />
     <ClCompile Include="..\Classes\NetworkManager.cpp" />
+    <ClCompile Include="..\Classes\ObjectInfos.cpp" />
     <ClCompile Include="..\Classes\ResultScene.cpp" />
     <ClCompile Include="..\Classes\StaticObject.cpp" />
     <ClCompile Include="..\Classes\TaskManager.cpp" />
@@ -274,8 +278,10 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\ClientGamePacket.h" />
     <ClInclude Include="..\Classes\ClientInput.h" />
     <ClInclude Include="..\Classes\ClientLobbyPacket.h" />
+    <ClInclude Include="..\Classes\ControlLayer.h" />
     <ClInclude Include="..\Classes\Controller.h" />
     <ClInclude Include="..\Classes\CreateAccountLayer.h" />
+    <ClInclude Include="..\Classes\CustomButton.h" />
     <ClInclude Include="..\Classes\CustomPopUp.h" />
     <ClInclude Include="..\Classes\DefineHeader.h" />
     <ClInclude Include="..\Classes\GameClient.h" />
@@ -292,6 +298,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Influence.hpp" />
     <ClInclude Include="..\Classes\IProcessBuilding_1.hpp" />
     <ClInclude Include="..\Classes\JsonReader.hpp" />
+    <ClInclude Include="..\Classes\LinkedList.h" />
     <ClInclude Include="..\Classes\LobbyAIGameLayer.h" />
     <ClInclude Include="..\Classes\LobbyBoardLayer.h" />
     <ClInclude Include="..\Classes\LobbyChannelLayer.h" />
@@ -311,6 +318,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Network.h" />
     <ClInclude Include="..\Classes\NetworkManager.h" />
     <ClInclude Include="..\Classes\ObjectInfo.h" />
+    <ClInclude Include="..\Classes\ObjectInfos.h" />
     <ClInclude Include="..\Classes\Process.h" />
     <ClInclude Include="..\Classes\ResultScene.h" />
     <ClInclude Include="..\Classes\StaticObject.hpp" />
