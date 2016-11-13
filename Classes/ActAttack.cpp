@@ -71,7 +71,15 @@ void ActAttack::update(long dt)
             }
             
         } else {
-            if((otherUnit->getX() - otherUnit->getWidth()) - (unit->getX() + unit->getWidth()) > unit->getAtkRange()) { // other unit is so far
+            
+            bool isFarToAttack = false;
+            if(unit->getGamePlayer()->getPlayerIndex() == 0) {
+                isFarToAttack = ((otherUnit->getX() - otherUnit->getWidth()) - (unit->getX() + unit->getWidth()) > unit->getAtkRange());
+            } else {
+                isFarToAttack = ((unit->getX() - unit->getWidth()) - (otherUnit->getX() + otherUnit->getWidth()) > unit->getAtkRange());
+            }
+            
+            if(isFarToAttack) { // other unit is so far
                 
                 unit->setTarget(nullptr);
                 otherUnit->removeTargetList(unit);

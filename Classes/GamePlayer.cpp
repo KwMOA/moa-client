@@ -329,14 +329,14 @@ Unit* GamePlayer::getBestCloseUnit(int lineNo, int x, int width, int range)
     
     if(playerIndex == 0) {
      
-        int closeX = x - (width + range + 1);
+        int closeX = x - (width + range);
         
         for(unitItr[i] = unitList[i].begin(); unitItr[i] != unitList[i].end(); unitItr[i]++)
         {
             Unit* unit = *unitItr[i];
             
-            if(unit->getX() + unit->getWidth() > closeX && unit->getIsVisible()) { // if find close unit
-                closeX = unit->getX() - unit->getWidth();
+            if(unit->getX() + unit->getWidth() >= closeX && unit->getIsVisible()) { // if find close unit
+                closeX = unit->getX() + unit->getWidth();
                 
                 closeUnit = unit;
             }
@@ -344,14 +344,14 @@ Unit* GamePlayer::getBestCloseUnit(int lineNo, int x, int width, int range)
         
     } else {
     
-        int closeX = x + (width + range + 1);
+        int closeX = x + (width + range);
         
         for(unitItr[i] = unitList[i].begin(); unitItr[i] != unitList[i].end(); unitItr[i]++)
         {
             Unit* unit = *unitItr[i];
             
-            if(unit->getX() - unit->getWidth() < closeX && unit->getIsVisible()) { // if find close unit
-                closeX = unit->getX() + unit->getWidth();
+            if(unit->getX() - unit->getWidth() <= closeX && unit->getIsVisible()) { // if find close unit
+                closeX = unit->getX() - unit->getWidth();
                 
                 closeUnit = unit;
             }
