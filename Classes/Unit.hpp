@@ -38,7 +38,7 @@ public:
     ~Unit() {}
     
     
-    void setHp(int _hp) { hp = _hp; }
+    void setHp(int _hp) { hp = _hp; if(hp < 0) hp = 0; hpBar->setScale(  (((double)hp) / staticUnit->getMaxHp()) * 0.5 , 0.5 );}
     int getHp() { return hp; }
     void setLineNo(int _lineNo) { lineNo = _lineNo; objectLayer->setPosition(Vec2(x, DISPLAY_HEIGHT - (_lineNo * 100))); }
     int getLineNo() { return lineNo; }

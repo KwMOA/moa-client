@@ -226,6 +226,12 @@
 		6F3B25021DD61F3100590E5D /* upgrade.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F3B24F31DD61F3100590E5D /* upgrade.png */; };
 		6F409CB11DC884A0009EED44 /* TaskManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F409CB01DC884A0009EED44 /* TaskManager.cpp */; };
 		6F409CB41DC8D706009EED44 /* BaseLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F409CB21DC8D706009EED44 /* BaseLayer.cpp */; };
+		6F7156C71DD843DE00A1A1FF /* hp_bar_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F7156C51DD843DE00A1A1FF /* hp_bar_bg.png */; };
+		6F7156C81DD843DE00A1A1FF /* hp_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F7156C61DD843DE00A1A1FF /* hp_bar.png */; };
+		6F7B1BF91DD74F44007E7898 /* ControlLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B1BF11DD74F44007E7898 /* ControlLayer.cpp */; };
+		6F7B1BFA1DD74F44007E7898 /* CustomButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B1BF31DD74F44007E7898 /* CustomButton.cpp */; };
+		6F7B1BFB1DD74F44007E7898 /* LinkedList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B1BF51DD74F44007E7898 /* LinkedList.cpp */; };
+		6F7B1BFC1DD74F44007E7898 /* ObjectInfos.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6F7B1BF71DD74F44007E7898 /* ObjectInfos.cpp */; };
 		6FDF074C1DC99C160096694D /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF074A1DC99C160096694D /* GameScene.cpp */; };
 		6FDF07511DCB10D60096694D /* LoginLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF074F1DCB10D60096694D /* LoginLayer.cpp */; };
 		6FDF07541DCB1E400096694D /* create_account_btn_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FDF07521DCB1E400096694D /* create_account_btn_01.png */; };
@@ -605,6 +611,16 @@
 		6F409CB01DC884A0009EED44 /* TaskManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TaskManager.cpp; sourceTree = "<group>"; };
 		6F409CB21DC8D706009EED44 /* BaseLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseLayer.cpp; sourceTree = "<group>"; };
 		6F409CB31DC8D706009EED44 /* BaseLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseLayer.h; sourceTree = "<group>"; };
+		6F7156C51DD843DE00A1A1FF /* hp_bar_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hp_bar_bg.png; sourceTree = "<group>"; };
+		6F7156C61DD843DE00A1A1FF /* hp_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hp_bar.png; sourceTree = "<group>"; };
+		6F7B1BF11DD74F44007E7898 /* ControlLayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ControlLayer.cpp; sourceTree = "<group>"; };
+		6F7B1BF21DD74F44007E7898 /* ControlLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlLayer.h; sourceTree = "<group>"; };
+		6F7B1BF31DD74F44007E7898 /* CustomButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomButton.cpp; sourceTree = "<group>"; };
+		6F7B1BF41DD74F44007E7898 /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
+		6F7B1BF51DD74F44007E7898 /* LinkedList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LinkedList.cpp; sourceTree = "<group>"; };
+		6F7B1BF61DD74F44007E7898 /* LinkedList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinkedList.h; sourceTree = "<group>"; };
+		6F7B1BF71DD74F44007E7898 /* ObjectInfos.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectInfos.cpp; sourceTree = "<group>"; };
+		6F7B1BF81DD74F44007E7898 /* ObjectInfos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectInfos.h; sourceTree = "<group>"; };
 		6FDF074A1DC99C160096694D /* GameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScene.cpp; sourceTree = "<group>"; };
 		6FDF074B1DC99C160096694D /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		6FDF074E1DC99E090096694D /* GameWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameWorld.h; sourceTree = "<group>"; };
@@ -754,6 +770,8 @@
 		46880B7519C43A67006E1F66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6F7156C51DD843DE00A1A1FF /* hp_bar_bg.png */,
+				6F7156C61DD843DE00A1A1FF /* hp_bar.png */,
 				6F3B24E51DD61F3100590E5D /* bg_bottom.png */,
 				6F3B24E61DD61F3100590E5D /* bg_gameworld.png */,
 				6F3B24E71DD61F3100590E5D /* bg_list.png */,
@@ -1146,6 +1164,14 @@
 		6F299A6D1DC6CC6300F73692 /* Layer */ = {
 			isa = PBXGroup;
 			children = (
+				6F7B1BF11DD74F44007E7898 /* ControlLayer.cpp */,
+				6F7B1BF21DD74F44007E7898 /* ControlLayer.h */,
+				6F7B1BF31DD74F44007E7898 /* CustomButton.cpp */,
+				6F7B1BF41DD74F44007E7898 /* CustomButton.h */,
+				6F7B1BF51DD74F44007E7898 /* LinkedList.cpp */,
+				6F7B1BF61DD74F44007E7898 /* LinkedList.h */,
+				6F7B1BF71DD74F44007E7898 /* ObjectInfos.cpp */,
+				6F7B1BF81DD74F44007E7898 /* ObjectInfos.h */,
 				6F3B24E11DD618DA00590E5D /* Controller.cpp */,
 				6F3B24E21DD618DA00590E5D /* Controller.h */,
 				6F151A521DCB4B4D00D3BDF2 /* LobbyRankGameLayer.cpp */,
@@ -1264,6 +1290,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
+				TargetAttributes = {
+					1D6058900D05DD3D006BFB54 = {
+						DevelopmentTeam = FJVLKT38YU;
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "moaClient" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1348,6 +1379,7 @@
 				5087E78317EB970100C73F5D /* Icon-152.png in Resources */,
 				6F299AD11DC6ECBB00F73692 /* rank_game_btn_01.png in Resources */,
 				6FDF07551DCB1E400096694D /* create_account_cancel_btn_01.png in Resources */,
+				6F7156C71DD843DE00A1A1FF /* hp_bar_bg.png in Resources */,
 				6F299AB11DC6ECBB00F73692 /* china_btn.png in Resources */,
 				6F299AD91DC6ECBB00F73692 /* unit in Resources */,
 				6F299AC51DC6ECBB00F73692 /* menu_clan_btn_02.png in Resources */,
@@ -1404,6 +1436,7 @@
 				50EF62A217ECD613001EB2F8 /* Icon-29.png in Resources */,
 				50EF629617ECD46A001EB2F8 /* Icon-40.png in Resources */,
 				5087E78217EB970100C73F5D /* Icon-144.png in Resources */,
+				6F7156C81DD843DE00A1A1FF /* hp_bar.png in Resources */,
 				6F299AD21DC6ECBB00F73692 /* res in Resources */,
 				6F3B24FE1DD61F3100590E5D /* star.png in Resources */,
 				3EACC98F19EE6D4300EB3C5E /* res in Resources */,
@@ -1462,6 +1495,7 @@
 				6FDF07511DCB10D60096694D /* LoginLayer.cpp in Sources */,
 				6F299A5F1DC6CBF400F73692 /* LobbyGameLayer.cpp in Sources */,
 				6F299A581DC6CBF400F73692 /* CreateAccountLayer.cpp in Sources */,
+				6F7B1BF91DD74F44007E7898 /* ControlLayer.cpp in Sources */,
 				6F2999E61DC60C6C00F73692 /* Building.cpp in Sources */,
 				6F2999D41DC60C6C00F73692 /* Act.cpp in Sources */,
 				6F409CB11DC884A0009EED44 /* TaskManager.cpp in Sources */,
@@ -1497,6 +1531,7 @@
 				6F299A611DC6CBF400F73692 /* LobbyScene.cpp in Sources */,
 				6F299A601DC6CBF400F73692 /* LobbyRankingLayer.cpp in Sources */,
 				6F299A131DC60C6C00F73692 /* Upgrade_22.cpp in Sources */,
+				6F7B1BFB1DD74F44007E7898 /* LinkedList.cpp in Sources */,
 				6F2999ED1DC60C6C00F73692 /* IProcessBuilding_1.cpp in Sources */,
 				6F2999D91DC60C6C00F73692 /* BaseObject.cpp in Sources */,
 				6F299A621DC6CBF400F73692 /* LoginScene.cpp in Sources */,
@@ -1510,6 +1545,7 @@
 				6F299A711DC6CF7C00F73692 /* GameClient.cpp in Sources */,
 				6F299A011DC60C6C00F73692 /* Upgrade_4.cpp in Sources */,
 				6F299A591DC6CBF400F73692 /* CustomPopUp.cpp in Sources */,
+				6F7B1BFC1DD74F44007E7898 /* ObjectInfos.cpp in Sources */,
 				6F299A6C1DC6CBF400F73692 /* UserListLayer.cpp in Sources */,
 				6F299A0E1DC60C6C00F73692 /* Upgrade_17.cpp in Sources */,
 				6F299A101DC60C6C00F73692 /* Upgrade_19.cpp in Sources */,
@@ -1523,6 +1559,7 @@
 				6F2999D51DC60C6C00F73692 /* ActAttack.cpp in Sources */,
 				6F299A001DC60C6C00F73692 /* Upgrade_3.cpp in Sources */,
 				6F2999D81DC60C6C00F73692 /* AutoTaskQueue.cpp in Sources */,
+				6F7B1BFA1DD74F44007E7898 /* CustomButton.cpp in Sources */,
 				6F2999DC1DC60C6C00F73692 /* Building_3.cpp in Sources */,
 				6F299A021DC60C6C00F73692 /* Upgrade_5.cpp in Sources */,
 				6F2999DB1DC60C6C00F73692 /* Building_2.cpp in Sources */,
@@ -1581,6 +1618,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				DEVELOPMENT_TEAM = FJVLKT38YU;
 				ENABLE_BITCODE = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
@@ -1614,6 +1652,7 @@
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COMPRESS_PNG_FILES = NO;
+				DEVELOPMENT_TEAM = FJVLKT38YU;
 				ENABLE_BITCODE = NO;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

@@ -74,6 +74,9 @@ public:
     
 public:
     Sprite*** images;
+    Sprite* hpBarBg;
+    Sprite* hpBar;
+    
     
     Layer* objectLayer;
 };

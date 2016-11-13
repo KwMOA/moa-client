@@ -17,7 +17,7 @@ BaseObject::BaseObject(GamePlayer* _gamePlayer, int _objectType)
     objectType = _objectType;
     
     objectLayer = Layer::create();
-    objectLayer->setAnchorPoint(Vec2(0.5, 0));
-    objectLayer->setAnchorPoint(Vec2(0, 0));
+//    objectLayer->setAnchorPoint(Vec2(0.5, 0));
+//    objectLayer->setAnchorPoint(Vec2(0, 0));
 //    gamePlayer->getGameWorld()->addChild(objectLayer);
 }

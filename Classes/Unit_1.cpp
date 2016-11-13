@@ -77,6 +77,22 @@ Unit_1::Unit_1(GamePlayer* _gamePlayer) : Unit(_gamePlayer, OBJECT_TYPE_UNIT_1)
     
     objectLayer->addChild(images[0][0], 0, TAG_IMAGE_OBJECT);
     
+    
+    //hp bar
+    hpBarBg = Sprite::create("hp_bar_bg.png");
+    hpBarBg->setPosition(Vec2(0, -10));
+    hpBarBg->setAnchorPoint(Vec2(0.5,0));
+
+    hpBarBg->setScale(0.5, 0.5);
+    objectLayer->addChild(hpBarBg);
+    
+    hpBar = Sprite::create("hp_bar.png");
+    hpBar->setPosition(Vec2(-(hpBarBg->getContentSize().width / 4), -10));
+    hpBar->setAnchorPoint(Vec2(0,0));
+    hpBar->setScale(0.5, 0.5);
+    objectLayer->addChild(hpBar);
+    
+    
     ActRun* act = new ActRun(this);
     actList.push_back(act);
 }
