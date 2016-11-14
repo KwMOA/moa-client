@@ -17,7 +17,7 @@ class Upgrade_13 : public Upgrade
 public:
     Upgrade_13(Building* building);
     void upgradeComplete();
-    void update(long dt);
+    void update(int updateCount);
 };
 
 #endif /* Upgrade_13_h */

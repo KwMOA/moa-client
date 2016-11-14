@@ -21,7 +21,7 @@ public:
     ~Building_1() {};
     
     void click();
-    void update(long dt);
+    void update(int updateCount);
     void updateImage(Layer* layer);
     
 };

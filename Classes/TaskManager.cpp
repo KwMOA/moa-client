@@ -309,8 +309,19 @@ void TaskManager::carryOutMessages(){
     if(!isCommunicate()){
         //통신이 두절
         LogMgr->Log("통신 두절");
-        return ;
+        
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+        MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
+        return;
+#endif
+        
+        Director::getInstance()->end();
+        
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        exit(0);
+#endif
     }
+    
     //현재 처리하는 패킷이 통신하는 패킷 번호보다 3보다 작거나 같을 때까지 모두 처리한다.
     while(myTask.front().packetNo < myTaskPacketNo - 2)
     {

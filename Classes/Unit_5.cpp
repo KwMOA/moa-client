@@ -18,7 +18,7 @@ void Unit_5::click()
     
 }
 
-void Unit_5::update(long dt)
+void Unit_5::update(int updateCount)
 {
     
 }

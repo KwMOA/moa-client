@@ -26,7 +26,7 @@ void Upgrade_16::upgradeComplete()
 }
 
 
-void Upgrade_16::update(long dt)
+void Upgrade_16::update(int updateCount)
 {
     upgrading(40);
 }

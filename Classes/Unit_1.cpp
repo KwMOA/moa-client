@@ -18,9 +18,9 @@ void Unit_1::click()
     
 }
 
-void Unit_1::update(long dt)
+void Unit_1::update(int updateCount)
 {
-    Unit::update(dt);
+    Unit::update(updateCount);
 }
 
 void Unit_1::updateImage(Layer *layer)

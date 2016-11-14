@@ -31,9 +31,9 @@ void Building_9::click()
     
 }
 
-void Building_9::update(long dt)
+void Building_9::update(int updateCount)
 {
-    Building::update(dt);
+    Building::update(updateCount);
     
     if(state == OBJECT_STATE_IDLE) { // if building is idle
         

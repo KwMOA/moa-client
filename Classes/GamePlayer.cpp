@@ -279,7 +279,7 @@ StaticBuilding* GamePlayer::getStaticBuildingByBuildingType(int buildingType)
 
 
 
-void GamePlayer::update(long dt)
+void GamePlayer::update(int updateCount)
 {
     
     // update buildings
@@ -287,7 +287,7 @@ void GamePlayer::update(long dt)
     {
         BaseObject* baseObject = (BaseObject*)*buildingItr;
         
-        baseObject->update(dt);
+        baseObject->update(updateCount);
     }
     
     
@@ -296,7 +296,7 @@ void GamePlayer::update(long dt)
     {
         Building* building = (Building*)*destroyBuildingItr;
         
-        building->update(dt);
+        building->update(updateCount);
         
         if(building->getState() == OBJECT_STATE_DESTROY) {
             destroyBuildingItr = destroyBuildingList.erase(destroyBuildingItr);
@@ -316,7 +316,7 @@ void GamePlayer::update(long dt)
         {
             Unit* unit = *unitItr[i];
             
-            unit->update(dt);
+            unit->update(updateCount);
         }
     }
 }
@@ -361,31 +361,55 @@ Unit* GamePlayer::getBestCloseUnit(Unit* otherUnit)
     
     if(playerIndex == 0) {
      
-        int closeX = otherUnit->getX() - (otherUnit->getWidth() + otherUnit->getAtkRange());
+        int closeX = otherUnit->getX() - (otherUnit->getWidth() + otherUnit->getAtkRange() + 1); // 1 is max attack range + 1 to find max attack unit
         
         for(unitItr[i] = unitList[i].begin(); unitItr[i] != unitList[i].end(); unitItr[i]++)
         {
             Unit* unit = *unitItr[i];
             
             if(otherUnit->isPossibleToAttack(unit)) { // if find close unit
-                closeX = unit->getX() + unit->getWidth();
                 
-                closeUnit = unit;
+                int x;
+                
+                if(unit->getUpdateCount() != otherUnit->getUpdateCount()) { // if otherUnit is already update
+                    x = unit->getPX();
+                } else {
+                    x = unit->getX();
+                }
+                
+                if(closeX < x + unit->getWidth()) // check that unit is best close
+                {
+                    closeX = x + unit->getWidth();
+                
+                    closeUnit = unit;
+                }
             }
         }
         
     } else {
     
-        int closeX = otherUnit->getX() + (otherUnit->getWidth() + otherUnit->getAtkRange());
+        int closeX = otherUnit->getX() + (otherUnit->getWidth() + otherUnit->getAtkRange() + 1); // 1 is max attack range + 1 to find max attack unit
         
         for(unitItr[i] = unitList[i].begin(); unitItr[i] != unitList[i].end(); unitItr[i]++)
         {
             Unit* unit = *unitItr[i];
             
             if(otherUnit->isPossibleToAttack(unit)) { // if find close unit
-                closeX = unit->getX() - unit->getWidth();
                 
-                closeUnit = unit;
+                int x;
+                
+                if(unit->getUpdateCount() != otherUnit->getUpdateCount()) { // if otherUnit is already update
+                    x = unit->getPX();
+                } else {
+                    x = unit->getX();
+                }
+                
+                if(closeX > x - unit->getWidth()) // check that unit is best close
+                {
+                    closeX = x - unit->getWidth();
+                    
+                    closeUnit = unit;
+                }
             }
         }
         

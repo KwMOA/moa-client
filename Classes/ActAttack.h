@@ -28,7 +28,7 @@ private:
 public:
     ActAttack(Unit* _unit);
     
-    void update(long dt);
+    void update(int updateCount);
     
     ~ActAttack() {}
 

@@ -18,7 +18,6 @@
 GameWorld::GameWorld(GameManager* _gameManager)
 {
     gameManager = _gameManager;
-
     
     gameMap = Layer::create();
 
@@ -35,15 +34,18 @@ GameWorld::GameWorld(GameManager* _gameManager)
         gamePlayers[0] = new GamePlayer(this, 0);
         gamePlayers[1] = new GamePlayer(this, 1);
     }
-    
 }
 
-void GameWorld::update(long dt)
-{
+void GameWorld::update(int updateCount)
+{    
     //buildings and units updates
-    gameManager->getGameWorld()->getGamePlayer(0)->update(dt);
-    ((AIPlayer*)gameManager->getGameWorld()->getGamePlayer(1))->update(dt);
-    
+    if(gameManager->isAiMode()) {
+        gameManager->getGameWorld()->getGamePlayer(0)->update(updateCount);
+        ((AIPlayer*)gameManager->getGameWorld()->getGamePlayer(1))->update(updateCount);
+    } else {
+        gameManager->getGameWorld()->getGamePlayer(0)->update(updateCount);
+        gameManager->getGameWorld()->getGamePlayer(1)->update(updateCount);
+    }
     
     // check collusion
     gameManager->getGameWorld()->checkCollusion();

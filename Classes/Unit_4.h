@@ -17,7 +17,7 @@ public:
     Unit_4(GamePlayer* _gamePlayer);
     ~Unit_4() {};
     void click();
-    void update(long dt);
+    void update(int updateCount);
 };
 
 #endif /* Unit_4_h */

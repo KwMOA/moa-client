@@ -18,7 +18,7 @@ class ActRun : public Act
 public:
     ActRun(Unit* _unit);
     
-    void update(long dt);
+    void update(int updateCount);
     
     ~ActRun() {}
     

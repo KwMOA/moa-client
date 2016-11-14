@@ -24,7 +24,7 @@ ActAttack::ActAttack(Unit* _unit) : Act(_unit, ACT_TYPE_ATTACK)
 
 
 
-void ActAttack::update(long dt)
+void ActAttack::update(int updateCount)
 {
     actPercent++;
     
@@ -102,15 +102,29 @@ void ActAttack::update(long dt)
             
             otherUnit->setInfluenceList(influence);
             
-            unit->setTarget(nullptr);
-            otherUnit->removeTargetList(unit);
         }
         
     } else if(actPercent == atkSpeed + atkLoadSpeed) { // attack finish
         
-        flag = 1;
-        
-        return ;
+        if(unit->getTargaet() != nullptr) //if not dead targetUnit
+        {
+            actPercent = 0;
+        } else {
+            
+            Unit* otherUnit = unit->checkEnemyInRange();
+            
+            if(otherUnit == nullptr) { // not exist to possible attacking emeny
+                
+                flag = 1;
+                
+            } else {
+                
+                unit->setTarget(otherUnit);
+                otherUnit->setTargetList(unit);
+                
+                actPercent = 0;
+            }
+        }
     
     } else {
         

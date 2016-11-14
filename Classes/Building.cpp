@@ -106,7 +106,7 @@ Building::Building(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gameP
     objectLayer->addChild(images[0][0], 0, TAG_IMAGE_OBJECT);
 }
 
-void Building::update(long dt)
+void Building::update(int updateCount)
 {
     if(state == OBJECT_STATE_CREATING) { // if building is creating
         
@@ -158,7 +158,7 @@ void Building::update(long dt)
         
         if(currentUpgrade != nullptr) {
             
-            currentUpgrade->update(dt);
+            currentUpgrade->update(updateCount);
             
         } else {
             std::cout << "not exist currentUpgrade - " << objectNo <<std::endl;

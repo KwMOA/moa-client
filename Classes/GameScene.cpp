@@ -30,6 +30,8 @@ bool GameScene::init()
         return false;
     }
     
+    updateCount = 0;
+    
     if(PLAY_ALONE) {
         gameManager = new GameManager(this, true);
     } else {
@@ -75,7 +77,8 @@ void GameScene::menuCloseCallback(Ref* pSender)
 
 void GameScene::customUpdate(float dt)
 {
-    gameManager->getGameWorld()->update(dt);
+    updateCount++;
+    gameManager->getGameWorld()->update(updateCount);
 }
 
 void GameScene::networkUpdate(float dt)

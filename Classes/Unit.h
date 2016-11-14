@@ -33,12 +33,13 @@ protected:
     std::list<Unit*> targetList;
     
     int attackPercent;
+    int updateCount;
     
 public:
     Unit(GamePlayer* _gamePlayer, int _objectType);
     ~Unit() {}
     
-    
+    int getUpdateCount() { return updateCount; }
     void setHp(int _hp) { hp = _hp; if(hp < 0) hp = 0; hpBar->setScale(  (((double)hp) / staticUnit->getMaxHp()) * 0.5 , 0.5 );}
     int getHp() { return hp; }
     void setLineNo(int _lineNo) { lineNo = _lineNo; objectLayer->setPosition(Vec2(x, DISPLAY_HEIGHT - (_lineNo * 100))); }
@@ -47,7 +48,7 @@ public:
     
     static Unit* createUnit(GamePlayer* _gamePlayer, int _objectType);
     
-    void update(long dt);
+    void update(int updateCount);
     void updateImage(Layer* layer) {}
     
     

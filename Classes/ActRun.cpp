@@ -18,7 +18,7 @@ ActRun::ActRun(Unit* _unit) : Act(_unit, ACT_TYPE_RUN)
 
 
 
-void ActRun::update(long dt)
+void ActRun::update(int updateCount)
 {
     Unit* otherUnit = unit->checkEnemyInRange();
     
@@ -33,7 +33,6 @@ void ActRun::update(long dt)
             unit->setX(unit->getX() - unit->getSpeed());
         
         //change Image
-        
         runCount++;
         if(runCount % 12 == 0) {
             unit->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
@@ -55,6 +54,7 @@ void ActRun::update(long dt)
             unit->objectLayer->addChild(unit->images[1][5], 0, TAG_IMAGE_OBJECT);
         }
         
+        
     } else {
         
         unit->setTarget(otherUnit);
@@ -62,7 +62,7 @@ void ActRun::update(long dt)
         
         ActAttack* actAttack = new ActAttack(unit);
         unit->setActList(actAttack);
-//        actAttack->update(dt);
+//        actAttack->update(updateCount);
         
         unit->setState(OBJECT_STATE_ATTACK);
     }

@@ -22,6 +22,7 @@ public:
 
 	CREATE_FUNC(GameScene);
 
+    int updateCount;
     
 public:
     GameManager* getGameManager() { return gameManager; }

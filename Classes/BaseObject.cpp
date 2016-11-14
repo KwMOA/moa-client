@@ -21,3 +21,11 @@ BaseObject::BaseObject(GamePlayer* _gamePlayer, int _objectType)
 //    objectLayer->setAnchorPoint(Vec2(0, 0));
 //    gamePlayer->getGameWorld()->addChild(objectLayer);
 }
+
+void BaseObject::setX(int _x)
+{
+    px = x;
+    x = _x;
+    objectLayer->setPositionX(x);
+    objectLayer->setLocalZOrder(gamePlayer->sameXPlayerIndex(x));
+}

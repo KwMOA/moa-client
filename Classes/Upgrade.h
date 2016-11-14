@@ -26,7 +26,7 @@ protected:
 public:
     Upgrade(Building* building);
     virtual void upgradeComplete() = 0;
-    virtual void update(long dt) = 0;
+    virtual void update(int updateCount) = 0;
     void updateImage();
     
     void upgrading(int upgradeTime);

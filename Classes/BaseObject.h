@@ -17,7 +17,7 @@ USING_NS_CC;
 
 enum TAG_IMAGE
 {
-    TAG_IMAGE_OBJECT,
+    TAG_IMAGE_OBJECT = 1,
     TAG_IMAGE_HP,
     TAG_IMAGE_UPGRADE_COUNT,
     TAG_IMAGE_COUNT,
@@ -39,7 +39,7 @@ public:
     BaseObject(GamePlayer* _gamePlayer, int _objectType);
     
     virtual void click() = 0;
-    virtual void update(long dt) = 0;
+    virtual void update(int updateCount) = 0;
     virtual void updateImage(Layer* layer) = 0;
     
     virtual ~BaseObject() {};
@@ -58,7 +58,7 @@ public:
     void setGamePlayer(GamePlayer* _gamePlayer) { gamePlayer = _gamePlayer; }
     
     int getX() { return x; }
-    void setX(int _x) { x = _x; objectLayer->setPosition(Vec2(x, objectLayer->getPosition().y)); }
+    void setX(int _x);
     
     int getPX() { return px; }
     void setPX(int _px) { px = _px; }

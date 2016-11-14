@@ -32,7 +32,7 @@ public:
     virtual ~Act() {};
 
     
-    virtual void update(long dt) = 0;
+    virtual void update(int updateCount) = 0;
 };
 
 #endif /* Act_h */

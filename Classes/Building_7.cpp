@@ -25,8 +25,8 @@ void Building_7::click()
     
 }
 
-void Building_7::update(long dt)
+void Building_7::update(int updateCount)
 {
-    Building::update(dt);
+    Building::update(updateCount);
     
 }

@@ -26,9 +26,9 @@ void Building_2::click()
     
 }
 
-void Building_2::update(long dt)
+void Building_2::update(int updateCount)
 {
-    Building::update(dt);
+    Building::update(updateCount);
     
     if(state != OBJECT_STATE_CREATING && state != OBJECT_STATE_DESTROYING) { // if building can create gold
         

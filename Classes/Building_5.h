@@ -19,7 +19,7 @@ public:
     ~Building_5() {};
     
     void click();
-    void update(long dt);
+    void update(int updateCount);
 };
 
 #endif /* Building_5_h */

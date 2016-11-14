@@ -30,11 +30,9 @@ private:
 public:
     GameWorld(GameManager* _gameManager);
     
-    void update(long dt);
+    void update(int updateCount);
     
     GamePlayer* getGamePlayer(int index) { return gamePlayers[index]; }
-    
-    
     
     void createBuilding(int userIndex, int objectType);
     void cancelCreateBuilding(int userIndex, int objectNo);

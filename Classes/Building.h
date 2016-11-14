@@ -39,7 +39,7 @@ public:
     void startUpgrade(int upgradeType);
     void cancelUpgrade(int upgradeType);
     
-    void update(long dt);
+    void update(int updateCount);
     void updateImage(Layer* layer) {}
 
     

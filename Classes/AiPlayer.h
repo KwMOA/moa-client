@@ -20,7 +20,7 @@ protected:
 public:
     AIPlayer(GameWorld* _gameWorld, int _aiType, int _playerIndex);
     
-    void update(long dt);
+    void update(int updateCount);
 };
 
 #endif /* __AI_PLAYER_H__ */

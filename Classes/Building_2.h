@@ -20,7 +20,7 @@ public:
     Building_2(GamePlayer* _gamePlayer);
     ~Building_2() {};
     void click();
-    void update(long dt);
+    void update(int updateCount);
 };
 
 #endif /* Building_2_h */

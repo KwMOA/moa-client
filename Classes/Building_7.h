@@ -21,7 +21,7 @@ public:
     ~Building_7() {};
     
     void click();
-    void update(long dt);
+    void update(int updateCount);
 };
 
 #endif /* Building_7_h */

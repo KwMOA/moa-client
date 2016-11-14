@@ -932,11 +932,6 @@
 				6F7156D31DD93E3B00A1A1FF /* GameData */,
 				6F7156D01DD93CD800A1A1FF /* Controller */,
 				6FF7DAFF1DD06FBF008B43F7 /* Ai */,
-				6F6B0C781DDA3E050005DF89 /* JsonReader.h */,
-				6F2999801DC60C6B00F73692 /* JsonReader.cpp */,
-				6F2999861DC60C6B00F73692 /* object_Info.json */,
-				6F2999701DC60C6B00F73692 /* GameData.h */,
-				6F2999871DC60C6B00F73692 /* ObjectInfo.h */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -1123,6 +1118,11 @@
 		6F299A261DC6CBE400F73692 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				6F6B0C781DDA3E050005DF89 /* JsonReader.h */,
+				6F2999801DC60C6B00F73692 /* JsonReader.cpp */,
+				6F2999861DC60C6B00F73692 /* object_Info.json */,
+				6F2999701DC60C6B00F73692 /* GameData.h */,
+				6F2999871DC60C6B00F73692 /* ObjectInfo.h */,
 				6F299A6F1DC6CF7C00F73692 /* GameClient.cpp */,
 				6F299A701DC6CF7C00F73692 /* GameClient.h */,
 				6F299A431DC6CBF400F73692 /* LogManager.cpp */,

@@ -33,11 +33,10 @@ Unit::Unit(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gamePlayer, _
     x = gamePlayer->sameXPlayerIndex(150);
     
     px = x;
-    
-    
+        
     hp = staticUnit->getMaxHp();
     
-    
+    updateCount = 0;
     
     
     //set image
@@ -142,11 +141,13 @@ Unit* Unit::createUnit(GamePlayer* _gamePlayer, int _objectType)
     }
 }
 
-void Unit::update(long dt)
+void Unit::update(int _updateCount)
 {
+    px = x;
+    
     Act* act = actList.front();
     
-    act->update(dt);
+    act->update(updateCount);
     
     int flag = act->getFlag();
     
@@ -155,6 +156,8 @@ void Unit::update(long dt)
         
         delete act;
     }
+    
+    updateCount = _updateCount;
 }
 
 
@@ -197,12 +200,17 @@ void Unit::applyInfluence()
     if(hp <= 0) {
         state = OBJECT_STATE_DEAD;
         
+        //remove targeted and targeting
+        
         std::list<Unit*>::iterator itr;
         
         for(itr = targetList.begin(); itr != targetList.end(); itr++) {
             Unit* unit = *itr;
-            unit->removeTargetList(this);
+            unit->setTarget(nullptr);
         }
+        
+        target = nullptr;
+        
         //메모리 해제
         
         
@@ -258,12 +266,20 @@ void Unit::getDirectionByIndex(char *direction)
 
 bool Unit::isPossibleToAttack(Unit* otherUnit)
 {
+    int tempX;
+    
+    if(otherUnit->getUpdateCount() != updateCount) { // otherUnit is already update
+        tempX = otherUnit->getPX();
+    } else {
+        tempX = otherUnit->getX();
+    }
+    
     if(otherUnit->getIsVisible() == false) {
         return false;
     } else if(getGamePlayer()->getPlayerIndex() == 0) {
-        return ((otherUnit->getX() - otherUnit->getWidth()) - (getX() + getWidth()) < getAtkRange());
+        return ((tempX - otherUnit->getWidth()) - (getX() + getWidth()) < getAtkRange());
     } else {
-        return ((getX() - getWidth()) - (otherUnit->getX() + otherUnit->getWidth()) < getAtkRange());
+        return ((getX() - getWidth()) - (tempX + otherUnit->getWidth()) < getAtkRange());
     }
 }
 

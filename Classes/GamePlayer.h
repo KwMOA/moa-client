@@ -82,7 +82,7 @@ public:
     StaticUnit* getStaticUnitByUnitType(int unitType);
     StaticBuilding* getStaticBuildingByBuildingType(int buildingType);
     
-    void update(long dt);
+    void update(int updateCount);
     void updateImage(Layer* layer);
     void applyInfluenceUnit();
     
