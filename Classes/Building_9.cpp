@@ -6,15 +6,15 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#include "Building_9.hpp"
+#include "Building_9.h"
 #include "GameDefines.h"
-#include "GamePlayer.hpp"
-#include "Upgrade_9.hpp"
-#include "Upgrade_10.hpp"
-#include "Upgrade_11.hpp"
-#include "Upgrade_12.hpp"
-#include "Upgrade_13.hpp"
-#include "Upgrade_14.hpp"
+#include "GamePlayer.h"
+#include "Upgrade_9.h"
+#include "Upgrade_10.h"
+#include "Upgrade_11.h"
+#include "Upgrade_12.h"
+#include "Upgrade_13.h"
+#include "Upgrade_14.h"
 
 Building_9::Building_9(GamePlayer* _gamePlayer) : Building(_gamePlayer, OBJECT_TYPE_BUILDING_9)
 {

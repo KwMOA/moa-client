@@ -1,13 +1,11 @@
 #include "AppDelegate.h"
 #include "HelloWorldScene.h"
 #include "GameWorld.h"
-#include "DefineHeader.h"
 #include "GameClient.h"
 #include "NetworkManager.h"
 #include "LoginScene.h"
 #include "LobbyScene.h"
 #include "BasicDefines.h"
-#include "DefineHeader.h"
 
 
 USING_NS_CC;
@@ -86,7 +84,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 #ifndef NOT_CONNECT_WITH_SERVER
 	GameClient::GetInstance().Initialize();
 
-	//NetworkManager::initInstance(IP_ADDRESS, PORT);
+	NetworkManager::initInstance(IP_ADDRESS, PORT);
 
 	GameClient::GetInstance().currentScene = NO_SCENE_NOW;
 

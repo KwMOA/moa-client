@@ -6,11 +6,11 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#include "ActAttack.hpp"
-#include "Unit.hpp"
-#include "GamePlayer.hpp"
-#include "ActRun.hpp"
-#include "AttackInfluence.hpp"
+#include "ActAttack.h"
+#include "Unit.h"
+#include "GamePlayer.h"
+#include "ActRun.h"
+#include "AttackInfluence.h"
 
 ActAttack::ActAttack(Unit* _unit) : Act(_unit, ACT_TYPE_ATTACK)
 {
@@ -57,7 +57,7 @@ void ActAttack::update(long dt)
         
         if(otherUnit == nullptr) {
             
-            otherUnit = unit->getGamePlayer()->checkEnemyInRange(unit->getLineNo(), unit->getX(), unit->getWidth(), unit->getAtkRange());
+            otherUnit = unit->checkEnemyInRange();
         
             if(otherUnit == nullptr) {
                 
@@ -72,19 +72,12 @@ void ActAttack::update(long dt)
             
         } else {
             
-            bool isFarToAttack = false;
-            if(unit->getGamePlayer()->getPlayerIndex() == 0) {
-                isFarToAttack = ((otherUnit->getX() - otherUnit->getWidth()) - (unit->getX() + unit->getWidth()) > unit->getAtkRange());
-            } else {
-                isFarToAttack = ((unit->getX() - unit->getWidth()) - (otherUnit->getX() + otherUnit->getWidth()) > unit->getAtkRange());
-            }
-            
-            if(isFarToAttack) { // other unit is so far
+            if(unit->isPossibleToAttack(otherUnit) == false) { // other unit is so far
                 
                 unit->setTarget(nullptr);
                 otherUnit->removeTargetList(unit);
                 
-                otherUnit = unit->getGamePlayer()->checkEnemyInRange(unit->getLineNo(), unit->getX(), unit->getWidth(), unit->getAtkRange());
+                otherUnit = unit->checkEnemyInRange();
                 
                 if(otherUnit == nullptr) {
                     

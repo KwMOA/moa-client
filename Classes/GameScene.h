@@ -8,7 +8,6 @@ class GameManager;
 class GameScene : public BaseLayer
 {
 private:
-    
     GameManager* gameManager;
     
 public:
@@ -20,11 +19,6 @@ public:
 
     void customUpdate(float dt);
     void networkUpdate(float dt);
-    
-//    virtual bool onTouchBegan(Touch* touch, Event* _event);
-//    virtual void onTouchMoved(Touch* touch, Event* _event);
-//    virtual void onTouchCancelled(Touch* touch, Event* _event);
-//    virtual void onTouchEnded(Touch* touch, Event *_event);
 
 	CREATE_FUNC(GameScene);
 

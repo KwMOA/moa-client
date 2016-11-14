@@ -1,5 +1,4 @@
 #include "LoginLayer.h"
-//#include "BackGroundLayer.h"
 #include "GameDefines.h"
 #include "ClientFrontPacket.h"
 #include "GameClient.h"

@@ -6,9 +6,9 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#include "Act.hpp"
+#include "Act.h"
 
-#include "Unit.hpp"
+#include "Unit.h"
 
 Act::Act(Unit* _unit, int _actType)
 {

@@ -6,4 +6,4 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#include "Influence.hpp"
+#include "Influence.h"

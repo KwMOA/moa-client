@@ -6,9 +6,9 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#include "Building_5.hpp"
+#include "Building_5.h"
 #include "GameDefines.h"
-#include "GamePlayer.hpp"
+#include "GamePlayer.h"
 
 Building_5::Building_5(GamePlayer* _gamePlayer) : Building(_gamePlayer, OBJECT_TYPE_BUILDING_5)
 {

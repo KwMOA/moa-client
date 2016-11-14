@@ -6,8 +6,8 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#include "AttackInfluence.hpp"
-#include "Unit.hpp"
+#include "AttackInfluence.h"
+#include "Unit.h"
 
 void AttackInfluence::applyInfluence(Unit* unit)
 {

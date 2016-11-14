@@ -2,11 +2,10 @@
 
 #include "GameDefines.h"
 
-#include "GameManager.hpp"
+#include "GameManager.h"
 #include "NetworkManager.h"
 #include "TaskManager.h"
-#include "GameLogic.h"
-#include "GameWorldImpl.hpp"
+#include "GameWorld.h"
 #include "ControlLayer.h"
 #include <ui/CocosGUI.h>
 
@@ -31,17 +30,17 @@ bool GameScene::init()
         return false;
     }
     
-    gameManager = new GameManager(this, true);
+    if(PLAY_ALONE) {
+        gameManager = new GameManager(this, true);
+    } else {
+        gameManager = new GameManager(this, false);
+    }
+    
     
     if(gameManager->init() == false) {
         return false;
     }
 
-
-
-
-
-    
     auto background = Sprite::create("game_back_ground_01.png");
     background->setAnchorPoint(Vec2(0, 0));
     background->setPosition(Vec2(0, 0));
@@ -51,22 +50,7 @@ bool GameScene::init()
 	ControlLayer* controlLayer = ControlLayer::create();
 	controlLayer->setGameWorld(this);
 	this->addChild(controlLayer);
-    
-//	auto loginBtn = MenuItemImage::create(
-//		"login_btn_01.png",
-//		"login_btn_01.png",
-//		CC_CALLBACK_1(LoginScene::clickLoginBtn, this));
-//
-//	loginBtn->setPosition(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 4);
-//    
-//	menu = Menu::create(loginBtn, NULL);
-//	menu->setPosition(Vec2::ZERO);
-//	this->addChild(menu, 100, TAG_MENU);
-//    
-//    createAccountLayer = CreateAccountLayer::create();
-//    createAccountLayer->retain();
-//    
-//    GameClient::GetInstance().currentScene = LOGIN_SCENE_NOW;
+
     
     schedule(schedule_selector(GameScene::customUpdate), 0.125f);
     schedule(schedule_selector(GameScene::networkUpdate), 0.25f);
@@ -91,7 +75,7 @@ void GameScene::menuCloseCallback(Ref* pSender)
 
 void GameScene::customUpdate(float dt)
 {
-    ((GameWorldImpl*)gameManager->getGameWorld())->update(dt);
+    gameManager->getGameWorld()->update(dt);
 }
 
 void GameScene::networkUpdate(float dt)

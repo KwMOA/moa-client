@@ -1,5 +1,5 @@
 //
-//  GameWorldImpl.hpp
+//  GameWorld.h
 //  moaClient
 //
 //  Created by kimyongchan on 2016. 9. 26..
@@ -10,26 +10,43 @@
 #define __GAME_WORLD_H__
 
 #include <stdio.h>
+#include <cocos2d.h>
+
+USING_NS_CC;
 
 class GamePlayer;
-class GameLogic;
-class TaskManager;
+class TechChecker;
+class GameManager;
 class BaseObject;
 
 class GameWorld
 {
-public:
+private:
+    GamePlayer* gamePlayers[2];
     
-    virtual void createBuilding(int userIndex, int objectType) = 0;
-    virtual void cancelCreateBuilding(int userIndex, int objectNo) = 0;
-    virtual void upgradeBuilding(int userIndex, int objectNo, int upgradeType) = 0;
-    virtual void cancelUpgradeBuilding(int userIndex, int objectNo, int upgradeType) = 0;
-    virtual void createUnit(int userIndex, int objectNo, int objectType, int objectCount, int lineNo) = 0;
-    virtual void checkCollusion() = 0;
-    virtual void updateImage() = 0;
-    virtual GamePlayer* getGamePlayer(int index) = 0;
-    virtual void addChild(BaseObject* object) = 0;
-    virtual bool isFinished() = 0;
+    GameManager* gameManager;
+    Layer* gameMap;
+    
+public:
+    GameWorld(GameManager* _gameManager);
+    
+    void update(long dt);
+    
+    GamePlayer* getGamePlayer(int index) { return gamePlayers[index]; }
+    
+    
+    
+    void createBuilding(int userIndex, int objectType);
+    void cancelCreateBuilding(int userIndex, int objectNo);
+    void upgradeBuilding(int userIndex, int objectNo, int upgradeType);
+    void cancelUpgradeBuilding(int userIndex, int objectNo, int upgradeType);
+    void createUnit(int userIndex, int objectNo, int objectType, int objectCount, int lineNo);
+    void checkCollusion();
+    void updateImage();
+    void addChild(BaseObject* object);
+    void removeChild(BaseObject* object);
+    bool isFinished();
+    GameManager* getGameManager() { return gameManager; }
 };
 
 

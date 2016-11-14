@@ -6,9 +6,9 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#include "Building_1.hpp"
+#include "Building_1.h"
 #include "GameDefines.h"
-#include "Upgrade_1.hpp"
+#include "Upgrade_1.h"
 
 
 
@@ -16,61 +16,7 @@ Building_1::Building_1(GamePlayer* _gamePlayer) : Building(_gamePlayer, OBJECT_T
 {
     upgradeList->push_back(new Upgrade_1(this));
     
-    images = new Sprite**[4];
-    
-    char buf[128];
-
-    images[0] = new Sprite*[3];
-    for(int i = 0; i < 3; i++) {
-        
-        memset(buf, 0, 128);
-        sprintf(buf, "building/b_1_create_%d.png", i + 1);
-        
-        images[0][i] = Sprite::create(buf);
-        images[0][i]->retain();
-        
-        images[0][i]->setScale(128 / (double)1701, 128 / (double)1701);
-    }
-    
-    images[1] = new Sprite*[1];
-    for(int i = 0; i < 1; i++) {
-        memset(buf, 0, 128);
-        sprintf(buf, "building/b_1_idle_%d.png", i + 1);
-        
-        images[1][i] = Sprite::create(buf);
-        images[1][i]->retain();
-        
-        
-        
-        images[1][i]->setScale(128 / (double)1701, 128 / (double)1701);
-    }
-    
-    
-    images[2] = new Sprite*[2];
-    for(int i = 0; i < 2; i++) {
-        memset(buf, 0, 128);
-        sprintf(buf, "building/b_1_run_%d.png", i + 1);
-        
-        images[2][i] = Sprite::create(buf);
-        images[2][i]->retain();
-        
-        images[2][i]->setScale(128 / (double)1701, 128 / (double)1701);
-    }
-    
-    images[3] = new Sprite*[3];
-    for(int i = 0; i < 3; i++) {
-        memset(buf, 0, 128);
-        sprintf(buf, "building/b_1_destroy_%d.png", i + 1);
-        
-        images[3][i] = Sprite::create(buf);
-        images[3][i]->retain();
-        
-        images[3][i]->setScale(128 / (double)1701, 128 / (double)1701);
-    }
-    
-    objectLayer->setAnchorPoint(Vec2(0.5, 0));
-    objectLayer->setPosition(Vec2(60, DISPLAY_HEIGHT - 120));
-    objectLayer->addChild(images[0][0], 0, TAG_IMAGE_OBJECT);
+    objectLayer->setPositionY(DISPLAY_HEIGHT - 60);
 }
 
 void Building_1::click()

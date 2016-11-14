@@ -1,18 +1,16 @@
 
 #include "AiPlayer.h"
-#include "GameWorldImpl.hpp"
+#include "GameWorld.h"
 #include "TaskManager.h"
-#include "GameManager.hpp"
+#include "GameManager.h"
 #include "ClientInput.h"
 #include "GameDefines.h"
-#include "BaseObject.hpp"
-#include "CheckCreateAvailable.hpp"
+#include "BaseObject.h"
 
 AIPlayer::AIPlayer(GameWorld* _gameWorld, int _aiType, int _playerIndex) : GamePlayer(_gameWorld, _playerIndex)
 {
     aiType = _aiType;
     currentTick = 0;
-    checker = new CheckCreateAvailable(this);
 }
 
 
@@ -28,7 +26,7 @@ void AIPlayer::update(long dt)
         ci->objectNo = getBuildingByObjectType(OBJECT_TYPE_BUILDING_3)->getObjectNo();
         ci->objectCount = 1;
         ci->lineNo = 1;
-        ((GameWorldImpl*)getGameWorld())->getGameManager()->getTaskManager()->pushBackAITask(ci);
+        getGameWorld()->getGameManager()->getTaskManager()->pushBackAITask(ci);
     }
     if(currentTick == 120) {
         CreateUnitCI* ci = new CreateUnitCI();
@@ -36,6 +34,6 @@ void AIPlayer::update(long dt)
         ci->objectNo = getBuildingByObjectType(OBJECT_TYPE_BUILDING_3)->getObjectNo();
         ci->objectCount = 1;
         ci->lineNo = 1;
-        ((GameWorldImpl*)getGameWorld())->getGameManager()->getTaskManager()->pushBackAITask(ci);
+        getGameWorld()->getGameManager()->getTaskManager()->pushBackAITask(ci);
     }
 }

@@ -1,5 +1,5 @@
 //
-//  AiPlayer.hpp
+//  AiPlayer.h
 //  moaClient
 //
 //  Created by kimyongchan on 2016. 10. 7..
@@ -10,7 +10,7 @@
 #define __AI_PLAYER_H__
 
 #include <stdio.h>
-#include "GamePlayer.hpp"
+#include "GamePlayer.h"
 
 class AIPlayer :public GamePlayer
 {

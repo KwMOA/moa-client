@@ -3,7 +3,7 @@
 #include "GameDefines.h"
 #include "ClientFrontPacket.h"
 
-#include "DefineHeader.h"
+#include "BasicDefines.h"
 #include "GameClient.h"
 #include "NetworkManager.h"
 USING_NS_CC;
@@ -31,7 +31,7 @@ bool ResultScene::init()
 		"btn_makeroom_01.png",
 		CC_CALLBACK_1(ResultScene::clickLoginBtn, this));
 
-	loginBtn->setPosition(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3);
+	loginBtn->setPosition(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 3);
 
     auto closeItem = MenuItemImage::create(
                                            "CloseNormal.png",

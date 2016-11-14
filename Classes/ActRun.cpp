@@ -6,10 +6,10 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#include "ActRun.hpp"
-#include "Unit.hpp"
-#include "GamePlayer.hpp"
-#include "ActAttack.hpp"
+#include "ActRun.h"
+#include "Unit.h"
+#include "GamePlayer.h"
+#include "ActAttack.h"
 
 ActRun::ActRun(Unit* _unit) : Act(_unit, ACT_TYPE_RUN)
 {
@@ -20,7 +20,7 @@ ActRun::ActRun(Unit* _unit) : Act(_unit, ACT_TYPE_RUN)
 
 void ActRun::update(long dt)
 {
-    Unit* otherUnit = unit->getGamePlayer()->checkEnemyInRange(unit->getLineNo(), unit->getX(), unit->getWidth(), unit->getAtkRange());
+    Unit* otherUnit = unit->checkEnemyInRange();
     
     if(otherUnit == nullptr) {
 

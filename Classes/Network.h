@@ -2,7 +2,7 @@
 #ifndef __NETWORK_H__
 #define __NETWORK_H__
 
-#include "DefineHeader.h"
+#include "BasicDefines.h"
 
 #ifndef NOT_CONNECT_WITH_SERVER
 #include <stdint.h>

@@ -6,12 +6,12 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#include "Building_8.hpp"
+#include "Building_8.h"
 #include "GameDefines.h"
-#include "GamePlayer.hpp"
-#include "Upgrade_6.hpp"
-#include "Upgrade_7.hpp"
-#include "Upgrade_8.hpp"
+#include "GamePlayer.h"
+#include "Upgrade_6.h"
+#include "Upgrade_7.h"
+#include "Upgrade_8.h"
 
 
 Building_8::Building_8(GamePlayer* _gamePlayer) : Building(_gamePlayer, OBJECT_TYPE_BUILDING_8)

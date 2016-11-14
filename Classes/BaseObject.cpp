@@ -6,8 +6,8 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#include "BaseObject.hpp"
-#include "GamePlayer.hpp"
+#include "BaseObject.h"
+#include "GamePlayer.h"
 #include "GameWorld.h"
 #include "GameScene.h"
 

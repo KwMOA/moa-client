@@ -34,22 +34,18 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Building_11.cpp \
                    ../../Classes/Building_12.cpp \
                    ../../Classes/Building.cpp \
-                   ../../Classes/CheckAvailable.cpp \
-                   ../../Classes/CheckCreateAvailable.cpp \
+                   ../../Classes/TechChecker.cpp \
                    ../../Classes/ControlLayer.cpp \
-                   ../../Classes/Controller.cpp \
                    ../../Classes/CreateAccountLayer.cpp \
                    ../../Classes/CustomButton.cpp \
                    ../../Classes/CustomPopUp.cpp \
                    ../../Classes/GameClient.cpp \
-                   ../../Classes/GameLogicImpl.cpp \
                    ../../Classes/GameManager.cpp \
                    ../../Classes/GamePlayer.cpp \
                    ../../Classes/GameScene.cpp \
-                   ../../Classes/GameWorldImpl.cpp \
+                   ../../Classes/GameWorld.cpp \
                    ../../Classes/HelloWorldScene.cpp \
                    ../../Classes/Influence.cpp \
-                   ../../Classes/IProcessBuilding_1.cpp \
                    ../../Classes/JsonReader.cpp \
                    ../../Classes/LinkedList.cpp \
                    ../../Classes/LobbyAIGameLayer.cpp \
