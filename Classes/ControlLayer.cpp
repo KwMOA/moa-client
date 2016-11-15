@@ -5,13 +5,12 @@
 #include "LinkedList.h"
 #include "CustomButton.h"
 #include "ObjectInfos.h"
-#include "GameManager.hpp"
-#include "GameLogic.h"
-#include "GameWorldImpl.hpp"
-#include "GamePlayer.hpp"
+#include "GameManager.h"
+#include "GameWorld.h"
+#include "GamePlayer.h"
 #include "GameDefines.h"
 #include "ClientInput.h"
-#include "BaseObject.hpp"
+#include "BaseObject.h"
 #include "TaskManager.h"
 
 #include <string>
@@ -98,7 +97,7 @@ void ControlLayer::DetailUnitCallback(cocos2d::Ref * pSender, cocos2d::ui::Widge
 			if(diva->unitCount > 0){
 				CreateUnitCI* p3 = new CreateUnitCI();
 				p3->objectType = diva->objectType;
-				p3->objectNo = ((GameWorldImpl*)gameScene->getGameManager()->getGameWorld())->getGamePlayer(0)->getBuildingByObjectType(list.getClickedBuilding()+1)->getObjectNo();
+				p3->objectNo = gameScene->getGameManager()->getGameWorld()->getGamePlayer(0)->getBuildingByObjectType(list.getClickedBuilding()+1)->getObjectNo();
 				p3->objectCount = diva->unitCount;
 				p3->lineNo = 3;
 				gameScene->getGameManager()->getTaskManager()->pushBackMessage(p3);
@@ -112,7 +111,7 @@ void ControlLayer::DetailUnitCallback(cocos2d::Ref * pSender, cocos2d::ui::Widge
 			if (diva->unitCount > 0) {
 				CreateUnitCI* p3 = new CreateUnitCI();
 				p3->objectType = diva->objectType;
-				p3->objectNo = ((GameWorldImpl*)gameScene->getGameManager()->getGameWorld())->getGamePlayer(0)->getBuildingByObjectType(list.getClickedBuilding() + 1)->getObjectNo();
+				p3->objectNo = gameScene->getGameManager()->getGameWorld()->getGamePlayer(0)->getBuildingByObjectType(list.getClickedBuilding() + 1)->getObjectNo();
 				p3->objectCount = diva->unitCount;
 				p3->lineNo = 2;
 				gameScene->getGameManager()->getTaskManager()->pushBackMessage(p3);
@@ -129,7 +128,7 @@ void ControlLayer::DetailUnitCallback(cocos2d::Ref * pSender, cocos2d::ui::Widge
 			if (diva->unitCount > 0) {
 				CreateUnitCI* p3 = new CreateUnitCI();
 				p3->objectType = diva->objectType;
-				p3->objectNo = ((GameWorldImpl*)gameScene->getGameManager()->getGameWorld())->getGamePlayer(0)->getBuildingByObjectType(list.getClickedBuilding() + 1)->getObjectNo();
+				p3->objectNo = gameScene->getGameManager()->getGameWorld()->getGamePlayer(0)->getBuildingByObjectType(list.getClickedBuilding() + 1)->getObjectNo();
 				p3->objectCount = 1;
 				p3->lineNo = 1;
 				gameScene->getGameManager()->getTaskManager()->pushBackMessage(p3);
