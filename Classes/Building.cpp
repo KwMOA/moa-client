@@ -6,33 +6,37 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#include "Building.hpp"
+#include "Building.h"
 #include "GameDefines.h"
-#include "Upgrade.hpp"
-#include "Unit_1.hpp"
-#include "Unit_2.hpp"
-#include "Building_1.hpp"
-#include "Building_2.hpp"
-#include "Building_3.hpp"
-#include "Building_4.hpp"
-#include "Building_5.hpp"
-#include "Building_6.hpp"
-#include "Building_7.hpp"
-#include "Building_8.hpp"
-#include "Building_9.hpp"
-#include "Building_10.hpp"
-#include "Building_11.hpp"
-#include "Building_12.hpp"
+#include "Upgrade.h"
+#include "GamePlayer.h"
+#include "StaticObject.h"
+#include "Unit_1.h"
+#include "Unit_2.h"
+#include "Building_1.h"
+#include "Building_2.h"
+#include "Building_3.h"
+#include "Building_4.h"
+#include "Building_5.h"
+#include "Building_6.h"
+#include "Building_7.h"
+#include "Building_8.h"
+#include "Building_9.h"
+#include "Building_10.h"
+#include "Building_11.h"
+#include "Building_12.h"
 
 
 //test
 #include "ClientGamePacket.h"
-#include "GameManager.hpp"
+#include "GameManager.h"
 
 Building::Building(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gamePlayer, _objectType)
 {
     state = OBJECT_STATE_CREATING;
     
+    staticBuilding = gamePlayer->getStaticBuildingByBuildingType(_objectType);
+
     createPersent = 0;
     destroyTime = 0;
     
@@ -41,10 +45,68 @@ Building::Building(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gameP
     currentUpgrade = nullptr;
     
     unitTypeList = new std::list<int>;
-    creatingUnit = nullptr;
+    
+    
+    //set images
+    
+    images = new Sprite**[4];
+    
+    char buf[128];
+    
+    images[0] = new Sprite*[staticBuilding->getCreateImageCount()];
+    for(int i = 0; i < staticBuilding->getCreateImageCount(); i++) {
+        
+        memset(buf, 0, 128);
+        sprintf(buf, "%s_create_%d.png", staticBuilding->getName(), i + 1);
+        
+        images[0][i] = Sprite::createWithSpriteFrameName(buf);
+        images[0][i]->retain();
+        
+        images[0][i]->setScale(128 / (double)1701, 128 / (double)1701);
+    }
+    
+    images[1] = new Sprite*[1];
+    for(int i = 0; i < 1; i++) {
+        memset(buf, 0, 128);
+        sprintf(buf, "%s_idle_%d.png", staticBuilding->getName(), i + 1);
+        
+        images[1][i] = Sprite::createWithSpriteFrameName(buf);
+        images[1][i]->retain();
+        
+        
+        
+        images[1][i]->setScale(128 / (double)1701, 128 / (double)1701);
+    }
+    
+    
+    images[2] = new Sprite*[staticBuilding->getWorkImageCount()];
+    for(int i = 0; i < staticBuilding->getWorkImageCount(); i++) {
+        memset(buf, 0, 128);
+        sprintf(buf, "%s_work_%d.png", staticBuilding->getName(), i + 1);
+        
+        images[2][i] = Sprite::createWithSpriteFrameName(buf);
+        images[2][i]->retain();
+        
+        images[2][i]->setScale(128 / (double)1701, 128 / (double)1701);
+    }
+    
+    images[3] = new Sprite*[staticBuilding->getDestroyImageCount()];
+    for(int i = 0; i < staticBuilding->getDestroyImageCount(); i++) {
+        memset(buf, 0, 128);
+        sprintf(buf, "%s_destroy_%d.png", staticBuilding->getName(), i + 1);
+        
+        images[3][i] = Sprite::createWithSpriteFrameName(buf);
+        images[3][i]->retain();
+        
+        images[3][i]->setScale(128 / (double)1701, 128 / (double)1701);
+    }
+    
+    objectLayer->setAnchorPoint(Vec2(0.5, 0));
+    objectLayer->setPositionX(gamePlayer->sameXPlayerIndex(60));
+    objectLayer->addChild(images[0][0], 0, TAG_IMAGE_OBJECT);
 }
 
-void Building::update(long dt)
+void Building::update(int updateCount)
 {
     if(state == OBJECT_STATE_CREATING) { // if building is creating
         
@@ -96,7 +158,7 @@ void Building::update(long dt)
         
         if(currentUpgrade != nullptr) {
             
-            currentUpgrade->update(dt);
+            currentUpgrade->update(updateCount);
             
         } else {
             std::cout << "not exist currentUpgrade - " << objectNo <<std::endl;
@@ -104,35 +166,6 @@ void Building::update(long dt)
         }
         
     } else if(state == OBJECT_STATE_CREATING_UNIT) { // now not use these
-        
-//        if(creatingUnit != nullptr) {
-//            
-//            for(int i = 0; i < creatingUnit->unitCount; i++) {
-//            
-//                Unit* unit = createUnitByUnitType(creatingUnit->unitType);
-//                
-//                if(unit == nullptr) {
-//                    
-//                    std::cout << "not exist unit - " << objectNo <<std::endl;
-//                    
-//                } else {
-//                    
-//                    //ToDo. set Unit in line
-//                    
-//                }
-//                
-//            }
-//            
-//            delete creatingUnit;
-//            
-//            creatingUnit = nullptr;
-//
-//            
-//        } else {
-//            std::cout << "not exist creatingUnit - " << objectNo <<std::endl;
-//            
-//        }
-        
         
     } else {
         
@@ -218,3 +251,5 @@ Building* Building::createBuilding(GamePlayer* _gamePlayer, int _objectType)
             return nullptr;
     }
 }
+
+

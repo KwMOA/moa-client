@@ -1,7 +1,7 @@
 #ifndef __NETWORK_MANAGER_H__
 #define __NETWORK_MANAGER_H__
 
-#include "DefineHeader.h"
+#include "BasicDefines.h"
 
 #ifndef NOT_CONNECT_WITH_SERVER
 
@@ -9,7 +9,7 @@
 
 #define NetMgr NetworkManager::getInstance()
 
-static char* IP_ADDRESS = "127.0.0.1";
+static char* IP_ADDRESS = "192.168.0.10";
 static const unsigned short PORT = 20400;
 
 enum SERVER_MODULE

@@ -6,13 +6,13 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#include "Building_10.hpp"
+#include "Building_10.h"
 #include "GameDefines.h"
-#include "GamePlayer.hpp"
-#include "Upgrade_15.hpp"
-#include "Upgrade_16.hpp"
-#include "Upgrade_17.hpp"
-#include "Upgrade_18.hpp"
+#include "GamePlayer.h"
+#include "Upgrade_15.h"
+#include "Upgrade_16.h"
+#include "Upgrade_17.h"
+#include "Upgrade_18.h"
 
 Building_10::Building_10(GamePlayer* _gamePlayer) : Building(_gamePlayer, OBJECT_TYPE_BUILDING_10)
 {
@@ -27,9 +27,9 @@ void Building_10::click()
     
 }
 
-void Building_10::update(long dt)
+void Building_10::update(int updateCount)
 {
-    Building::update(dt);
+    Building::update(updateCount);
     
     if(state == OBJECT_STATE_IDLE) { // if building is idle
         

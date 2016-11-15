@@ -6,11 +6,11 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#include "Upgrade_1.hpp"
+#include "Upgrade_1.h"
 
 #include <iostream>
 #include "GameDefines.h"
-#include "Building_1.hpp"
+#include "Building_1.h"
 
 Upgrade_1::Upgrade_1(Building* building) : Upgrade(building)
 {
@@ -24,7 +24,7 @@ void Upgrade_1::upgradeComplete()
 }
 
 
-void Upgrade_1::update(long dt)
+void Upgrade_1::update(int updateCount)
 {
     upgrading(40);
 }

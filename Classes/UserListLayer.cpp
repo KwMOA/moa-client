@@ -3,7 +3,7 @@
 
 #include "GameDefines.h"
 #include "LobbyScene.h"
-#include "DefineHeader.h"
+#include "BasicDefines.h"
 #include <stdio.h>
 USING_NS_CC;
 using namespace ui;
@@ -69,10 +69,10 @@ void UserListLayer::addUserViewInfo(int nickNameLen, const char* nickName)
     UserInfoLayer * userInfoLayer = userInfoLayerList.front();
     userInfoLayerList.erase(userInfoLayerList.begin());
     userInfoLayer->SetUserInfo(nickNameLen, nickName);
-//    userInfoLayer->setScale(((float)SCREEN_WIDTH / 4) / SCREEN_WIDTH, ((float)SCREEN_HEIGHT / 10) / SCREEN_HEIGHT);
-    userInfoLayer->setPosition(Vec2(DISPLAY_WIDTH / 2, CONTAINER_HEIGHT - 128 - (nextAddUserNumber * (SCREEN_HEIGHT / 10))));
+//    userInfoLayer->setScale(((float)DISPLAY_WIDTH / 4) / DISPLAY_WIDTH, ((float)DISPLAY_HEIGHT / 10) / DISPLAY_HEIGHT);
+    userInfoLayer->setPosition(Vec2(DISPLAY_WIDTH / 2, CONTAINER_HEIGHT - 128 - (nextAddUserNumber * (DISPLAY_HEIGHT / 10))));
     
-//        userInfoLayer->setPosition(Vec2(getContentSize().width / 2, getContentSize().height - (nextAddUserNumber) * (SCREEN_HEIGHT / 10)));
+//        userInfoLayer->setPosition(Vec2(getContentSize().width / 2, getContentSize().height - (nextAddUserNumber) * (DISPLAY_HEIGHT / 10)));
     
     userInfoLayer->layerPosition = nextAddUserNumber;
     //    MenuItem* item = MenuItem::create(userInfoLayerList[nextAddUserNumber], CC_CALLBACK_1(UserListLayer::ClickUserInfo, this, nextAddUserNumber));
@@ -108,7 +108,7 @@ void UserListLayer::removeUserViewInfo(int nickNameLen, const char* nickName)
 //    
 //    for(int i = 0; i < nextAddUserNumber; i++)
 //    {
-//        ((UserInfoLayer*)childVector.at(i))->setPosition(Vec2(DISPLAY_WIDTH / 2, CONTAINER_HEIGHT - 128 - (i * (SCREEN_HEIGHT / 10))));
+//        ((UserInfoLayer*)childVector.at(i))->setPosition(Vec2(DISPLAY_WIDTH / 2, CONTAINER_HEIGHT - 128 - (i * (DISPLAY_HEIGHT / 10))));
 //        ((UserInfoLayer*)childVector.at(i))->layerPosition = i;
 //    }
 }
@@ -131,7 +131,7 @@ bool UserListLayer::onTouchBegan(Touch* touch, Event* _event){
     
     printf("begin %f %f\n", vec.x, vec.y);
     
-    int position = 19 - ((int)(vec.y / (SCREEN_HEIGHT / 10)));
+    int position = 19 - ((int)(vec.y / (DISPLAY_HEIGHT / 10)));
     
     if(position >= nextAddUserNumber)
     {

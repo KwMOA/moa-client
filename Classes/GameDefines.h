@@ -10,9 +10,7 @@
 #define GameDefines_h
 
 #include <iostream>
-
-#define DISPLAY_WIDTH 1280
-#define DISPLAY_HEIGHT 720
+#include "BasicDefines.h"
 
 #define MENU_BUTTON_LAYER_Y 0
 #define MENU_BUTTON_LAYER_HEIGHT 120
@@ -21,6 +19,7 @@
 #define LOBBY_LAYER_Y MENU_BUTTON_LAYER_HEIGHT
 #define LOBBY_LAYER_HEIGHT (DISPLAY_HEIGHT - MY_INFO_LAYER_HEIGHT - MENU_BUTTON_LAYER_HEIGHT)
 
+#define MAP_WIDTH 1408
 
 enum LAYER_TAG
 {

@@ -1,6 +1,6 @@
 #include "BaseLayer.h"
 #include "NetworkManager.h"
-#include "DefineHeader.h"
+#include "BasicDefines.h"
 USING_NS_CC;
 
 Scene* BaseLayer::createScene()
@@ -34,34 +34,16 @@ void BaseLayer::update(float dt)
 {
 #ifndef NOT_CONNECT_WITH_SERVER
     int recvBytes = 0;
-    while (1)
-    {
+    
         recvBytes = NetMgr->receiveData(SERVER_MODULE_FRONT_SERVER);
-        if(recvBytes <= 0)
-            break;
-    }
     
-    while (1)
-    {
         recvBytes = NetMgr->receiveData(SERVER_MODULE_LOBBY_SERVER);
-        if(recvBytes <= 0)
-            break;
-    }
     
-    while (1)
-    {
         recvBytes = NetMgr->receiveData(SERVER_MODULE_GAME_SERVER);
-        if(recvBytes <= 0)
-            break;
-    }
     
-    while (1)
-    {
+    
         recvBytes = NetMgr->receiveData(SERVER_MODULE_CHATTING_SERVER);
-        if(recvBytes <= 0)
-            break;
-    }
-
+    
 #else
 
 #endif

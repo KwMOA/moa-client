@@ -6,9 +6,9 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#include "Building_6.hpp"
+#include "Building_6.h"
 #include "GameDefines.h"
-#include "GamePlayer.hpp"
+#include "GamePlayer.h"
 
 Building_6::Building_6(GamePlayer* _gamePlayer) : Building(_gamePlayer, OBJECT_TYPE_BUILDING_6)
 {
@@ -21,9 +21,9 @@ void Building_6::click()
     
 }
 
-void Building_6::update(long dt)
+void Building_6::update(int updateCount)
 {
-    Building::update(dt);
+    Building::update(updateCount);
     
     if(state == OBJECT_STATE_IDLE) { // if building is idle
         

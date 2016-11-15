@@ -6,13 +6,13 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#include "Upgrade_11.hpp"
+#include "Upgrade_11.h"
 
 #include <iostream>
 #include "GameDefines.h"
-#include "Building_7.hpp"
-#include "GamePlayer.hpp"
-#include "StaticObject.hpp"
+#include "Building_7.h"
+#include "GamePlayer.h"
+#include "StaticObject.h"
 Upgrade_11::Upgrade_11(Building* building) : Upgrade(building)
 {
     upgradeType = UPGRADE_TYPE_11;
@@ -25,7 +25,7 @@ void Upgrade_11::upgradeComplete()
 }
 
 
-void Upgrade_11::update(long dt)
+void Upgrade_11::update(int updateCount)
 {
     upgrading(40);
 }

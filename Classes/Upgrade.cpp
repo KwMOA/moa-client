@@ -7,8 +7,8 @@
 //
 
 #include <iostream>
-#include "Upgrade.hpp"
-#include "Building.hpp"
+#include "Upgrade.h"
+#include "Building.h"
 #include "GameDefines.h"
 
 Upgrade::Upgrade(Building* building)

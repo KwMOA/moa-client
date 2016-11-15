@@ -6,14 +6,15 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#include "GamePlayer.hpp"
-#include "BaseObject.hpp"
+#include "GamePlayer.h"
+#include "BaseObject.h"
+#include "BasicDefines.h"
 #include "GameDefines.h"
-#include "Building.hpp"
-#include "Unit.hpp"
-#include "StaticObject.hpp"
-#include "GameWorldImpl.hpp"
-#include "CheckAvailable.hpp"
+#include "Building.h"
+#include "Unit.h"
+#include "StaticObject.h"
+#include "GameWorld.h"
+#include "TechChecker.h"
 
 GamePlayer::GamePlayer(GameWorld* _gameWorld, int _playerIndex)
 {
@@ -31,7 +32,7 @@ GamePlayer::GamePlayer(GameWorld* _gameWorld, int _playerIndex)
     unitList[2].clear();
     
     
-    // set static unit
+    // set static object
     
     staticUnitList.push_back(new StaticUnit_1());
     staticUnitList.push_back(new StaticUnit_2());
@@ -42,14 +43,29 @@ GamePlayer::GamePlayer(GameWorld* _gameWorld, int _playerIndex)
     staticUnitList.push_back(new StaticUnit_7());
     staticUnitList.push_back(new StaticUnit_8());
     staticUnitList.push_back(new StaticUnit_9());
-
-	gold = 0;
+    
+    staticBuildingList.push_back(new StaticBuilding_1());
+    staticBuildingList.push_back(new StaticBuilding_2());
+    staticBuildingList.push_back(new StaticBuilding_3());
+    staticBuildingList.push_back(new StaticBuilding_4());
+    staticBuildingList.push_back(new StaticBuilding_5());
+    staticBuildingList.push_back(new StaticBuilding_6());
+    staticBuildingList.push_back(new StaticBuilding_7());
+    staticBuildingList.push_back(new StaticBuilding_8());
+    staticBuildingList.push_back(new StaticBuilding_9());
+    staticBuildingList.push_back(new StaticBuilding_10());
+    staticBuildingList.push_back(new StaticBuilding_11());
+    staticBuildingList.push_back(new StaticBuilding_12());
+    
     
     ////////////////////
     
     gold = 0;
     
-    checker = new CheckAvailable(this);
+    checker = new TechChecker(this);
+    
+    
+    ////////////////////////////////////// init start building
     
     int objectNo = createBuilding(OBJECT_TYPE_BUILDING_1);
     Building* building = (Building*)getBuildingByObjectNo(objectNo);
@@ -67,6 +83,8 @@ GamePlayer::GamePlayer(GameWorld* _gameWorld, int _playerIndex)
     
     building->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
     building->objectLayer->addChild(building->images[1][0], 0, TAG_IMAGE_OBJECT);
+    
+    //////////////////////////////////////
 }
 
 BaseObject* GamePlayer::getBuildingByObjectNo(int objectNo)
@@ -243,11 +261,25 @@ StaticUnit* GamePlayer::getStaticUnitByUnitType(int unitType)
     return nullptr;
 }
 
+StaticBuilding* GamePlayer::getStaticBuildingByBuildingType(int buildingType)
+{
+    for(staticBuildingItr = staticBuildingList.begin(); staticBuildingItr != staticBuildingList.end(); staticBuildingItr++)
+    {
+        if((*staticBuildingItr)->getBuildingType() == buildingType)
+        {
+            return *staticBuildingItr;
+        }
+        
+    }
+    
+    return nullptr;
+}
 
 
 
 
-void GamePlayer::update(long dt)
+
+void GamePlayer::update(int updateCount)
 {
     
     // update buildings
@@ -255,7 +287,7 @@ void GamePlayer::update(long dt)
     {
         BaseObject* baseObject = (BaseObject*)*buildingItr;
         
-        baseObject->update(dt);
+        baseObject->update(updateCount);
     }
     
     
@@ -264,7 +296,7 @@ void GamePlayer::update(long dt)
     {
         Building* building = (Building*)*destroyBuildingItr;
         
-        building->update(dt);
+        building->update(updateCount);
         
         if(building->getState() == OBJECT_STATE_DESTROY) {
             destroyBuildingItr = destroyBuildingList.erase(destroyBuildingItr);
@@ -284,7 +316,7 @@ void GamePlayer::update(long dt)
         {
             Unit* unit = *unitItr[i];
             
-            unit->update(dt);
+            unit->update(updateCount);
         }
     }
 }
@@ -310,50 +342,74 @@ void GamePlayer::applyInfluenceUnit()
 
 
 
-Unit* GamePlayer::checkEnemyInRange(int lineNo, int x, int width, int range)
-{
-    Unit* unit;
-    if(playerIndex == 0) {
-        unit = gameWorld->getGamePlayer(1)->getBestCloseUnit(lineNo, x, width, range);
-    } else {
-        unit = gameWorld->getGamePlayer(0)->getBestCloseUnit(lineNo, x, width, range);
-    }
-    
-    return unit;
-}
+//Unit* GamePlayer::checkEnemyInRange(int lineNo, int x, int width, int range)
+//{
+//    Unit* unit;
+//    if(playerIndex == 0) {
+//        unit = gameWorld->getGamePlayer(1)->getBestCloseUnit(lineNo, x, width, range);
+//    } else {
+//        unit = gameWorld->getGamePlayer(0)->getBestCloseUnit(lineNo, x, width, range);
+//    }
+//    
+//    return unit;
+//}
 
-Unit* GamePlayer::getBestCloseUnit(int lineNo, int x, int width, int range)
+Unit* GamePlayer::getBestCloseUnit(Unit* otherUnit)
 {
     Unit* closeUnit = nullptr;
-    int i = lineNo - 1;
+    int i = otherUnit->getLineNo() - 1;
     
     if(playerIndex == 0) {
      
-        int closeX = x - (width + range + 1);
+        int closeX = otherUnit->getX() - (otherUnit->getWidth() + otherUnit->getAtkRange() + 1); // 1 is max attack range + 1 to find max attack unit
         
         for(unitItr[i] = unitList[i].begin(); unitItr[i] != unitList[i].end(); unitItr[i]++)
         {
             Unit* unit = *unitItr[i];
             
-            if(unit->getX() + unit->getWidth() > closeX && unit->getIsVisible()) { // if find close unit
-                closeX = unit->getX() - unit->getWidth();
+            if(otherUnit->isPossibleToAttack(unit)) { // if find close unit
                 
-                closeUnit = unit;
+                int x;
+                
+                if(unit->getUpdateCount() != otherUnit->getUpdateCount()) { // if otherUnit is already update
+                    x = unit->getPX();
+                } else {
+                    x = unit->getX();
+                }
+                
+                if(closeX < x + unit->getWidth()) // check that unit is best close
+                {
+                    closeX = x + unit->getWidth();
+                
+                    closeUnit = unit;
+                }
             }
         }
         
     } else {
     
-        int closeX = x + (width + range + 1);
+        int closeX = otherUnit->getX() + (otherUnit->getWidth() + otherUnit->getAtkRange() + 1); // 1 is max attack range + 1 to find max attack unit
         
         for(unitItr[i] = unitList[i].begin(); unitItr[i] != unitList[i].end(); unitItr[i]++)
         {
             Unit* unit = *unitItr[i];
             
-            if(unit->getX() - unit->getWidth() < closeX && unit->getIsVisible()) { // if find close unit
-                closeX = unit->getX() + unit->getWidth();
+            if(otherUnit->isPossibleToAttack(unit)) { // if find close unit
                 
-                closeUnit = unit;
+                int x;
+                
+                if(unit->getUpdateCount() != otherUnit->getUpdateCount()) { // if otherUnit is already update
+                    x = unit->getPX();
+                } else {
+                    x = unit->getX();
+                }
+                
+                if(closeX > x - unit->getWidth()) // check that unit is best close
+                {
+                    closeX = x - unit->getWidth();
+                    
+                    closeUnit = unit;
+                }
             }
         }
         

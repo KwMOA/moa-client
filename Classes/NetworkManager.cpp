@@ -17,7 +17,7 @@
 #include "GameScene.h"
 #include "GameWorld.h"
 #include "TaskManager.h"
-#include "GameManager.hpp"
+#include "GameManager.h"
 #include "LobbyChannelLayer.h"
 
 #include "BasicPacket.h"
@@ -239,22 +239,22 @@ void NetworkManager::Receive(ConnectInfo* connectInfo, const char* data, int dat
     {
         switch (cmd)
         {
-                //            case ClientGamePacket::FIRST_CONNECT_RES:
-                //                gameHandleFirstConnectRes(connectInfo, pData, pDataSize);
-                //                break;
-                //
-                //            case ClientGamePacket::START_GAME_NOTIFY:
-                //                gameHandleStartGameNotify(connectInfo, pData, pDataSize);
-                //                break;
-                //
-                //            case ClientGamePacket::CLIENT_NOTIFY:
-                //                gameHandleClientNotify(connectInfo, pData, pDataSize);
-                //                break;
-                //
-                //            case ClientGamePacket::FINISH_GAME_RES:
-                //                gameHandleFinishGameRes(connectInfo, pData, pDataSize);
-                //                break;
-                //
+            case ClientGamePacket::FIRST_CONNECT_RES:
+                gameHandleFirstConnectRes(connectInfo, pData, pDataSize);
+                break;
+
+            case ClientGamePacket::START_GAME_NOTIFY:
+                gameHandleStartGameNotify(connectInfo, pData, pDataSize);
+                break;
+
+            case ClientGamePacket::CLIENT_NOTIFY:
+                gameHandleClientNotify(connectInfo, pData, pDataSize);
+                break;
+
+            case ClientGamePacket::FINISH_GAME_RES:
+                gameHandleFinishGameRes(connectInfo, pData, pDataSize);
+                break;
+
                 
             default:
                 printf("type invalid - %d", cmd);
@@ -1038,7 +1038,7 @@ void NetworkManager::gameHandleClientNotify(ConnectInfo* connectInfo, const char
 {
     //    printf("NetworkManager::gameHandleClientNotify");
     
-    ((GameScene*)Director::getInstance()->getRunningScene())->getGameManager()->getTaskManager()->fetchFromServer(dataSize,data);
+    ((GameScene*)Director::getInstance()->getRunningScene()->getChildByTag(TAG_GAME_SCENE))->getGameManager()->getTaskManager()->fetchFromServer(dataSize,data);
 }
 
 

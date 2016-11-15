@@ -6,12 +6,12 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#include "Building_12.hpp"
+#include "Building_12.h"
 #include "GameDefines.h"
-#include "GamePlayer.hpp"
-#include "Upgrade_22.hpp"
-#include "Upgrade_23.hpp"
-#include "Upgrade_24.hpp"
+#include "GamePlayer.h"
+#include "Upgrade_22.h"
+#include "Upgrade_23.h"
+#include "Upgrade_24.h"
 
 Building_12::Building_12(GamePlayer* _gamePlayer) : Building(_gamePlayer, OBJECT_TYPE_BUILDING_12)
 {
@@ -25,9 +25,9 @@ void Building_12::click()
     
 }
 
-void Building_12::update(long dt)
+void Building_12::update(int updateCount)
 {
-    Building::update(dt);
+    Building::update(updateCount);
     
     if(state == OBJECT_STATE_IDLE) { // if building is idle
         

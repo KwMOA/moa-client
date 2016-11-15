@@ -174,9 +174,13 @@ void LobbyRankGameLayer::menuCloseCallback(Ref* pSender)
 
 void LobbyRankGameLayer::clickTribe1(cocos2d::Ref* pSender)
 {
+#ifndef NOT_CONNECT_WITH_SERVER
+    NetMgr->lobbySendQuickPlayReq(1);
+#else
     Scene* scene = GameScene::createScene();
     
     Director::getInstance()->replaceScene(scene);
+#endif
 }
 
 void LobbyRankGameLayer::clickTribe2(cocos2d::Ref *pSender)

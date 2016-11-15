@@ -6,21 +6,23 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#include "Unit.hpp"
-#include "GamePlayer.hpp"
-#include "Unit_1.hpp"
-#include "Unit_2.hpp"
-#include "Unit_3.hpp"
-#include "Unit_4.hpp"
-#include "Unit_5.hpp"
-#include "Unit_6.hpp"
-#include "Unit_7.hpp"
-#include "Unit_8.hpp"
-#include "Unit_9.hpp"
+#include "Unit.h"
+#include "GamePlayer.h"
+#include "Unit_1.h"
+#include "Unit_2.h"
+#include "Unit_3.h"
+#include "Unit_4.h"
+#include "Unit_5.h"
+#include "Unit_6.h"
+#include "Unit_7.h"
+#include "Unit_8.h"
+#include "Unit_9.h"
 
-#include "Act.hpp"
-#include "Influence.hpp"
-#include "GameWorldImpl.hpp"
+#include "Act.h"
+#include "ActRun.h"
+#include "Influence.h"
+#include "GameWorld.h"
+#include <string>
 
 Unit::Unit(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gamePlayer, _objectType)
 {
@@ -28,12 +30,89 @@ Unit::Unit(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gamePlayer, _
     staticUnit = gamePlayer->getStaticUnitByUnitType(_objectType);
     attackPercent = 0;
     
-    if(getGamePlayer()->getPlayerIndex() == 0)
-        x = UNIT_START_X[getGamePlayer()->getPlayerIndex()];
-    else
-        x = UNIT_START_X[getGamePlayer()->getPlayerIndex()];
+    x = gamePlayer->sameXPlayerIndex(150);
     
     px = x;
+        
+    hp = staticUnit->getMaxHp();
+    
+    updateCount = 0;
+    
+    
+    //set image
+    
+    
+    //direction
+    char direction[6] = {0, };
+    
+    getDirectionByIndex(direction);
+    
+    
+    //////////////////////////
+    
+    
+    
+    
+    images = new Sprite**[3];
+    
+    
+    char buf[128];
+    
+    images[0] = new Sprite*[1];
+    for(int i = 0; i < 1; i++) {
+        
+        memset(buf, 0, 128);
+        sprintf(buf, "%s_%s_idle_%d.png", staticUnit->getName(), direction, i + 1);
+        
+        images[0][i] = Sprite::createWithSpriteFrameName(buf);
+        images[0][i]->retain();
+        
+        images[0][i]->setAnchorPoint(Vec2(0.5, 0));
+    }
+    
+    images[1] = new Sprite*[staticUnit->getRunImageCount()];
+    for(int i = 0; i < staticUnit->getRunImageCount(); i++) {
+        memset(buf, 0, 128);
+        sprintf(buf, "%s_%s_run_%d.png", staticUnit->getName(), direction, i + 1);
+        
+        images[1][i] = Sprite::createWithSpriteFrameName(buf);
+        images[1][i]->retain();
+        
+        
+        
+        images[1][i]->setAnchorPoint(Vec2(0.5, 0));
+    }
+    
+    
+    images[2] = new Sprite*[staticUnit->getAttackImageCount()];
+    for(int i = 0; i < staticUnit->getAttackImageCount(); i++) {
+        memset(buf, 0, 128);
+        sprintf(buf, "%s_%s_attack_%d.png", staticUnit->getName(), direction, i + 1);
+        images[2][i] = Sprite::createWithSpriteFrameName(buf);
+        images[2][i]->retain();
+        
+        images[2][i]->setAnchorPoint(Vec2(0.5, 0));
+    }
+    
+    
+    //hp bar
+    hpBarBg = Sprite::create("hp_bar_bg.png");
+    hpBarBg->setPosition(Vec2(0, -10));
+    hpBarBg->setAnchorPoint(Vec2(0.5,0));
+    
+    hpBarBg->setScale(0.5, 0.5);
+    objectLayer->addChild(hpBarBg);
+    
+    hpBar = Sprite::create("hp_bar.png");
+    hpBar->setPosition(Vec2(-(hpBarBg->getContentSize().width / 4), -10));
+    hpBar->setAnchorPoint(Vec2(0,0));
+    hpBar->setScale(0.5, 0.5);
+    objectLayer->addChild(hpBar);
+    
+    
+    ActRun* act = new ActRun(this);
+    actList.push_back(act);
+
 }
 
 Unit* Unit::createUnit(GamePlayer* _gamePlayer, int _objectType)
@@ -62,12 +141,13 @@ Unit* Unit::createUnit(GamePlayer* _gamePlayer, int _objectType)
     }
 }
 
-void Unit::update(long dt)
+void Unit::update(int _updateCount)
 {
-    std::cout<<"x - "<<x<< ", y - "<<DISPLAY_HEIGHT - (lineNo * 100)<<std::endl;
+    px = x;
+    
     Act* act = actList.front();
     
-    act->update(dt);
+    act->update(updateCount);
     
     int flag = act->getFlag();
     
@@ -76,6 +156,8 @@ void Unit::update(long dt)
         
         delete act;
     }
+    
+    updateCount = _updateCount;
 }
 
 
@@ -118,12 +200,17 @@ void Unit::applyInfluence()
     if(hp <= 0) {
         state = OBJECT_STATE_DEAD;
         
+        //remove targeted and targeting
+        
         std::list<Unit*>::iterator itr;
         
         for(itr = targetList.begin(); itr != targetList.end(); itr++) {
             Unit* unit = *itr;
-            unit->removeTargetList(this);
+            unit->setTarget(nullptr);
         }
+        
+        target = nullptr;
+        
         //메모리 해제
         
         
@@ -131,12 +218,19 @@ void Unit::applyInfluence()
         auto deadAni = Animation::create();
         deadAni->setDelayPerUnit(0.2);
         auto cache = SpriteFrameCache::getInstance();
-        deadAni->addSpriteFrame(cache->getSpriteFrameByName("unit_1_death_1.png"));
-        deadAni->addSpriteFrame(cache->getSpriteFrameByName("unit_1_death_2.png"));
-        deadAni->addSpriteFrame(cache->getSpriteFrameByName("unit_1_death_3.png"));
-        deadAni->addSpriteFrame(cache->getSpriteFrameByName("unit_1_death_4.png"));
-        deadAni->addSpriteFrame(cache->getSpriteFrameByName("unit_1_death_5.png"));
-        deadAni->addSpriteFrame(cache->getSpriteFrameByName("unit_1_death_6.png"));
+        
+        char buf[128];
+        
+        char direction[6] = {0, };
+        getDirectionByIndex(direction);
+        
+        for(int i = 0; i < staticUnit->getDeathImageCount(); i++) {
+            memset(buf, 0, 128);
+            sprintf(buf, "%s_%s_death_%d.png", staticUnit->getName(), direction, i + 1);
+            
+            deadAni->addSpriteFrame(cache->getSpriteFrameByName(buf));
+        }
+        
         
         auto deathAni = Animate::create(deadAni);
         
@@ -145,10 +239,10 @@ void Unit::applyInfluence()
         
         auto sequence = Sequence::create(deathAni, cbSound, NULL);
         
-        images[3][0]->runAction(sequence);
+        images[0][0]->runAction(sequence);
         
         objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
-        objectLayer->addChild(images[3][0], 0, TAG_IMAGE_OBJECT);
+        objectLayer->addChild(images[0][0], 0, TAG_IMAGE_OBJECT);
     }
     
     influenceList.clear();
@@ -156,5 +250,52 @@ void Unit::applyInfluence()
 
 void Unit::finishUnitDead()
 {
-    ((GameWorldImpl*)gamePlayer->getGameWorld())->removeChild(this);
+    gamePlayer->getGameWorld()->removeChild(this);
+}
+
+void Unit::getDirectionByIndex(char *direction)
+{
+    if(getGamePlayer()->getPlayerIndex() == 0)
+        memcpy(direction, "right", 5);
+    else
+        memcpy(direction, "left", 4);
+}
+
+
+
+
+bool Unit::isPossibleToAttack(Unit* otherUnit)
+{
+    int tempX;
+    
+    if(otherUnit->getUpdateCount() != updateCount) { // otherUnit is already update
+        tempX = otherUnit->getPX();
+    } else {
+        tempX = otherUnit->getX();
+    }
+    
+    if(otherUnit->getIsVisible() == false) {
+        return false;
+    } else if(getGamePlayer()->getPlayerIndex() == 0) {
+        return ((tempX - otherUnit->getWidth()) - (getX() + getWidth()) < getAtkRange());
+    } else {
+        return ((getX() - getWidth()) - (tempX + otherUnit->getWidth()) < getAtkRange());
+    }
+}
+
+Unit* Unit::checkEnemyInRange()
+{
+    GamePlayer* otherPlayer;
+    
+    if(gamePlayer->getPlayerIndex() == 0) {
+    
+        otherPlayer = gamePlayer->getGameWorld()->getGamePlayer(1);
+        
+    } else {
+        
+        otherPlayer = gamePlayer->getGameWorld()->getGamePlayer(0);
+        
+    }
+    
+    return otherPlayer->getBestCloseUnit(this);
 }

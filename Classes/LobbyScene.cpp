@@ -4,7 +4,7 @@
 
 #include "UserListLayer.h"
 #include "GameClient.h"
-#include "DefineHeader.h"
+#include "BasicDefines.h"
 #include "MenuButtonLayer.h"
 #include "MyInfoLayer.h"
 #include "LobbyGameLayer.h"
@@ -138,23 +138,23 @@ bool LobbyScene::init()
 
 
 //    menuLayer = Layer::create();
-//	menuLayer->setContentSize(Size(SCREEN_WIDTH / 4, SCREEN_HEIGHT));
+//	menuLayer->setContentSize(Size(DISPLAY_WIDTH / 4, DISPLAY_HEIGHT));
 //	menuLayer->setAnchorPoint(Vec2(0, 0));
 //	menuLayer->setPosition(0, 0);
 //    auto menuLayerbackGroundSprite = Sprite::create("back_ground_01.png");
 //    menuLayerbackGroundSprite->setAnchorPoint(Vec2(0, 0));
 //    menuLayerbackGroundSprite->setPosition(0, 0);
-//    menuLayerbackGroundSprite->setScale((SCREEN_WIDTH / 4) / menuLayerbackGroundSprite->getContentSize().width, SCREEN_HEIGHT / menuLayerbackGroundSprite->getContentSize().height);
+//    menuLayerbackGroundSprite->setScale((DISPLAY_WIDTH / 4) / menuLayerbackGroundSprite->getContentSize().width, DISPLAY_HEIGHT / menuLayerbackGroundSprite->getContentSize().height);
 //    menuLayer->addChild(menuLayerbackGroundSprite, 0);
 //    this->addChild(menuLayer, 100201);
 //    
 //    userListLayer = UserListLayer::create();
 //    userListLayer->setAnchorPoint(Vec2(0, 0));
 //    userListLayer->setPosition(Vec2(0, 0));
-//    userListLayer->setContentSize(Size(SCREEN_WIDTH / 4, SCREEN_HEIGHT * 2));
+//    userListLayer->setContentSize(Size(DISPLAY_WIDTH / 4, DISPLAY_HEIGHT * 2));
 //    
 //    
-//    scrollView = ScrollView::create(Size(SCREEN_WIDTH / 4, SCREEN_HEIGHT), userListLayer);
+//    scrollView = ScrollView::create(Size(DISPLAY_WIDTH / 4, DISPLAY_HEIGHT), userListLayer);
 //    scrollView->retain();
 //    scrollView->setBounceable(false);
 //    scrollView->setDirection(ScrollView::Direction::VERTICAL);
@@ -410,7 +410,7 @@ void LobbyScene::waitToStart()
 bool LobbyScene::onTouchBegan(Touch* touch, Event* _event){
     printf("onTouchBegan");
 
-//    Rect userListRect = Rect(0,0,SCREEN_WIDTH / 4, SCREEN_HEIGHT);
+//    Rect userListRect = Rect(0,0,DISPLAY_WIDTH / 4, DISPLAY_HEIGHT);
 //    Point point = Point(touch->getLocation().x, touch->getLocation().y);
 //    if(userListRect.containsPoint(point))
 //    {

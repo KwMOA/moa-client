@@ -6,11 +6,11 @@
 //  Copyright © 2016년 kimyongchan. All rights reserved.
 //
 
-#include "ActAttack.hpp"
-#include "Unit.hpp"
-#include "GamePlayer.hpp"
-#include "ActRun.hpp"
-#include "AttackInfluence.hpp"
+#include "ActAttack.h"
+#include "Unit.h"
+#include "GamePlayer.h"
+#include "ActRun.h"
+#include "AttackInfluence.h"
 
 ActAttack::ActAttack(Unit* _unit) : Act(_unit, ACT_TYPE_ATTACK)
 {
@@ -24,7 +24,7 @@ ActAttack::ActAttack(Unit* _unit) : Act(_unit, ACT_TYPE_ATTACK)
 
 
 
-void ActAttack::update(long dt)
+void ActAttack::update(int updateCount)
 {
     actPercent++;
     
@@ -57,7 +57,7 @@ void ActAttack::update(long dt)
         
         if(otherUnit == nullptr) {
             
-            otherUnit = unit->getGamePlayer()->checkEnemyInRange(unit->getLineNo(), unit->getX(), unit->getWidth(), unit->getAtkRange());
+            otherUnit = unit->checkEnemyInRange();
         
             if(otherUnit == nullptr) {
                 
@@ -71,12 +71,13 @@ void ActAttack::update(long dt)
             }
             
         } else {
-            if((otherUnit->getX() - otherUnit->getWidth()) - (unit->getX() + unit->getWidth()) > unit->getAtkRange()) { // other unit is so far
+            
+            if(unit->isPossibleToAttack(otherUnit) == false) { // other unit is so far
                 
                 unit->setTarget(nullptr);
                 otherUnit->removeTargetList(unit);
                 
-                otherUnit = unit->getGamePlayer()->checkEnemyInRange(unit->getLineNo(), unit->getX(), unit->getWidth(), unit->getAtkRange());
+                otherUnit = unit->checkEnemyInRange();
                 
                 if(otherUnit == nullptr) {
                     
@@ -101,15 +102,29 @@ void ActAttack::update(long dt)
             
             otherUnit->setInfluenceList(influence);
             
-            unit->setTarget(nullptr);
-            otherUnit->removeTargetList(unit);
         }
         
     } else if(actPercent == atkSpeed + atkLoadSpeed) { // attack finish
         
-        flag = 1;
-        
-        return ;
+        if(unit->getTargaet() != nullptr) //if not dead targetUnit
+        {
+            actPercent = 0;
+        } else {
+            
+            Unit* otherUnit = unit->checkEnemyInRange();
+            
+            if(otherUnit == nullptr) { // not exist to possible attacking emeny
+                
+                flag = 1;
+                
+            } else {
+                
+                unit->setTarget(otherUnit);
+                otherUnit->setTargetList(unit);
+                
+                actPercent = 0;
+            }
+        }
     
     } else {
         

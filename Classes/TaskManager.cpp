@@ -2,19 +2,19 @@
 #include "cocos2d.h"
 
 #include "GameDefines.h"
-#include "DefineHeader.h"
+#include "BasicDefines.h"
 #include "GameWorld.h"
 #include "GameClient.h"
 #include "LogManager.h"
-#include "GameManager.hpp"
+#include "GameManager.h"
 #include "GameScene.h"
 #include "NetworkManager.h"
 USING_NS_CC;
 
 TaskManager::TaskManager(GameManager* _gameManager)
 {
-    myTaskPacketNo = 3;
-    enemyTaskPacketNo = 3;
+    myTaskPacketNo = 2;
+    enemyTaskPacketNo = 2;
     iCntCarryOutMessages = 0;
 
     setupWhatPlayerFlag();
@@ -22,7 +22,7 @@ TaskManager::TaskManager(GameManager* _gameManager)
     gameManager = _gameManager;
     
     //초기화시 각 Task에 0번, 1번, 2번 더미 패킷을 한개씩 넣어놓는다.
-    for(int i=0;i<3;i++){
+    for(int i=0;i<2;i++){
         myTask.push_back(ClientInputWithPacketNo(i,NULL));
         enemyTask.push_back(ClientInputWithPacketNo(i,NULL));
     }
@@ -34,16 +34,19 @@ TaskManager::~TaskManager(){
 
 void TaskManager::setupWhatPlayerFlag(){
 
-    if(PLAY_ALONE){
-        iPlayerFlag = 0;
-    }else{        
-        //플레이어 A인가?
-        if(GameClient::GetInstance().myGameIndex == 0){
-            iPlayerFlag = 0;
-        }else{
-            iPlayerFlag = 1;
-        }
-    }
+//    if(PLAY_ALONE){
+//        iPlayerFlag = 0;
+//    }else{        
+//        //플레이어 A인가?
+//        if(GameClient::GetInstance().myGameIndex == 0){
+//            iPlayerFlag = 0;
+//        }else{
+//            iPlayerFlag = 1;
+//        }
+//    }
+    
+    //set my index 0
+    iPlayerFlag = 0;
 }
 //DispatchTask에 쌓인 Message를 서버로 보낸 후, Task에 전송한다.
 void TaskManager::dispatchToServer(){
@@ -306,10 +309,21 @@ void TaskManager::carryOutMessages(){
     if(!isCommunicate()){
         //통신이 두절
         LogMgr->Log("통신 두절");
-        return ;
+        
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+        MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
+        return;
+#endif
+        
+        Director::getInstance()->end();
+        
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+        exit(0);
+#endif
     }
+    
     //현재 처리하는 패킷이 통신하는 패킷 번호보다 3보다 작거나 같을 때까지 모두 처리한다.
-    while(myTask.front().packetNo <= myTaskPacketNo - 6)
+    while(myTask.front().packetNo < myTaskPacketNo - 2)
     {
         if(enemyTask.size() <= 0)
             break;
@@ -416,7 +430,7 @@ void TaskManager::carryOutEnemyTask(int _packetNo){
 //통신이 두절되었나 확인한다.
 bool TaskManager::isCommunicate()const{
     //상대방에게 날아온 메시지가 비어있다면, 또는 두 컴퓨터의 패킷 차이가 3이상 차이가 난다면
-    return !(enemyTask.empty() || abs(myTaskPacketNo - enemyTaskPacketNo) >= 30);
+    return !enemyTask.empty();
 }
 
 
