@@ -11,6 +11,7 @@ class node {
 
 private:
 	item data;
+	string name;
 	node* prev;
 	node* next;
 public:
@@ -19,10 +20,11 @@ public:
 	void setPrev(node* _prev) { prev = _prev; }
 	void setNext(node* _next) { next = _next; }
 	void setData(item _data) { data = _data; }
-
+	void setName(string _name) { name = _name; }
 	node* getPrev() { return prev; }
 	node* getNext() { return next; }
 	item getData() { return data; }
+	string getName() { return name; }
 };
 
 template <class item>
@@ -32,7 +34,9 @@ private:
 	int clickedBuildingNo;
 	int clickedUnitNo;
 	int clickedUpgradeNo;
+	int firstUpgradeNo;
 	int upgradeCount;
+	int totalBuildingCount;
 	node<item>* head_ptr;
 	node<item>* tail_ptr;
 	void hang_node(node<item>* prev_node, node<item>* new_node);
@@ -66,9 +70,11 @@ public:
 	bool isEmpty();
 	void insert(node<item>* prev_node, item data);
 	void insert_head(item data);
-	void insert_tail(item data);
-	void insert_location(size_t loc, item data);
+	void insert_tail(item data, string name);
+	void insert_location(size_t loc, item data, string name);
+	void insert_location(node<item>* prev, item data, string name);
 	node<item>* search_node(item data);
+	node<item>* search_node_name(string data);
 	item getFront();
 	size_t list_length();
 	item pop();
@@ -77,20 +83,20 @@ public:
 	void remove_section_node(node<item>* from_node, node<item>* to_node, node<item>* end_node);
 	void insert_section_node(node<item>* from_node, node<item>* to_node, node<item>* insert_node);
 	void print_content();
+	int getLocation(string _name);
 	void setClickedBuilding(int no);
 	void setClickedUnit(int no);
 	void setUpgradeCount(int no);
+	void setClickedUpgradeNo(int _no) { clickedUpgradeNo = _no; }
+	void setFirstUpgradeNo(int _no) { firstUpgradeNo = _no; }
 	int getUpgradeCount();
 	int getClickedBuilding();
 	int getClickedUnit();
-	int getClickedUpgrade();
+	int getClickedUpgradeNo() { return clickedUpgradeNo; }
+	int getTotalBuildingCount() {return totalBuildingCount;}
+	int getFirstUpgradeNo() { return firstUpgradeNo; }
 };
 
-template <class item>
-int LinkedList<item>::getClickedUpgrade() {
-	clickedUpgradeNo = clickedUnitNo - upgradeCount;
-	return clickedUpgradeNo;
-}
 template <class item>
 void LinkedList<item>::setUpgradeCount(int no) {
 	upgradeCount = no;
@@ -136,10 +142,19 @@ item LinkedList<item>::pop() {
 template<class item>
 void LinkedList<item>::hang_node(node<item>* prev_node, node<item>* new_node)
 {
-	new_node->setNext(prev_node->getNext());
-	new_node->setPrev(prev_node);
-	prev_node->getNext()->setPrev(new_node);
-	prev_node->setNext(new_node);
+	if (prev_node->getNext() != NULL) {
+		new_node->setNext(prev_node->getNext());
+		new_node->setPrev(prev_node);
+		prev_node->getNext()->setPrev(new_node);
+		prev_node->setNext(new_node);
+	}
+	else {
+		new_node->setNext(tail_ptr);
+		new_node->setPrev(prev_node);
+		tail_ptr->setPrev(new_node);
+		prev_node->setNext(new_node);
+	}
+	
 }
 
 template<class item>
@@ -150,6 +165,7 @@ LinkedList<item>::LinkedList() {
 	clickedUnitNo = -1;
 	clickedUpgradeNo = -1;
 	upgradeCount = 0;
+	totalBuildingCount = 12;
 }
 
 template<class item>
@@ -170,10 +186,10 @@ void LinkedList<item>::insert_head(item data)
 }
 
 template<class item>
-void LinkedList<item>::insert_tail(item data)
+void LinkedList<item>::insert_tail(item data, string name)
 {
 	node<item>* new_node = new node<item>(data);
-
+	new_node->setName(name);
 	if (isEmpty()) {
 		head_ptr->setNext(new_node);
 		tail_ptr->setPrev(new_node);
@@ -187,16 +203,29 @@ void LinkedList<item>::insert_tail(item data)
 }
 
 template<class item>
-void LinkedList<item>::insert_location(size_t loc, item data)
+void LinkedList<item>::insert_location(size_t loc, item data, string name)
 {
 	node<item>* new_node = new node<item>(data);
+	new_node->setName(name);
 	node<item>* cursor;
 	size_t location = 0;
 	for (cursor = head_ptr->getNext(); location != loc; cursor = cursor->getNext()) {
 		location++;
+		if (cursor == tail_ptr)
+			break;
 	}
 
 	hang_node(cursor, new_node);
+
+}
+
+template<class item>
+void LinkedList<item>::insert_location(node<item>* prev, item data, string name)
+{
+	node<item>* new_node = new node<item>(data);
+	new_node->setName(name);
+
+	hang_node(prev, new_node);
 
 }
 
@@ -212,6 +241,17 @@ node<item>* LinkedList<item>::search_node(item data)
 }
 
 template<class item>
+inline node<item>* LinkedList<item>::search_node_name(string data)
+{
+	node<item>* cursor = new node<item>();
+	for (cursor = head_ptr->getNext(); cursor != NULL; cursor = cursor->getNext()) {
+		if (cursor->getName() == data)
+			return cursor;
+	}
+	return NULL;
+}
+
+template<class item>
 void LinkedList<item>::print_content()
 {
 	node<item>* cursor = 0;
@@ -220,6 +260,21 @@ void LinkedList<item>::print_content()
 		std::cout << cursor->getData() << " ";
 	}
 	std::cout << endl;
+}
+
+template<class item>
+int LinkedList<item>::getLocation(string _name)
+{
+	int location = 0;
+	node<item>* match = search_node_name(_name);
+	node<item>* cursor = new node<item>();
+
+	for (cursor = head_ptr->getNext(); cursor != NULL; cursor = cursor->getNext()) {
+		location++;
+		if (cursor == match)
+			return location;
+	}
+	return 0;
 }
 
 template<class item>

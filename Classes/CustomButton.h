@@ -5,29 +5,26 @@
 #include "ui/CocosGUI.h"
 #include "GameDefines.h"
 
-class CustomButton : public cocos2d::ui::Button
+class CustomButton
 {
 private:
 	int state;
 	int buttonType;
-	int buildingType;
-	
+	int objectType;
+	cocos2d::ui::Button* btn;
 public:
-	static CustomButton* create(const std::string& normalImage,
-								const std::string& selectedImage = "",
-								const std::string& disableImage = "",
-								TextureResType texType = TextureResType::LOCAL);
-	CustomButton();
-
-	void setBuildingType(int _Type);
+	~CustomButton();
+	void setButton(cocos2d::ui::Button* _btn);
+	cocos2d::ui::Button* getButton();
+	void defaultSet();
+	void setobjectType(int _Type);
 	void setButtonType(int _Type);
 	void setState(int _state);
-	int getBuildingType(int _Type);
+	int getobjectType();
 	int getButtonType();
 	int getState();
 	void changeState();
 
-		CREATE_FUNC(CustomButton);
 };
 
 #endif // __CUSTOMBUTTON_H__

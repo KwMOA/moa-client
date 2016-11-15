@@ -8,6 +8,7 @@
 #include "GameLogic.h"
 #include "GameWorldImpl.hpp"
 #include "ControlLayer.h"
+#include "ObjectInfos.h"
 #include <ui/CocosGUI.h>
 
 USING_NS_CC;
@@ -32,7 +33,7 @@ bool GameScene::init()
     }
     
     gameManager = new GameManager(this, true);
-    
+	objectInfoList = new ObjectInfoList();
     if(gameManager->init() == false) {
         return false;
     }

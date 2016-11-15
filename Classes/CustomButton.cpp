@@ -1,25 +1,28 @@
 #include "CustomButton.h"
 
-CustomButton* CustomButton::create(const std::string & normalImage, const std::string & selectedImage, const std::string & disableImage, TextureResType texType)
+
+
+
+void CustomButton::setButton(cocos2d::ui::Button* _btn)
 {
-	Button *btn = new (std::nothrow) Button;
-	if (btn && btn->init(normalImage, selectedImage, disableImage, texType))
-	{
-		btn->autorelease();
-		return (CustomButton*)btn;
-	}
-	CC_SAFE_DELETE(btn);
-	return nullptr;
+	btn = _btn;
 }
 
-CustomButton::CustomButton()
+cocos2d::ui::Button * CustomButton::getButton()
 {
-
+	return btn;
 }
 
-void CustomButton::setBuildingType(int _Type)
+void CustomButton::defaultSet()
 {
-	buildingType = _Type;
+	state = -1;
+	buttonType = -1;
+	objectType = -1;
+}
+
+void CustomButton::setobjectType(int _Type)
+{
+	objectType = _Type;
 }
 
 void CustomButton::setButtonType(int _Type)
@@ -32,10 +35,11 @@ void CustomButton::setState(int _state)
 	state = _state;
 }
 
-int CustomButton::getBuildingType(int _Type)
+int CustomButton::getobjectType()
 {
-	return buildingType;
+	return objectType;
 }
+
 
 int CustomButton::getButtonType()
 {

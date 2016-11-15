@@ -15,25 +15,28 @@ using namespace cocos2d::ui;
 class ControlLayer : public cocos2d::Layer
 {
 private:
-	 
+
 	GameScene* gameScene;
 	LinkedList<CustomButton*> list;
 	LinkedList<CustomButton*>::iterator itr;
 	
+	char buf[128];
 	string name;
+	string clickedName;
 	char myChar;
-	CustomButton* button;
+	Button* button;
+	CustomButton* csBtn;
 	Layer* moveLayer;
 	int buttonCount;
 	int changCount;
 	int count;
 	size_t layerLength;
 	void makeBuildingButton(string nomal, string select, string disable, int count);
-	void makeUnitButton(size_t location, size_t howMany, size_t upgradeCount);
-	void makeDetailButton(size_t location, size_t count, bool isUpgrade);
-	void actionByBuilding(CustomButton* refButton, size_t howMany, size_t upgradeCount);
-	void actionByUnit(CustomButton* refButton, size_t howMany);
-	string makeName(string _name, int _no);
+	void makeUnitButton(size_t location, size_t howMany, size_t upgradeCount, int firstUnit, int firstUpgrade);
+	void makeDetailButton(size_t count, string name);
+	void actionByBuilding(Button* refButton, size_t howMany, size_t upgradeCount, int firstUnit, int firstUpgrade);
+	void actionByUnit(Button* refButton, size_t howMany);
+	char* makeName(string _name, int _no);
 
 public:
 
