@@ -35,6 +35,7 @@ GameManager::GameManager(GameScene* _gameScene, bool _isAiMode)
     //이미지 캐슁해놓기
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("unit/unit_1.plist");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("building/building.plist");
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("control_btn/control_btn.plist");
     
     
     //DOTO. set new Instance in NetworkHandler and TaskManager

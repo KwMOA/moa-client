@@ -40,7 +40,7 @@ bool GameScene::init()
 		gameManager = new GameManager(this, false);
 	}
 
-	objectInfoList = new ObjectInfoList();
+//	objectInfoList = new ObjectInfoList();
     
     
     if(gameManager->init() == false) {
@@ -54,7 +54,7 @@ bool GameScene::init()
     addChild(background, 0);
     
 	ControlLayer* controlLayer = ControlLayer::create();
-	controlLayer->setGameWorld(this);
+	controlLayer->setGamePlayer(gameManager->getGameWorld()->getGamePlayer(0));
 	this->addChild(controlLayer);
 
     

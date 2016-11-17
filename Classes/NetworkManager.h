@@ -9,7 +9,7 @@
 
 #define NetMgr NetworkManager::getInstance()
 
-static char* IP_ADDRESS = "192.168.0.10";
+static char* IP_ADDRESS = "52.78.32.13";
 static const unsigned short PORT = 20400;
 
 enum SERVER_MODULE

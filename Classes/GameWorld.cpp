@@ -64,35 +64,35 @@ void GameWorld::update(int updateCount)
 
 void GameWorld::createBuilding(int userIndex, int objectType)
 {
-	if(gamePlayers[userIndex]->getChecker()->checkCreateBuilding(userIndex, objectType))
+	if(gamePlayers[userIndex]->getChecker()->checkCreateBuilding(objectType))
 		gamePlayers[userIndex]->createBuilding(objectType);
 }
 
 
 void GameWorld::cancelCreateBuilding(int userIndex, int objectNo)
 {
-	if(gamePlayers[userIndex]->getChecker()->checkCancelBuilding(userIndex, objectNo))
+	if(gamePlayers[userIndex]->getChecker()->checkCancelBuilding(objectNo))
         gamePlayers[userIndex]->cancelCreateBuilding(objectNo);
 }
 
 
 void GameWorld::upgradeBuilding(int userIndex, int objectNo, int upgradeType)
 {
-	if (gamePlayers[userIndex]->getChecker()->ckeckUpgradeBuilding(userIndex, objectNo))
+	if (gamePlayers[userIndex]->getChecker()->ckeckUpgradeBuilding(objectNo))
         gamePlayers[userIndex]->upgradeBuilding(objectNo, upgradeType);
 }
 
 
 void GameWorld::cancelUpgradeBuilding(int userIndex, int objectNo, int upgradeType)
 {
-	if (gamePlayers[userIndex]->getChecker()->checkCancleUpgradeBuilding(userIndex, objectNo))
+	if (gamePlayers[userIndex]->getChecker()->checkCancleUpgradeBuilding(objectNo))
         gamePlayers[userIndex]->cancelUpgradeBuilding(objectNo, upgradeType);
 }
 
 
 void GameWorld::createUnit(int userIndex, int objectNo, int objectType, int objectCount, int lineNo)
 {
-	if(gamePlayers[userIndex]->getChecker()->checkCreateUnit(userIndex, objectNo))
+	if(gamePlayers[userIndex]->getChecker()->checkCreateUnit(objectNo))
         gamePlayers[userIndex]->createUnit(objectNo, objectType, objectCount, lineNo);
 }
 

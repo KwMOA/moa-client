@@ -18,6 +18,7 @@ class StaticBuilding
 protected:
     int objectType;
     char name[20];
+    int price;
     int createImageCount;
     int workImageCount;
     int destroyImageCount;
@@ -30,6 +31,7 @@ public:
     int getBuildingType() { return objectType; }
 
     char* getName() { return name; }
+    int getPrice() { return price; }
     
     void setCreateImageCount(int _createImageCount) { createImageCount = _createImageCount; }
     int getCreateImageCount() { return createImageCount; }

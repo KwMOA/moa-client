@@ -7,8 +7,10 @@
 #include "LinkedList.h"
 #include "CustomButton.h"
 #include "ObjectInfos.h"
+#include "GamePlayer.h"
 
 #include <string>
+#include <list>
 
 using namespace cocos2d::ui;
 
@@ -16,10 +18,14 @@ class ControlLayer : public cocos2d::Layer
 {
 private:
 
-	GameScene* gameScene;
-	LinkedList<CustomButton*> list;
-	LinkedList<CustomButton*>::iterator itr;
+	GamePlayer* gamePlayer;
+    CustomButton* rootCustomButton;
+    
+    ObjectInfoList* objectInfoList;
 	
+    std::list<CustomButton*> buttonList;
+    std::list<CustomButton*>::iterator buttonListItr;
+    
 	char buf[128];
 	string name;
 	string clickedName;
@@ -31,7 +37,6 @@ private:
 	int changCount;
 	int count;
 	size_t layerLength;
-	void makeBuildingButton(string nomal, string select, string disable, int count);
 	void makeUnitButton(size_t location, size_t howMany, size_t upgradeCount, int firstUnit, int firstUpgrade);
 	void makeDetailButton(size_t count, string name);
 	void actionByBuilding(Button* refButton, size_t howMany, size_t upgradeCount, int firstUnit, int firstUpgrade);
@@ -42,7 +47,17 @@ public:
 
 	virtual bool init();
 	void update(float dt);	
+    void refreshMoveLayer(CustomButton* customButton);
+    
+    void makeBuildingButton(int objectType);
 
+    void buttonCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType, CustomButton* customButton);
+
+    void buildingCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
+
+    void closeButtones(CustomButton* customButton);
+    
+    void openButtones(CustomButton* customButton);
 
 	void completeCreateBuildingNotify(int objectType);
 	void completeUgradeNotify(int upgradeType, int upgradeCompleteNum);
@@ -51,16 +66,24 @@ public:
 	void activeUnitNotify(int objectType);
 
 	// a selector callback
-	void setGameWorld(GameScene* _gameWorld);
+	void setGamePlayer(GamePlayer* _gamePlayer);
 
 	void enterCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
 
-	void buildingCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
 	void unitCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
 	void upgradeCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
 
 	void DetailUnitCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
 	void DetailUpgradeCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(ControlLayer);

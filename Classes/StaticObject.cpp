@@ -251,6 +251,8 @@ StaticBuilding_1::StaticBuilding_1()
     
     x = 60;
     y = DISPLAY_HEIGHT - 60;
+    
+    price = 400;
 }
 
 StaticBuilding_2::StaticBuilding_2()
@@ -268,6 +270,8 @@ StaticBuilding_2::StaticBuilding_2()
     
     x = 60;
     y = DISPLAY_HEIGHT - 120;
+    
+    price = 100;
 }
 
 StaticBuilding_3::StaticBuilding_3()
@@ -285,6 +289,8 @@ StaticBuilding_3::StaticBuilding_3()
     
     x = 60;
     y = DISPLAY_HEIGHT - 180;
+    
+    price = 200;
 }
 
 StaticBuilding_4::StaticBuilding_4()
@@ -302,6 +308,8 @@ StaticBuilding_4::StaticBuilding_4()
     
     x = 120;
     y = DISPLAY_HEIGHT - 240;
+    
+    price = 250;
 }
 
 StaticBuilding_5::StaticBuilding_5()
@@ -319,6 +327,8 @@ StaticBuilding_5::StaticBuilding_5()
     
     x = 120;
     y = DISPLAY_HEIGHT - 300;
+    
+    price = 300;
 }
 
 StaticBuilding_6::StaticBuilding_6()
@@ -336,6 +346,9 @@ StaticBuilding_6::StaticBuilding_6()
     
     x = 120;
     y = DISPLAY_HEIGHT - 360;
+    
+    
+    price = 400;
 }
 
 StaticBuilding_7::StaticBuilding_7()
@@ -353,6 +366,8 @@ StaticBuilding_7::StaticBuilding_7()
     
     x = 120;
     y = DISPLAY_HEIGHT - 420;
+    
+    price = 250;
 }
 
 StaticBuilding_8::StaticBuilding_8()
@@ -370,6 +385,8 @@ StaticBuilding_8::StaticBuilding_8()
     
     x = 120;
     y = DISPLAY_HEIGHT - 480;
+    
+    price = 300;
 }
 
 StaticBuilding_9::StaticBuilding_9()
@@ -387,6 +404,8 @@ StaticBuilding_9::StaticBuilding_9()
     
     x = 120;
     y = DISPLAY_HEIGHT - 540;
+    
+    price = 300;
 }
 
 StaticBuilding_10::StaticBuilding_10()
@@ -404,6 +423,8 @@ StaticBuilding_10::StaticBuilding_10()
     
     x = 120;
     y = DISPLAY_HEIGHT - 600;
+    
+    price = 300;
 }
 
 StaticBuilding_11::StaticBuilding_11()
@@ -421,6 +442,8 @@ StaticBuilding_11::StaticBuilding_11()
     
     x = 120;
     y = DISPLAY_HEIGHT - 660;
+    
+    price = 400;
 }
 
 StaticBuilding_12::StaticBuilding_12()
@@ -438,4 +461,6 @@ StaticBuilding_12::StaticBuilding_12()
     
     x = 120;
     y = DISPLAY_HEIGHT - 720;
+    
+    price = 400;
 }

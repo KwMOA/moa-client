@@ -6,15 +6,15 @@ class BaseObject;
 
 class TechChecker {
 protected:
-	GamePlayer* gamePlayers;
+	GamePlayer* gamePlayer;
 public:
 	TechChecker(GamePlayer* player);
-	BaseObject* getBaseObject(int userIndex, int objectType);
-	bool checkCreateBuilding(int userIndex, int objectType);
-	bool checkCancelBuilding(int userIndex, int objectNo);
-	bool ckeckUpgradeBuilding(int userIndex, int objectNo);
-	bool checkCancleUpgradeBuilding(int userIndex, int objectNo);
-	bool checkCreateUnit(int userIndex, int objectNo);
+//	BaseObject* getBaseObject(int userIndex, int objectType);
+	bool checkCreateBuilding(int objectType);
+	bool checkCancelBuilding(int objectNo);
+	bool ckeckUpgradeBuilding(int objectNo);
+	bool checkCancleUpgradeBuilding(int objectNo);
+	bool checkCreateUnit(int objectNo);
 
 };
 #endif // !__TECH_CHECKER_H__

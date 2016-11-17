@@ -10,7 +10,7 @@ class GameScene : public BaseLayer
 {
 private:
     GameManager* gameManager;
-	ObjectInfoList* objectInfoList;
+//	ObjectInfoList* objectInfoList;
     
 public:
 	static cocos2d::Scene* createScene();
@@ -28,7 +28,7 @@ public:
     
 public:
     GameManager* getGameManager() { return gameManager; }
-	ObjectInfoList* getObjectInfoList() { return objectInfoList; }
+//	ObjectInfoList* getObjectInfoList() { return objectInfoList; }
     
 };
 
