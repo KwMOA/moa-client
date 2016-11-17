@@ -13,12 +13,37 @@
 #include <string>
 #include "BasicDefines.h"
 
-class StaticBuilding
+class StaticObject
 {
 protected:
     int objectType;
     char name[20];
     int price;
+    int width;
+    
+    int staticObjectState;
+    
+public:
+    int getObjectType() { return objectType; }
+    void setObjectType(int _objectType) { objectType = _objectType; }
+    
+    void setName(char* _name, int nameLen) { memcpy(name, _name, nameLen); }
+    char* getName() { return name; }
+    
+    void setPrice(int _price) { price = _price; }
+    int getPrice() { return price; }
+    
+    void setWidth(int _width) { width = _width; }
+    int getWidth() { return width; }
+    
+    void setStaticObjectState(int _staticObjectState) { staticObjectState = _staticObjectState; }
+    int getStaticObjectState() { return staticObjectState; }
+    
+};
+
+class StaticBuilding : public StaticObject
+{
+protected:
     int createImageCount;
     int workImageCount;
     int destroyImageCount;
@@ -26,13 +51,8 @@ protected:
     int createCompleteTime;
     
     int x, y;
-public:
-    
-    int getBuildingType() { return objectType; }
 
-    char* getName() { return name; }
-    int getPrice() { return price; }
-    
+public:
     void setCreateImageCount(int _createImageCount) { createImageCount = _createImageCount; }
     int getCreateImageCount() { return createImageCount; }
     
@@ -44,6 +64,12 @@ public:
     
     void setCreateCompleteTime(int _createCompleteTime) { createCompleteTime = _createCompleteTime; }
     int getCreateCompleteTime() { return createCompleteTime; }
+    
+    int getX() { return x; }
+    void setX(int _x) { x = _x; }
+    
+    int getY() { return y; }
+    void setY(int _y) { y = _y; }
 };
 
 
@@ -125,13 +151,9 @@ public:
 
 
 
-class StaticUnit
+class StaticUnit : public StaticObject
 {
 protected:
-    int unitType;
-    char name[20];
-    int price;
-    int width;
     int maxHp;
     int atk;
     int atkSpeed;
@@ -150,19 +172,6 @@ protected:
     
     
 public:
-    
-    void setUnitType(int _unitType) { unitType = _unitType; }
-    int getUnitType() { return unitType; }
-    
-    void setName(char* _name, int nameLen) { memcpy(name, _name, nameLen); }
-    char* getName() { return name; }
-    
-    void setPrice(int _price) { price = _price; }
-    int getPrice() { return price; }
-    
-    void setWidth(int _width) { width = _width; }
-    int getWidth() { return width; }
-    
     void setMaxHp(int _maxHp) { maxHp = _maxHp; }
     int getMaxHp() { return maxHp; }
     

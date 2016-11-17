@@ -6,6 +6,7 @@
 #include "NetworkManager.h"
 #include "TaskManager.h"
 #include "GameWorld.h"
+#include "TopLayer.h"
 #include "ControlLayer.h"
 #include "ObjectInfos.h"
 #include <ui/CocosGUI.h>
@@ -30,6 +31,8 @@ bool GameScene::init()
     {
         return false;
     }
+    topLayer = TopLayer::create();
+    this->addChild(topLayer);
     
 	updateCount = 0;
 
@@ -47,14 +50,18 @@ bool GameScene::init()
         return false;
     }
 
-    auto background = Sprite::create("game_back_ground_01.png");
-    background->setAnchorPoint(Vec2(0, 0));
-    background->setPosition(Vec2(0, 0));
+//    auto background = Sprite::create("game_back_ground_01.png");
+//    background->setAnchorPoint(Vec2(0, 0));
+//    background->setPosition(Vec2(0, 0));
+//    
+//    addChild(background, 0);
+//
     
-    addChild(background, 0);
+	controlLayer = ControlLayer::create();
+    if(controlLayer->initWithParameter(gameManager->getGameWorld()->getGamePlayer(0)) == false) {
+        return false;
+    }
     
-	ControlLayer* controlLayer = ControlLayer::create();
-	controlLayer->setGamePlayer(gameManager->getGameWorld()->getGamePlayer(0));
 	this->addChild(controlLayer);
 
     

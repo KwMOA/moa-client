@@ -30,52 +30,83 @@ bool ControlLayer::init()
 		return false;
 	}
 
-    objectInfoList = new ObjectInfoList();
-    
-//	list = LinkedList<CustomButton*>();
-//	itr = LinkedList<CustomButton*>::iterator();
-	layerLength = 0;
-
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-	moveLayer = Layer::create();
-	//Bottom menu gui
-
-	auto BottomBackground = Sprite::create("bg_bottom.png");
-	BottomBackground->setPosition(Vec2(0, 0));
-	BottomBackground->setAnchorPoint(Vec2(0, 0));
-
-	auto buttonLeft = Button::create("cursor.png", "cursor_pressed.png", "cursor_pressed.png");
-	auto buttonRight = Button::create("cursor.png", "cursor_pressed.png", "cursor_pressed.png");
-
-	buttonLeft->setAnchorPoint(Vec2(0, 0));
-	buttonLeft->setPosition(Vec2(0, 0));
-	buttonRight->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
-	buttonRight->setPosition(Vec2(WIDTH, 0));
-
-	BottomBackground->addChild(buttonRight, 1);
-	BottomBackground->addChild(buttonLeft, 1);
-
-    rootCustomButton = new CustomButton(BUTTON_TYPE_ROOT, 0, 0, this, nullptr);
-    buttonList.push_back(rootCustomButton);
-    
-    openButtones(rootCustomButton);
-
-    refreshMoveLayer(nullptr);
-
-	moveLayer->setAnchorPoint(Vec2(0, 0));
-	BottomBackground->addChild(moveLayer, 0);
-	this->addChild(BottomBackground);
-
-	buttonLeft->addTouchEventListener(CC_CALLBACK_2(ControlLayer::enterCallback, this));
-	buttonLeft->setTag(1);
-	buttonRight->addTouchEventListener(CC_CALLBACK_2(ControlLayer::enterCallback, this));
-	buttonRight->setTag(2);
-
 	return true;
 }
 
+bool ControlLayer::initWithParameter(GamePlayer* _gamePlayer)
+{
+    gamePlayer = _gamePlayer;
+    
+    objectInfoList = new ObjectInfoList();
+    
+    //	list = LinkedList<CustomButton*>();
+    //	itr = LinkedList<CustomButton*>::iterator();
+    layerLength = 0;
+    
+    auto visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    
+    moveLayer = Layer::create();
+    //Bottom menu gui
+    
+    auto BottomBackground = Sprite::create("bg_bottom.png");
+    BottomBackground->setPosition(Vec2(0, 0));
+    BottomBackground->setAnchorPoint(Vec2(0, 0));
+    
+    auto buttonLeft = Button::create("cursor.png", "cursor_pressed.png", "cursor_pressed.png");
+    auto buttonRight = Button::create("cursor.png", "cursor_pressed.png", "cursor_pressed.png");
+    
+    buttonLeft->setAnchorPoint(Vec2(0, 0));
+    buttonLeft->setPosition(Vec2(0, 0));
+    buttonRight->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
+    buttonRight->setPosition(Vec2(WIDTH, 0));
+    
+    this->addChild(buttonRight, 1);
+    this->addChild(buttonLeft, 1);
+    
+    
+    CustomButton* plusButton = new CustomButton(BUTTON_TYPE_ACTION, ACTION_BUTTON_TYPE_UNIT_PLUS, this, nullptr);
+    CustomButton* minusButton = new CustomButton(BUTTON_TYPE_ACTION, ACTION_BUTTON_TYPE_UNIT_MINUS, this, nullptr);
+    CustomButton* line1Button = new CustomButton(BUTTON_TYPE_ACTION, ACTION_BUTTON_TYPE_LINE_1, this, nullptr);
+    CustomButton* line2Button = new CustomButton(BUTTON_TYPE_ACTION, ACTION_BUTTON_TYPE_LINE_2, this, nullptr);
+    CustomButton* line3Button = new CustomButton(BUTTON_TYPE_ACTION, ACTION_BUTTON_TYPE_LINE_3, this, nullptr);
+    CustomButton* createButton = new CustomButton(BUTTON_TYPE_ACTION, ACTION_BUTTON_TYPE_BUILDING_CREATE, this, nullptr);
+    CustomButton* cancelCreateButton = new CustomButton(BUTTON_TYPE_ACTION, ACTION_BUTTON_TYPE_BUILDING_CREATE_CANCEL, this, nullptr);
+    CustomButton* upgradeButton = new CustomButton(BUTTON_TYPE_ACTION, ACTION_BUTTON_TYPE_UPGRADE, this, nullptr);
+    CustomButton* upgradeCreateButton = new CustomButton(BUTTON_TYPE_ACTION, ACTION_BUTTON_TYPE_UPGRADE_CANCEL, this, nullptr);
+    
+    unitActionButtonList.push_back(plusButton);
+    unitActionButtonList.push_back(minusButton);
+    unitActionButtonList.push_back(line1Button);
+    unitActionButtonList.push_back(line2Button);
+    unitActionButtonList.push_back(line3Button);
+    
+    buildingCreateButtonList.push_back(createButton);
+    buildingCreateCancelButtonList.push_back(cancelCreateButton);
+    upgradeCreateButtonList.push_back(upgradeButton);
+    upgradeCreateCancelButtonList.push_back(upgradeCreateButton);
+    
+    
+    
+    rootCustomButton = new CustomButton(BUTTON_TYPE_ROOT, 0, this, nullptr);
+    buttonList.push_back(rootCustomButton);
+    
+    openButtones(rootCustomButton);
+    
+    refreshMoveLayer(rootCustomButton);
+    
+    moveLayer->setPosition(Vec2(-(((double)DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9), 0));
+    moveLayer->setAnchorPoint(Vec2(0, 0));
+    this->addChild(moveLayer, 0);
+    //	this->addChild(BottomBackground);
+    
+    buttonLeft->addTouchEventListener(CC_CALLBACK_2(ControlLayer::enterCallback, this));
+    buttonLeft->setTag(1);
+    buttonRight->addTouchEventListener(CC_CALLBACK_2(ControlLayer::enterCallback, this));
+    buttonRight->setTag(2);
+    
+    return true;
+}
 
 
 void ControlLayer::buttonCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType, CustomButton* customButton)
@@ -93,22 +124,25 @@ void ControlLayer::buttonCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
                 
             default: // building, unit, upgrade button
                 
-                if(customButton->isOpened()) {
-                    
-                    closeButtones(customButton);
+                if(customButton->getState() == STATIC_OBJECT_STATE_DISABLE) {
                     
                 } else {
-                    CustomButton* parentButton = customButton->getParentButton();
+                    if(customButton->isOpened()) {
+                        
+                        closeButtones(customButton);
+                        
+                    } else {
+                        CustomButton* parentButton = customButton->getParentButton();
+                        
+                        closeButtones(parentButton);
+                        
+                        openButtones(parentButton);
+                        
+                        openButtones(customButton);
+                    }
                     
-                    closeButtones(parentButton);
-                    
-                    openButtones(parentButton);
-                    
-                    openButtones(customButton);
+                    refreshMoveLayer(customButton);
                 }
-                
-                refreshMoveLayer(customButton);
-                
                 break;
         }
         
@@ -168,16 +202,39 @@ void ControlLayer::refreshMoveLayer(CustomButton* customButton)
     int i = 1;
     for (buttonListItr = buttonList.begin(); buttonListItr != buttonList.end(); buttonListItr++) {
         if(*buttonListItr == customButton) {
-            moveLayer->setPositionX(120 - (((double)DISPLAY_WIDTH - 240) / 9) * i);
+            moveLayer->setPositionX(MOVE_MOVE_LAYER_BUTTON_WIDTH - (((double)DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9) * i);
         }
         
-        (*buttonListItr)->getButton()->setPositionX(((double)(DISPLAY_WIDTH - 240) / 9) * (i + 1));
+        (*buttonListItr)->getButton()->setPositionX(((double)(DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9) * (i + 1));
         moveLayer->addChild((*buttonListItr)->getButton());
         i++;
     }
 }
 
 
+void ControlLayer::enterCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType) {
+    
+    Button* item = (Button*)pSender;
+    switch (item->getTag()) {
+        case 1:
+            if (cocos2d::ui::Widget::TouchEventType::BEGAN == eventType) {
+                
+                if (moveLayer->getPositionX() + ((double)(DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9) < -1) {
+                    moveLayer->setPositionX(moveLayer->getPositionX() + ((double)(DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9));
+                }
+            }
+            break;
+        case 2:
+            if (cocos2d::ui::Widget::TouchEventType::BEGAN == eventType) {
+                
+                if (moveLayer->getPositionX() - ((double)(DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9) + ((buttonList.size() + 1) * ((double)(DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9)) >  (DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2))) {
+                    moveLayer->setPositionX(moveLayer->getPositionX() - ((double)(DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9));
+                }
+            }
+            break;
+            
+    }
+}
 
 
 
@@ -378,32 +435,6 @@ void ControlLayer::buildingCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::
 	}
 }
 
-void ControlLayer::enterCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType) {
-	MoveBy* action;
-
-	Button* item = (Button*)pSender;
-	int count = 0;
-	switch (item->getTag()) {
-	case 1:
-		if (cocos2d::ui::Widget::TouchEventType::BEGAN == eventType) {
-			if (moveLayer->getPosition().x < 120) {
-                moveLayer->setPositionX(moveLayer->getPositionX() + ((double)(DISPLAY_WIDTH - 240) / 9));
-//				action = MoveBy::create(0.0, Point((DISPLAY_WIDTH - 240) / 9, 0));
-//				moveLayer->runAction(action);
-			}
-		}
-		break;
-	case 2:
-		if (cocos2d::ui::Widget::TouchEventType::BEGAN == eventType) {
-            moveLayer->setPositionX(moveLayer->getPositionX() - ((double)(DISPLAY_WIDTH - 240) / 9));
-
-//			action = MoveBy::create(0.0, Point(-120, 0));
-//			moveLayer->runAction(action);
-		}
-		break;
-
-	}
-}
 
 void ControlLayer::makeBuildingButton(int objectType) {
 	
@@ -473,11 +504,11 @@ void ControlLayer::actionByBuilding(Button * refButton, size_t howMany, size_t u
 //
 //	for (itr = list.begin(); itr != list.end(); itr++) {
 //		button = itr.getData()->getButton();
-//		button->setPosition(Vec2(120 * (count++), 0));
+//		button->setPosition(Vec2(MOVE_MOVE_LAYER_BUTTON_WIDTH * (count++), 0));
 //		moveLayer->addChild(itr.getData()->getButton());
 //	}
 //
-//	moveLayer->setPosition(Vec2(120 * (-1 * refButton->getTag() + 1), 0));
+//	moveLayer->setPosition(Vec2(MOVE_MOVE_LAYER_BUTTON_WIDTH * (-1 * refButton->getTag() + 1), 0));
 }
 
 
@@ -635,11 +666,11 @@ void ControlLayer::actionByUnit(Button * refButton, size_t howMany)
 //	
 //	for (itr = list.begin(); itr != NULL; itr++) {
 //		button = itr.getData()->getButton();
-//		button->setPosition(Vec2(120 * (count++), 0));
+//		button->setPosition(Vec2(MOVE_MOVE_LAYER_BUTTON_WIDTH * (count++), 0));
 //		moveLayer->addChild(itr.getData()->getButton());
 //	}
 //
-//	moveLayer->setPosition(Vec2(-120 * (list.getLocation(name)-2), 0));
+//	moveLayer->setPosition(Vec2(-MOVE_MOVE_LAYER_BUTTON_WIDTH * (list.getLocation(name)-2), 0));
 }
 
 char* ControlLayer::makeName(string _name, int _no)

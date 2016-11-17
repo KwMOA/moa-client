@@ -48,7 +48,7 @@ protected:
     
 
     int gold;
-    int unitPopulation;
+    int population;
     
     int objectNoCreator;
     
@@ -76,6 +76,9 @@ public:
     void addGold(int plus) { gold += plus; }
     
     int getGold() { return gold; }
+    void setGold(int _gold);
+    int getPopulation() { return population; }
+    void setPopulation(int _population);
     
     std::list<Unit*> getUnitListByUnitType(int unitType);
     

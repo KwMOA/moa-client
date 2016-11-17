@@ -102,8 +102,10 @@ Building::Building(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gameP
     }
     
     objectLayer->setAnchorPoint(Vec2(0.5, 0));
-    objectLayer->setPositionX(gamePlayer->sameXPlayerIndex(60));
+    objectLayer->setPosition(Vec2(gamePlayer->sameXPlayerIndex(staticBuilding->getX()), staticBuilding->getY()));
     objectLayer->addChild(images[0][0], 0, TAG_IMAGE_OBJECT);
+    
+    gamePlayer->setGold(gamePlayer->getGold() - staticBuilding->getPrice());
 }
 
 void Building::update(int updateCount)

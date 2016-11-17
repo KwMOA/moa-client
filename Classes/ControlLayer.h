@@ -26,6 +26,27 @@ private:
     std::list<CustomButton*> buttonList;
     std::list<CustomButton*>::iterator buttonListItr;
     
+    CustomButton* plusButton;
+    CustomButton* minusButton;
+    CustomButton* line1Button;
+    CustomButton* line2Button;
+    CustomButton* line3Button;
+    
+    std::list<CustomButton*> unitActionButtonList;
+    
+    std::list<CustomButton*> buildingCreateButtonList;
+    
+    std::list<CustomButton*> buildingCreateCancelButtonList;
+    
+    std::list<CustomButton*> upgradeCreateButtonList;
+    
+    std::list<CustomButton*> upgradeCreateCancelButtonList;
+    
+    CustomButton* createButton;
+    CustomButton* cancelCreateButton;
+    CustomButton* upgradeButton;
+    CustomButton* upgradeCreateButton;
+    
 	char buf[128];
 	string name;
 	string clickedName;
@@ -46,8 +67,11 @@ private:
 public:
 
 	virtual bool init();
+    bool initWithParameter(GamePlayer* gamePlayer);
 	void update(float dt);	
     void refreshMoveLayer(CustomButton* customButton);
+    
+    GamePlayer* getGamePlayer() { return gamePlayer; }
     
     void makeBuildingButton(int objectType);
 
@@ -58,6 +82,12 @@ public:
     void closeButtones(CustomButton* customButton);
     
     void openButtones(CustomButton* customButton);
+    
+    std::list<CustomButton*>* getUnitActionButtonList() { return &unitActionButtonList; }
+    std::list<CustomButton*>* getBuildingCreateButtonList() { return &buildingCreateButtonList; }
+    std::list<CustomButton*>* getBuildingCreateCancelButtonList() { return &buildingCreateCancelButtonList; }
+    std::list<CustomButton*>* getUpgradeCreateButtonList() { return &upgradeCreateButtonList; }
+    std::list<CustomButton*>* getUpgradeCreateCancelButtonList() { return &upgradeCreateCancelButtonList; }
 
 	void completeCreateBuildingNotify(int objectType);
 	void completeUgradeNotify(int upgradeType, int upgradeCompleteNum);

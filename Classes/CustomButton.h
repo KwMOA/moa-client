@@ -20,12 +20,12 @@ private:
 	cocos2d::ui::Button* btn;
 
 public:
-    std::list<CustomButton*> buttonList;
+    std::list<CustomButton*>* buttonList;
     std::list<CustomButton*>::iterator buttonListItr;
     
 public:
     CustomButton() {};
-    CustomButton(int _buttonType, int _objectType, int state, ControlLayer* controlLayer, CustomButton* _parentButton);
+    CustomButton(int _buttonType, int _objectType, ControlLayer* controlLayer, CustomButton* _parentButton);
 	~CustomButton();
 	void setButton(cocos2d::ui::Button* _btn);
 	cocos2d::ui::Button* getButton();

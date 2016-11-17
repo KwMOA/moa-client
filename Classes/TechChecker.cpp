@@ -14,9 +14,9 @@ TechChecker::TechChecker(GamePlayer* player) {
 
 
 bool TechChecker::checkCreateBuilding(int objectType) {
-	BaseObject* baseObject;
-	Building* building;
-
+//	BaseObject* baseObject;
+//	Building* building;
+//
 //	switch (objectType) {
 //	case OBJECT_TYPE_BUILDING_1:	//need NULL
 //		return true;
@@ -40,7 +40,7 @@ bool TechChecker::checkCreateBuilding(int objectType) {
 //        }
 //        
 //        if(gamePlayer->getGold() < gamePlayer->getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_3)->getPrice()) {
-//            
+//            return false;
 //        }
 ////
 ////		if (baseObject != nullptr && (baseObject->getState() == OBJECT_STATE_IDLE || baseObject->getState() == OBJECT_STATE_UPGRADING || baseObject->getState() == OBJECT_STATE_CREATING_UNIT)) { return true; }
@@ -91,6 +91,8 @@ bool TechChecker::checkCreateBuilding(int objectType) {
 //	default:
 //		return false;
 //	}
+    
+    return true;
 }
 
 bool TechChecker::checkCancelBuilding(int objectNo) {
@@ -98,6 +100,8 @@ bool TechChecker::checkCancelBuilding(int objectNo) {
 //	if (baseObject != nullptr && baseObject->getState() == OBJECT_STATE_CREATING)
 //		return true;
 //	return false;
+    return true;
+
 }
 
 bool TechChecker::ckeckUpgradeBuilding(int objectNo)
@@ -107,6 +111,8 @@ bool TechChecker::ckeckUpgradeBuilding(int objectNo)
 //	if (baseObject != nullptr && baseObject->getState() == OBJECT_STATE_IDLE)
 //		return true;
 //	return false;
+    return true;
+
 }
 
 bool TechChecker::checkCancleUpgradeBuilding(int objectNo)
@@ -116,6 +122,7 @@ bool TechChecker::checkCancleUpgradeBuilding(int objectNo)
 //	if (baseObject != nullptr && baseObject->getState() == OBJECT_STATE_UPGRADING)
 //		return true;
 //	return false;
+    return true;
 }
 
 bool TechChecker::checkCreateUnit(int objectNo)

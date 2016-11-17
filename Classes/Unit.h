@@ -42,7 +42,7 @@ public:
     int getUpdateCount() { return updateCount; }
     void setHp(int _hp) { hp = _hp; if(hp < 0) hp = 0; hpBar->setScale(  (((double)hp) / staticUnit->getMaxHp()) * 0.5 , 0.5 );}
     int getHp() { return hp; }
-    void setLineNo(int _lineNo) { lineNo = _lineNo; objectLayer->setPosition(Vec2(x, DISPLAY_HEIGHT - (_lineNo * 100))); }
+    void setLineNo(int _lineNo) { lineNo = _lineNo; objectLayer->setPositionY(DISPLAY_HEIGHT - ( 62 + ((_lineNo - 1) * 64 * 3))); }
     int getLineNo() { return lineNo; }
     
     
@@ -56,7 +56,7 @@ public:
     
     /////////////////////////////////////////////////// TODO. set with influence
     
-    int getUnitType() { return staticUnit->getUnitType(); }
+    int getUnitType() { return staticUnit->getObjectType(); }
     
     std::string getName() { return staticUnit->getName(); }
     

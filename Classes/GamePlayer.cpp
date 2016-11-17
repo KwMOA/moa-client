@@ -15,6 +15,9 @@
 #include "StaticObject.h"
 #include "GameWorld.h"
 #include "TechChecker.h"
+#include "GameManager.h"
+#include "GameScene.h"
+#include "TopLayer.h"
 
 GamePlayer::GamePlayer(GameWorld* _gameWorld, int _playerIndex)
 {
@@ -60,7 +63,8 @@ GamePlayer::GamePlayer(GameWorld* _gameWorld, int _playerIndex)
     
     ////////////////////
     
-    gold = 0;
+    setGold(getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_1)->getPrice() + getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_2)->getPrice());
+    setPopulation(0);
     
     checker = new TechChecker(this);
     
@@ -251,7 +255,7 @@ StaticUnit* GamePlayer::getStaticUnitByUnitType(int unitType)
 {
     for(staticUnitItr = staticUnitList.begin(); staticUnitItr != staticUnitList.end(); staticUnitItr++)
     {
-        if((*staticUnitItr)->getUnitType() == unitType)
+        if((*staticUnitItr)->getObjectType() == unitType)
         {
             return *staticUnitItr;
         }
@@ -265,7 +269,7 @@ StaticBuilding* GamePlayer::getStaticBuildingByBuildingType(int buildingType)
 {
     for(staticBuildingItr = staticBuildingList.begin(); staticBuildingItr != staticBuildingList.end(); staticBuildingItr++)
     {
-        if((*staticBuildingItr)->getBuildingType() == buildingType)
+        if((*staticBuildingItr)->getObjectType() == buildingType)
         {
             return *staticBuildingItr;
         }
@@ -482,4 +486,20 @@ bool GamePlayer::isFinished()
 void GamePlayer::finishUnitDead()
 {
     
+}
+
+void GamePlayer::setGold(int _gold)
+{
+    gold = _gold;
+    
+    if(playerIndex == 0)
+        gameWorld->getGameManager()->getGameScene()->getTopLayer()->changeGold(gold);
+}
+
+void GamePlayer::setPopulation(int _population)
+{
+    population = _population;
+    
+    if(playerIndex == 0)
+        gameWorld->getGameManager()->getGameScene()->getTopLayer()->changePopulation(population);
 }

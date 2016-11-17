@@ -81,38 +81,38 @@ bool LobbyScene::init()
     lobbyRankGameLayer = LobbyRankGameLayer::create();
     lobbyRankGameLayer->retain();
     
-    lobbyRankGameLayer->setAnchorPoint(Vec2(0, 0));
-    lobbyRankGameLayer->setPosition(Vec2(0, 0));
-    
-    lobbyChannelLayer = LobbyChannelLayer::create();
-    lobbyChannelLayer->retain();
-    
-    lobbyChannelLayer->setAnchorPoint(Vec2(0, 0));
-    lobbyChannelLayer->setPosition(Vec2(0, 0));
-    
-    lobbyFriendLayer = LobbyFriendLayer::create();
-    lobbyFriendLayer->retain();
-    
-    lobbyFriendLayer->setAnchorPoint(Vec2(0, 0));
-    lobbyFriendLayer->setPosition(Vec2(0, 0));
-    
-    lobbyClanLayer = LobbyClanLayer::create();
-    lobbyClanLayer->retain();
-    
-    lobbyClanLayer->setAnchorPoint(Vec2(0, 0));
-    lobbyClanLayer->setPosition(Vec2(0, 0));
-    
-    lobbyRankingLayer = LobbyRankingLayer::create();
-    lobbyRankingLayer->retain();
-    
-    lobbyRankingLayer->setAnchorPoint(Vec2(0, 0));
-    lobbyRankingLayer->setPosition(Vec2(0, 0));
-    
-    lobbyBoardLayer = LobbyBoardLayer::create();
-    lobbyBoardLayer->retain();
-    
-    lobbyBoardLayer->setAnchorPoint(Vec2(0, 0));
-    lobbyBoardLayer->setPosition(Vec2(0, 0));
+//    lobbyRankGameLayer->setAnchorPoint(Vec2(0, 0));
+//    lobbyRankGameLayer->setPosition(Vec2(0, 0));
+//    
+//    lobbyChannelLayer = LobbyChannelLayer::create();
+//    lobbyChannelLayer->retain();
+//    
+//    lobbyChannelLayer->setAnchorPoint(Vec2(0, 0));
+//    lobbyChannelLayer->setPosition(Vec2(0, 0));
+//    
+//    lobbyFriendLayer = LobbyFriendLayer::create();
+//    lobbyFriendLayer->retain();
+//    
+//    lobbyFriendLayer->setAnchorPoint(Vec2(0, 0));
+//    lobbyFriendLayer->setPosition(Vec2(0, 0));
+//    
+//    lobbyClanLayer = LobbyClanLayer::create();
+//    lobbyClanLayer->retain();
+//    
+//    lobbyClanLayer->setAnchorPoint(Vec2(0, 0));
+//    lobbyClanLayer->setPosition(Vec2(0, 0));
+//    
+//    lobbyRankingLayer = LobbyRankingLayer::create();
+//    lobbyRankingLayer->retain();
+//    
+//    lobbyRankingLayer->setAnchorPoint(Vec2(0, 0));
+//    lobbyRankingLayer->setPosition(Vec2(0, 0));
+//    
+//    lobbyBoardLayer = LobbyBoardLayer::create();
+//    lobbyBoardLayer->retain();
+//    
+//    lobbyBoardLayer->setAnchorPoint(Vec2(0, 0));
+//    lobbyBoardLayer->setPosition(Vec2(0, 0));
     
     
     

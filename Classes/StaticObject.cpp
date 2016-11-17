@@ -12,8 +12,8 @@
 
 StaticUnit_1::StaticUnit_1()
 {
-    unitType = OBJECT_TYPE_UNIT_1;
-    
+    objectType = OBJECT_TYPE_UNIT_1;
+    staticObjectState = STATIC_OBJECT_STATE_DISABLE;
     runImageCount = 6;
     attackImageCount = 6;
     deathImageCount = 6;
@@ -36,8 +36,9 @@ StaticUnit_1::StaticUnit_1()
 
 StaticUnit_2::StaticUnit_2()
 {
-    unitType = OBJECT_TYPE_UNIT_2;
-    
+    objectType = OBJECT_TYPE_UNIT_2;
+    staticObjectState = STATIC_OBJECT_STATE_DISABLE;
+
     runImageCount = 6;
     attackImageCount = 6;
     deathImageCount = 6;
@@ -59,8 +60,9 @@ StaticUnit_2::StaticUnit_2()
 
 StaticUnit_3::StaticUnit_3()
 {
-    unitType = OBJECT_TYPE_UNIT_3;
-    
+    objectType = OBJECT_TYPE_UNIT_3;
+    staticObjectState = STATIC_OBJECT_STATE_DISABLE;
+
     runImageCount = 6;
     attackImageCount = 6;
     deathImageCount = 6;
@@ -85,8 +87,9 @@ StaticUnit_3::StaticUnit_3()
 
 StaticUnit_4::StaticUnit_4()
 {
-    unitType = OBJECT_TYPE_UNIT_4;
-    
+    objectType = OBJECT_TYPE_UNIT_4;
+    staticObjectState = STATIC_OBJECT_STATE_DISABLE;
+
     runImageCount = 6;
     attackImageCount = 6;
     deathImageCount = 6;
@@ -110,8 +113,9 @@ StaticUnit_4::StaticUnit_4()
 
 StaticUnit_5::StaticUnit_5()
 {
-    unitType = OBJECT_TYPE_UNIT_5;
-    
+    objectType = OBJECT_TYPE_UNIT_5;
+    staticObjectState = STATIC_OBJECT_STATE_DISABLE;
+
     runImageCount = 6;
     attackImageCount = 6;
     deathImageCount = 6;
@@ -136,8 +140,9 @@ StaticUnit_5::StaticUnit_5()
 
 StaticUnit_6::StaticUnit_6()
 {
-    unitType = OBJECT_TYPE_UNIT_6;
-    
+    objectType = OBJECT_TYPE_UNIT_6;
+    staticObjectState = STATIC_OBJECT_STATE_DISABLE;
+
     runImageCount = 6;
     attackImageCount = 6;
     deathImageCount = 6;
@@ -161,8 +166,9 @@ StaticUnit_6::StaticUnit_6()
 
 StaticUnit_7::StaticUnit_7()
 {
-    unitType = OBJECT_TYPE_UNIT_7;
-    
+    objectType = OBJECT_TYPE_UNIT_7;
+    staticObjectState = STATIC_OBJECT_STATE_DISABLE;
+
     runImageCount = 6;
     attackImageCount = 6;
     deathImageCount = 6;
@@ -186,8 +192,9 @@ StaticUnit_7::StaticUnit_7()
 
 StaticUnit_8::StaticUnit_8()
 {
-    unitType = OBJECT_TYPE_UNIT_8;
-    
+    objectType = OBJECT_TYPE_UNIT_8;
+    staticObjectState = STATIC_OBJECT_STATE_DISABLE;
+
     runImageCount = 6;
     attackImageCount = 6;
     deathImageCount = 6;
@@ -212,8 +219,9 @@ StaticUnit_8::StaticUnit_8()
 
 StaticUnit_9::StaticUnit_9()
 {
-    unitType = OBJECT_TYPE_UNIT_9;
-    
+    objectType = OBJECT_TYPE_UNIT_9;
+    staticObjectState = STATIC_OBJECT_STATE_DISABLE;
+
     runImageCount = 6;
     attackImageCount = 6;
     deathImageCount = 6;
@@ -239,7 +247,8 @@ StaticUnit_9::StaticUnit_9()
 StaticBuilding_1::StaticBuilding_1()
 {
     objectType = OBJECT_TYPE_BUILDING_1;
-    
+    staticObjectState = STATIC_OBJECT_STATE_BUILDING_CREATED;
+
     createImageCount = 3;
     workImageCount = 2;
     destroyImageCount = 3;
@@ -258,7 +267,8 @@ StaticBuilding_1::StaticBuilding_1()
 StaticBuilding_2::StaticBuilding_2()
 {
     objectType = OBJECT_TYPE_BUILDING_2;
-    
+    staticObjectState = STATIC_OBJECT_STATE_BUILDING_CREATED;
+
     createImageCount = 3;
     workImageCount = 2;
     destroyImageCount = 3;
@@ -277,7 +287,8 @@ StaticBuilding_2::StaticBuilding_2()
 StaticBuilding_3::StaticBuilding_3()
 {
     objectType = OBJECT_TYPE_BUILDING_3;
-    
+    staticObjectState = STATIC_OBJECT_STATE_ABLE;
+
     createImageCount = 3;
     workImageCount = 2;
     destroyImageCount = 3;
@@ -296,7 +307,8 @@ StaticBuilding_3::StaticBuilding_3()
 StaticBuilding_4::StaticBuilding_4()
 {
     objectType = OBJECT_TYPE_BUILDING_4;
-    
+    staticObjectState = STATIC_OBJECT_STATE_DISABLE;
+
     createImageCount = 3;
     workImageCount = 2;
     destroyImageCount = 3;
@@ -315,7 +327,8 @@ StaticBuilding_4::StaticBuilding_4()
 StaticBuilding_5::StaticBuilding_5()
 {
     objectType = OBJECT_TYPE_BUILDING_5;
-    
+    staticObjectState = STATIC_OBJECT_STATE_DISABLE;
+
     createImageCount = 3;
     workImageCount = 2;
     destroyImageCount = 3;
@@ -334,7 +347,8 @@ StaticBuilding_5::StaticBuilding_5()
 StaticBuilding_6::StaticBuilding_6()
 {
     objectType = OBJECT_TYPE_BUILDING_6;
-    
+    staticObjectState = STATIC_OBJECT_STATE_DISABLE;
+
     createImageCount = 3;
     workImageCount = 2;
     destroyImageCount = 3;
@@ -354,7 +368,8 @@ StaticBuilding_6::StaticBuilding_6()
 StaticBuilding_7::StaticBuilding_7()
 {
     objectType = OBJECT_TYPE_BUILDING_7;
-    
+    staticObjectState = STATIC_OBJECT_STATE_DISABLE;
+
     createImageCount = 3;
     workImageCount = 2;
     destroyImageCount = 3;
@@ -373,7 +388,8 @@ StaticBuilding_7::StaticBuilding_7()
 StaticBuilding_8::StaticBuilding_8()
 {
     objectType = OBJECT_TYPE_BUILDING_8;
-    
+    staticObjectState = STATIC_OBJECT_STATE_DISABLE;
+
     createImageCount = 3;
     workImageCount = 2;
     destroyImageCount = 3;
@@ -392,7 +408,8 @@ StaticBuilding_8::StaticBuilding_8()
 StaticBuilding_9::StaticBuilding_9()
 {
     objectType = OBJECT_TYPE_BUILDING_9;
-    
+    staticObjectState = STATIC_OBJECT_STATE_DISABLE;
+
     createImageCount = 3;
     workImageCount = 2;
     destroyImageCount = 3;
@@ -411,7 +428,8 @@ StaticBuilding_9::StaticBuilding_9()
 StaticBuilding_10::StaticBuilding_10()
 {
     objectType = OBJECT_TYPE_BUILDING_10;
-    
+    staticObjectState = STATIC_OBJECT_STATE_DISABLE;
+
     createImageCount = 3;
     workImageCount = 2;
     destroyImageCount = 3;
@@ -430,7 +448,8 @@ StaticBuilding_10::StaticBuilding_10()
 StaticBuilding_11::StaticBuilding_11()
 {
     objectType = OBJECT_TYPE_BUILDING_11;
-    
+    staticObjectState = STATIC_OBJECT_STATE_DISABLE;
+
     createImageCount = 3;
     workImageCount = 2;
     destroyImageCount = 3;
@@ -449,7 +468,8 @@ StaticBuilding_11::StaticBuilding_11()
 StaticBuilding_12::StaticBuilding_12()
 {
     objectType = OBJECT_TYPE_BUILDING_12;
-    
+    staticObjectState = STATIC_OBJECT_STATE_DISABLE;
+
     createImageCount = 3;
     workImageCount = 2;
     destroyImageCount = 3;

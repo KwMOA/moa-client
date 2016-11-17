@@ -20,11 +20,16 @@ GameWorld::GameWorld(GameManager* _gameManager)
     gameManager = _gameManager;
     
     gameMap = Layer::create();
-
+    
+    auto bg = Sprite::create("fefefe.png");
+    gameMap->addChild(bg);
+    bg->setAnchorPoint(Vec2(0.5, 0.5));
+    bg->setPosition(Vec2((DISPLAY_WIDTH / 2), (DISPLAY_HEIGHT / 2) - 120));
+    
     gameMap->setAnchorPoint(Vec2(0,0));
     gameMap->setPosition(Vec2(0,0));
     
-    gameManager->getGameScene()->addChild(gameMap, 1);
+    gameManager->getGameScene()->addChild(gameMap, 0);
 
     
     if(gameManager->isAiMode()) {

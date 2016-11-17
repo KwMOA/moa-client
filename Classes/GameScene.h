@@ -5,11 +5,14 @@
 
 class GameManager;
 class ObjectInfoList;
-
+class TopLayer;
+class ControlLayer;
 class GameScene : public BaseLayer
 {
 private:
     GameManager* gameManager;
+    TopLayer* topLayer;
+    ControlLayer* controlLayer;
 //	ObjectInfoList* objectInfoList;
     
 public:
@@ -28,6 +31,8 @@ public:
     
 public:
     GameManager* getGameManager() { return gameManager; }
+    TopLayer* getTopLayer() { return topLayer; }
+    ControlLayer* getControlLayer() { return controlLayer; }
 //	ObjectInfoList* getObjectInfoList() { return objectInfoList; }
     
 };

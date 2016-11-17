@@ -109,14 +109,21 @@ Unit::Unit(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gamePlayer, _
     hpBar->setScale(0.5, 0.5);
     objectLayer->addChild(hpBar);
     
+    //set gold and population
+    gamePlayer->setGold(gamePlayer->getGold() - staticUnit->getPrice());
+    gamePlayer->setPopulation(gamePlayer->getPopulation() + staticUnit->getPopulation());
+    
+    
     
     ActRun* act = new ActRun(this);
     actList.push_back(act);
-
+    
+    
 }
 
 Unit* Unit::createUnit(GamePlayer* _gamePlayer, int _objectType)
 {
+    
     switch (_objectType) {
         case OBJECT_TYPE_UNIT_1:
             return new Unit_1(_gamePlayer);
@@ -210,6 +217,8 @@ void Unit::applyInfluence()
         }
         
         target = nullptr;
+        
+        gamePlayer->setPopulation(gamePlayer->getPopulation() - staticUnit->getPopulation());
         
         //메모리 해제
         
