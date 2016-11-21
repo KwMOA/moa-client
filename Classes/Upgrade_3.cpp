@@ -14,9 +14,8 @@
 #include "Building_7.h"
 #include "StaticObject.h"
 
-Upgrade_3::Upgrade_3(Building* building) : Upgrade(building)
+Upgrade_3::Upgrade_3(Building* building) : Upgrade(building, OBJECT_TYPE_UPGRADE_3)
 {
-    upgradeType = UPGRADE_TYPE_3;
 }
 
 

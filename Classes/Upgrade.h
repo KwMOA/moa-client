@@ -10,10 +10,12 @@
 #define Upgrade_h
 
 #include <stdio.h>
+#include "BaseObject.h"
 
 class Building;
+class StaticUpgrade;
 
-class Upgrade
+class Upgrade : public BaseObject
 {
 protected:
     int upgradePercent;
@@ -23,8 +25,9 @@ protected:
     
     Building* owner;
     
+    StaticUpgrade* staticUpgrade;
 public:
-    Upgrade(Building* building);
+    Upgrade(Building* building, int _upgradeType);
     virtual void upgradeComplete() = 0;
     virtual void update(int updateCount) = 0;
     void updateImage();
@@ -38,6 +41,16 @@ public:
     void setUpgradePercent(int percent) { upgradePercent = percent; }
     void setUpgradeCount(int count) { upgradePercent = count; }
     void setUpgradeType(int type) { upgradeType = type; }
+    
+    void updateImage(Layer* layer) {}
+    void click() {}
+    ~Upgrade() {}
+    
+    void setState(int _state);
+    
+    void startUpgrade();
+    void cancelUpgrade();
+    void completeUpgrade();
 };
 
 #endif /* Upgrade_h */

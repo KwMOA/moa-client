@@ -32,30 +32,30 @@ ObjectInfoList::ObjectInfoList()
 //
 //	//Button Upgrade
 //
-//	infoList.push_back(new ButtonInfo("Upgrade_1", BUTTON_STATE_ACTIVE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_1));
-//	infoList.push_back(new ButtonInfo("Upgrade_2", BUTTON_STATE_ACTIVE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_2));
-//	infoList.push_back(new ButtonInfo("Upgrade_3", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_3));
-//	infoList.push_back(new ButtonInfo("Upgrade_4", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_4));
-//	infoList.push_back(new ButtonInfo("Upgrade_5", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_5));
-//	infoList.push_back(new ButtonInfo("Upgrade_6", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_6));
-//	infoList.push_back(new ButtonInfo("Upgrade_7", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_7));
-//	infoList.push_back(new ButtonInfo("Upgrade_8", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_8));
-//	infoList.push_back(new ButtonInfo("Upgrade_9", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_9));
-//	infoList.push_back(new ButtonInfo("Upgrade_10", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_10));
-//	infoList.push_back(new ButtonInfo("Upgrade_11", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_11));
-//	infoList.push_back(new ButtonInfo("Upgrade_12", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_12));
-//	infoList.push_back(new ButtonInfo("Upgrade_13", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_13));
-//	infoList.push_back(new ButtonInfo("Upgrade_14", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_14));
-//	infoList.push_back(new ButtonInfo("Upgrade_15", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_15));
-//	infoList.push_back(new ButtonInfo("Upgrade_16", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_16));
-//	infoList.push_back(new ButtonInfo("Upgrade_17", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_17));
-//	infoList.push_back(new ButtonInfo("Upgrade_18", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_18));
-//	infoList.push_back(new ButtonInfo("Upgrade_19", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_19));
-//	infoList.push_back(new ButtonInfo("Upgrade_20", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_20));
-//	infoList.push_back(new ButtonInfo("Upgrade_21", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_21));
-//	infoList.push_back(new ButtonInfo("Upgrade_22", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_22));
-//	infoList.push_back(new ButtonInfo("Upgrade_23", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_23));
-//	infoList.push_back(new ButtonInfo("Upgrade_24", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, UPGRADE_TYPE_24));
+//	infoList.push_back(new ButtonInfo("Upgrade_1", BUTTON_STATE_ACTIVE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_1));
+//	infoList.push_back(new ButtonInfo("Upgrade_2", BUTTON_STATE_ACTIVE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_2));
+//	infoList.push_back(new ButtonInfo("Upgrade_3", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_3));
+//	infoList.push_back(new ButtonInfo("Upgrade_4", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_4));
+//	infoList.push_back(new ButtonInfo("Upgrade_5", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_5));
+//	infoList.push_back(new ButtonInfo("Upgrade_6", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_6));
+//	infoList.push_back(new ButtonInfo("Upgrade_7", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_7));
+//	infoList.push_back(new ButtonInfo("Upgrade_8", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_8));
+//	infoList.push_back(new ButtonInfo("Upgrade_9", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_9));
+//	infoList.push_back(new ButtonInfo("Upgrade_10", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_10));
+//	infoList.push_back(new ButtonInfo("Upgrade_11", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_11));
+//	infoList.push_back(new ButtonInfo("Upgrade_12", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_12));
+//	infoList.push_back(new ButtonInfo("Upgrade_13", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_13));
+//	infoList.push_back(new ButtonInfo("Upgrade_14", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_14));
+//	infoList.push_back(new ButtonInfo("Upgrade_15", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_15));
+//	infoList.push_back(new ButtonInfo("Upgrade_16", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_16));
+//	infoList.push_back(new ButtonInfo("Upgrade_17", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_17));
+//	infoList.push_back(new ButtonInfo("Upgrade_18", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_18));
+//	infoList.push_back(new ButtonInfo("Upgrade_19", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_19));
+//	infoList.push_back(new ButtonInfo("Upgrade_20", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_20));
+//	infoList.push_back(new ButtonInfo("Upgrade_21", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_21));
+//	infoList.push_back(new ButtonInfo("Upgrade_22", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_22));
+//	infoList.push_back(new ButtonInfo("Upgrade_23", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_23));
+//	infoList.push_back(new ButtonInfo("Upgrade_24", BUTTON_STATE_NONE, BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_24));
 //
 
 

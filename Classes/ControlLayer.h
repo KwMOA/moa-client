@@ -8,7 +8,7 @@
 #include "CustomButton.h"
 #include "ObjectInfos.h"
 #include "GamePlayer.h"
-
+#include "StaticObject.h"
 #include <string>
 #include <list>
 
@@ -107,12 +107,14 @@ public:
 	void DetailUpgradeCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
     
     
+    std::list<CustomButton*> wholeButtonList;
+    std::list<CustomButton*>::iterator wholeButtonListItr;
+    
+    //receive notify
+    void setState(int objectType, int state);
     
     
-    
-    
-    
-    
+    void update(int updateCount);
     
 
 	// implement the "static create()" method manually

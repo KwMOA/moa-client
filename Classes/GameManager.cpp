@@ -58,15 +58,15 @@ bool GameManager::init()
 {
     //test code - create
     
-    CreateBuildingCI* p3 = new CreateBuildingCI();
-    p3->objectType = OBJECT_TYPE_BUILDING_3;
-    taskManager->pushBackMessage(p3);
-    
-    
-    CreateBuildingCI* p6 = new CreateBuildingCI();
-    p6->objectType = OBJECT_TYPE_BUILDING_3;
-    taskManager->pushBackAITask(p6);
-    
+//    CreateBuildingCI* p3 = new CreateBuildingCI();
+//    p3->objectType = OBJECT_TYPE_BUILDING_3;
+//    taskManager->pushBackMessage(p3);
+//    
+//    
+//    CreateBuildingCI* p6 = new CreateBuildingCI();
+//    p6->objectType = OBJECT_TYPE_BUILDING_3;
+//    taskManager->pushBackAITask(p6);
+//    
     //////////////////////////////
     
     return true;
@@ -75,6 +75,18 @@ bool GameManager::init()
 void GameManager::finishGame()
 {
     std::cout<<"finish"<<std::endl;
+//    LogMgr->Log("통신 두절");
+    
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+    MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
+    return;
+#endif
+    
+    Director::getInstance()->end();
+    
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    exit(0);
+#endif
 }
 
 

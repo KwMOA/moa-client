@@ -10,14 +10,19 @@
 #include "Upgrade.h"
 #include "Building.h"
 #include "GameDefines.h"
+#include "GamePlayer.h"
+#include "StaticObject.h"
 
-Upgrade::Upgrade(Building* building)
+Upgrade::Upgrade(Building* building, int _upgradeType) : BaseObject(building->getGamePlayer(), _upgradeType)
 {
     owner = building;
+    upgradeType = _upgradeType;
     
     upgradeCount = 0;
     upgradePercent = 0;
     upgradeCompleteNum = 40;
+    
+    staticUpgrade = building->getGamePlayer()->getStaticUpgradeByUpgradeType(_upgradeType);
 }
 
 void Upgrade::upgrading(int upgradeTime)
@@ -27,10 +32,9 @@ void Upgrade::upgrading(int upgradeTime)
     if(upgradePercent == upgradeCompleteNum) {
         std::cout << "upgrade complete" <<std::endl;
         
-        upgradePercent = 0;
-        upgradeCount++;
-        
-        
+        completeUpgrade();
+    } else {
+    
         //ToDo. change image
         if(upgradePercent % 8 == 0) {
             owner->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
@@ -39,18 +43,47 @@ void Upgrade::upgrading(int upgradeTime)
             owner->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
             owner->objectLayer->addChild(owner->images[2][1]);
         }
-        
-        //ToDo. upgrade something
-        upgradeComplete();
-        
-        owner->setState(OBJECT_STATE_IDLE);
-        
-        owner->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
-        owner->objectLayer->addChild(owner->images[1][0]);
     }
+    
 }
 
 void Upgrade::updateImage()
 {
 
 }
+
+
+void Upgrade::setState(int _state)
+{
+    BaseObject::setState(_state);
+}
+
+
+void Upgrade::startUpgrade()
+{
+    staticUpgrade->startUpgrade();
+}
+
+void Upgrade::cancelUpgrade()
+{
+    upgradePercent = 0;
+    
+    staticUpgrade->cancelUpgrade();
+}
+
+void Upgrade::completeUpgrade()
+{
+    upgradePercent = 0;
+    upgradeCount++;
+    
+    //ToDo. upgrade something
+    upgradeComplete();
+    
+    //
+    owner->completeUpgrade(objectType);
+    
+    staticUpgrade->completeUpgrade();
+}
+
+
+

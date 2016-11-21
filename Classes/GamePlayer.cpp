@@ -37,29 +37,54 @@ GamePlayer::GamePlayer(GameWorld* _gameWorld, int _playerIndex)
     
     // set static object
     
-    staticUnitList.push_back(new StaticUnit_1());
-    staticUnitList.push_back(new StaticUnit_2());
-    staticUnitList.push_back(new StaticUnit_3());
-    staticUnitList.push_back(new StaticUnit_4());
-    staticUnitList.push_back(new StaticUnit_5());
-    staticUnitList.push_back(new StaticUnit_6());
-    staticUnitList.push_back(new StaticUnit_7());
-    staticUnitList.push_back(new StaticUnit_8());
-    staticUnitList.push_back(new StaticUnit_9());
+    staticUnitList.push_back(new StaticUnit_1(this));
+    staticUnitList.push_back(new StaticUnit_2(this));
+    staticUnitList.push_back(new StaticUnit_3(this));
+    staticUnitList.push_back(new StaticUnit_4(this));
+    staticUnitList.push_back(new StaticUnit_5(this));
+    staticUnitList.push_back(new StaticUnit_6(this));
+    staticUnitList.push_back(new StaticUnit_7(this));
+    staticUnitList.push_back(new StaticUnit_8(this));
+    staticUnitList.push_back(new StaticUnit_9(this));
     
-    staticBuildingList.push_back(new StaticBuilding_1());
-    staticBuildingList.push_back(new StaticBuilding_2());
-    staticBuildingList.push_back(new StaticBuilding_3());
-    staticBuildingList.push_back(new StaticBuilding_4());
-    staticBuildingList.push_back(new StaticBuilding_5());
-    staticBuildingList.push_back(new StaticBuilding_6());
-    staticBuildingList.push_back(new StaticBuilding_7());
-    staticBuildingList.push_back(new StaticBuilding_8());
-    staticBuildingList.push_back(new StaticBuilding_9());
-    staticBuildingList.push_back(new StaticBuilding_10());
-    staticBuildingList.push_back(new StaticBuilding_11());
-    staticBuildingList.push_back(new StaticBuilding_12());
+    staticBuildingList.push_back(new StaticBuilding_1(this));
+    staticBuildingList.push_back(new StaticBuilding_2(this));
+    staticBuildingList.push_back(new StaticBuilding_3(this));
+    staticBuildingList.push_back(new StaticBuilding_4(this));
+    staticBuildingList.push_back(new StaticBuilding_5(this));
+    staticBuildingList.push_back(new StaticBuilding_6(this));
+    staticBuildingList.push_back(new StaticBuilding_7(this));
+    staticBuildingList.push_back(new StaticBuilding_8(this));
+    staticBuildingList.push_back(new StaticBuilding_9(this));
+    staticBuildingList.push_back(new StaticBuilding_10(this));
+    staticBuildingList.push_back(new StaticBuilding_11(this));
+    staticBuildingList.push_back(new StaticBuilding_12(this));
     
+    
+    staticUpgradeList.push_back(new StaticUpgrade_1(this));
+    staticUpgradeList.push_back(new StaticUpgrade_2(this));
+    staticUpgradeList.push_back(new StaticUpgrade_3(this));
+    staticUpgradeList.push_back(new StaticUpgrade_4(this));
+    staticUpgradeList.push_back(new StaticUpgrade_5(this));
+    staticUpgradeList.push_back(new StaticUpgrade_6(this));
+    staticUpgradeList.push_back(new StaticUpgrade_7(this));
+    staticUpgradeList.push_back(new StaticUpgrade_8(this));
+    staticUpgradeList.push_back(new StaticUpgrade_9(this));
+    staticUpgradeList.push_back(new StaticUpgrade_10(this));
+    staticUpgradeList.push_back(new StaticUpgrade_11(this));
+    staticUpgradeList.push_back(new StaticUpgrade_12(this));
+    staticUpgradeList.push_back(new StaticUpgrade_13(this));
+    staticUpgradeList.push_back(new StaticUpgrade_14(this));
+    staticUpgradeList.push_back(new StaticUpgrade_15(this));
+    staticUpgradeList.push_back(new StaticUpgrade_16(this));
+    staticUpgradeList.push_back(new StaticUpgrade_17(this));
+    staticUpgradeList.push_back(new StaticUpgrade_18(this));
+    staticUpgradeList.push_back(new StaticUpgrade_19(this));
+    staticUpgradeList.push_back(new StaticUpgrade_20(this));
+    staticUpgradeList.push_back(new StaticUpgrade_21(this));
+    staticUpgradeList.push_back(new StaticUpgrade_22(this));
+    staticUpgradeList.push_back(new StaticUpgrade_23(this));
+    staticUpgradeList.push_back(new StaticUpgrade_24(this));
     
     ////////////////////
     
@@ -152,10 +177,13 @@ int GamePlayer::cancelCreateBuilding(int objectNo)
         BaseObject* baseObject = (BaseObject*)*buildingItr;
         
         if(baseObject->getObjectNo() == objectNo && baseObject->getState() == OBJECT_STATE_CREATING) {
+            ((Building*)baseObject)->cancelCreate();
             baseObject->setState(OBJECT_STATE_DESTROYING);
             
             buildingList.remove(*buildingItr);
             destroyBuildingList.push_back(baseObject);
+            
+//            cancelCreatingBuildingNotify((Building*)baseObject);
             
             std::cout<< "destroy building start - " << baseObject->getObjectNo() <<std::endl;
             
@@ -219,6 +247,7 @@ int GamePlayer::createUnit(int objectNo, int objectType, int objectCount, int li
         
         unit->setObjectNo(objectNoCreator++);
         unit->setLineNo(lineNo);
+        unit->setX(sameXPlayerIndex(64));
         
         unitList[lineNo - 1].push_back(unit);
         
@@ -279,7 +308,19 @@ StaticBuilding* GamePlayer::getStaticBuildingByBuildingType(int buildingType)
     return nullptr;
 }
 
-
+StaticUpgrade* GamePlayer::getStaticUpgradeByUpgradeType(int upgradeType)
+{
+    for(staticUpgradeItr = staticUpgradeList.begin(); staticUpgradeItr != staticUpgradeList.end(); staticUpgradeItr++)
+    {
+        if((*staticUpgradeItr)->getObjectType() == upgradeType)
+        {
+            return *staticUpgradeItr;
+        }
+        
+    }
+    
+    return nullptr;
+}
 
 
 

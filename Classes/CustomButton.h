@@ -8,6 +8,7 @@
 #include <list>
 
 class ControlLayer;
+class StaticObject;
 
 class CustomButton
 {
@@ -22,6 +23,8 @@ private:
 public:
     std::list<CustomButton*>* buttonList;
     std::list<CustomButton*>::iterator buttonListItr;
+    
+    StaticObject* staticObject;
     
 public:
     CustomButton() {};
@@ -43,6 +46,8 @@ public:
     std::list<CustomButton*>* open();
     int close();
     void setChildButton(ControlLayer* controlLayer);
+    
+    void update(int updateCount);
 };
 
 #endif // __CUSTOMBUTTON_H__

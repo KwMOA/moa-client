@@ -70,6 +70,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/ResultScene.cpp \
                    ../../Classes/StaticObject.cpp \
                    ../../Classes/TaskManager.cpp \
+                   ../../Classes/TopLayer.cpp \
                    ../../Classes/Unit_1.cpp \
                    ../../Classes/Unit_2.cpp \
                    ../../Classes/Unit_3.cpp \

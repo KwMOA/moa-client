@@ -33,8 +33,6 @@
 
 Building::Building(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gamePlayer, _objectType)
 {
-    state = OBJECT_STATE_CREATING;
-    
     staticBuilding = gamePlayer->getStaticBuildingByBuildingType(_objectType);
 
     createPersent = 0;
@@ -106,18 +104,20 @@ Building::Building(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gameP
     objectLayer->addChild(images[0][0], 0, TAG_IMAGE_OBJECT);
     
     gamePlayer->setGold(gamePlayer->getGold() - staticBuilding->getPrice());
+    
+    startCreate();
 }
 
 void Building::update(int updateCount)
 {
     if(state == OBJECT_STATE_CREATING) { // if building is creating
         
-        createPersent += 10;
+        createPersent += 1;
         
-        if(createPersent < 200) {
+        if(createPersent < 20) {
             objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
             objectLayer->addChild(images[0][0], 0, TAG_IMAGE_OBJECT);
-        } else if(createPersent < 500) {
+        } else if(createPersent < 50) {
             objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
             objectLayer->addChild(images[0][1], 0, TAG_IMAGE_OBJECT);
         } else {
@@ -125,13 +125,15 @@ void Building::update(int updateCount)
             objectLayer->addChild(images[0][2], 0, TAG_IMAGE_OBJECT);
         }
         
-        if(createPersent == 800) {
+        if(createPersent == 80) {
             std::cout << "create building - " << objectNo <<std::endl;
             
             state = OBJECT_STATE_IDLE;
             
             objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
             objectLayer->addChild(images[1][0], 0, TAG_IMAGE_OBJECT);
+            
+            completeCreate();
         }
         
         
@@ -208,14 +210,34 @@ void Building::startUpgrade(int upgradeType)
 {
     state = OBJECT_STATE_UPGRADING;
     currentUpgrade = getUpgradeByUpgradeType(upgradeType);
+    
+    currentUpgrade->startUpgrade();
+    staticBuilding->startUpgrade();
 }
 
 void Building::cancelUpgrade(int upgradeType)
 {
     state = OBJECT_STATE_IDLE;
     
-    currentUpgrade->setUpgradePercent(0);
+    currentUpgrade->cancelUpgrade();
+    staticBuilding->cancelUpgrade();
+    
     currentUpgrade = nullptr;
+    
+}
+
+
+void Building::completeUpgrade(int upgradeType)
+{
+    state = OBJECT_STATE_IDLE;
+    
+    objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
+    objectLayer->addChild(images[1][0]);
+    
+    staticBuilding->completeUpgrade();
+    
+    currentUpgrade = nullptr;
+    
 }
 
 
@@ -253,5 +275,44 @@ Building* Building::createBuilding(GamePlayer* _gamePlayer, int _objectType)
             return nullptr;
     }
 }
+
+
+void Building::setState(int _state)
+{
+    BaseObject::setState(_state);
+}
+
+
+
+void Building::startCreate()
+{
+    state = OBJECT_STATE_CREATING;
+    
+    staticBuilding->startCreate(this);
+}
+
+
+void Building::cancelCreate()
+{
+    state = OBJECT_STATE_DESTROY;
+    
+    staticBuilding->cancelCreate();
+}
+
+void Building::completeCreate()
+{
+    state = OBJECT_STATE_IDLE;
+    
+    staticBuilding->completeCreate();
+}
+
+
+
+
+
+
+
+
+
 
 

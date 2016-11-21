@@ -31,8 +31,11 @@ bool GameScene::init()
     {
         return false;
     }
+
     topLayer = TopLayer::create();
     this->addChild(topLayer);
+    
+    controlLayer = ControlLayer::create();
     
 	updateCount = 0;
 
@@ -57,7 +60,6 @@ bool GameScene::init()
 //    addChild(background, 0);
 //
     
-	controlLayer = ControlLayer::create();
     if(controlLayer->initWithParameter(gameManager->getGameWorld()->getGamePlayer(0)) == false) {
         return false;
     }
@@ -90,6 +92,7 @@ void GameScene::customUpdate(float dt)
 {
     updateCount++;
     gameManager->getGameWorld()->update(updateCount);
+    controlLayer->update(updateCount);
 }
 
 void GameScene::networkUpdate(float dt)

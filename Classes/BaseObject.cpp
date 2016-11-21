@@ -30,3 +30,8 @@ void BaseObject::setX(int _x)
     objectLayer->setPositionX(x);
     objectLayer->setLocalZOrder(gamePlayer->sameXPlayerIndex(x));
 }
+
+void BaseObject::setState(int _state)
+{
+    state = _state;
+}

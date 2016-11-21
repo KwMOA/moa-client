@@ -36,13 +36,19 @@ public:
    
 	Upgrade* getUpgradeByUpgradeType(int upgradeType);
 
+    void startCreate();
+    void cancelCreate();
+    void completeCreate();
+    
     void startUpgrade(int upgradeType);
     void cancelUpgrade(int upgradeType);
+    void completeUpgrade(int upgradeType);
+    
     
     void update(int updateCount);
     void updateImage(Layer* layer) {}
 
-    
+    void setState(int _state);
     
     static Building* createBuilding(GamePlayer* _gamePlayer, int objectType);
     

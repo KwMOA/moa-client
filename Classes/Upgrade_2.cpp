@@ -12,9 +12,8 @@
 #include "GameDefines.h"
 #include "Building_2.h"
 
-Upgrade_2::Upgrade_2(Building* building) : Upgrade(building)
+Upgrade_2::Upgrade_2(Building* building) : Upgrade(building, OBJECT_TYPE_UPGRADE_2)
 {
-    upgradeType = UPGRADE_TYPE_2;
 }
 
 

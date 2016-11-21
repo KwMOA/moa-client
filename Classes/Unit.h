@@ -45,6 +45,7 @@ public:
     void setLineNo(int _lineNo) { lineNo = _lineNo; objectLayer->setPositionY(DISPLAY_HEIGHT - ( 62 + ((_lineNo - 1) * 64 * 3))); }
     int getLineNo() { return lineNo; }
     
+    void setState(int _state);
     
     static Unit* createUnit(GamePlayer* _gamePlayer, int _objectType);
     

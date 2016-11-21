@@ -20,8 +20,8 @@
 
 #define NETWORK_FPS 18
 
-const bool PLAY_ALONE = true;
-#define NOT_CONNECT_WITH_SERVER 1
+const bool PLAY_ALONE = false;
+//#define NOT_CONNECT_WITH_SERVER 1
 
 
 #endif //__BASIC_DEFINES_H__

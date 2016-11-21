@@ -52,7 +52,7 @@ public:
     void setObjectType(int _objectType) { objectType = _objectType; }
     
     int getState() { return state; }
-    void setState(int _state) { state = _state; }
+    void setState(int _state);
     
     GamePlayer* getGamePlayer() { return gamePlayer; }
     void setGamePlayer(GamePlayer* _gamePlayer) { gamePlayer = _gamePlayer; }

@@ -235,12 +235,12 @@
 //			//  if You need chang child button count  then u change that second argu
 //			//  and third argu is how many upgrad button u need    ***** child button  includ upgrade button
 //			// first argu is ref Button bcz i want to know any button pressed
-//			actionByBuilding(item, 2 , 1, OBJECT_TYPE_UNIT_1, UPGRADE_TYPE_1);
+//			actionByBuilding(item, 2 , 1, OBJECT_TYPE_UNIT_1, OBJECT_TYPE_UPGRADE_1);
 //		}
 //		break;
 //	case 1:
 //		if (cocos2d::ui::Widget::TouchEventType::BEGAN == eventType) {
-//			actionByBuilding(item, 4, 2, OBJECT_TYPE_UNIT_2, UPGRADE_TYPE_2);
+//			actionByBuilding(item, 4, 2, OBJECT_TYPE_UNIT_2, OBJECT_TYPE_UPGRADE_2);
 //		}
 //		break;
 //	case 2:

@@ -62,6 +62,6 @@ void TopLayer::changePopulation(int _population)
 {
     char buf[8] = {0, };
     sprintf(buf, "%d/100", _population);
-    gold->setString(buf);
+    population->setString(buf);
 }
 

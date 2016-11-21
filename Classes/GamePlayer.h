@@ -21,6 +21,7 @@ class BaseObject;
 class Unit;
 class StaticUnit;
 class StaticBuilding;
+class StaticUpgrade;
 class GameWorld;
 class TechChecker;
 
@@ -39,11 +40,16 @@ protected:
     std::list<Unit*> destroyUnitList;
     std::list<Unit*>::iterator destoryUnitItr;
     
+    
     std::list<StaticUnit*> staticUnitList;
     std::list<StaticUnit*>::iterator staticUnitItr;
     
     std::list<StaticBuilding*> staticBuildingList;
     std::list<StaticBuilding*>::iterator staticBuildingItr;
+    
+    std::list<StaticUpgrade*> staticUpgradeList;
+    std::list<StaticUpgrade*>::iterator staticUpgradeItr;
+    
     
     
 
@@ -84,6 +90,7 @@ public:
     
     StaticUnit* getStaticUnitByUnitType(int unitType);
     StaticBuilding* getStaticBuildingByBuildingType(int buildingType);
+    StaticUpgrade* getStaticUpgradeByUpgradeType(int upgradeType);
     
     void update(int updateCount);
     void updateImage(Layer* layer);
@@ -105,5 +112,19 @@ public:
     
     
     int sameXPlayerIndex(int newX) {if(playerIndex == 0) return newX; else return MAP_WIDTH - newX;}
+    
+    
+    
+    
+    
+    
+    
+//    creatingBuildingNotify(this)
+//    sendCreateCompleteNotify(this);
+//    cancelCreatingBuildingNotify((Building*)baseObject);
+//startUpgardeNotify(currentUpgrade);
+//    cancelUpgardeNotify(currentUpgrade);
+//    
+    
 };
 #endif /* GamePlayer_h */

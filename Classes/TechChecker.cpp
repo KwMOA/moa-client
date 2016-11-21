@@ -6,7 +6,8 @@
 #include "Building.h"
 #include "Upgrade.h"
 #include "StaticObject.h"
-
+#include "Unit.h"
+#include "Unit_1.h"
 #include <iostream>
 TechChecker::TechChecker(GamePlayer* player) {
 	gamePlayer = player;
@@ -52,13 +53,13 @@ bool TechChecker::checkCreateBuilding(int objectType) {
 //	case OBJECT_TYPE_BUILDING_5:	//need BLD_3, BLD_1_UP_1
 //		baseObject = gamePlayers[userIndex].getBuildingByObjectType(OBJECT_TYPE_BUILDING_3);
 //		building = (Building*)gamePlayers[userIndex].getBuildingByObjectType(OBJECT_TYPE_BUILDING_1);
-//		if (baseObject != nullptr && (baseObject->getState() == OBJECT_STATE_IDLE || baseObject->getState() == OBJECT_STATE_UPGRADING || baseObject->getState() == OBJECT_STATE_CREATING_UNIT) && building->getUpgradeByUpgradeType(UPGRADE_TYPE_1)->getUpgradeCount() >=1) { return true; }
+//		if (baseObject != nullptr && (baseObject->getState() == OBJECT_STATE_IDLE || baseObject->getState() == OBJECT_STATE_UPGRADING || baseObject->getState() == OBJECT_STATE_CREATING_UNIT) && building->getUpgradeByUpgradeType(OBJECT_TYPE_UPGRADE_1)->getUpgradeCount() >=1) { return true; }
 //
 //		return false;
 //	case OBJECT_TYPE_BUILDING_6:	//need BLD_5, BLD_1_UP_2
 //		baseObject = gamePlayers[userIndex].getBuildingByObjectType(OBJECT_TYPE_BUILDING_5);
 //		building = (Building*)gamePlayers[userIndex].getBuildingByObjectType(OBJECT_TYPE_BUILDING_1);
-//		if (baseObject != nullptr && (baseObject->getState() == OBJECT_STATE_IDLE || baseObject->getState() == OBJECT_STATE_UPGRADING || baseObject->getState() == OBJECT_STATE_CREATING_UNIT) && building->getUpgradeByUpgradeType(UPGRADE_TYPE_1)->getUpgradeCount() >= 2) { return true; }
+//		if (baseObject != nullptr && (baseObject->getState() == OBJECT_STATE_IDLE || baseObject->getState() == OBJECT_STATE_UPGRADING || baseObject->getState() == OBJECT_STATE_CREATING_UNIT) && building->getUpgradeByUpgradeType(OBJECT_TYPE_UPGRADE_1)->getUpgradeCount() >= 2) { return true; }
 //
 //		return false;
 //	case OBJECT_TYPE_BUILDING_7:	//need BLD_3
@@ -69,7 +70,7 @@ bool TechChecker::checkCreateBuilding(int objectType) {
 //	case OBJECT_TYPE_BUILDING_8:	//need BLD_7, BLD_1_UP_1 
 //		baseObject = gamePlayers[userIndex].getBuildingByObjectType(OBJECT_TYPE_BUILDING_7);
 //		building = (Building*)gamePlayers[userIndex].getBuildingByObjectType(OBJECT_TYPE_BUILDING_1);
-//		if (baseObject != nullptr && (baseObject->getState() == OBJECT_STATE_IDLE || baseObject->getState() == OBJECT_STATE_UPGRADING || baseObject->getState() == OBJECT_STATE_CREATING_UNIT) && building->getUpgradeByUpgradeType(UPGRADE_TYPE_1)->getUpgradeCount() >= 1) { return true; }
+//		if (baseObject != nullptr && (baseObject->getState() == OBJECT_STATE_IDLE || baseObject->getState() == OBJECT_STATE_UPGRADING || baseObject->getState() == OBJECT_STATE_CREATING_UNIT) && building->getUpgradeByUpgradeType(OBJECT_TYPE_UPGRADE_1)->getUpgradeCount() >= 1) { return true; }
 //
 //		return false;
 //	case OBJECT_TYPE_BUILDING_9:	//need BLD_4
@@ -127,6 +128,10 @@ bool TechChecker::checkCancleUpgradeBuilding(int objectNo)
 
 bool TechChecker::checkCreateUnit(int objectNo)
 {
+    if((gamePlayer->getStaticUnitByUnitType(OBJECT_TYPE_UNIT_1))->getPrice() > gamePlayer->getGold()) {
+        printf("111111111111");
+        return false;
+    }
 //	int objectType = gamePlayers[userIndex].getUnitByObjectNo(objectNo)->getObjectType();
 //	BaseObject* baseObject;
 //	switch (objectType) {

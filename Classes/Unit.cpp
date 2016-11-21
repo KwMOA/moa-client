@@ -308,3 +308,9 @@ Unit* Unit::checkEnemyInRange()
     
     return otherPlayer->getBestCloseUnit(this);
 }
+
+
+void Unit::setState(int _state)
+{
+    BaseObject::setState(_state);
+}
