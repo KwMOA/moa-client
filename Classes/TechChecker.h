@@ -14,7 +14,7 @@ public:
 	bool checkCancelBuilding(int objectNo);
 	bool ckeckUpgradeBuilding(int objectNo);
 	bool checkCancleUpgradeBuilding(int objectNo);
-	bool checkCreateUnit(int objectNo);
+	bool checkCreateUnit(int objectNo, int objectType, int objectCount, int lineNo);
 
 };
 #endif // !__TECH_CHECKER_H__

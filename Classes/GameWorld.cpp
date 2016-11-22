@@ -97,7 +97,7 @@ void GameWorld::cancelUpgradeBuilding(int userIndex, int objectNo, int upgradeTy
 
 void GameWorld::createUnit(int userIndex, int objectNo, int objectType, int objectCount, int lineNo)
 {
-	if(gamePlayers[userIndex]->getChecker()->checkCreateUnit(objectNo))
+	if(gamePlayers[userIndex]->getChecker()->checkCreateUnit(objectNo, objectType, objectCount, lineNo))
         gamePlayers[userIndex]->createUnit(objectNo, objectType, objectCount, lineNo);
 }
 

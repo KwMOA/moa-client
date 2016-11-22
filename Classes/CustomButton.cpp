@@ -5,84 +5,21 @@
 USING_NS_CC;
 using namespace cocos2d::ui;
 
-CustomButton::CustomButton(int _buttonType, int _objectType, ControlLayer* controlLayer, CustomButton* _parentButton)
+CustomButton::CustomButton(int _buttonType, int _objectType, ControlLayer* _controlLayer, CustomButton* _parentButton)
 {
+    controlLayer = _controlLayer;
+    
     buttonType = _buttonType;
     objectType = _objectType;
     parentButton = _parentButton;
     opened = false;
     
-    btn = Button::create();
-    btn->retain();
-    btn->setAnchorPoint(Vec2(0.5, 0));
-    btn->addTouchEventListener(CC_CALLBACK_2(ControlLayer::buttonCallback, controlLayer, this));
     
-    controlLayer->wholeButtonList.push_back(this);
-
-    // link button with static object
-    staticObject = nullptr;
+    memset(buttonTypeName, 0, 20);
+    memset(buttonName, 0, 30);
     
-    if(buttonType == BUTTON_TYPE_BUILDING)
-        staticObject = controlLayer->getGamePlayer()->getStaticBuildingByBuildingType(objectType);
-    else if(buttonType == BUTTON_TYPE_UPGRADE)
-        staticObject = controlLayer->getGamePlayer()->getStaticUpgradeByUpgradeType(objectType);
-    else if(buttonType == BUTTON_TYPE_UNIT)
-        staticObject = controlLayer->getGamePlayer()->getStaticUnitByUnitType(objectType);
-    
-//    if(buttonType == BUTTON_TYPE_BUILDING)
-//        setState(controlLayer->getGamePlayer()->getStaticBuildingByBuildingType(objectType)->getStaticObjectState());
-//    else if(buttonType == BUTTON_TYPE_UNIT)
-//        setState(controlLayer->getGamePlayer()->getStaticUnitByUnitType(objectType)->getStaticObjectState());
-//    else if(buttonType == BUTTON_TYPE_UPGRADE) {
-//        setState(STATIC_OBJECT_STATE_DISABLE);
-//    } else {
-//        setState(0);
-//    }
-    
-    //set child button
-//    setChildButton(controlLayer);
-    
-//    //set close
-//    close();
-}
-
-void CustomButton::setButton(cocos2d::ui::Button* _btn)
-{
-	btn = _btn;
-}
-
-cocos2d::ui::Button * CustomButton::getButton()
-{
-	return btn;
-}
-
-void CustomButton::defaultSet()
-{
-	state = -1;
-	buttonType = -1;
-	objectType = -1;
-}
-
-void CustomButton::setobjectType(int _Type)
-{
-	objectType = _Type;
-}
-
-void CustomButton::setButtonType(int _Type)
-{
-	buttonType = _Type;
-}
-
-void CustomButton::setState(int _state)
-{
-	state = _state;
-    
-    char buttonTypeName[20] = {0, };
-    char buttonStateName[10] = {0, };
-    char buttonName[30] = {0, };
-
     if(buttonType == BUTTON_TYPE_ROOT) {
-
+        
     } else {
         if(buttonType == BUTTON_TYPE_BUILDING) {
             memcpy(buttonTypeName, "building", 8);
@@ -115,18 +52,6 @@ void CustomButton::setState(int _state)
                 
             }
             
-            if(state == STATIC_OBJECT_STATE_DISABLE) {
-                memcpy(buttonStateName, "disble", 6);
-            } else if(state == STATIC_OBJECT_STATE_ABLE) {
-                memcpy(buttonStateName, "able", 4);
-            } else if(state == STATIC_OBJECT_STATE_BUILDING_CREATING) {
-                memcpy(buttonStateName, "able", 4);
-            } else if(state == STATIC_OBJECT_STATE_ACTIVE) {
-                memcpy(buttonStateName, "active", 6);
-            } else {
-                
-            }
-            
         } else if(buttonType == BUTTON_TYPE_UNIT) {
             memcpy(buttonTypeName, "unit", 4);
             
@@ -148,14 +73,6 @@ void CustomButton::setState(int _state)
                 memcpy(buttonName, "unit_8", 6);
             } else if(objectType == OBJECT_TYPE_UNIT_9) {
                 memcpy(buttonName, "unit_9", 6);
-            } else {
-                
-            }
-            
-            if(state == STATIC_OBJECT_STATE_DISABLE) {
-                memcpy(buttonStateName, "disble", 6);
-            } else if(state == STATIC_OBJECT_STATE_ABLE) {
-                memcpy(buttonStateName, "active", 6);
             } else {
                 
             }
@@ -215,20 +132,7 @@ void CustomButton::setState(int _state)
                 
             }
             
-            if(state == STATIC_OBJECT_STATE_DISABLE) {
-                memcpy(buttonStateName, "disble", 6);
-            } else if(state == STATIC_OBJECT_STATE_ABLE) {
-                memcpy(buttonStateName, "able", 4);
-            } else if(state == STATIC_OBJECT_STATE_UPGRADE_UPGRADING) {
-                memcpy(buttonStateName, "able", 4);
-            } else if(state == STATIC_OBJECT_STATE_ACTIVE) {
-                memcpy(buttonStateName, "disble", 6);
-            } else {
-                
-            }
-            
         } else if(buttonType == BUTTON_TYPE_ACTION) {
-            memcpy(buttonStateName, "able", 4);
             
             if(objectType == ACTION_BUTTON_TYPE_UNIT_PLUS) {
                 memcpy(buttonName, "action_plus", 11);
@@ -251,6 +155,140 @@ void CustomButton::setState(int _state)
             } else {
                 printf("??");
             }
+        } else {
+            
+        }
+    }
+    
+    
+    btn = Button::create();
+    btn->retain();
+    btn->setAnchorPoint(Vec2(0.5, 0));
+    btn->addTouchEventListener(CC_CALLBACK_2(ControlLayer::buttonCallback, controlLayer, this));
+    
+    controlLayer->wholeButtonList.push_back(this);
+
+    // link button with static object
+    staticObject = nullptr;
+    setActiveButtonList(controlLayer);
+    
+    if(buttonType == BUTTON_TYPE_ROOT) {
+        setState(0);
+    } else if(buttonType == BUTTON_TYPE_BUILDING) {
+        staticObject = controlLayer->getGamePlayer()->getStaticBuildingByBuildingType(objectType);
+        setState(staticObject->getStaticObjectState());
+    } else if(buttonType == BUTTON_TYPE_UPGRADE) {
+        staticObject = controlLayer->getGamePlayer()->getStaticUpgradeByUpgradeType(objectType);
+        setState(staticObject->getStaticObjectState());
+    } else if(buttonType == BUTTON_TYPE_UNIT) {
+        staticObject = controlLayer->getGamePlayer()->getStaticUnitByUnitType(objectType);
+        setState(staticObject->getStaticObjectState());
+    }
+    
+//    prevStaticObjectState = staticObject->getStaticObjectState();
+    
+    
+//    if(buttonType == BUTTON_TYPE_BUILDING)
+//        setState(controlLayer->getGamePlayer()->getStaticBuildingByBuildingType(objectType)->getStaticObjectState());
+//    else if(buttonType == BUTTON_TYPE_UNIT)
+//        setState(controlLayer->getGamePlayer()->getStaticUnitByUnitType(objectType)->getStaticObjectState());
+//    else if(buttonType == BUTTON_TYPE_UPGRADE) {
+//        setState(STATIC_OBJECT_STATE_DISABLE);
+//    } else {
+//        setState(0);
+//    }
+    
+    //set child button
+//    setChildButton(controlLayer);
+    
+//    //set close
+//    close();
+}
+
+void CustomButton::setButton(cocos2d::ui::Button* _btn)
+{
+	btn = _btn;
+}
+
+cocos2d::ui::Button * CustomButton::getButton()
+{
+	return btn;
+}
+
+void CustomButton::defaultSet()
+{
+	state = -1;
+	buttonType = -1;
+	objectType = -1;
+}
+
+void CustomButton::setobjectType(int _Type)
+{
+	objectType = _Type;
+}
+
+void CustomButton::setButtonType(int _Type)
+{
+	buttonType = _Type;
+}
+
+void CustomButton::setState(int _state)
+{
+	state = _state;
+    
+    setChildButton(controlLayer);
+    
+    
+    
+    memset(buttonStateName, 0, 10);
+
+    if(buttonType == BUTTON_TYPE_ROOT) {
+
+    } else {
+        if(buttonType == BUTTON_TYPE_BUILDING) {
+            
+            if(state == STATIC_OBJECT_STATE_DISABLE) {
+                memcpy(buttonStateName, "disble", 6);
+            } else if(state == STATIC_OBJECT_STATE_ABLE) {
+                memcpy(buttonStateName, "able", 4);
+            } else if(state == STATIC_OBJECT_STATE_BUILDING_CREATING) {
+                memcpy(buttonStateName, "able", 4);
+            } else if(state == STATIC_OBJECT_STATE_ACTIVE) {
+                memcpy(buttonStateName, "active", 6);
+            } else {
+                
+            }
+            
+        } else if(buttonType == BUTTON_TYPE_UNIT) {
+
+            
+            if(state == STATIC_OBJECT_STATE_DISABLE) {
+                memcpy(buttonStateName, "disble", 6);
+            } else if(state == STATIC_OBJECT_STATE_ABLE) {
+                memcpy(buttonStateName, "active", 6);
+            } else {
+                
+            }
+            
+        } else if(buttonType == BUTTON_TYPE_UPGRADE) {
+            
+            if(state == STATIC_OBJECT_STATE_DISABLE) {
+                memcpy(buttonStateName, "disble", 6);
+            } else if(state == STATIC_OBJECT_STATE_ABLE) {
+                memcpy(buttonStateName, "able", 4);
+            } else if(state == STATIC_OBJECT_STATE_UPGRADE_UPGRADING) {
+                memcpy(buttonStateName, "able", 4);
+            } else if(state == STATIC_OBJECT_STATE_ACTIVE) {
+                memcpy(buttonStateName, "disble", 6);
+            } else {
+                
+            }
+            
+        } else if(buttonType == BUTTON_TYPE_ACTION) {
+            memcpy(buttonStateName, "able", 4);
+
+        } else {
+            
         }
         
 
@@ -263,6 +301,8 @@ void CustomButton::setState(int _state)
         
         
         btn->loadTextures(buttonName1, buttonName2);
+        
+        prevStaticObjectState = state;
     }
 }
 
@@ -293,140 +333,169 @@ int CustomButton::close()
     return closeCount;
 }
 
-void CustomButton::setChildButton(ControlLayer* controlLayer)
+void CustomButton::setChildButton(ControlLayer* _controlLayer)
 {
     if(buttonType == BUTTON_TYPE_ROOT) {
-        buttonList = new std::list<CustomButton*>();
-        buttonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_1, controlLayer, this));
-        buttonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_2, controlLayer, this));
-        buttonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_3, controlLayer, this));
-        buttonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_4, controlLayer, this));
-        buttonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_5, controlLayer, this));
-        buttonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_6, controlLayer, this));
-        buttonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_7, controlLayer, this));
-        buttonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_8, controlLayer, this));
-        buttonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_9, controlLayer, this));
-        buttonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_10, controlLayer, this));
-        buttonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_11, controlLayer, this));
-        buttonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_12, controlLayer, this));
+        buttonList = activeButtonList;
     } else if(buttonType == BUTTON_TYPE_BUILDING) {
         if(state == STATIC_OBJECT_STATE_DISABLE) {
-            
+            buttonList = nullptr;
         } else if(state == STATIC_OBJECT_STATE_ABLE) {
             buttonList = controlLayer->getBuildingCreateButtonList();
+            controlLayer->attachedBuildingCreateButton = this;
         } else if(state == STATIC_OBJECT_STATE_BUILDING_CREATING) {
             buttonList = controlLayer->getBuildingCreateCancelButtonList();
+            controlLayer->attachedBuildingCreateCancelButton = this;
         } else if(state == STATIC_OBJECT_STATE_ACTIVE) {
-            
-            buttonList = new std::list<CustomButton*>();
-            
-            switch (objectType) {
-                case OBJECT_TYPE_BUILDING_1:
-                {
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_1, controlLayer, this));
-                }
-                    break;
-                case OBJECT_TYPE_BUILDING_2:
-                {
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_2, controlLayer, this));
-                }
-                    break;
-                case OBJECT_TYPE_BUILDING_3:
-                {
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UNIT, OBJECT_TYPE_UNIT_1, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UNIT, OBJECT_TYPE_UNIT_2, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UNIT, OBJECT_TYPE_UNIT_3, controlLayer, this));
-                }
-                    break;
-                case OBJECT_TYPE_BUILDING_4:
-                {
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UNIT, OBJECT_TYPE_UNIT_4, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UNIT, OBJECT_TYPE_UNIT_5, controlLayer, this));
-                    
-                }
-                    break;
-                case OBJECT_TYPE_BUILDING_5:
-                {
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UNIT, OBJECT_TYPE_UNIT_6, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UNIT, OBJECT_TYPE_UNIT_7, controlLayer, this));
-
-                }
-                    break;
-                case OBJECT_TYPE_BUILDING_6:
-                {
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UNIT, OBJECT_TYPE_UNIT_2, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UNIT, OBJECT_TYPE_UNIT_3, controlLayer, this));
-                }
-                    break;
-                case OBJECT_TYPE_BUILDING_7:
-                {
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_3, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_4, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_5, controlLayer, this));
-
-                }
-                    break;
-                case OBJECT_TYPE_BUILDING_8:
-                {
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_6, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_7, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_8, controlLayer, this));
-                }
-                    break;
-                case OBJECT_TYPE_BUILDING_9:
-                {
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_9, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_10, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_11, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_12, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_13, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_14, controlLayer, this));
-                }
-                    break;
-                case OBJECT_TYPE_BUILDING_10:
-                {
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_15, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_16, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_17, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_18, controlLayer, this));
-                }
-                    break;
-                case OBJECT_TYPE_BUILDING_11:
-                {
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_19, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_20, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_21, controlLayer, this));
-                }
-                    break;
-                case OBJECT_TYPE_BUILDING_12:
-                {
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_22, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_23, controlLayer, this));
-                    buttonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_24, controlLayer, this));
-                }
-                    break;
-                    
-                default:
-                    break;
-            }
+            buttonList = activeButtonList;
+        } else if(state == STATIC_OBJECT_STATE_BUILDING_UPGRADING) {
+            buttonList = controlLayer->getUpgradeCreateCancelButtonList();
+            controlLayer->attachedUpgradeCreateCancelButton = this;
         } else {
             printf("??");
         }
         
     } else if(buttonType == BUTTON_TYPE_UNIT) {
-        
-        buttonList = controlLayer->getUnitActionButtonList();
+        if(state == STATIC_OBJECT_STATE_DISABLE) {
+            buttonList = nullptr;
+        } else if(state == STATIC_OBJECT_STATE_ABLE) {
+            buttonList = controlLayer->getUnitActionButtonList();
+            controlLayer->attachedUnitActionButton = this;
+        } else {
+            printf("??");
+        }
         
     } else if(buttonType == BUTTON_TYPE_UPGRADE) {
-        
-        buttonList = controlLayer->getUpgradeCreateButtonList();
+        if(state == STATIC_OBJECT_STATE_DISABLE) {
+            buttonList = nullptr;
+        } else if(state == STATIC_OBJECT_STATE_ABLE) {
+            buttonList = controlLayer->getUpgradeCreateButtonList();
+            controlLayer->attachedUpgradeCreateButton = this;
+        } else if(state == STATIC_OBJECT_STATE_UPGRADE_UPGRADING) {
+            buttonList = nullptr;
+        } else if(state == STATIC_OBJECT_STATE_ACTIVE) {
+            buttonList = nullptr;
+        } else {
+            printf("??");
+        }
         
     } else {
         
     }
 }
 
-
+void CustomButton::setActiveButtonList(ControlLayer* _controlLayer)
+{
+    activeButtonList = new std::list<CustomButton*>();
+    
+    if(buttonType == BUTTON_TYPE_ROOT) {
+        activeButtonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_1, controlLayer, this));
+        activeButtonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_2, controlLayer, this));
+        activeButtonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_3, controlLayer, this));
+        activeButtonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_4, controlLayer, this));
+        activeButtonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_5, controlLayer, this));
+        activeButtonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_6, controlLayer, this));
+        activeButtonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_7, controlLayer, this));
+        activeButtonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_8, controlLayer, this));
+        activeButtonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_9, controlLayer, this));
+        activeButtonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_10, controlLayer, this));
+        activeButtonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_11, controlLayer, this));
+        activeButtonList->push_back(new CustomButton(BUTTON_TYPE_BUILDING, OBJECT_TYPE_BUILDING_12, controlLayer, this));
+        
+        return ;
+    }
+    
+    switch (objectType) {
+        case OBJECT_TYPE_BUILDING_1:
+        {
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_1, controlLayer, this));
+        }
+            break;
+        case OBJECT_TYPE_BUILDING_2:
+        {
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_2, controlLayer, this));
+        }
+            break;
+        case OBJECT_TYPE_BUILDING_3:
+        {
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UNIT, OBJECT_TYPE_UNIT_1, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UNIT, OBJECT_TYPE_UNIT_2, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UNIT, OBJECT_TYPE_UNIT_3, controlLayer, this));
+        }
+            break;
+        case OBJECT_TYPE_BUILDING_4:
+        {
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UNIT, OBJECT_TYPE_UNIT_4, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UNIT, OBJECT_TYPE_UNIT_5, controlLayer, this));
+            
+        }
+            break;
+        case OBJECT_TYPE_BUILDING_5:
+        {
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UNIT, OBJECT_TYPE_UNIT_6, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UNIT, OBJECT_TYPE_UNIT_7, controlLayer, this));
+            
+        }
+            break;
+        case OBJECT_TYPE_BUILDING_6:
+        {
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UNIT, OBJECT_TYPE_UNIT_2, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UNIT, OBJECT_TYPE_UNIT_3, controlLayer, this));
+        }
+            break;
+        case OBJECT_TYPE_BUILDING_7:
+        {
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_3, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_4, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_5, controlLayer, this));
+            
+        }
+            break;
+        case OBJECT_TYPE_BUILDING_8:
+        {
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_6, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_7, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_8, controlLayer, this));
+        }
+            break;
+        case OBJECT_TYPE_BUILDING_9:
+        {
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_9, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_10, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_11, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_12, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_13, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_14, controlLayer, this));
+        }
+            break;
+        case OBJECT_TYPE_BUILDING_10:
+        {
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_15, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_16, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_17, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_18, controlLayer, this));
+        }
+            break;
+        case OBJECT_TYPE_BUILDING_11:
+        {
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_19, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_20, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_21, controlLayer, this));
+        }
+            break;
+        case OBJECT_TYPE_BUILDING_12:
+        {
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_22, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_23, controlLayer, this));
+            activeButtonList->push_back(new CustomButton(BUTTON_TYPE_UPGRADE, OBJECT_TYPE_UPGRADE_24, controlLayer, this));
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
+}
 
 int CustomButton::getobjectType()
 {
@@ -451,25 +520,30 @@ void CustomButton::changeState()
 
 void CustomButton::update(int updateCount)
 {
+    int staticObjectState = 0;
+    
     switch (buttonType) {
+        case BUTTON_TYPE_ROOT:
+        {
+            setState(0);
+            
+            break;
+        }
+            
         case BUTTON_TYPE_BUILDING:
         {
             StaticBuilding* staticBuilding = (StaticBuilding*)staticObject;
             
-            int staticObjectState = staticBuilding->getStaticObjectState();
+            staticObjectState = staticBuilding->getStaticObjectState();
+            
+            setState(staticObjectState);
             
             if(staticObjectState == STATIC_OBJECT_STATE_DISABLE) {
-                
             } else if(staticObjectState == STATIC_OBJECT_STATE_ABLE) {
-                
             } else if(staticObjectState == STATIC_OBJECT_STATE_BUILDING_CREATING) {
-                
             } else if(staticObjectState == STATIC_OBJECT_STATE_ACTIVE) {
-                
             } else if(staticObjectState == STATIC_OBJECT_STATE_BUILDING_UPGRADING) {
-                
             } else {
-                
             }
             
             break;
@@ -477,18 +551,15 @@ void CustomButton::update(int updateCount)
         case BUTTON_TYPE_UPGRADE:
         {
             
-            int staticObjectState = staticObject->getStaticObjectState();
+            staticObjectState = staticObject->getStaticObjectState();
             
+            setState(staticObjectState);
+
             if(staticObjectState == STATIC_OBJECT_STATE_DISABLE) {
-                
             } else if(staticObjectState == STATIC_OBJECT_STATE_ABLE) {
-                
             } else if(staticObjectState == STATIC_OBJECT_STATE_UPGRADE_UPGRADING) {
-                
             } else if(staticObjectState == STATIC_OBJECT_STATE_ACTIVE) {
-                
             } else {
-                
             }
             
             break;
@@ -496,25 +567,39 @@ void CustomButton::update(int updateCount)
         case BUTTON_TYPE_UNIT:
         {
             
-            int staticObjectState = staticObject->getStaticObjectState();
+            staticObjectState = staticObject->getStaticObjectState();
+
+            setState(staticObjectState);
             
             if(staticObjectState == STATIC_OBJECT_STATE_DISABLE) {
-                
             } else if(staticObjectState == STATIC_OBJECT_STATE_ABLE) {
-                
             } else {
-                
             }
             
             break;
         }
         case BUTTON_TYPE_ACTION:
         {
-        
+            setState(0);
             break;
         }
         default:
             
             break;
     }
+}
+
+
+bool CustomButton::isChangedState()
+{
+    if(staticObject == nullptr) {
+        return false;
+    }
+    
+    if(prevStaticObjectState != staticObject->getStaticObjectState())
+    {
+        return true;
+    }
+    
+    return false;
 }

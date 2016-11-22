@@ -35,8 +35,6 @@ bool GameScene::init()
     topLayer = TopLayer::create();
     this->addChild(topLayer);
     
-    controlLayer = ControlLayer::create();
-    
 	updateCount = 0;
 
 	if (PLAY_ALONE) {
@@ -59,6 +57,7 @@ bool GameScene::init()
 //    
 //    addChild(background, 0);
 //
+    controlLayer = ControlLayer::create();
     
     if(controlLayer->initWithParameter(gameManager->getGameWorld()->getGamePlayer(0)) == false) {
         return false;

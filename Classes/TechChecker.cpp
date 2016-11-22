@@ -15,40 +15,40 @@ TechChecker::TechChecker(GamePlayer* player) {
 
 
 bool TechChecker::checkCreateBuilding(int objectType) {
-//	BaseObject* baseObject;
-//	Building* building;
+	BaseObject* baseObject;
+	Building* building;
+
+	switch (objectType) {
+	case OBJECT_TYPE_BUILDING_1:	//need NULL
+		return true;
+	case OBJECT_TYPE_BUILDING_2:	//need NULL
+		return true;
+	case OBJECT_TYPE_BUILDING_3:	//need BLD_1
+    {
+        building = (Building*)gamePlayer->getBuildingByObjectType(OBJECT_TYPE_BUILDING_1);
+        if(building == nullptr || building->getState() == OBJECT_STATE_CREATING) {
+            return false;
+        }
+        
+        building = (Building*)gamePlayer->getBuildingByObjectType(OBJECT_TYPE_BUILDING_2);
+        if(building == nullptr || building->getState() == OBJECT_STATE_CREATING) {
+            return false;
+        }
+        
+        building = (Building*)gamePlayer->getBuildingByObjectType(OBJECT_TYPE_BUILDING_3);
+        if(building != nullptr) {
+            return false;
+        }
+        
+        if(gamePlayer->getGold() < gamePlayer->getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_3)->getPrice()) {
+            return false;
+        }
 //
-//	switch (objectType) {
-//	case OBJECT_TYPE_BUILDING_1:	//need NULL
-//		return true;
-//	case OBJECT_TYPE_BUILDING_2:	//need NULL
-//		return true;
-//	case OBJECT_TYPE_BUILDING_3:	//need BLD_1
-//    {
-//        building = (Building*)gamePlayer->getBuildingByObjectType(OBJECT_TYPE_BUILDING_1);
-//        if(building == nullptr || building->getState() == OBJECT_STATE_CREATING) {
-//            return false;
-//        }
-//        
-//        building = (Building*)gamePlayer->getBuildingByObjectType(OBJECT_TYPE_BUILDING_2);
-//        if(building == nullptr || building->getState() == OBJECT_STATE_CREATING) {
-//            return false;
-//        }
-//        
-//        building = (Building*)gamePlayer->getBuildingByObjectType(OBJECT_TYPE_BUILDING_3);
-//        if(building != nullptr) {
-//            return false;
-//        }
-//        
-//        if(gamePlayer->getGold() < gamePlayer->getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_3)->getPrice()) {
-//            return false;
-//        }
-////
-////		if (baseObject != nullptr && (baseObject->getState() == OBJECT_STATE_IDLE || baseObject->getState() == OBJECT_STATE_UPGRADING || baseObject->getState() == OBJECT_STATE_CREATING_UNIT)) { return true; }
-////
-////		return false;
-//    }
-//            return true;
+//		if (baseObject != nullptr && (baseObject->getState() == OBJECT_STATE_IDLE || baseObject->getState() == OBJECT_STATE_UPGRADING || baseObject->getState() == OBJECT_STATE_CREATING_UNIT)) { return true; }
+//
+//		return false;
+    }
+            return true;
 //	case OBJECT_TYPE_BUILDING_4:	//need BLD_3, BLD_1_UP_1
 //	case OBJECT_TYPE_BUILDING_5:	//need BLD_3, BLD_1_UP_1
 //		baseObject = gamePlayers[userIndex].getBuildingByObjectType(OBJECT_TYPE_BUILDING_3);
@@ -89,20 +89,18 @@ bool TechChecker::checkCreateBuilding(int objectType) {
 //		if (baseObject != nullptr && (baseObject->getState() == OBJECT_STATE_IDLE || baseObject->getState() == OBJECT_STATE_UPGRADING || baseObject->getState() == OBJECT_STATE_CREATING_UNIT)) { return true; }
 //
 //		return false;
-//	default:
-//		return false;
-//	}
+	default:
+		return false;
+	}
     
     return true;
 }
 
 bool TechChecker::checkCancelBuilding(int objectNo) {
-//	BaseObject* baseObject = gamePlayers[userIndex].getBuildingByObjectType(objectNo);
-//	if (baseObject != nullptr && baseObject->getState() == OBJECT_STATE_CREATING)
-//		return true;
-//	return false;
-    return true;
-
+	BaseObject* baseObject = gamePlayer->getBuildingByObjectNo(objectNo);
+	if (baseObject != nullptr && baseObject->getState() == OBJECT_STATE_CREATING)
+		return true;
+	return false;
 }
 
 bool TechChecker::ckeckUpgradeBuilding(int objectNo)
@@ -126,12 +124,17 @@ bool TechChecker::checkCancleUpgradeBuilding(int objectNo)
     return true;
 }
 
-bool TechChecker::checkCreateUnit(int objectNo)
+bool TechChecker::checkCreateUnit(int objectNo, int objectType, int objectCount, int lineNo)
 {
-    if((gamePlayer->getStaticUnitByUnitType(OBJECT_TYPE_UNIT_1))->getPrice() > gamePlayer->getGold()) {
-        printf("111111111111");
+//    if(gamePlayer->getBuildingByObjectNo(objectNo) != nullptr) {
+//        return false;
+//    }
+    
+    if((gamePlayer->getStaticUnitByUnitType(objectType))->getPrice() * objectCount > gamePlayer->getGold()) {
         return false;
     }
+    
+    return true;
 //	int objectType = gamePlayers[userIndex].getUnitByObjectNo(objectNo)->getObjectType();
 //	BaseObject* baseObject;
 //	switch (objectType) {

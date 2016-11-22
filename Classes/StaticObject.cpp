@@ -414,12 +414,14 @@ StaticBuilding_3::StaticBuilding_3(GamePlayer* _gamePlayer) : StaticBuilding(OBJ
     x = 60;
     y = DISPLAY_HEIGHT - 180;
     
-    price = 200;
+    price = 500;
 }
 
 void StaticBuilding_3::completeCreate()
 {
-StaticBuilding::completeCreate();    
+    StaticBuilding::completeCreate();
+    
+    gamePlayer->getStaticUnitByUnitType(OBJECT_TYPE_UNIT_1)->setStaticObjectState(STATIC_OBJECT_STATE_ABLE);
 }
 
 StaticBuilding_4::StaticBuilding_4(GamePlayer* _gamePlayer) : StaticBuilding(OBJECT_TYPE_BUILDING_4, "building_4", STATIC_OBJECT_STATE_DISABLE, _gamePlayer)

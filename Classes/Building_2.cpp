@@ -38,7 +38,7 @@ void Building_2::update(int updateCount)
             
             gamePlayer->setGold(gamePlayer->getGold() + 100 + (100 * getUpgradeByUpgradeType(OBJECT_TYPE_UPGRADE_2)->getUpgradeCount()));
             
-            std::cout << "acquired gold - " << gamePlayer->getGold() <<std::endl;
+//            std::cout << "acquired gold - " << gamePlayer->getGold() <<std::endl;
             
             goldAquiredTime = 0;
             

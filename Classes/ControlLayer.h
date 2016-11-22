@@ -47,6 +47,9 @@ private:
     CustomButton* upgradeButton;
     CustomButton* upgradeCreateButton;
     
+    int plusUnitCount;
+    
+    
 	char buf[128];
 	string name;
 	string clickedName;
@@ -65,19 +68,26 @@ private:
 	char* makeName(string _name, int _no);
 
 public:
+    CustomButton* attachedBuildingCreateButton;
+    CustomButton* attachedBuildingCreateCancelButton;
+    CustomButton* attachedUpgradeCreateButton;
+    CustomButton* attachedUpgradeCreateCancelButton;
+    CustomButton* attachedUnitActionButton;
+    
+public:
 
 	virtual bool init();
     bool initWithParameter(GamePlayer* gamePlayer);
-	void update(float dt);	
+//	void update(float dt);	
     void refreshMoveLayer(CustomButton* customButton);
     
     GamePlayer* getGamePlayer() { return gamePlayer; }
     
-    void makeBuildingButton(int objectType);
+//    void makeBuildingButton(int objectType);
 
     void buttonCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType, CustomButton* customButton);
 
-    void buildingCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
+//    void buildingCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
 
     void closeButtones(CustomButton* customButton);
     
@@ -89,22 +99,22 @@ public:
     std::list<CustomButton*>* getUpgradeCreateButtonList() { return &upgradeCreateButtonList; }
     std::list<CustomButton*>* getUpgradeCreateCancelButtonList() { return &upgradeCreateCancelButtonList; }
 
-	void completeCreateBuildingNotify(int objectType);
-	void completeUgradeNotify(int upgradeType, int upgradeCompleteNum);
-	void activeBuildingNotify(int objectType);
-	void activeUgradeNotify(int upgradeType, int upgradeCompleteNum);
-	void activeUnitNotify(int objectType);
+//	void completeCreateBuildingNotify(int objectType);
+//	void completeUgradeNotify(int upgradeType, int upgradeCompleteNum);
+//	void activeBuildingNotify(int objectType);
+//	void activeUgradeNotify(int upgradeType, int upgradeCompleteNum);
+//	void activeUnitNotify(int objectType);
 
 	// a selector callback
 	void setGamePlayer(GamePlayer* _gamePlayer);
 
 	void enterCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
-
-	void unitCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
-	void upgradeCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
-
-	void DetailUnitCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
-	void DetailUpgradeCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
+//
+//	void unitCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
+//	void upgradeCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
+//
+//	void DetailUnitCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
+//	void DetailUpgradeCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
     
     
     std::list<CustomButton*> wholeButtonList;

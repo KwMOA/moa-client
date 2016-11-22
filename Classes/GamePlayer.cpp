@@ -99,7 +99,7 @@ GamePlayer::GamePlayer(GameWorld* _gameWorld, int _playerIndex)
     int objectNo = createBuilding(OBJECT_TYPE_BUILDING_1);
     Building* building = (Building*)getBuildingByObjectNo(objectNo);
     
-    building->setState(OBJECT_STATE_IDLE);
+    building->completeCreate();
     
     building->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
     building->objectLayer->addChild(building->images[1][0], 0, TAG_IMAGE_OBJECT);
@@ -108,7 +108,7 @@ GamePlayer::GamePlayer(GameWorld* _gameWorld, int _playerIndex)
     objectNo = createBuilding(OBJECT_TYPE_BUILDING_2);
     building = (Building*)getBuildingByObjectNo(objectNo);
     
-    building->setState(OBJECT_STATE_IDLE);
+    building->completeCreate();
     
     building->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
     building->objectLayer->addChild(building->images[1][0], 0, TAG_IMAGE_OBJECT);

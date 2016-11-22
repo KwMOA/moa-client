@@ -128,11 +128,6 @@ void Building::update(int updateCount)
         if(createPersent == 80) {
             std::cout << "create building - " << objectNo <<std::endl;
             
-            state = OBJECT_STATE_IDLE;
-            
-            objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
-            objectLayer->addChild(images[1][0], 0, TAG_IMAGE_OBJECT);
-            
             completeCreate();
         }
         
@@ -302,6 +297,9 @@ void Building::cancelCreate()
 void Building::completeCreate()
 {
     state = OBJECT_STATE_IDLE;
+    
+    objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
+    objectLayer->addChild(images[1][0], 0, TAG_IMAGE_OBJECT);
     
     staticBuilding->completeCreate();
 }
