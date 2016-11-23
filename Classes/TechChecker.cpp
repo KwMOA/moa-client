@@ -48,7 +48,7 @@ bool TechChecker::checkCreateBuilding(int objectType) {
 //
 //		return false;
     }
-            return true;
+//            return true;
 //	case OBJECT_TYPE_BUILDING_4:	//need BLD_3, BLD_1_UP_1
 //	case OBJECT_TYPE_BUILDING_5:	//need BLD_3, BLD_1_UP_1
 //		baseObject = gamePlayers[userIndex].getBuildingByObjectType(OBJECT_TYPE_BUILDING_3);
@@ -90,7 +90,7 @@ bool TechChecker::checkCreateBuilding(int objectType) {
 //
 //		return false;
 	default:
-		return false;
+		return true;
 	}
     
     return true;

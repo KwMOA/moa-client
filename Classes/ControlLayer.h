@@ -49,6 +49,7 @@ private:
     
     int plusUnitCount;
     
+    CustomButton* currentOpenedButton;
     
 	char buf[128];
 	string name;

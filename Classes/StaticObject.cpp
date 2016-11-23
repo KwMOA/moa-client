@@ -15,6 +15,7 @@
 #include "ControlLayer.h"
 #include "CustomButton.h"
 #include "Building.h"
+#include "Upgrade.h"
 
 
 StaticObject::StaticObject(int _objectType, std::string _name, int _staticObjectState, GamePlayer* _gamePlayer)
@@ -65,6 +66,8 @@ StaticUnit::StaticUnit(int _objectType, std::string _name, int _staticObjectStat
 StaticBuilding::StaticBuilding(int _objectType, std::string _name, int _staticObjectState, GamePlayer* _gamePlayer)
 : StaticVisibleObject(_objectType, _name, _staticObjectState, _gamePlayer)
 {
+    createConditionCount = 0;
+    
     building = nullptr;
 }
 
@@ -124,7 +127,6 @@ StaticUnit_1::StaticUnit_1(GamePlayer* _gamePlayer) : StaticUnit(OBJECT_TYPE_UNI
     def = 20;
     isVisible = 1;
     population = 1;
-    
 }
 
 StaticUnit_2::StaticUnit_2(GamePlayer* _gamePlayer) : StaticUnit(OBJECT_TYPE_UNIT_2, "unit_2", STATIC_OBJECT_STATE_DISABLE, _gamePlayer)
@@ -363,6 +365,8 @@ StaticBuilding_1::StaticBuilding_1(GamePlayer* _gamePlayer) : StaticBuilding(OBJ
     y = DISPLAY_HEIGHT - 60;
     
     price = 400;
+    
+    maxCreateCondition = 0;
 }
 
 void StaticBuilding_1::completeCreate()
@@ -390,11 +394,15 @@ StaticBuilding_2::StaticBuilding_2(GamePlayer* _gamePlayer) : StaticBuilding(OBJ
     y = DISPLAY_HEIGHT - 120;
     
     price = 100;
+    
+    maxCreateCondition = 0;
 }
 
 void StaticBuilding_2::completeCreate()
 {
-StaticBuilding::completeCreate();
+    StaticBuilding::completeCreate();
+    
+    gamePlayer->getStaticUpgradeByUpgradeType(OBJECT_TYPE_UPGRADE_2)->setStaticObjectState(STATIC_OBJECT_STATE_ABLE);
 }
 
 StaticBuilding_3::StaticBuilding_3(GamePlayer* _gamePlayer) : StaticBuilding(OBJECT_TYPE_BUILDING_3, "building_3", STATIC_OBJECT_STATE_ABLE, _gamePlayer)
@@ -415,6 +423,8 @@ StaticBuilding_3::StaticBuilding_3(GamePlayer* _gamePlayer) : StaticBuilding(OBJ
     y = DISPLAY_HEIGHT - 180;
     
     price = 500;
+    
+    maxCreateCondition = 2;
 }
 
 void StaticBuilding_3::completeCreate()
@@ -422,6 +432,8 @@ void StaticBuilding_3::completeCreate()
     StaticBuilding::completeCreate();
     
     gamePlayer->getStaticUnitByUnitType(OBJECT_TYPE_UNIT_1)->setStaticObjectState(STATIC_OBJECT_STATE_ABLE);
+    gamePlayer->getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_7)->setStaticObjectState(STATIC_OBJECT_STATE_ABLE);
+    gamePlayer->getStaticUpgradeByUpgradeType(OBJECT_TYPE_UPGRADE_1)->setStaticObjectState(STATIC_OBJECT_STATE_ABLE);
 }
 
 StaticBuilding_4::StaticBuilding_4(GamePlayer* _gamePlayer) : StaticBuilding(OBJECT_TYPE_BUILDING_4, "building_4", STATIC_OBJECT_STATE_DISABLE, _gamePlayer)
@@ -442,11 +454,20 @@ StaticBuilding_4::StaticBuilding_4(GamePlayer* _gamePlayer) : StaticBuilding(OBJ
     y = DISPLAY_HEIGHT - 240;
     
     price = 250;
+    
+    maxCreateCondition = 1;
 }
 
 void StaticBuilding_4::completeCreate()
 {
-StaticBuilding::completeCreate();    
+    StaticBuilding::completeCreate();
+    
+    StaticBuilding* staticBuilding = gamePlayer->getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_9);
+    staticBuilding->setCreateConditionCount(staticBuilding->getCreateConditionCount() + 1);
+    
+    if(staticBuilding->getCreateConditionCount() == staticBuilding->getMaxCreateCondition()) {
+        staticBuilding->setStaticObjectState(STATIC_OBJECT_STATE_ABLE);
+    }
 }
 
 StaticBuilding_5::StaticBuilding_5(GamePlayer* _gamePlayer) : StaticBuilding(OBJECT_TYPE_BUILDING_5, "building_5", STATIC_OBJECT_STATE_DISABLE, _gamePlayer)
@@ -467,11 +488,15 @@ StaticBuilding_5::StaticBuilding_5(GamePlayer* _gamePlayer) : StaticBuilding(OBJ
     y = DISPLAY_HEIGHT - 300;
     
     price = 300;
+    
+    maxCreateCondition = 1;
 }
 
 void StaticBuilding_5::completeCreate()
 {
-StaticBuilding::completeCreate();    
+    StaticBuilding::completeCreate();
+    
+    gamePlayer->getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_10)->setStaticObjectState(STATIC_OBJECT_STATE_ABLE);
 }
 
 StaticBuilding_6::StaticBuilding_6(GamePlayer* _gamePlayer) : StaticBuilding(OBJECT_TYPE_BUILDING_6, "building_6", STATIC_OBJECT_STATE_DISABLE, _gamePlayer)
@@ -493,11 +518,16 @@ StaticBuilding_6::StaticBuilding_6(GamePlayer* _gamePlayer) : StaticBuilding(OBJ
     
     
     price = 400;
+    
+    maxCreateCondition = 1;
 }
 
 void StaticBuilding_6::completeCreate()
 {
-StaticBuilding::completeCreate();    
+    StaticBuilding::completeCreate();
+    
+    gamePlayer->getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_11)->setStaticObjectState(STATIC_OBJECT_STATE_ABLE);
+    gamePlayer->getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_12)->setStaticObjectState(STATIC_OBJECT_STATE_ABLE);
 }
 
 StaticBuilding_7::StaticBuilding_7(GamePlayer* _gamePlayer) : StaticBuilding(OBJECT_TYPE_BUILDING_7, "building_7", STATIC_OBJECT_STATE_DISABLE, _gamePlayer)
@@ -518,11 +548,16 @@ StaticBuilding_7::StaticBuilding_7(GamePlayer* _gamePlayer) : StaticBuilding(OBJ
     y = DISPLAY_HEIGHT - 420;
     
     price = 250;
+    
+    maxCreateCondition = 1;
 }
 
 void StaticBuilding_7::completeCreate()
 {
-StaticBuilding::completeCreate();    
+    StaticBuilding::completeCreate();
+    
+    gamePlayer->getStaticUnitByUnitType(OBJECT_TYPE_UNIT_2)->setStaticObjectState(STATIC_OBJECT_STATE_ABLE);
+    gamePlayer->getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_8)->setStaticObjectState(STATIC_OBJECT_STATE_ABLE);
 }
 
 StaticBuilding_8::StaticBuilding_8(GamePlayer* _gamePlayer) : StaticBuilding(OBJECT_TYPE_BUILDING_8, "building_8", STATIC_OBJECT_STATE_DISABLE, _gamePlayer)
@@ -543,11 +578,23 @@ StaticBuilding_8::StaticBuilding_8(GamePlayer* _gamePlayer) : StaticBuilding(OBJ
     y = DISPLAY_HEIGHT - 480;
     
     price = 300;
+    
+    maxCreateCondition = 1;
 }
 
 void StaticBuilding_8::completeCreate()
 {
-StaticBuilding::completeCreate();    
+    StaticBuilding::completeCreate();
+    
+    gamePlayer->getStaticUnitByUnitType(OBJECT_TYPE_UNIT_3)->setStaticObjectState(STATIC_OBJECT_STATE_ABLE);
+
+    StaticBuilding* staticBuilding = gamePlayer->getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_9);
+    staticBuilding->setCreateConditionCount(staticBuilding->getCreateConditionCount() + 1);
+    
+    if(staticBuilding->getCreateConditionCount() == staticBuilding->getMaxCreateCondition()) {
+        staticBuilding->setStaticObjectState(STATIC_OBJECT_STATE_ABLE);
+    }
+    
 }
 
 StaticBuilding_9::StaticBuilding_9(GamePlayer* _gamePlayer) : StaticBuilding(OBJECT_TYPE_BUILDING_9, "building_9", STATIC_OBJECT_STATE_DISABLE, _gamePlayer)
@@ -568,11 +615,19 @@ StaticBuilding_9::StaticBuilding_9(GamePlayer* _gamePlayer) : StaticBuilding(OBJ
     y = DISPLAY_HEIGHT - 540;
     
     price = 300;
+    
+    maxCreateCondition = 1;
 }
 
 void StaticBuilding_9::completeCreate()
 {
-StaticBuilding::completeCreate();    
+    StaticBuilding::completeCreate();
+    
+    StaticUpgrade* staticUpgrade = gamePlayer->getStaticUpgradeByUpgradeType(OBJECT_TYPE_UPGRADE_1);
+    
+    if(staticUpgrade->getStaticObjectState() == STATIC_OBJECT_STATE_DISABLE) {
+        staticUpgrade->setStaticObjectState(STATIC_OBJECT_STATE_ABLE);
+    }
 }
 
 StaticBuilding_10::StaticBuilding_10(GamePlayer* _gamePlayer) : StaticBuilding(OBJECT_TYPE_BUILDING_10, "building_10", STATIC_OBJECT_STATE_DISABLE, _gamePlayer)
@@ -593,11 +648,19 @@ StaticBuilding_10::StaticBuilding_10(GamePlayer* _gamePlayer) : StaticBuilding(O
     y = DISPLAY_HEIGHT - 600;
     
     price = 300;
+    
+    maxCreateCondition = 1;
 }
 
 void StaticBuilding_10::completeCreate()
 {
-StaticBuilding::completeCreate();    
+    StaticBuilding::completeCreate();
+    
+    StaticUpgrade* staticUpgrade = gamePlayer->getStaticUpgradeByUpgradeType(OBJECT_TYPE_UPGRADE_1);
+    
+    if(staticUpgrade->getStaticObjectState() == STATIC_OBJECT_STATE_DISABLE) {
+        staticUpgrade->setStaticObjectState(STATIC_OBJECT_STATE_ABLE);
+    }
 }
 
 StaticBuilding_11::StaticBuilding_11(GamePlayer* _gamePlayer) : StaticBuilding(OBJECT_TYPE_BUILDING_11, "building_11", STATIC_OBJECT_STATE_DISABLE, _gamePlayer)
@@ -618,6 +681,8 @@ StaticBuilding_11::StaticBuilding_11(GamePlayer* _gamePlayer) : StaticBuilding(O
     y = DISPLAY_HEIGHT - 660;
     
     price = 400;
+    
+    maxCreateCondition = 1;
 }
 
 void StaticBuilding_11::completeCreate()
@@ -643,6 +708,8 @@ StaticBuilding_12::StaticBuilding_12(GamePlayer* _gamePlayer) : StaticBuilding(O
     y = DISPLAY_HEIGHT - 720;
     
     price = 400;
+    
+    maxCreateCondition = 1;
 }
 
 void StaticBuilding_12::completeCreate()
@@ -660,7 +727,7 @@ StaticUpgrade_1::StaticUpgrade_1(GamePlayer* _gamePlayer) : StaticUpgrade(OBJECT
     memset(name, 0, 20);
     memcpy(name, "upgrade_1", 9);
     
-    maxUpgardeCount = 3;
+    maxUpgardeCount = 2;
     completeTimeAndPriceArray = new std::pair<int, int>[maxUpgardeCount];
     
     for(int i = 0; i < maxUpgardeCount; i++) {
@@ -670,7 +737,24 @@ StaticUpgrade_1::StaticUpgrade_1(GamePlayer* _gamePlayer) : StaticUpgrade(OBJECT
 
 void StaticUpgrade_1::completeUpgrade()
 {
-    StaticUpgrade::completeUpgrade();    
+    StaticUpgrade::completeUpgrade();
+    
+    if(upgrade->getUpgradeCount() == maxUpgardeCount) {
+        setStaticObjectState(STATIC_OBJECT_STATE_ACTIVE);
+        
+        gamePlayer->getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_6)->setStaticObjectState(STATIC_OBJECT_STATE_ABLE);
+
+    } else {
+        
+        setStaticObjectState(STATIC_OBJECT_STATE_DISABLE);
+        
+        if(upgrade->getUpgradeCount() == 1) {
+            gamePlayer->getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_4)->setStaticObjectState(STATIC_OBJECT_STATE_ABLE);
+            gamePlayer->getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_5)->setStaticObjectState(STATIC_OBJECT_STATE_ABLE);
+        } else {
+            
+        }
+    }
 }
 
 StaticUpgrade_2::StaticUpgrade_2(GamePlayer* _gamePlayer) : StaticUpgrade(OBJECT_TYPE_UPGRADE_2, "upgrade_2", STATIC_OBJECT_STATE_DISABLE, _gamePlayer)
@@ -714,7 +798,9 @@ StaticUpgrade_3::StaticUpgrade_3(GamePlayer* _gamePlayer) : StaticUpgrade(OBJECT
 
 void StaticUpgrade_3::completeUpgrade()
 {
-    StaticUpgrade::completeUpgrade();    
+    StaticUpgrade::completeUpgrade();
+    
+    
 }
 
 StaticUpgrade_4::StaticUpgrade_4(GamePlayer* _gamePlayer) : StaticUpgrade(OBJECT_TYPE_UPGRADE_4, "upgrade_4", STATIC_OBJECT_STATE_DISABLE, _gamePlayer)

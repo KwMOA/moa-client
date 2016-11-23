@@ -14,7 +14,7 @@
 
 Upgrade_1::Upgrade_1(Building* building) : Upgrade(building, OBJECT_TYPE_UPGRADE_1)
 {
-
+    
 }
 
 

@@ -23,6 +23,7 @@ Upgrade::Upgrade(Building* building, int _upgradeType) : BaseObject(building->ge
     upgradeCompleteNum = 40;
     
     staticUpgrade = building->getGamePlayer()->getStaticUpgradeByUpgradeType(_upgradeType);
+    staticUpgrade->setUpgrade(this);
 }
 
 void Upgrade::upgrading(int upgradeTime)
@@ -38,10 +39,10 @@ void Upgrade::upgrading(int upgradeTime)
         //ToDo. change image
         if(upgradePercent % 8 == 0) {
             owner->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
-            owner->objectLayer->addChild(owner->images[2][0]);
+            owner->objectLayer->addChild(owner->images[1][0]);
         } else if(upgradePercent % 8 == 4) {
             owner->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
-            owner->objectLayer->addChild(owner->images[2][1]);
+            owner->objectLayer->addChild(owner->images[1][0]);
         }
     }
     

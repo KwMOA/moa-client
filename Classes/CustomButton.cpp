@@ -253,6 +253,8 @@ void CustomButton::setState(int _state)
                 memcpy(buttonStateName, "able", 4);
             } else if(state == STATIC_OBJECT_STATE_BUILDING_CREATING) {
                 memcpy(buttonStateName, "able", 4);
+            } else if(state == STATIC_OBJECT_STATE_BUILDING_UPGRADING) {
+                memcpy(buttonStateName, "able", 4);
             } else if(state == STATIC_OBJECT_STATE_ACTIVE) {
                 memcpy(buttonStateName, "active", 6);
             } else {
@@ -342,15 +344,15 @@ void CustomButton::setChildButton(ControlLayer* _controlLayer)
             buttonList = nullptr;
         } else if(state == STATIC_OBJECT_STATE_ABLE) {
             buttonList = controlLayer->getBuildingCreateButtonList();
-            controlLayer->attachedBuildingCreateButton = this;
+//            controlLayer->attachedBuildingCreateButton = this;
         } else if(state == STATIC_OBJECT_STATE_BUILDING_CREATING) {
             buttonList = controlLayer->getBuildingCreateCancelButtonList();
-            controlLayer->attachedBuildingCreateCancelButton = this;
+//            controlLayer->attachedBuildingCreateCancelButton = this;
         } else if(state == STATIC_OBJECT_STATE_ACTIVE) {
             buttonList = activeButtonList;
         } else if(state == STATIC_OBJECT_STATE_BUILDING_UPGRADING) {
             buttonList = controlLayer->getUpgradeCreateCancelButtonList();
-            controlLayer->attachedUpgradeCreateCancelButton = this;
+//            controlLayer->attachedUpgradeCreateCancelButton = this;
         } else {
             printf("??");
         }
@@ -360,7 +362,7 @@ void CustomButton::setChildButton(ControlLayer* _controlLayer)
             buttonList = nullptr;
         } else if(state == STATIC_OBJECT_STATE_ABLE) {
             buttonList = controlLayer->getUnitActionButtonList();
-            controlLayer->attachedUnitActionButton = this;
+//            controlLayer->attachedUnitActionButton = this;
         } else {
             printf("??");
         }
@@ -370,7 +372,7 @@ void CustomButton::setChildButton(ControlLayer* _controlLayer)
             buttonList = nullptr;
         } else if(state == STATIC_OBJECT_STATE_ABLE) {
             buttonList = controlLayer->getUpgradeCreateButtonList();
-            controlLayer->attachedUpgradeCreateButton = this;
+//            controlLayer->attachedUpgradeCreateButton = this;
         } else if(state == STATIC_OBJECT_STATE_UPGRADE_UPGRADING) {
             buttonList = nullptr;
         } else if(state == STATIC_OBJECT_STATE_ACTIVE) {

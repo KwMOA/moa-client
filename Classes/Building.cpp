@@ -55,7 +55,8 @@ Building::Building(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gameP
     for(int i = 0; i < staticBuilding->getCreateImageCount(); i++) {
         
         memset(buf, 0, 128);
-        sprintf(buf, "%s_create_%d.png", staticBuilding->getName(), i + 1);
+//        sprintf(buf, "%s_create_%d.png", staticBuilding->getName(), i + 1);
+        sprintf(buf, "building_1_create_%d.png", i + 1);
         
         images[0][i] = Sprite::createWithSpriteFrameName(buf);
         images[0][i]->retain();
@@ -66,7 +67,8 @@ Building::Building(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gameP
     images[1] = new Sprite*[1];
     for(int i = 0; i < 1; i++) {
         memset(buf, 0, 128);
-        sprintf(buf, "%s_idle_%d.png", staticBuilding->getName(), i + 1);
+//        sprintf(buf, "%s_idle_%d.png", staticBuilding->getName(), i + 1);
+        sprintf(buf, "building_1_idle_%d.png", i + 1);
         
         images[1][i] = Sprite::createWithSpriteFrameName(buf);
         images[1][i]->retain();
@@ -80,7 +82,8 @@ Building::Building(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gameP
     images[2] = new Sprite*[staticBuilding->getWorkImageCount()];
     for(int i = 0; i < staticBuilding->getWorkImageCount(); i++) {
         memset(buf, 0, 128);
-        sprintf(buf, "%s_work_%d.png", staticBuilding->getName(), i + 1);
+//        sprintf(buf, "%s_work_%d.png", staticBuilding->getName(), i + 1);
+        sprintf(buf, "building_1_work_%d.png", i + 1);
         
         images[2][i] = Sprite::createWithSpriteFrameName(buf);
         images[2][i]->retain();
@@ -91,7 +94,8 @@ Building::Building(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gameP
     images[3] = new Sprite*[staticBuilding->getDestroyImageCount()];
     for(int i = 0; i < staticBuilding->getDestroyImageCount(); i++) {
         memset(buf, 0, 128);
-        sprintf(buf, "%s_destroy_%d.png", staticBuilding->getName(), i + 1);
+//        sprintf(buf, "%s_destroy_%d.png", staticBuilding->getName(), i + 1);
+        sprintf(buf, "building_1_destroy_%d.png", i + 1);
         
         images[3][i] = Sprite::createWithSpriteFrameName(buf);
         images[3][i]->retain();

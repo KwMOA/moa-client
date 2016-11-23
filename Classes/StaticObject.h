@@ -37,6 +37,7 @@ public:
     void setStaticObjectState(int _staticObjectState) { staticObjectState = _staticObjectState; }
     int getStaticObjectState() { return staticObjectState; }
     
+    void setUpgrade(Upgrade* _upgrade) { upgrade = _upgrade; }
     
     Upgrade* upgrade;
 };
@@ -271,6 +272,9 @@ protected:
     
     int x, y;
     
+    int maxCreateCondition;
+    int createConditionCount;
+    
 public:
     StaticBuilding(int _objectType, std::string _name, int _staticObjectState, GamePlayer* _gamePlayer);
     void setCreateImageCount(int _createImageCount) { createImageCount = _createImageCount; }
@@ -284,6 +288,12 @@ public:
     
     void setCreateCompleteTime(int _createCompleteTime) { createCompleteTime = _createCompleteTime; }
     int getCreateCompleteTime() { return createCompleteTime; }
+    
+    void setMaxCreateCondition(int _maxCreateCondition) { maxCreateCondition = _maxCreateCondition; }
+    int getMaxCreateCondition() { return maxCreateCondition; }
+    
+    void setCreateConditionCount(int _createConditionCount) { createConditionCount = _createConditionCount; }
+    int getCreateConditionCount() { return createConditionCount; }
     
     int getX() { return x; }
     void setX(int _x) { x = _x; }

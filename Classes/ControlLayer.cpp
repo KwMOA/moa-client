@@ -129,14 +129,14 @@ void ControlLayer::buttonCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
                 if(customButton->getobjectType() == ACTION_BUTTON_TYPE_BUILDING_CREATE) {
                     
                     CreateBuildingCI* ci = new CreateBuildingCI();
-                    ci->objectType = attachedBuildingCreateButton->getobjectType();
+                    ci->objectType = currentOpenedButton->getobjectType();
                     
                     gamePlayer->getGameWorld()->getGameManager()->getTaskManager()->pushBackMessage(ci);
                     
                 } else if(customButton->getobjectType() == ACTION_BUTTON_TYPE_BUILDING_CREATE_CANCEL) {
                     CancelCreateBuildingCI* ci = new CancelCreateBuildingCI();
                     
-                    BaseObject* building = gamePlayer->getBuildingByObjectType(attachedBuildingCreateCancelButton->getobjectType());
+                    BaseObject* building = gamePlayer->getBuildingByObjectType(currentOpenedButton->getobjectType());
                     
                     if(building == nullptr) {
                         printf("not exist building");
@@ -149,7 +149,25 @@ void ControlLayer::buttonCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
                     
                 } else if(customButton->getobjectType() == ACTION_BUTTON_TYPE_UPGRADE) {
                     
+                    BaseObject* building = gamePlayer->getBuildingByObjectType(currentOpenedButton->getParentButton()->getobjectType());
+                    
+                    if(building != nullptr) {
+                        UpgradeBuildingCI* ci = new UpgradeBuildingCI();
+                        ci->upgradeType = currentOpenedButton->getobjectType();
+                        ci->objectNo = building->getObjectNo();
+                        gamePlayer->getGameWorld()->getGameManager()->getTaskManager()->pushBackMessage(ci);
+                    }
+                    
+                    
                 } else if(customButton->getobjectType() == ACTION_BUTTON_TYPE_UPGRADE_CANCEL) {
+                    BaseObject* building = gamePlayer->getBuildingByObjectType(currentOpenedButton->getobjectType());
+                    
+                    if(building != nullptr) {
+                        CancelUpgradeBuildingCI* ci = new CancelUpgradeBuildingCI();
+//                        ci->upgradeType = currentOpenedButton->getobjectType();
+                        ci->objectNo = building->getObjectNo();
+                        gamePlayer->getGameWorld()->getGameManager()->getTaskManager()->pushBackMessage(ci);
+                    }
                     
                 } else if(customButton->getobjectType() == ACTION_BUTTON_TYPE_UNIT_PLUS) {
                     plusUnitCount++;
@@ -161,11 +179,11 @@ void ControlLayer::buttonCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
                     
                     if(plusUnitCount > 0) {
                         
-                        BaseObject* building = gamePlayer->getBuildingByObjectType(attachedUnitActionButton->getParentButton()->getobjectType());
+                        BaseObject* building = gamePlayer->getBuildingByObjectType(currentOpenedButton->getParentButton()->getobjectType());
                         
                         if(building != nullptr) {
                             CreateUnitCI* ci = new CreateUnitCI();
-                            ci->objectType = attachedUnitActionButton->getobjectType();
+                            ci->objectType = currentOpenedButton->getobjectType();
                             ci->objectNo = building->getObjectNo();
                             ci->objectCount = plusUnitCount;
                             ci->lineNo = 1;
@@ -175,11 +193,11 @@ void ControlLayer::buttonCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
                 } else if(customButton->getobjectType() == ACTION_BUTTON_TYPE_LINE_2) {
                     if(plusUnitCount > 0) {
                         
-                        BaseObject* building = gamePlayer->getBuildingByObjectType(attachedUnitActionButton->getParentButton()->getobjectType());
+                        BaseObject* building = gamePlayer->getBuildingByObjectType(currentOpenedButton->getParentButton()->getobjectType());
                         
                         if(building != nullptr) {
                             CreateUnitCI* ci = new CreateUnitCI();
-                            ci->objectType = attachedUnitActionButton->getobjectType();
+                            ci->objectType = currentOpenedButton->getobjectType();
                             ci->objectNo = building->getObjectNo();
                             ci->objectCount = plusUnitCount;
                             ci->lineNo = 2;
@@ -189,11 +207,11 @@ void ControlLayer::buttonCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
                 } else if(customButton->getobjectType() == ACTION_BUTTON_TYPE_LINE_3) {
                     if(plusUnitCount > 0) {
                         
-                        BaseObject* building = gamePlayer->getBuildingByObjectType(attachedUnitActionButton->getParentButton()->getobjectType());
+                        BaseObject* building = gamePlayer->getBuildingByObjectType(currentOpenedButton->getParentButton()->getobjectType());
                         
                         if(building != nullptr) {
                             CreateUnitCI* ci = new CreateUnitCI();
-                            ci->objectType = attachedUnitActionButton->getobjectType();
+                            ci->objectType = currentOpenedButton->getobjectType();
                             ci->objectNo = building->getObjectNo();
                             ci->objectCount = plusUnitCount;
                             ci->lineNo = 3;
@@ -212,6 +230,9 @@ void ControlLayer::buttonCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
                 if(customButton->getState() == STATIC_OBJECT_STATE_DISABLE) {
                     
                 } else {
+                    
+                    currentOpenedButton = customButton;
+                    
                     if(customButton->isOpened()) {
                         
                         closeButtones(customButton);
