@@ -19,6 +19,7 @@ USING_NS_CC;
 
 class BaseObject;
 class Unit;
+class StaticObject;
 class StaticUnit;
 class StaticBuilding;
 class StaticUpgrade;
@@ -68,7 +69,6 @@ public:
     
     BaseObject* getBuildingByObjectNo(int objectNo);
     BaseObject* getUnitByObjectNo(int objectNo);
-
 	BaseObject* getBuildingByObjectType(int objectType);
     
     int createBuilding(int objectType);
@@ -91,6 +91,8 @@ public:
     StaticUnit* getStaticUnitByUnitType(int unitType);
     StaticBuilding* getStaticBuildingByBuildingType(int buildingType);
     StaticUpgrade* getStaticUpgradeByUpgradeType(int upgradeType);
+    
+    StaticObject* getStaticObjectByObjectType(int buttonType, int objectType);
     
     void update(int updateCount);
     void updateImage(Layer* layer);

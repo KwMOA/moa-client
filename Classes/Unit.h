@@ -53,7 +53,7 @@ public:
     void updateImage(Layer* layer) {}
     
     
-    
+    StaticUnit* getStaticUnit() { return staticUnit; }
     
     /////////////////////////////////////////////////// TODO. set with influence
     

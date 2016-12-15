@@ -36,7 +36,7 @@ void Building_2::update(int updateCount)
         
         if(goldAquiredTime == 8) {
             
-            gamePlayer->setGold(gamePlayer->getGold() + 100 + (100 * getUpgradeByUpgradeType(OBJECT_TYPE_UPGRADE_2)->getUpgradeCount()));
+            gamePlayer->setGold(gamePlayer->getGold() + 8 + (8 * getUpgradeByUpgradeType(OBJECT_TYPE_UPGRADE_2)->getUpgradeCount()));
             
 //            std::cout << "acquired gold - " << gamePlayer->getGold() <<std::endl;
             

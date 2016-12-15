@@ -39,7 +39,7 @@ public:
     
     bool init();
     
-    void finishGame();
+    void finishGame(int winIndex);
     
     /////////////////
     

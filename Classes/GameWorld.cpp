@@ -45,24 +45,25 @@ void GameWorld::update(int updateCount)
 {    
     //buildings and units updates
     if(gameManager->isAiMode()) {
-        gameManager->getGameWorld()->getGamePlayer(0)->update(updateCount);
+        getGamePlayer(0)->update(updateCount);
         ((AIPlayer*)gameManager->getGameWorld()->getGamePlayer(1))->update(updateCount);
     } else {
-        gameManager->getGameWorld()->getGamePlayer(0)->update(updateCount);
-        gameManager->getGameWorld()->getGamePlayer(1)->update(updateCount);
+        getGamePlayer(0)->update(updateCount);
+        getGamePlayer(1)->update(updateCount);
     }
     
     // check collusion
-    gameManager->getGameWorld()->checkCollusion();
+    checkCollusion();
     
     // apply influence
-    gameManager->getGameWorld()->getGamePlayer(0)->applyInfluenceUnit();
-    gameManager->getGameWorld()->getGamePlayer(1)->applyInfluenceUnit();
+    getGamePlayer(0)->applyInfluenceUnit();
+    getGamePlayer(1)->applyInfluenceUnit();
     
     // TODO. check is finish game
     
-    if(gameManager->getGameWorld()->isFinished()) {
-        gameManager->finishGame();
+    int finish = isFinished();
+    if(finish == 0 || finish == 1) {
+        gameManager->finishGame(finish);
     }
 }
 
@@ -83,14 +84,14 @@ void GameWorld::cancelCreateBuilding(int userIndex, int objectNo)
 
 void GameWorld::upgradeBuilding(int userIndex, int objectNo, int upgradeType)
 {
-	if (gamePlayers[userIndex]->getChecker()->ckeckUpgradeBuilding(objectNo))
+	if (gamePlayers[userIndex]->getChecker()->ckeckUpgradeBuilding(objectNo, upgradeType))
         gamePlayers[userIndex]->upgradeBuilding(objectNo, upgradeType);
 }
 
 
 void GameWorld::cancelUpgradeBuilding(int userIndex, int objectNo, int upgradeType)
 {
-	if (gamePlayers[userIndex]->getChecker()->checkCancleUpgradeBuilding(objectNo))
+	if (gamePlayers[userIndex]->getChecker()->checkCancleUpgradeBuilding(objectNo, upgradeType))
         gamePlayers[userIndex]->cancelUpgradeBuilding(objectNo, upgradeType);
 }
 
@@ -128,15 +129,17 @@ void GameWorld::removeChild(BaseObject* object)
 }
 
 
-bool GameWorld::isFinished()
+int GameWorld::isFinished()
 {
     bool finish0 = gamePlayers[0]->isFinished();
     bool finish1 = gamePlayers[1]->isFinished();
     
-    if(finish0 || finish1) {
-        return true;
+    if(finish0) {
+        return 0;
+    } else if (finish1) {
+        return 1;
     }
     
-    return false;
+    return 2;
     
 }

@@ -17,6 +17,7 @@ class AIPlayer :public GamePlayer
 protected:
     int aiType;
     int currentTick;
+    int testUnitCreateNum;
 public:
     AIPlayer(GameWorld* _gameWorld, int _aiType, int _playerIndex);
     

@@ -62,6 +62,8 @@ void Upgrade::setState(int _state)
 
 void Upgrade::startUpgrade()
 {
+    owner->getGamePlayer()->setGold(owner->getGamePlayer()->getGold() - staticUpgrade->getCompleteTimeArray()[upgradeCount].second);
+    
     staticUpgrade->startUpgrade();
 }
 

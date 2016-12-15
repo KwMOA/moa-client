@@ -30,7 +30,7 @@ Unit::Unit(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gamePlayer, _
     staticUnit = gamePlayer->getStaticUnitByUnitType(_objectType);
     attackPercent = 0;
     
-    x = gamePlayer->sameXPlayerIndex(150);
+    x = gamePlayer->sameXPlayerIndex(128);
     
     px = x;
         
@@ -68,6 +68,7 @@ Unit::Unit(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gamePlayer, _
         images[0][i]->retain();
         
         images[0][i]->setAnchorPoint(Vec2(0.5, 0));
+        images[0][i]->setScale(((float)50) / staticUnit->getImageWidth(), ((float)50) / staticUnit->getImageHeight());
     }
     
     images[1] = new Sprite*[staticUnit->getRunImageCount()];
@@ -81,6 +82,8 @@ Unit::Unit(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gamePlayer, _
         
         
         images[1][i]->setAnchorPoint(Vec2(0.5, 0));
+        images[1][i]->setScale(((float)50) / staticUnit->getImageWidth(), ((float)50) / staticUnit->getImageHeight());
+
     }
     
     
@@ -92,6 +95,7 @@ Unit::Unit(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gamePlayer, _
         images[2][i]->retain();
         
         images[2][i]->setAnchorPoint(Vec2(0.5, 0));
+        images[2][i]->setScale(((float)50) / staticUnit->getImageWidth(), ((float)50) / staticUnit->getImageHeight());
     }
     
     
@@ -113,7 +117,8 @@ Unit::Unit(GamePlayer* _gamePlayer, int _objectType) : BaseObject(_gamePlayer, _
     gamePlayer->setGold(gamePlayer->getGold() - staticUnit->getPrice());
     gamePlayer->setPopulation(gamePlayer->getPopulation() + staticUnit->getPopulation());
     
-    
+//    objectLayer->setScale(((float)32) / staticUnit->getWidth(), ((float)32) / staticUnit->getHeight());
+
     
     ActRun* act = new ActRun(this);
     actList.push_back(act);
@@ -237,6 +242,8 @@ void Unit::applyInfluence()
             memset(buf, 0, 128);
             sprintf(buf, "%s_%s_death_%d.png", staticUnit->getName(), direction, i + 1);
             
+            SpriteFrame* sp = cache->getSpriteFrameByName(buf);
+            
             deadAni->addSpriteFrame(cache->getSpriteFrameByName(buf));
         }
         
@@ -248,7 +255,11 @@ void Unit::applyInfluence()
         
         auto sequence = Sequence::create(deathAni, cbSound, NULL);
         
+        
+        images[0][0]->setScale(((float)50) / staticUnit->getImageWidth(), ((float)50) / staticUnit->getImageHeight());
+
         images[0][0]->runAction(sequence);
+        
         
         objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
         objectLayer->addChild(images[0][0], 0, TAG_IMAGE_OBJECT);

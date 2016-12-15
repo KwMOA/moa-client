@@ -25,6 +25,11 @@ StaticObject::StaticObject(int _objectType, std::string _name, int _staticObject
     memcpy(name, _name.c_str(), _name.length());
     staticObjectState = _staticObjectState;
     gamePlayer = _gamePlayer;
+    
+    image = Sprite::create("control_btn/control_btn_able_building_1.png");
+    image->setAnchorPoint(Vec2(0,0));
+    image->setPosition(Vec2(0, 0));
+    image->retain();
 }
 
 StaticVisibleObject::StaticVisibleObject(int _objectType, std::string _name, int _staticObjectState, GamePlayer* _gamePlayer)
@@ -110,23 +115,31 @@ StaticUnit_1::StaticUnit_1(GamePlayer* _gamePlayer) : StaticUnit(OBJECT_TYPE_UNI
 {
     objectType = OBJECT_TYPE_UNIT_1;
     staticObjectState = STATIC_OBJECT_STATE_DISABLE;
-    runImageCount = 6;
+    runImageCount = 7;
     attackImageCount = 6;
     deathImageCount = 6;
     
     memset(name, 0, 20);
     memcpy(name, "unit_1", 6);
     price = 100;
-    width = 50;
+    width = 10;
+    height = 10;
+    
+    imageWidth = 300;
+    imageHeight = 300;
+    
     maxHp = 100;
     atk = 30;
     atkSpeed = 8;
     atkLoadSpeed = 8;
     atkRange = 0;
-    speed = 5;
+    speed = 8;
     def = 20;
     isVisible = 1;
     population = 1;
+    
+    attackStartImageCount = 3;
+    attackLoadImageCount = 2;
 }
 
 StaticUnit_2::StaticUnit_2(GamePlayer* _gamePlayer) : StaticUnit(OBJECT_TYPE_UNIT_2, "unit_2", STATIC_OBJECT_STATE_DISABLE, _gamePlayer)
@@ -134,23 +147,29 @@ StaticUnit_2::StaticUnit_2(GamePlayer* _gamePlayer) : StaticUnit(OBJECT_TYPE_UNI
     objectType = OBJECT_TYPE_UNIT_2;
     staticObjectState = STATIC_OBJECT_STATE_DISABLE;
 
-    runImageCount = 6;
-    attackImageCount = 6;
+    runImageCount = 7;
+    attackImageCount = 7;
     deathImageCount = 6;
     
     memset(name, 0, 20);
     memcpy(name, "unit_2", 6);
-    price = 100;
-    width = 50;
-    maxHp = 100;
+    price = 150;
+    width = 10;
+    height = 10;
+    imageWidth = 300;
+    imageHeight = 300;
+    maxHp = 50;
     atk = 30;
     atkSpeed = 8;
     atkLoadSpeed = 8;
-    atkRange = 0;
-    speed = 10;
+    atkRange = 150;
+    speed = 5;
     def = 20;
     isVisible = 1;
     population = 1;
+    
+    attackStartImageCount = 3;
+    attackLoadImageCount = 3;
 }
 
 
@@ -422,7 +441,7 @@ StaticBuilding_3::StaticBuilding_3(GamePlayer* _gamePlayer) : StaticBuilding(OBJ
     x = 60;
     y = DISPLAY_HEIGHT - 180;
     
-    price = 500;
+    price = 150;
     
     maxCreateCondition = 2;
 }
@@ -765,7 +784,7 @@ StaticUpgrade_2::StaticUpgrade_2(GamePlayer* _gamePlayer) : StaticUpgrade(OBJECT
     memset(name, 0, 20);
     memcpy(name, "upgrade_2", 9);
     
-    maxUpgardeCount = 3;
+    maxUpgardeCount = 10000;
     completeTimeAndPriceArray = new std::pair<int, int>[maxUpgardeCount];
     
     for(int i = 0; i < maxUpgardeCount; i++) {

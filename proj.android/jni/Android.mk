@@ -108,6 +108,9 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/Upgrade.cpp \
                    ../../Classes/UserInfoLayer.cpp \
                    ../../Classes/UserListLayer.cpp \
+                   ../../Classes/ResultLayer.cpp \
+                   ../../Classes/InfoLayer.cpp \
+
 
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes

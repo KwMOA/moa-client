@@ -13,6 +13,9 @@
 #include <string>
 #include "BasicDefines.h"
 #include "GamePlayer.h"
+#include <cocos2d.h>
+
+USING_NS_CC;
 
 class Building;
 class Upgrade;
@@ -24,7 +27,7 @@ protected:
     int objectType;
     char name[20];
     int staticObjectState;
-    
+    Sprite* image;
 
 public:
     StaticObject(int _objectType, std::string _name, int _staticObjectState, GamePlayer* _gamePlayer);
@@ -37,9 +40,13 @@ public:
     void setStaticObjectState(int _staticObjectState) { staticObjectState = _staticObjectState; }
     int getStaticObjectState() { return staticObjectState; }
     
-    void setUpgrade(Upgrade* _upgrade) { upgrade = _upgrade; }
+    Sprite* getImage() { return image; }
     
-    Upgrade* upgrade;
+    
+    
+//    void setUpgrade(Upgrade* _upgrade) { upgrade = _upgrade; }
+//    
+//    Upgrade* upgrade;
 };
 
 
@@ -62,6 +69,11 @@ public:
     void startUpgrade();
     void cancelUpgrade();
     virtual void completeUpgrade() = 0;
+    
+    void setUpgrade(Upgrade* _upgrade) { upgrade = _upgrade; }
+
+    Upgrade* upgrade;
+
 };
 
 class StaticUpgrade_1 : public StaticUpgrade
@@ -246,6 +258,10 @@ class StaticVisibleObject : public StaticObject
 protected:
     int price;
     int width;
+    int height;
+    
+    int imageWidth;
+    int imageHeight;
     
 public:
     StaticVisibleObject(int _objectType, std::string _name, int _staticObjectState, GamePlayer* _gamePlayer);
@@ -255,6 +271,15 @@ public:
     
     void setWidth(int _width) { width = _width; }
     int getWidth() { return width; }
+    
+    void setHeight(int _height) { height = _height; }
+    int getHeight() { return height; }
+    
+    void setImageWidth(int _imageWidth) { imageWidth = _imageWidth; }
+    int getImageWidth() { return imageWidth; }
+    
+    void setImageHeight(int _imageHeight) { imageHeight = _imageHeight; }
+    int getImageHeight() { return imageHeight; }
     
 };
 
@@ -425,6 +450,8 @@ protected:
     
     int attackInfluenceNum;
     
+    int attackStartImageCount;
+    int attackLoadImageCount;
     
 public:
     StaticUnit(int _objectType, std::string _name, int _staticObjectState, GamePlayer* _gamePlayer);
@@ -467,6 +494,14 @@ public:
     
     void setAttackInfluenceNum(int _attackInfluenceNum) { attackInfluenceNum = _attackInfluenceNum; }
     int getAttackInfluenceNum() { return attackInfluenceNum; }
+    
+    
+    void setAttackLoadImageCount(int _attackLoadImageCount) { attackLoadImageCount = _attackLoadImageCount; }
+    int getAttackLoadImageCount() { return attackLoadImageCount; }
+    
+    
+    void setAttackStartImageCount(int _attackStartImageCount) { attackStartImageCount = _attackStartImageCount; }
+    int getAttackStartImageCount() { return attackStartImageCount; }
     
 };
 

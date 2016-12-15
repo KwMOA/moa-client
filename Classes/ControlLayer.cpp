@@ -33,15 +33,29 @@ bool ControlLayer::init()
 
     objectInfoList = new ObjectInfoList();
     
-
+//    this->setTouchEnabled(true);
+    
+    //디스패처. 리스너와 오브젝트를 연결해주는 역할
+    EventDispatcher* dispatcher = Director::getInstance()->getEventDispatcher();
+    //터치 위치를 알려주는 리스너. 단일 터치.
+    //바로 만들어쓰는 식별자는 auto를 사용한다.
+    auto positionListener = EventListenerTouchAllAtOnce::create();
+    //콜백 함수 대입
+    positionListener->onTouchesBegan = CC_CALLBACK_2(ControlLayer::onTouchesBegan, this);
+    positionListener->onTouchesEnded = CC_CALLBACK_2(ControlLayer::onTouchesEnded, this);
+    positionListener->onTouchesMoved = CC_CALLBACK_2(ControlLayer::onTouchesMoved, this);
+    positionListener->onTouchesCancelled = CC_CALLBACK_2(ControlLayer::onTouchesCancelled, this);
+    
+    //디스패처를 이용해 객체와 리스너를 이어준다. 화면 전체를 터치할 수 있게 만들어야 하므로 객체는 this
+    dispatcher->addEventListenerWithSceneGraphPriority(positionListener, this);
     
 	return true;
 }
 
-bool ControlLayer::initWithParameter(GamePlayer* _gamePlayer)
+bool ControlLayer::initWithParameter(GamePlayer* _gamePlayer, InfoLayer* _infoLayer)
 {
     gamePlayer = _gamePlayer;
-    
+    infoLayer = _infoLayer;
     //	list = LinkedList<CustomButton*>();
     //	itr = LinkedList<CustomButton*>::iterator();
     layerLength = 0;
@@ -50,22 +64,25 @@ bool ControlLayer::initWithParameter(GamePlayer* _gamePlayer)
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     
     moveLayer = Layer::create();
+    
+    
+    
     //Bottom menu gui
     
     auto BottomBackground = Sprite::create("bg_bottom.png");
     BottomBackground->setPosition(Vec2(0, 0));
     BottomBackground->setAnchorPoint(Vec2(0, 0));
     
-    auto buttonLeft = Button::create("cursor.png", "cursor_pressed.png", "cursor_pressed.png");
-    auto buttonRight = Button::create("cursor.png", "cursor_pressed.png", "cursor_pressed.png");
-    
-    buttonLeft->setAnchorPoint(Vec2(0, 0));
-    buttonLeft->setPosition(Vec2(0, 0));
-    buttonRight->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
-    buttonRight->setPosition(Vec2(WIDTH, 0));
-    
-    this->addChild(buttonRight, 1);
-    this->addChild(buttonLeft, 1);
+//    auto buttonLeft = Button::create("cursor.png", "cursor_pressed.png", "cursor_pressed.png");
+//    auto buttonRight = Button::create("cursor.png", "cursor_pressed.png", "cursor_pressed.png");
+//    
+//    buttonLeft->setAnchorPoint(Vec2(0, 0));
+//    buttonLeft->setPosition(Vec2(0, 0));
+//    buttonRight->setAnchorPoint(Vec2::ANCHOR_BOTTOM_RIGHT);
+//    buttonRight->setPosition(Vec2(WIDTH, 0));
+//    
+//    this->addChild(buttonRight, 1);
+//    this->addChild(buttonLeft, 1);
     
     plusUnitCount = 0;
     
@@ -90,6 +107,117 @@ bool ControlLayer::initWithParameter(GamePlayer* _gamePlayer)
     upgradeCreateButtonList.push_back(upgradeButton);
     upgradeCreateCancelButtonList.push_back(upgradeCreateButton);
     
+    if(unitActionButtonList.size() != 0) {
+        CustomButton* cb = unitActionButtonList.front();
+        
+        if(cb != nullptr) {
+            Sprite* parentheses = Sprite::create("control_btn/left_parentheses.png");
+            parentheses->setAnchorPoint(Vec2(0.5, 0));
+            
+            cb->getButton()->addChild(parentheses, 10);
+        }
+        
+        cb = unitActionButtonList.back();
+        
+        if(cb != nullptr) {
+            Sprite* parentheses = Sprite::create("control_btn/right_parentheses.png");
+            parentheses->setAnchorPoint(Vec2(0.5, 0));
+            parentheses->setPositionX(115.5);
+            
+            cb->getButton()->addChild(parentheses, 10);
+        }
+    }
+    
+    if(buildingCreateButtonList.size() != 0) {
+        CustomButton* cb = buildingCreateButtonList.front();
+        
+        if(cb != nullptr) {
+            Sprite* parentheses = Sprite::create("control_btn/left_parentheses.png");
+            parentheses->setAnchorPoint(Vec2(0.5, 0));
+            
+            cb->getButton()->addChild(parentheses, 10);
+        }
+        
+        cb = buildingCreateButtonList.back();
+        
+        if(cb != nullptr) {
+            Sprite* parentheses = Sprite::create("control_btn/right_parentheses.png");
+            parentheses->setAnchorPoint(Vec2(0.5, 0));
+            parentheses->setPositionX(115.5);
+            
+            cb->getButton()->addChild(parentheses, 10);
+        }
+    }
+    
+    if(buildingCreateCancelButtonList.size() != 0) {
+        CustomButton* cb = buildingCreateCancelButtonList.front();
+        
+        if(cb != nullptr) {
+            Sprite* parentheses = Sprite::create("control_btn/left_parentheses.png");
+            parentheses->setAnchorPoint(Vec2(0.5, 0));
+            
+            cb->getButton()->addChild(parentheses, 10);
+        }
+        
+        cb = buildingCreateCancelButtonList.back();
+        
+        if(cb != nullptr) {
+            Sprite* parentheses = Sprite::create("control_btn/right_parentheses.png");
+            parentheses->setAnchorPoint(Vec2(0.5, 0));
+            parentheses->setPositionX(115.5);
+            
+            cb->getButton()->addChild(parentheses, 10);
+        }
+    }
+    
+    if(upgradeCreateButtonList.size() != 0) {
+        CustomButton* cb = upgradeCreateButtonList.front();
+        
+        if(cb != nullptr) {
+            Sprite* parentheses = Sprite::create("control_btn/left_parentheses.png");
+            parentheses->setAnchorPoint(Vec2(0.5, 0));
+            
+            cb->getButton()->addChild(parentheses, 10);
+        }
+        
+        cb = upgradeCreateButtonList.back();
+        
+        if(cb != nullptr) {
+            Sprite* parentheses = Sprite::create("control_btn/right_parentheses.png");
+            parentheses->setAnchorPoint(Vec2(0.5, 0));
+            parentheses->setPositionX(115.5);
+            
+            cb->getButton()->addChild(parentheses, 10);
+        }
+    }
+    
+    if(upgradeCreateCancelButtonList.size() != 0) {
+        CustomButton* cb = upgradeCreateCancelButtonList.front();
+        
+        if(cb != nullptr) {
+            Sprite* parentheses = Sprite::create("control_btn/left_parentheses.png");
+            parentheses->setAnchorPoint(Vec2(0.5, 0));
+            
+            cb->getButton()->addChild(parentheses, 10);
+        }
+        
+        cb = upgradeCreateCancelButtonList.back();
+        
+        if(cb != nullptr) {
+            Sprite* parentheses = Sprite::create("control_btn/right_parentheses.png");
+            parentheses->setAnchorPoint(Vec2(0.5, 0));
+            parentheses->setPositionX(115.5);
+            
+            cb->getButton()->addChild(parentheses, 10);
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
     attachedBuildingCreateButton = nullptr;
     attachedBuildingCreateCancelButton = nullptr;
     attachedUpgradeCreateCancelButton = nullptr;
@@ -103,15 +231,15 @@ bool ControlLayer::initWithParameter(GamePlayer* _gamePlayer)
     
     refreshMoveLayer(rootCustomButton);
     
-    moveLayer->setPosition(Vec2(-(((double)DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9), 0));
+    moveLayer->setPosition(Vec2(0, 0));
     moveLayer->setAnchorPoint(Vec2(0, 0));
     this->addChild(moveLayer, 0);
     //	this->addChild(BottomBackground);
     
-    buttonLeft->addTouchEventListener(CC_CALLBACK_2(ControlLayer::enterCallback, this));
-    buttonLeft->setTag(1);
-    buttonRight->addTouchEventListener(CC_CALLBACK_2(ControlLayer::enterCallback, this));
-    buttonRight->setTag(2);
+//    buttonLeft->addTouchEventListener(CC_CALLBACK_2(ControlLayer::enterCallback, this));
+//    buttonLeft->setTag(1);
+//    buttonRight->addTouchEventListener(CC_CALLBACK_2(ControlLayer::enterCallback, this));
+//    buttonRight->setTag(2);
     
     return true;
 }
@@ -120,6 +248,8 @@ bool ControlLayer::initWithParameter(GamePlayer* _gamePlayer)
 void ControlLayer::buttonCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType, CustomButton* customButton)
 {
     if (cocos2d::ui::Widget::TouchEventType::BEGAN == eventType) {
+        
+    } else if (cocos2d::ui::Widget::TouchEventType::MOVED == eventType) {
         
     } else if (cocos2d::ui::Widget::TouchEventType::ENDED == eventType) {
         
@@ -227,6 +357,8 @@ void ControlLayer::buttonCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::To
                 
             default: // building, unit, upgrade button
                 
+                infoLayer->setObjectInfo(customButton->getButtonType(), gamePlayer->getStaticObjectByObjectType(customButton->getButtonType(), customButton->getobjectType()));
+                
                 if(customButton->getState() == STATIC_OBJECT_STATE_DISABLE) {
                     
                 } else {
@@ -311,40 +443,40 @@ void ControlLayer::refreshMoveLayer(CustomButton* customButton)
     
     int i = 1;
     for (buttonListItr = buttonList.begin(); buttonListItr != buttonList.end(); buttonListItr++) {
-        if(*buttonListItr == customButton) {
-            moveLayer->setPositionX(MOVE_MOVE_LAYER_BUTTON_WIDTH - (((double)DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9) * i);
-        }
+//        if(*buttonListItr == customButton) {
+//            moveLayer->setPositionX(MOVE_MOVE_LAYER_BUTTON_WIDTH - (((double)DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9) * i);
+//        }
         
-        (*buttonListItr)->getButton()->setPositionX(((double)(DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9) * (i + 1));
+        (*buttonListItr)->getButton()->setPositionX(((double)DISPLAY_WIDTH / 9) * (i - 1));
         moveLayer->addChild((*buttonListItr)->getButton());
         i++;
     }
 }
 
 
-void ControlLayer::enterCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType) {
-    
-    Button* item = (Button*)pSender;
-    switch (item->getTag()) {
-        case 1:
-            if (cocos2d::ui::Widget::TouchEventType::BEGAN == eventType) {
-                
-                if (moveLayer->getPositionX() + ((double)(DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9) < -1) {
-                    moveLayer->setPositionX(moveLayer->getPositionX() + ((double)(DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9));
-                }
-            }
-            break;
-        case 2:
-            if (cocos2d::ui::Widget::TouchEventType::BEGAN == eventType) {
-                
-                if (moveLayer->getPositionX() - ((double)(DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9) + ((buttonList.size() + 1) * ((double)(DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9)) >  (DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2))) {
-                    moveLayer->setPositionX(moveLayer->getPositionX() - ((double)(DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9));
-                }
-            }
-            break;
-            
-    }
-}
+//void ControlLayer::enterCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType) {
+//    
+//    Button* item = (Button*)pSender;
+//    switch (item->getTag()) {
+//        case 1:
+//            if (cocos2d::ui::Widget::TouchEventType::BEGAN == eventType) {
+//                
+//                if (moveLayer->getPositionX() + ((double)(DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9) < -1) {
+//                    moveLayer->setPositionX(moveLayer->getPositionX() + ((double)(DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9));
+//                }
+//            }
+//            break;
+//        case 2:
+//            if (cocos2d::ui::Widget::TouchEventType::BEGAN == eventType) {
+//                
+//                if (moveLayer->getPositionX() - ((double)(DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9) + ((buttonList.size() + 1) * ((double)(DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9)) >  (DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2))) {
+//                    moveLayer->setPositionX(moveLayer->getPositionX() - ((double)(DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9));
+//                }
+//            }
+//            break;
+//            
+//    }
+//}
 
 
 void ControlLayer::setGamePlayer(GamePlayer * _gamePlayer)
@@ -404,7 +536,47 @@ void ControlLayer::update(int updateCount)
     
 }
 
+void ControlLayer::onTouchesBegan(const std::vector<Touch *> &touches, cocos2d::Event *unused_event)
+{
+    for (auto iter = touches.begin(); iter != touches.end(); iter++){
+        Vec2 location = (*iter)->getLocation();
+        
+//        CCLOG("onTouchesBegan");
+    }
+}
 
+void ControlLayer::onTouchesEnded(const std::vector<Touch *> &touches, cocos2d::Event *unused_event)
+{
+    for (auto iter = touches.begin(); iter != touches.end(); iter++){
+        Vec2 location = (*iter)->getLocation();
+        
+//        CCLOG("onTouchesEnded");
+    }
+}
+
+void ControlLayer::onTouchesMoved(const std::vector<Touch *> &touches, cocos2d::Event *unused_event)
+{
+    for (auto iter = touches.begin(); iter != touches.end(); iter++){
+        Vec2 location = (*iter)->getLocation();
+        Vec2 prevLocation = (*iter)->getPreviousLocation();
+        
+        if ((location.x - prevLocation.x) > 0 && moveLayer->getPositionX() < 0)
+        {
+            moveLayer->setPositionX(moveLayer->getPosition().x + (location.x - prevLocation.x));
+        } else if ((location.x - prevLocation.x) < 0 && moveLayer->getPositionX() - ((double)(DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9) + ((buttonList.size() + 4) * ((double)(DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2)) / 9)) >  (DISPLAY_WIDTH - (MOVE_MOVE_LAYER_BUTTON_WIDTH * 2))) {
+            moveLayer->setPositionX(moveLayer->getPosition().x + (location.x - prevLocation.x));
+        }
+    }
+}
+
+void ControlLayer::onTouchesCancelled(const std::vector<Touch *> &touches, cocos2d::Event *unused_event)
+{
+    for (auto iter = touches.begin(); iter != touches.end(); iter++){
+        Vec2 location = (*iter)->getLocation();
+        
+//        CCLOG("onTouchesCancelled");
+    }
+}
 
 
 

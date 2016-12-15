@@ -34,6 +34,7 @@ GameManager::GameManager(GameScene* _gameScene, bool _isAiMode)
 {
     //이미지 캐슁해놓기
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("unit/unit_1.plist");
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("unit/unit_2.plist");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("building/building.plist");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("control_btn/control_btn.plist");
     
@@ -72,21 +73,13 @@ bool GameManager::init()
     return true;
 }
 
-void GameManager::finishGame()
+void GameManager::finishGame(int winIndex)
 {
     std::cout<<"finish"<<std::endl;
-//    LogMgr->Log("통신 두절");
     
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
-    MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
-    return;
-#endif
+    gameScene->unscheduleAllCallbacks();
     
-    Director::getInstance()->end();
-    
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
-#endif
+    gameScene->setResult(winIndex);
 }
 
 

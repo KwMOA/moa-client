@@ -24,6 +24,8 @@ private:
     
     int actPercent;
     
+    int prevImage;
+    int currentImage;
     
 public:
     ActAttack(Unit* _unit);

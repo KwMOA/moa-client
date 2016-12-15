@@ -2,17 +2,22 @@
 #define __GAME_SCENE_H__
 
 #include "BaseLayer.h"
+#include "ui/CocosGUI.h"
 
 class GameManager;
 class ObjectInfoList;
 class TopLayer;
 class ControlLayer;
+class InfoLayer;
+class ResultLayer;
 class GameScene : public BaseLayer
 {
 private:
     GameManager* gameManager;
     TopLayer* topLayer;
     ControlLayer* controlLayer;
+    InfoLayer* infoLayer;
+    ResultLayer* resultLayer;
 //	ObjectInfoList* objectInfoList;
     
 public:
@@ -29,6 +34,8 @@ public:
 
     int updateCount;
     
+    void exitCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
+    void setResult(int result);
 public:
     GameManager* getGameManager() { return gameManager; }
     TopLayer* getTopLayer() { return topLayer; }

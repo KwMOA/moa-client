@@ -67,7 +67,7 @@ public:
     void fetchFromServer(int length, const char* str);
     
     //Task에 쌓인 메시지들을 모두 수행한다.
-    void carryOutMessages();
+    bool carryOutMessages();
     
     //GameWorld를 설정한다.
     void setGameWorld(GameWorld* pGame){m_pGameWorld = pGame;}

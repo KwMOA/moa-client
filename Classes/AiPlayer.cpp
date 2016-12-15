@@ -11,6 +11,9 @@ AIPlayer::AIPlayer(GameWorld* _gameWorld, int _aiType, int _playerIndex) : GameP
 {
     aiType = _aiType;
     currentTick = 0;
+    testUnitCreateNum = 0;
+    
+    setGold(100000000);
 }
 
 
@@ -20,28 +23,56 @@ void AIPlayer::update(int updateCount)
     
     currentTick++;
     
-//    if(currentTick == 100) {
-//        CreateUnitCI* ci = new CreateUnitCI();
-//        ci->objectType = OBJECT_TYPE_UNIT_1;
-//        ci->objectNo = getBuildingByObjectType(OBJECT_TYPE_BUILDING_3)->getObjectNo();
-//        ci->objectCount = 1;
-//        ci->lineNo = 1;
-//        getGameWorld()->getGameManager()->getTaskManager()->pushBackAITask(ci);
-//    }
-//    if(currentTick == 120) {
-//        CreateUnitCI* ci = new CreateUnitCI();
-//        ci->objectType = OBJECT_TYPE_UNIT_1;
-//        ci->objectNo = getBuildingByObjectType(OBJECT_TYPE_BUILDING_3)->getObjectNo();
-//        ci->objectCount = 1;
-//        ci->lineNo = 2;
-//        getGameWorld()->getGameManager()->getTaskManager()->pushBackAITask(ci);
-//    }
-//    if(currentTick == 140) {
-//        CreateUnitCI* ci = new CreateUnitCI();
-//        ci->objectType = OBJECT_TYPE_UNIT_1;
-//        ci->objectNo = getBuildingByObjectType(OBJECT_TYPE_BUILDING_3)->getObjectNo();
-//        ci->objectCount = 1;
-//        ci->lineNo = 3;
-//        getGameWorld()->getGameManager()->getTaskManager()->pushBackAITask(ci);
-//    }
+    if(testUnitCreateNum > 190) {
+        testUnitCreateNum = 190;
+    }
+    
+    if((currentTick) % (200 - testUnitCreateNum) == 0) {
+        testUnitCreateNum += 10;
+        {
+        CreateUnitCI* ci1 = new CreateUnitCI();
+        ci1->objectType = OBJECT_TYPE_UNIT_1;
+        ci1->objectNo = 0;
+        ci1->objectCount = 1;
+        ci1->lineNo = 1;
+        getGameWorld()->getGameManager()->getTaskManager()->pushBackAITask(ci1);
+        
+        CreateUnitCI* ci2 = new CreateUnitCI();
+        ci2->objectType = OBJECT_TYPE_UNIT_1;
+        ci2->objectNo = 0;
+        ci2->objectCount = 1;
+        ci2->lineNo = 2;
+        getGameWorld()->getGameManager()->getTaskManager()->pushBackAITask(ci2);
+        
+        CreateUnitCI* ci3 = new CreateUnitCI();
+        ci3->objectType = OBJECT_TYPE_UNIT_1;
+        ci3->objectNo = 0;
+        ci3->objectCount = 1;
+        ci3->lineNo = 3;
+        getGameWorld()->getGameManager()->getTaskManager()->pushBackAITask(ci3);
+        }
+        {
+            CreateUnitCI* ci1 = new CreateUnitCI();
+            ci1->objectType = OBJECT_TYPE_UNIT_2;
+            ci1->objectNo = 0;
+            ci1->objectCount = 1;
+            ci1->lineNo = 1;
+            getGameWorld()->getGameManager()->getTaskManager()->pushBackAITask(ci1);
+            
+            CreateUnitCI* ci2 = new CreateUnitCI();
+            ci2->objectType = OBJECT_TYPE_UNIT_2;
+            ci2->objectNo = 0;
+            ci2->objectCount = 1;
+            ci2->lineNo = 2;
+            getGameWorld()->getGameManager()->getTaskManager()->pushBackAITask(ci2);
+            
+            CreateUnitCI* ci3 = new CreateUnitCI();
+            ci3->objectType = OBJECT_TYPE_UNIT_2;
+            ci3->objectNo = 0;
+            ci3->objectCount = 1;
+            ci3->lineNo = 3;
+            getGameWorld()->getGameManager()->getTaskManager()->pushBackAITask(ci3);
+            
+        }
+    }
 }

@@ -165,7 +165,7 @@ CustomButton::CustomButton(int _buttonType, int _objectType, ControlLayer* _cont
     btn->retain();
     btn->setAnchorPoint(Vec2(0.5, 0));
     btn->addTouchEventListener(CC_CALLBACK_2(ControlLayer::buttonCallback, controlLayer, this));
-    
+    btn->setSwallowTouches(false); // to send touch event to control-layer 
     controlLayer->wholeButtonList.push_back(this);
 
     // link button with static object
@@ -203,6 +203,30 @@ CustomButton::CustomButton(int _buttonType, int _objectType, ControlLayer* _cont
     
 //    //set close
 //    close();
+    
+    
+    //add parentheses
+    if(activeButtonList != nullptr && activeButtonList->size() != 0) {
+        CustomButton* cb = activeButtonList->front();
+        
+        if(cb != nullptr) {
+            Sprite* parentheses = Sprite::create("control_btn/left_parentheses.png");
+            parentheses->setAnchorPoint(Vec2(0.5, 0));
+            
+            cb->getButton()->addChild(parentheses, 10);
+        }
+        
+        cb = activeButtonList->back();
+        
+        if(cb != nullptr) {
+            Sprite* parentheses = Sprite::create("control_btn/right_parentheses.png");
+            parentheses->setAnchorPoint(Vec2(0.5, 0));
+            parentheses->setPositionX(115.5);
+            
+            cb->getButton()->addChild(parentheses, 10);
+        }
+    }
+    
 }
 
 void CustomButton::setButton(cocos2d::ui::Button* _btn)

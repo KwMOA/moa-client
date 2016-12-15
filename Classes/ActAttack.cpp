@@ -20,6 +20,8 @@ ActAttack::ActAttack(Unit* _unit) : Act(_unit, ACT_TYPE_ATTACK)
     atkRange = _unit->getAtkRange();
     
     actPercent = 0;
+    currentImage = 0;
+    prevImage = 0;
 }
 
 
@@ -28,27 +30,30 @@ void ActAttack::update(int updateCount)
 {
     actPercent++;
     
-    //change Image
-    if(actPercent == 1) {
-        unit->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
-        unit->objectLayer->addChild(unit->images[2][0], 0, TAG_IMAGE_OBJECT);
-    } else if(actPercent == atkSpeed / 3) {
-        unit->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
-        unit->objectLayer->addChild(unit->images[2][1], 0, TAG_IMAGE_OBJECT);
-    } else if(actPercent == (atkSpeed * 2) / 3) {
-        unit->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
-        unit->objectLayer->addChild(unit->images[2][2], 0, TAG_IMAGE_OBJECT);
-    } else if(actPercent  == atkSpeed) {
-        unit->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
-        unit->objectLayer->addChild(unit->images[2][3], 0, TAG_IMAGE_OBJECT);
-    } else if(actPercent== ((atkSpeed + atkLoadSpeed) / 2)) {
-        unit->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
-        unit->objectLayer->addChild(unit->images[2][4], 0, TAG_IMAGE_OBJECT);
-    } else if(actPercent == (atkSpeed + atkLoadSpeed)) {
-        unit->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
-        unit->objectLayer->addChild(unit->images[2][5], 0, TAG_IMAGE_OBJECT);
-    }
     
+    //change Image
+//    if(actPercent == 1) {
+//            unit->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
+//            unit->objectLayer->addChild(unit->images[2][currentImage++], 0, TAG_IMAGE_OBJECT);
+//    } else if(actPercent == (atkSpeed * currentImage) / unit->getStaticUnit()->getAttackStartImageCount()) {
+//            unit->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
+//            unit->objectLayer->addChild(unit->images[2][currentImage++], 0, TAG_IMAGE_OBJECT);
+//    } else if(actPercent  == atkSpeed) {
+//        unit->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
+//        unit->objectLayer->addChild(unit->images[2][currentImage++], 0, TAG_IMAGE_OBJECT);
+//    } else if(actPercent == (((atkSpeed + atkLoadSpeed) * (currentImage - unit->getStaticUnit()->getAttackStartImageCount())) / unit->getStaticUnit()->getAttackLoadImageCount())) {
+//        unit->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
+//        unit->objectLayer->addChild(unit->images[2][currentImage++], 0, TAG_IMAGE_OBJECT);
+//    } else if(actPercent == (atkSpeed + atkLoadSpeed)) {
+//        unit->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
+//        unit->objectLayer->addChild(unit->images[2][5], 0, TAG_IMAGE_OBJECT);
+//    }
+//    
+//    
+    if(actPercent == ((((atkSpeed + atkLoadSpeed) * (currentImage + 1)) / unit->getStaticUnit()->getAttackImageCount()))) {
+        unit->objectLayer->removeChildByTag(TAG_IMAGE_OBJECT);
+        unit->objectLayer->addChild(unit->images[2][currentImage++], 0, TAG_IMAGE_OBJECT);
+    }
     
     
     if(actPercent <= atkSpeed) {
@@ -105,6 +110,8 @@ void ActAttack::update(int updateCount)
         }
         
     } else if(actPercent == atkSpeed + atkLoadSpeed) { // attack finish
+        
+        currentImage = 0;
         
         if(unit->getTargaet() != nullptr) //if not dead targetUnit
         {

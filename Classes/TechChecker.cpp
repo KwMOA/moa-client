@@ -15,13 +15,21 @@ TechChecker::TechChecker(GamePlayer* player) {
 
 
 bool TechChecker::checkCreateBuilding(int objectType) {
-	BaseObject* baseObject;
+	
+    if(gamePlayer->getGold() < gamePlayer->getStaticBuildingByBuildingType(objectType)->getPrice()) {
+        return false;
+    }
+    
+    BaseObject* baseObject;
 	Building* building;
+    
+    
 
 	switch (objectType) {
 	case OBJECT_TYPE_BUILDING_1:	//need NULL
 		return true;
 	case OBJECT_TYPE_BUILDING_2:	//need NULL
+
 		return true;
 	case OBJECT_TYPE_BUILDING_3:	//need BLD_1
     {
@@ -39,15 +47,16 @@ bool TechChecker::checkCreateBuilding(int objectType) {
         if(building != nullptr) {
             return false;
         }
-        
-        if(gamePlayer->getGold() < gamePlayer->getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_3)->getPrice()) {
-            return false;
-        }
+
 //
 //		if (baseObject != nullptr && (baseObject->getState() == OBJECT_STATE_IDLE || baseObject->getState() == OBJECT_STATE_UPGRADING || baseObject->getState() == OBJECT_STATE_CREATING_UNIT)) { return true; }
 //
 //		return false;
     }
+        case OBJECT_TYPE_BUILDING_7:
+        {
+            return true;
+        }
 //            return true;
 //	case OBJECT_TYPE_BUILDING_4:	//need BLD_3, BLD_1_UP_1
 //	case OBJECT_TYPE_BUILDING_5:	//need BLD_3, BLD_1_UP_1
@@ -103,18 +112,24 @@ bool TechChecker::checkCancelBuilding(int objectNo) {
 	return false;
 }
 
-bool TechChecker::ckeckUpgradeBuilding(int objectNo)
+bool TechChecker::ckeckUpgradeBuilding(int objectNo, int upgradeType)
 {
-//	BaseObject* baseObject = gamePlayers[userIndex].getBuildingByObjectNo(objectNo);
-//	
-//	if (baseObject != nullptr && baseObject->getState() == OBJECT_STATE_IDLE)
-//		return true;
-//	return false;
-    return true;
-
+	BaseObject* baseObject = gamePlayer->getBuildingByObjectNo(objectNo);
+	
+	if (baseObject != nullptr && baseObject->getState() == OBJECT_STATE_IDLE)
+    {
+        int gold = gamePlayer->getStaticUpgradeByUpgradeType(upgradeType)->getCompleteTimeArray()[((Building*)baseObject)->getUpgradeByUpgradeType(upgradeType)->getUpgradeCount()].second;
+        
+        if(gold <= gamePlayer->getGold())
+        {
+            return true;
+        }
+    }
+    
+    return false;
 }
 
-bool TechChecker::checkCancleUpgradeBuilding(int objectNo)
+bool TechChecker::checkCancleUpgradeBuilding(int objectNo, int upgradeType)
 {
 //	BaseObject* baseObject = gamePlayers[userIndex].getBuildingByObjectNo(objectNo);
 //

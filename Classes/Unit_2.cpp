@@ -11,6 +11,7 @@
 
 Unit_2::Unit_2(GamePlayer* _gamePlayer) : Unit(_gamePlayer, OBJECT_TYPE_UNIT_2)
 {
+    
 }
 
 void Unit_2::click()
@@ -20,5 +21,5 @@ void Unit_2::click()
 
 void Unit_2::update(int updateCount)
 {
-    
+    Unit::update(updateCount);
 }

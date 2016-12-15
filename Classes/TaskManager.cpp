@@ -302,28 +302,20 @@ void TaskManager::pushBackAITask(ClientInput* ci){
 }
 
 //Task에 쌓인 메시지들을 모두 수행한다.
-void TaskManager::carryOutMessages(){
-    iCntCarryOutMessages++;
-    
+bool TaskManager::carryOutMessages(){
+
     //상대방 컴퓨터와 통신이 두절되었는지 확인한다.
     if(!isCommunicate()){
         //통신이 두절
         LogMgr->Log("통신 두절");
         
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
-        MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.","Alert");
-        return;
-#endif
-        
-        Director::getInstance()->end();
-        
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-        exit(0);
-#endif
+        return false;
     }
+
+    iCntCarryOutMessages++;
     
     //현재 처리하는 패킷이 통신하는 패킷 번호보다 3보다 작거나 같을 때까지 모두 처리한다.
-    while(myTask.front().packetNo < myTaskPacketNo - 2)
+    while(myTask.front().packetNo == myTaskPacketNo - 2)
     {
         if(enemyTask.size() <= 0)
             break;
@@ -344,6 +336,7 @@ void TaskManager::carryOutMessages(){
 //        m_pGameWorld->updateSynch();
     }
 
+    return true;
 }
 //메인 일 처리 함수
 void TaskManager::carryOutTask(ClientInput* pCi, int packetNo, int _iPlayerFlag){

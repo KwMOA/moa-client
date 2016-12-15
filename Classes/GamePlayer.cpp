@@ -88,7 +88,7 @@ GamePlayer::GamePlayer(GameWorld* _gameWorld, int _playerIndex)
     
     ////////////////////
     
-    setGold(getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_1)->getPrice() + getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_2)->getPrice());
+    setGold(getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_1)->getPrice() + getStaticBuildingByBuildingType(OBJECT_TYPE_BUILDING_2)->getPrice() + 100);
     setPopulation(0);
     
     checker = new TechChecker(this);
@@ -247,7 +247,7 @@ int GamePlayer::createUnit(int objectNo, int objectType, int objectCount, int li
         
         unit->setObjectNo(objectNoCreator++);
         unit->setLineNo(lineNo);
-        unit->setX(sameXPlayerIndex(64));
+        unit->setX(sameXPlayerIndex(128));
         
         unitList[lineNo - 1].push_back(unit);
         
@@ -279,6 +279,20 @@ std::list<Unit*> GamePlayer::getUnitListByUnitType(int unitType)
 }
 
 
+StaticObject* GamePlayer::getStaticObjectByObjectType(int buttonType, int objectType)
+{
+    switch (buttonType) {
+        case BUTTON_TYPE_UNIT:
+            return getStaticUnitByUnitType(objectType);
+        case BUTTON_TYPE_BUILDING:
+            return getStaticBuildingByBuildingType(objectType);
+        case BUTTON_TYPE_UPGRADE:
+            return getStaticUpgradeByUpgradeType(objectType);
+            
+        default:
+            return nullptr;
+    }
+}
 
 StaticUnit* GamePlayer::getStaticUnitByUnitType(int unitType)
 {
@@ -508,11 +522,11 @@ bool GamePlayer::isFinished()
             Unit* unit = *unitItr[i];
             
             if(playerIndex == 0) {
-                if(unit->getX() > DISPLAY_WIDTH - 80) {
+                if(unit->getX() > MAP_WIDTH - 128) {
                     return true;
                 }
             } else {
-                if(unit->getX() < 80) {
+                if(unit->getX() < 128) {
                     return true;
                 }
             }
@@ -535,6 +549,8 @@ void GamePlayer::setGold(int _gold)
     
     if(playerIndex == 0)
         gameWorld->getGameManager()->getGameScene()->getTopLayer()->changeGold(gold);
+    
+    CCLOG("%d \n", gold);
 }
 
 void GamePlayer::setPopulation(int _population)

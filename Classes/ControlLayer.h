@@ -9,6 +9,7 @@
 #include "ObjectInfos.h"
 #include "GamePlayer.h"
 #include "StaticObject.h"
+#include "InfoLayer.h"
 #include <string>
 #include <list>
 
@@ -67,6 +68,8 @@ private:
 	void actionByBuilding(Button* refButton, size_t howMany, size_t upgradeCount, int firstUnit, int firstUpgrade);
 	void actionByUnit(Button* refButton, size_t howMany);
 	char* makeName(string _name, int _no);
+    
+    InfoLayer* infoLayer;
 
 public:
     CustomButton* attachedBuildingCreateButton;
@@ -78,7 +81,7 @@ public:
 public:
 
 	virtual bool init();
-    bool initWithParameter(GamePlayer* gamePlayer);
+    bool initWithParameter(GamePlayer* gamePlayer, InfoLayer* infoLayer);
 //	void update(float dt);	
     void refreshMoveLayer(CustomButton* customButton);
     
@@ -109,7 +112,7 @@ public:
 	// a selector callback
 	void setGamePlayer(GamePlayer* _gamePlayer);
 
-	void enterCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
+//	void enterCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
 //
 //	void unitCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
 //	void upgradeCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType);
@@ -127,6 +130,12 @@ public:
     
     void update(int updateCount);
     
+    
+    
+    virtual void onTouchesBegan(const std::vector<Touch *> &touches, cocos2d::Event *unused_event);
+    virtual void onTouchesEnded(const std::vector<Touch *> &touches, cocos2d::Event *unused_event);
+    virtual void onTouchesMoved(const std::vector<Touch *> &touches, cocos2d::Event *unused_event);
+    virtual void onTouchesCancelled(const std::vector<Touch *> &touches, cocos2d::Event *unused_event);
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(ControlLayer);

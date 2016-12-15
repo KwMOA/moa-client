@@ -9,6 +9,9 @@
 #include "TopLayer.h"
 #include "ControlLayer.h"
 #include "ObjectInfos.h"
+#include "InfoLayer.h"
+#include "LobbyScene.h"
+#include "ResultLayer.h"
 #include <ui/CocosGUI.h>
 
 USING_NS_CC;
@@ -35,6 +38,24 @@ bool GameScene::init()
     topLayer = TopLayer::create();
     this->addChild(topLayer);
     
+    
+    infoLayer = InfoLayer::create();
+    infoLayer->setPosition(Vec2(0, 120));
+    infoLayer->setAnchorPoint(Vec2(0, 0));
+    
+    auto bg = Sprite::create("bg_info.png");
+    bg->setAnchorPoint(Vec2::ZERO);
+    bg->setPosition(Vec2(0, 120));
+    
+    addChild(bg, 11);
+    
+    addChild(infoLayer, 12);
+    
+    resultLayer = ResultLayer::create();
+    resultLayer->setAnchorPoint(Vec2(0.5, 0.5));
+    resultLayer->setPosition(Vec2(DISPLAY_WIDTH/2, DISPLAY_HEIGHT/2));
+    resultLayer->retain();
+    
 	updateCount = 0;
 
 	if (PLAY_ALONE) {
@@ -59,7 +80,7 @@ bool GameScene::init()
 //
     controlLayer = ControlLayer::create();
     
-    if(controlLayer->initWithParameter(gameManager->getGameWorld()->getGamePlayer(0)) == false) {
+    if(controlLayer->initWithParameter(gameManager->getGameWorld()->getGamePlayer(0), infoLayer) == false) {
         return false;
     }
     
@@ -67,7 +88,7 @@ bool GameScene::init()
 
     
     schedule(schedule_selector(GameScene::customUpdate), 0.125f);
-    schedule(schedule_selector(GameScene::networkUpdate), 0.25f);
+//    schedule(schedule_selector(GameScene::networkUpdate), 0.25f);
     
     
     return true;
@@ -90,6 +111,16 @@ void GameScene::menuCloseCallback(Ref* pSender)
 void GameScene::customUpdate(float dt)
 {
     updateCount++;
+    
+    if(updateCount % 2 == 0) {
+        if(gameManager->getTaskManager()->carryOutMessages() == false) {
+            updateCount--;
+            return;
+        }
+        
+        gameManager->getTaskManager()->dispatchToServer();
+    }
+    
     gameManager->getGameWorld()->update(updateCount);
     controlLayer->update(updateCount);
 }
@@ -101,5 +132,15 @@ void GameScene::networkUpdate(float dt)
 }
 
 
+void GameScene::exitCallback(cocos2d::Ref *pSender, cocos2d::ui::Widget::TouchEventType eventType)
+{
+    Scene* scene = LobbyScene::createScene();
+    
+    Director::getInstance()->replaceScene(scene);
+}
 
-
+void GameScene::setResult(int result)
+{
+    resultLayer->setResult(this, result);
+    addChild(resultLayer, 100);
+}

@@ -43,7 +43,7 @@ public:
     void updateImage();
     void addChild(BaseObject* object);
     void removeChild(BaseObject* object);
-    bool isFinished();
+    int isFinished();
     GameManager* getGameManager() { return gameManager; }
 };
 
